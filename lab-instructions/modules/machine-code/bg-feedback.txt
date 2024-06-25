@@ -1,0 +1,59 @@
+Jag har kollat på labben nu och här är mina initiala reflektioner för diskussion i Zoom strax (jag pingar dig om ngn minut):
+
+* Målformuleringen är bra! 
+
+* Kanske frågan "Hur kan en dator utföra så komplexa uppgifter som att spela spel, redigera bilder och skriva text?" kan strykas (eller utvecklas, som den är nu så tror jag inte man följer tråden som oinvigd.)
+
+* Jag tror det är bra att byta namn på labben till ett kort ord tex "Maskinkodsprogrammering" eller ännu kortare och bättre: "Maskinkod" i stil med de andra labbarna. Jag tror det blir lättare för studenterna att direkt se vad den innehåller och lättare att prata om den.
+
+* Frågan "Hur funkar en datorn?" är lite väl löftesrik - labben ger ju ett utsnitt av en låg abstraktionsnivå där kopplingen mellan källkod och maskikod och en instruktionsuppsättning i en cpu förlaras (men lång ifrån allt om hur en dator funkar...)
+
+* Jag tror det är bra att lägga till ett kort stycke teori efter målformuleringen *innan* hemuppgifterna. I stil med
+"En dator består bland annat av en centraprocessorenhet (eng. central processing unit cpu), ett arbetsminne, samt in- och utada-enheter. Varje cpu har en instruktionsuppsättning som består av en mängd instruktioner som kan ladda heltal ur arbetsminnet och göra beräkningar och spara tillbaka resultat i arbetsminnet."
+etc. för att förklara vad det går ut på och vad som de teoretiskt ska kunna. Och bygg påmed enkla förklaringar som i ett stycke eller två ger begrepp och en förenklad men "sann" bild.
+
+Titta gärna på bilderna jag visar här bilderna 35-39: https://fileadmin.cs.lth.se/pgk/lect-w01.pdf
+Det vore bra om du knyter an till begreppen där och sedan tar det vidare mot register och instruktionsuppsättning etc.
+
+* Avslutande kapitlet "Java - Felsökning" är nog onödigt eftersom de i pgk fått java att funka. Det räcker att berätta om kontrollen med java under hemuppgift H6.
+
+* Ang. "Datorn har ett minne och en processor med register som kan utföra enkla operationer." För att undvika förvirring kanske börja meningen "Den simulerade datorn har ett minne och en processor med register som kan utföra enkla operationer."
+
+* Jag vill att de i skallen ska ha en bild som knyter källkod till maskinkod; därvar nedan idéer.
+
+* Det vore bra om det fanns en uppgift som knyter an det de lärt sig om c3pu till bytekod på JVM (min bild 39 på föreläsningen) och att de tittar på bajtkoden för ett enkelt program:
+
+Nedan funkar efter att man installerat scala-kompuilatorkommandot scalac med tex `sdk install scala`
+
+$ cat run.scala
+@main def run =
+  val x = 42
+  if x == 42 then println("found meaning of life") 
+  else println("unreachable")
+
+$ scalac run.scala
+
+$ ls 
+ run.class 'run$package.class' 'run$package$.class' 'run$package.tasty' run.scala run.tasty
+
+$ javap -v run.class
+
+Och uppgiften kan vara att ändra programmet till att införa en while-loop som gör samma som i någon uppgift med c3pu och att studera hur maskinkoden som JVM har med javap  och hitta var loopandet sker.
+
+Förslag på uppgift: räkna ut summan av de första n postiva heltalen med detta givna Scala-funktionshuvud:
+def sumFirst(n: Int): Int = ???
+
+och lösningen i Scala med hjälp av standarbiblioteket:
+
+def sumFirst(n: Int): Int = (1 to n).sum
+
+och primitiv lösning i Scala med primitiv while (som är det som ska efterfrågas att de ska använda i uppgiften för då blir maskinkoden roligare/enklare):
+
+def sumFirst(n: Int): Int = 
+  var i = 1
+  var sum = 0
+  while i <= n do 
+    sum += i
+    i += 1
+  end while
+  sum

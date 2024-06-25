@@ -1,0 +1,196 @@
+
+%\newpage
+%\section{Laboration \arabic{section} --- Datarepresentation: teckenkodning}
+%\emph{Mål:} Du ska praktiskt få bekanta dig med olika sätt att representera data, särskilt data i textform, samt arbeta med dessa olika former av datarepresentation. Detta illustrerar att betydelsen av de bitmönster som lagras i datorns minne är helt beroende på hur vi som programmerare väljer att tolka dem och ger en mycket praktisk insikt i det problem just bristen på standardisering för teckenkodning ger upphov till.
+%
+%\subsection*{Hemarbete}
+%\begin{Hemarbete}
+%\item Läs noga igenom hela laborationen samt repetera innehållet ur föreläsningsbilderna från föreläsningen om teckenrepresentation.
+%\item Läs översiktligt igenom wikipediasidorna för de teckenkodningsstandarder för vilka det finns länkar på kurshemsidans laborationssida:
+%
+%\code{http://cs.lth.se/EDAA60/datorlaborationer}
+%\end{Hemarbete}
+%
+%\subsection*{Kontrollfrågor}
+%\begin{Kontrollfragor}
+%\item Hur många olika tecken/styrkoder kan man representera med hjälp av 7-bitars ASCII-kod?
+%\item Vad är skillnaden mellan svensk och amerikansk 7-bitars ASCII-kod?
+%\item Hur många olika tecken/styrkoder kan man representera med hjälp av standarden ISO 8859-1 (även kallad Latin-1)?
+%\item Nämn tre olika standarder för hur radslut kan representeras i en text.
+%\item Vad är den principiella skillnaden mellan begreppet Unicode och UTF-8?
+%\item Vad är (sammanfattat i en mening) den huvudsakliga skillnaden mellan UTF-8 och UTF-32?
+%\item En fil kodad med Unicode kan inledas med en s.k. \emph{BOM}. Vad är det?
+%\item Vad menar man med en \emph{escapesekvens}?
+%\item Vad använder man unix-verktyget \code{od} till?
+%\item Vad använder man unix-verktyget \code{tr} till?
+%\item Om man är osäker på vilken teckenkodningsstandard som använts i en fil kan man se efter hur vissa speciella tecken kodats i filen. Ge ett exempel på ett lämpligt tecken man kan undersöka.
+%\end{Kontrollfragor}
+%
+%\subsection*{Datorarbete}
+%
+%\begin{Datorarbete}
+%
+%\item Logga in på din Linuxdator i E-husets källare och skapa en lämplig arbetskatalog på din konto. Gå sedan ner i katalogen. Detta görs lämpligen genom att starta ett terminalfönster och ge följande kommandon (vi förutsätter att du redan skapat en katalog \code{dod} i den första laborationen):
+%
+%\begin{Code}
+%cd
+%cd dod
+%mkdir lab4
+%cd lab4
+%\end{Code}
+%
+%\item Under laborationen kommer vi att arbeta med ett antal exempeltexter lagrade i textfiler. Kopiera dessa till katalogen du nyss skapade:
+%
+%\begin{Code}
+%cp /usr/local/cs/dod/lab4/* .
+%\end{Code}
+%
+%\n Kontrollera att du nu har ett antal filer i katalogen:
+%
+%\begin{Code}
+%ls -l
+%\end{Code}
+%
+%\n Du bör ha fyra filer kallade \emph{text1.txt} till \emph{text4.txt} i din katalog.
+%
+%\item Kommandot \code{cat} (conCATenate) kan användas för att skriva ut innehållet i en textfil på skärmen. Prova att skriva ut innehållet i den första exempelfilen på skärmen:
+%
+%\begin{Code}
+%cat text1.txt
+%\end{Code}
+%
+%\item Exempelfil 2 är en äldre textfil som skapades på det minidatorsystem som användes på D-utbildningen under 80-talet (DEC VAX 8000 med operativsystemet VAX/VMS). Prova att skriva ut textfilen på skärmen:
+%
+%\begin{Code}
+%cat text2.txt
+%\end{Code}
+%
+%\n Det är uppenbarligen något underligt med innehållet i filen! Som du kunde se av resultatet av kommandot \code{ls -l} ovan ska ju filen innehålla 164 tecken, men ändå verkar det inte skrivas ut en vettig text!
+%
+%Vi måste ta reda på vad problemet är. På Unix/Linux finns det ett praktiskt verktyg vi kan använda när vi vill analysera innehållet i en fil: kommandot \code{od} (Octal Dump). Programmet skriver ut innehållet i en fil i ett format som gör att vi kan studera exakt vilka tecken som filen består av. Vi kan använda olika optioner för att styra utskriften från kommandot \code{od}. Några vanliga varianter av kommandot är:
+%
+%\halfblankline
+%
+%\n \code{od -c} -- Visa skrivbara tecken som sådana och övriga som escapesekvenser eller oktala tal.\\
+%\code{od -t x1} -- Visa alla tecken som hexidecimala koder.\\
+%\code{od -t o1} -- Visa alla tecken som oktala koder\\
+%\code{od -t u1} -- Visa alla tecken som positiva decimala teckenkoder.
+%
+%\halfblankline
+%
+%\n Du hittar mer information om \code{od} om ni skriver kommandot \code{man od} i terminalfönstret.
+%
+%\halfblankline
+%
+%\n Skriv ut textfilens innehåll på skärmen som ASCII och som hexadecimala teckenkoder:
+%
+%\begin{Code}
+%od -c text2.txt
+%od -t x1 text2.txt
+%\end{Code}
+%
+%\n Notera för att senare redovisa för din laborationshandledare svaret på följande frågor:
+%
+%\begin{enumerate}[a)]
+%\item Vilken teckenkodningstandard har troligen använts på VAX-datorn där filen skapades? Tag hjälp av de teckenkodningstabeller som finns på wikipediasidorna för de olika teckenkodningsstandarderna du läste igenom som hemarbete för att lista ut vilken teckenkodning som använts.
+%\item Hur representerar VAX/VMS radslut?
+%\end{enumerate}
+%
+%\n Vi saknar dock fortfarande lite kunskap för att kunna förklara den konstiga utskriften av filen.
+%
+%\item Vilken teckenkodning används och hur representeras radslut på er Linuxdator? Använd kommandot od för att ta reda på detta. Ledtråd: Om man inte anger någon fil som argument till \code{od} kommer programmet att läsa tecken från tangentbordet i stället för från den angivna filen. Starta \code{od} med lämplig option, men utan filnamn och skriv in lämplig text (vilka tecken är lämpliga att prova?). Avsluta inmatningen med att trycka tangentbordskombinationen \code{CTRL-D}, vilket betyder slut på data.
+%
+%\halfblankline
+%
+%\n Notera för att senare redovisa för din laborationshandledare svaret på följande frågor:
+%
+%\begin{enumerate}[a)]
+%\item Vilken teckenkodningstandard använder Linuxdatorn sig av i terminalfönstret?
+%
+%\item Hur representerar Linux radslut?
+%
+%\item Diskutera med din handledare: Hur kan du och din handledare med det ni nu vet förklara den underliga utskriften från kommandot \code{cat text2.txt}?
+%\end{enumerate}
+%
+%\item För att t.ex. göra enklare översättningar mellan olika teckenkodningar kan man använda kommandot \code{tr} (TRanslate characters).
+%
+%Kommandot \code{tr} läser tecken från standard in (normalt tangentbordet) och skriver resultatet på standard out (normalt terminalfönstret). Tecknen skrivs ut likadana som de lästes in -- såvida inte tecknet finns med i den sträng som utgör det första argumentet till \code{tr}. Om så är fallet ersätts det med det tecken som står på motsvarande position i strängen som utgör det andra argumentet till tr. Prova följande exempel för att förstå principen:
+%
+%\begin{Code}
+%tr "abc" "def"
+%\end{Code}
+%
+%\n Skriv in text från tangentbordet och se hur alla förekomster av ``a'', ``b'' eller ``c'' byts ut mot ``d'', ``e'' respektive ``f''. Avsluta inmatningen med CTRL-D.
+%\halfblankline
+%
+%\n För att ange tecken som inte är direkt skrivbara, som radslutstecken och liknande, i argumenten kan man antingen skriva det som ett ``\textbackslash'' direkt följt av tre oktala siffror som anger tecknets teckenkod, eller -- för vissa vanliga specialtecken -- ange speciella escapesekvenser. Kommandot \code{tr \textquotedbl abc\textquotedbl \hspace{0mm}  \textquotedbl def\textquotedbl} kan alltså också skrivas som \code{tr \textquotedbl \textbackslash 141\textbackslash 142\textbackslash 143\textquotedbl \hspace{0mm} \textquotedbl \textbackslash 144\textbackslash 145\textbackslash 146\textquotedbl}. Se kommandots man-sida för att ta reda på vilka de speciella escapesekvenserna är (för radslut och liknande):
+%
+%\begin{Code}
+%man tr
+%\end{Code}
+%
+%\n För att läsa in texten från en fil i stället för från tangentbordet kan ni lägga till tecknet ``<'' följt av filnamnet sist på kommandoraden. Prova till exempel att byta ut alla ``e'' mot ``X'' i den första exempelfilen:
+%
+%\begin{Code}
+%tr "e" "X" < text1.txt
+%\end{Code}
+%
+%\n Skriv ihop en kommandorad som med hjälp av \code{tr} översätter alla radslutstecken  i filen text2.txt till den kodning som används i terminalfönstret på Linux. Prova ert kommando och notera dess utseende för senare redovisning för din laborationshandledare.
+%
+%Kan ni skriva ut texten i filen på skärmen nu?
+%
+%\item Skriv ut texten i filen text3.txt på skärmen:
+%
+%\begin{Code}
+%cat text3.txt
+%\end{Code}
+%
+%\n Vilken teckenkodning har använts i denna fil? Använd kommandot \code{od} för att se hur svenska tecken representeras och matcha mot teckentabellerna du använde tidigare. Notera svaret för att senare redovisa för din laborationshandledare.
+%
+%\item Skriv ut texten i filen text4.txt på skärmen:
+%
+%\begin{Code}
+%cat text4.txt
+%\end{Code}
+%
+%\n Notera för att senare redovisa för din laborationshandledare svaret på följande frågor:
+%
+%\begin{enumerate}[a)]
+%\item Vilken teckenkodningstandard har använts i filen? Använd kommandot od för att se kodningen!
+%\item Vad är syftet med de tre första tecknen i filen?
+%\item Hur representeras radslut i filen?
+%\item Under vilket operativsystem kan vi misstänka att denna fil skapats (var hittar vi sådana radslut)?
+%\end{enumerate}
+%
+%\item På vissa Linuxsystem finns kommandona \code{fromdos} respektive \code{todos} alternativt kommandona \code{dos2unix} respektive \code{unix2dos} för att konvertera radsluten i en fil mellan Unix- och Windowsformat. Dessa finns dock tyvärr inte installerade på våra datorer. Ett (av flera) sätt att ändå omvandla filen till rent Unix-format är att använda \code{tr} med optionen \code{-d} för att ta bort de överflödiga vagnreturtecknen:
+%
+%\begin{Code}
+%tr -d "\r" < text4.txt > t4.txt
+%\end{Code}
+%
+%\n Den rensade texten finns nu i filen t4.txt. Utför konverteringen och kontrollera resultatet med hjälp av \code{od}!
+%
+%\item Programmet \code{iconv} är ett praktiskt verktyg för att i Unix/Linux konvertera en textfil från en teckenkodning till en annan. Läs man-sidan för kommandot för att ta reda på hur man använder kommandot:
+%
+%\begin{Code}
+%man iconv
+%\end{Code}
+%
+%\n För att ta reda på namnen på de teckenkodningar som stöds, skriv:
+%
+%\begin{Code}
+%iconv --list
+%\end{Code}
+%
+%\n Ja, det finns faktiskt så många möjliga teckenkodningsstandarder därute!
+%
+%\halfblankline
+%
+%\n Skriv ihop en kommandorad som med hjälp av \code{iconv} konverterar innehållet i filen text3.txt till den teckenkodning som används i terminalfönstret på Linux och skriver ut det på skärmen. Prova ert kommando och notera dess utseende för senare redovisning för din laborationshandledare.
+%
+%\end{Datorarbete}
+%
+%\subsubsection*{När du är klar}
+%Diskutera igenom med din handledare vad du har lärt dig och visa att du har svarat på samtliga frågor.
+
+%-----------------------

@@ -1,0 +1,73 @@
+\ProvidesPackage{selthcstikz}
+
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.symbols}
+\usetikzlibrary{arrows,positioning,fit}
+
+\makeatletter
+% A less fleshy variant of LaTeX's orginal arrow type
+
+\pgfarrowsdeclare{latex''}{latex''}
+{
+  \pgfutil@tempdima=0.56pt% 0.28
+  \advance\pgfutil@tempdima by.3\pgflinewidth%
+  \pgfarrowsleftextend{+-4\pgfutil@tempdima}
+  \pgfarrowsrightextend{+5\pgfutil@tempdima}%
+}
+{
+  \pgfutil@tempdima=0.56pt% 0.28
+  \advance\pgfutil@tempdima by.3\pgflinewidth%
+  \pgfpathmoveto{\pgfqpoint{6\pgfutil@tempdima}{0\pgfutil@tempdima}}
+  \pgfpathcurveto
+  {\pgfqpoint{3.5\pgfutil@tempdima}{.5\pgfutil@tempdima}}
+  {\pgfqpoint{-1\pgfutil@tempdima}{1.5\pgfutil@tempdima}}
+  {\pgfqpoint{-4\pgfutil@tempdima}{3.75\pgfutil@tempdima}}
+  \pgfpathcurveto
+  {\pgfqpoint{-1.5\pgfutil@tempdima}{1\pgfutil@tempdima}}
+  {\pgfqpoint{-1.5\pgfutil@tempdima}{-1\pgfutil@tempdima}}
+  {\pgfqpoint{-4\pgfutil@tempdima}{-3.75\pgfutil@tempdima}}
+  \pgfpathcurveto
+  {\pgfqpoint{-1\pgfutil@tempdima}{-1.5\pgfutil@tempdima}}
+  {\pgfqpoint{3.5\pgfutil@tempdima}{-.5\pgfutil@tempdima}}
+  {\pgfqpoint{6\pgfutil@tempdima}{0\pgfutil@tempdima}}
+  \pgfusepathqfill
+}
+
+\pgfarrowsdeclarereversed{latex'' reversed}{latex'' reversed}{latex''}{latex''}
+\makeatother
+
+\newlength{\defaultcellwidth}
+\setlength{\defaultcellwidth}{13mm}
+\newlength{\cellwidth}
+\setlength{\cellwidth}{\defaultcellwidth}
+\newlength{\cellcontentswidth}
+\setlength{\cellcontentswidth}{\cellwidth}
+\addtolength{\cellcontentswidth}{-2mm}
+
+\newcommand{\setcellwidth}[1]{\setlength{\cellwidth}{#1}\setlength{\cellcontentswidth}{\cellwidth}\addtolength{\cellcontentswidth}{-2mm}
+}
+
+\newcommand{\restorecellwidth}{\setlength{\cellwidth}{\defaultcellwidth}\setlength{\cellcontentswidth}{\cellwidth}\addtolength{\cellcontentswidth}{-2mm}
+}
+
+\tikzstyle{cell}=[rectangle, draw, inner sep=0pt, minimum width=\cellwidth, minimum height=4mm, text height=1.5 ex, text depth=.25ex, font=\ttfamily]
+
+\tikzstyle{lab}=[rectangle, inner sep=0pt, minimum height=4mm, text height=1.5 ex, text depth=.25ex, font=\ttfamily]
+
+\newcommand{\cellat}[3]{
+\node [cell] (#1) at (#3) {\makebox[\cellcontentswidth][r]{#2}};
+\node [lab] (#1lab) [left=1mm of #1] {#1};
+}
+\newcommand{\cellbelow}[3]{
+\node [cell] (#1) [below=-0.4pt of #3] {\makebox[\cellcontentswidth][r]{#2}};
+\node [lab] (#1lab) [left=1mm of #1] {#1};
+}
+\newcommand{\namedcellbelow}[4]{
+\node [cell] (#1) [below=-0.4pt of #4] {\makebox[\cellcontentswidth][r]{#3}};
+\node [lab] (#1lab) [left=1mm of #1] {#2};
+}
+
+\newcommand{\cloudaround}[3]{
+\node [cloud, draw, aspect = 2, cloud puff arc = 110, fit = (#2)(#3), inner sep=0mm] (#1) {};
+}
+%-----------------------------------------------------------------

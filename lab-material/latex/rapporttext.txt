@@ -1,0 +1,95 @@
+
+
+
+
+                     Newton-Raphsons metod
+
+
+
+                            Per Holm
+
+
+                        21 september 2001
+
+
+
+1 Numeriska metoder
+
+En numerisk metod är en metod med vars hjälp man kan finna en
+approximativ lösning till ett matematiskt problem. Lösningen ges i
+numerisk form dvs i form av ett antal talvärden. Till exempel kan man
+med en numerisk metod räkna ut att roten till ekvationen x2 = 3 är
+1.73205..., men inte få fram den analytiska lösningen roten ur 3.
+   I många problem är man hänvisad till numeriska metoder. Det kan
+bero på att problemet inte har någon analytisk lösning eller att det
+skulle vara alltför arbetsamt att få fram denna.
+   I denna rapport studeras en numerisk metod för att lösa ekvationer
+med en obekant, nämligen Newton-Raphsons metod.
+
+
+
+2 Newton-Raphsons metod
+
+
+2.1 Teori
+
+Vi söker en rot alfa till ekvationen f(x) = 0. Vi antar att vi vet att
+roten ligger i närheten av talet x0 och ska försöka förbättra denna
+approximativa lösning.  Vi kan bilda nya approximationer x1, x2, x3,
+... med följande formel:
+
+       x(k+1) = x(k) - f(x(k))/f'(x(k))
+
+Metoden åskådliggörs geometriskt i figur ??. Tangenten i punkten
+(x0,f(x0)) skär x-axeln för x = x1, tangenten i punkten (x1,f(x1))
+skär x-axeln för x = x2, osv. Av figuren förstår vi att x(k) går mot
+alfa då k går mot oändligheten.
+   Newton-Raphsons metod kan härledas genom att man serieutvecklar
+funktionen f(x0-epsilon) och trunkerar utvecklingen efter den linjära
+termen. Ur serieutvecklingen kan man också få ett uttryck på
+feltermen.
+
+Figur: Newton-Raphsons metod
+
+
+
+2.2 Exempel
+
+Ekvationen exp(-x) = sin(x) har en rot nära 0.6. Bestäm denna rot med
+Newton-Raphsons metod.
+   Här är f(x) = exp(-x)-sin(x), f'(x) = -exp(-x)-cos(x). Om vi räknar
+med 9 decimaler så får vi:
+
+      x              f(x)              f'(x)             f(x)/f'(x)
+      0.6            -0.015830837      -1.374147251      0.011510481
+      0.588479519    0.000073820       -1.386956425      -0.000053224
+      0.588532743    0.000000001       -1.386897331      -0.000000001
+      0.588532744
+
+dvs alfa = 0.588532744.
+
+
+
+2.3 Konvergens
+
+Newton-Raphsons metod konvergerar i allmänhet kvadratiskt mot den
+sökta roten, vilket innebär att antalet korrekta siffror i svaret
+fördubblas i varje iteration. Men det finns fall då konvergensen
+blir sämre eller då metoden inte alls konvergerar, nämligen då man
+råkar ut för en derivata som är nära noll. Två sådana fall illustreras
+i figur ??.
+
+Figur: Konvergensproblem
+
+
+
+3 Newton-Raphsons metod i Java
+
+Det är inte helt enkelt att implementera Newton-Raphsons metod i ett
+program, åtminstone inte om man kräver att metoden ska fungera i
+alla upptänkliga fall.  I metoden solve som visas nedan finns bara
+den grundläggande algoritmen med: vi har inte tagit hänsyn till
+undantagsfall som finns eller fel som kan inträffa, till exempel
+att derivatan fprim(x0) blir nära noll (se avsnitt ??).
+
+Program: NewtonRaphson.java

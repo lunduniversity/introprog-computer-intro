@@ -1,0 +1,76 @@
+% selthcsslides.sty: LaTeX package for slides @cs.lth.se.
+% Only works with the beamer package (so ought to be a
+% documentclass, not a package).
+
+\ProvidesPackage{selthcsslides}
+
+\RequirePackage{textcomp} % Make straight single quotes (') - used together with upquote=true
+\RequirePackage{pgfpages} % To resize slides.
+\RequirePackage{listings} % For code listings.
+
+% Madrid theme.
+\usetheme{Madrid}
+
+% Resize slides to A4.
+\pgfpagesuselayout{resize to}[a4paper,landscape]
+
+% Some commands.
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\commandchar}[1]{\textsc{#1}}
+
+\newcommand{\blankline}{\vspace{\baselineskip}}
+\newcommand{\halfblankline}{\vspace{0.5\baselineskip}}
+\newcommand{\FIXBEFORECODE}{\vspace{-0.5\baselineskip}}
+\newcommand{\pindent}{\hspace{1em}}
+
+% Listings.
+\lstset{language=Java}
+\lstset{tabsize=4}
+\lstset{xleftmargin=1em}
+\lstset{basicstyle=\ttfamily\small} % NOTE \small
+\lstset{keywordstyle=\ttfamily}
+\lstset{commentstyle=\ttfamily}
+\lstset{upquote=true}
+\lstset{columns=fixed}
+\lstset{basewidth=0.50em}     % character width, tight
+\lstset{showstringspaces=false}
+\lstset{lineskip=-0.7pt}      % smaller line distance
+\lstset{print=true}           % print also in draft
+
+% Environment for writing code. The optional argument is the
+% distance above and below the code (default one blank line).
+\lstnewenvironment{Code}[1][\baselineskip]
+{\lstset{aboveskip=#1}
+\lstset{belowskip=#1}}
+{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This hack fixes a bug in beamer which causes the slide
+% numbers to be off by 1. From:
+%https://sourceforge.net/tracker/index.php?func=detail&aid=1569519&group_id=92412&atid=600660
+\makeatletter
+\AtBeginDocument{%
+\def\label#1{%
+\@bsphack
+\begingroup
+\let\label\@gobble
+\def\ref{\protect\ref}%
+\edef\@currentlabstr{%
+\expandafter\strip@prefix\meaning
+\@currentlabelname
+}%
+\protected@write\@auxout{}{%
+\string\newlabel{#1}{%
+{\@currentlabel}%
+{\insertframenumber}%
+{\expandafter\strip@period\@currentlabstr
+\relax.\relax\@@@}%
+{\@currentHref}{}%
+}%
+}%
+\endgroup
+\@esphack
+}%
+}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

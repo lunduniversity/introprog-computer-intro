@@ -1,0 +1,225 @@
+
+%\newpage
+%\section{Laboration \arabic{section} --- Matlab}
+%\emph{Mål:} Du ska bekanta dig med Matlab. I laborationen visar vi bara de mest elementära delarna av Matlab --- det finns massor av färdiga paket och funktioner för olika användningsområden. En del av dessa kommer du att träffa på i senare kurser.
+%
+%Lunds Universitet har avtal med MathWorks så att studenter har gratis tillgång till Matlab. Du kan ladda hem Matlab till din egen dator från \url{http://program.ddg.lth.se}. Alternativt kan du använda Octave, \url{www.octave.org}.
+%
+%
+%\subsection*{Hemarbete}
+%\begin{Hemarbete}
+%\item Läs igenom föreläsningsbilderna till veckans föreläsning. Det finns gott om Matlab-introduktioner på webben; leta själv om du är intresserad. 
+%\item \label{hem:ekvsyst} Lös (för hand) följande ekvationssystem:
+%\begin{eqnarray*}
+%		5x - 3y& = &1\\
+%		 x + 2y& = &8
+%\end{eqnarray*}
+%
+%\item En enkel och säker metod att hitta nollställen till en funktion $f$ är intervallhalvering. Man utgår från ett startintervall $[a,b]$ sådant att $f(a)$ och $f(b)$ har olika tecken. I intervallet finns då med säkerhet (minst) ett nollställe till $f(x)$. Målet är att göra intervallet $[a,b]$ mindre --- om man till exempel gör det så litet att $|a-b|< 0.0005$ så har man hittat nollstället med tre decimalers noggrannhet.
+%
+%Man gör intervallet hälften så stort genom att räkna ut mittpunkten $m$ i intervallet $[a,b]$ och beräkna funktionsvärdet $f(m)$. Om nu $f(m)$ har samma tecken som $f(a)$ kan intervallet begränsas till $[m,b]$ (dvs man sätter $a$ till $m$), annars till $[a,m]$ (dvs man sätter $b$ till $m$). Detta upprepas sedan med det nya kortare intervallet, tills man har uppnått önskad noggrannhet.
+%
+%I följande figur åskådliggörs några steg i halveringen:
+%
+%\begin{center}
+%\includegraphics[scale=1.0]{matlabbild.pdf}
+%\end{center}
+%
+%\n \label{hem:funk} Skriv en Matlabfunktion med anropet \code{zero = inthalv(a,b,tol)} som finner ett nollställe \code{zero} i intervallet \code{[a,b]} till en funktion med namnet \code{f}. Nollstället ska beräknas med noggrannheten \code{tol}. Du kan förutsätta att \code{f(a)} och \code{f(b)} har olika tecken. I Java skulle funktionen kunna se ut så här:
+%
+%\clearpage
+%\begin{Code}
+%public double inthalv(double a, double b, double tol) {
+%	while (Math.abs(a - b) >= tol) {
+%		double m = (a + b) / 2;
+%		if (f(a) * f(m) > 0) {
+%			a = m;
+%		}
+%		else {
+%			b = m;
+%		}
+%	}
+%	return a;
+%}
+%\end{Code}
+%
+%\n Att testa om två tal \code{x} och \code{y} har samma tecken med \code{x * y > 0} är betydligt enklare än att skriva \code{x > 0 \&\& y > 0 || x < 0 \&\& y < 0}. 
+%\end{Hemarbete}
+%
+%
+%\subsection*{Kontrollfrågor}
+%\begin{Kontrollfragor}
+%\item Vad är skillnaden mellan Matlab och Maple?
+%\item Vilken noggrannhet har man vid beräkningar i dubbel precision?
+%\item Matlab har, precis som miniräknare, begränsad räknenoggrannhet. Hur kan detta yttra sig?
+%\item Hur stort kan ett dubbel precisions-tal vara? Hur litet?
+%\item Hur skriver man för att få hjälp om ett kommando i Matlab?
+%\item Hur undviker man i Matlab att resultatet från en beräkning skrivs ut?
+%\item Ge exempel på några inbyggda funktioner i Matlab.
+%\item Vad skrivs ut när följande Matlabkommandon exekveras?
+%\begin{Code}
+%x = [1 4 9 16];
+%sqrt(x)
+%\end{Code}
+%\item Hur skriver man i Matlab för att plotta funktionen $f(x) = x^2$ i intervallet $[-2, 2]$?
+%\item Hur skriver man i Matlab för att skapa en vektor \code{v} med de 100 elementen $-1$, 1, 3, 5, \ldots, 195, 197?
+%\item Vad är en \code{m}-fil?
+%\item Hur tar man reda på det första elementet i en vektor? Det sista?
+%\end{Kontrollfragor}
+%
+%\subsection*{Datorarbete}
+%\subsubsection*{Matlab som miniräknare}
+%
+%Matlab fungerar bra som miniräknare. Alla vanliga matematiska operationer och funktioner finns inbyggda. Man kan spara resultat i variabler och använda dem senare.
+%
+%\begin{Datorarbete}
+%\item Starta Matlab genom att ge kommandot \code{matlab} i ett kommandofönster. Du får ett nytt fönster där du kan skriva Matlab-kommandon. Om du skriver \code{matlab -nojvm} skapas inte något nytt fönster; då får du skriva Matlab-kommandona i kommandofönstret. (I~vissa versioner av Matlab kan det inträffa att hakparenteser \code{[} och \code{]} inte fungerar om man inte anger \code{-nojvm}.) Alternativt kan du använda \code{octave}.
+%\item Prova Matlab som miniräknare: beräkna \code{3.5+2*4.5}, \code{pi/3}, \code{sin(pi/3)}, \ldots
+%\item Prova variabler: sätt \code{x = pi/3}, beräkna \code{y = sin(x)}, \code{1/y}, \ldots
+%\end{Datorarbete}
+%
+%\subsubsection*{Vektorer}
+%En vektor är en följd av värden som är numrerade 1, 2, 3, \ldots\  (observera att man börjar numrera från 1, inte från 0 som man gör i Java). Man kommer åt ett element genom att skriva vektorns namn och index inom vanliga parenteser \code{()} (inte hakparenteser \code{[]} som i Java). Exempel:
+%
+%\begin{Code}
+%>> x = [1 3 4 5 10]
+%x = 1 3 4 5 10
+%
+%>> x(2)
+%ans = 3
+%
+%>> x(1) + x(length(x))
+%ans = 11
+%
+%>> x(2) = x(2) + 1
+%x = 1 4 4 5 10
+%\end{Code}
+%
+%
+%\n Funktioner kan ha vektorer som parametrar. Då appliceras funktionen på alla elementen:
+%
+%\begin{Code}
+%>> sqrt(x)
+%ans = 1.0000 2.0000 2.0000 2.2361 3.1623
+%\end{Code}
+%
+%\n Man kan enkelt bilda ''regelbundna'' vektorer genom att ange startvärde, steg och slutvärde:
+%
+%\begin{Code}
+%>> x = 0 : 0.5 : 7
+%x = 0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 5.5 6.0 6.5 7.0
+%\end{Code}
+%
+%
+%\n Om man har en vektor med x-värden och en vektor med funktionsvärden kan man rita upp (''plotta'') funktionen:
+%
+%\begin{Code}
+%>> f = sin(x);
+%>> plot(x, f)
+%\end{Code}
+%
+%
+%\n Man kan spara bilder som man ritat i Matlab (\code{Save}-kommandot i \code{File}-menyn i ritfönstret). Bilder kan sparas i många olika format. Om man vill inkludera en bild i ett \LaTeX-dokument ska den vara i \file{pdf}-format (eller \file{jpg} eller \file{png}). Om man har sparat en bild i ''fel'' format är det enkelt att konvertera till ett annat bildformat med ImageMagick-programmet \code{convert}. Exempel:
+%
+%\begin{Code}
+%convert myfig.fig myfig.pdf
+%\end{Code}
+%
+%\begin{DatorarbeteCont}
+%\item Rita upp sinuskurvan enligt exemplet. Kurvan blir ojämn --- rita en jämnare kurva.
+%\item Rita en cosinuskurva i samma intervall i \emph{samma} fönster. Kurvan ska ritas med röd färg (\code{help plot}).
+%\item Rita i ett nytt fönster en kurva där \code{x}-värdena är punkterna i cosinusvektorn och \code{y}-värdena är punkterna i sinusvektorn. Ge kommandot \code{axis('equal')} för att få samma skala på båda axlarna. Förklara resultatet.
+%\end{DatorarbeteCont}
+%
+%\subsubsection*{Matriser och ekvationssystem}
+%I Javakursen kommer vi att arbeta med matriser, som är rektangulära ''rutnät''. Exempel på en matris med 3 rader och 3 kolonner där elementen är heltal:
+%
+%\begin{displaymath}
+%a = \left(
+%\begin{array}{ccc}
+%3 &5 &1\\
+%1 &3 &4\\
+%0 &2 &1\\
+%\end{array}
+%\right)
+%\end{displaymath}
+%Matlab är väldigt bra på att hantera matriser. För att skapa en matris skriver man ungefär som när man skapar en vektor, men man skiljer på raderna med semikolon. Man kommer åt elementen genom att ge matrisens namn och radindex och kolonnindex, till exempel \code{a(2,3)} (i Java skulle man skrivit \code{a[1][2]}). Exempel:
+%
+%\begin{Code}
+%>> a = [3 5 1; 1 3 4; 0 2 1]
+%a = 3 5 1
+%    1 3 4
+%    0 2 1
+%>> a(2,3)
+%ans = 4
+%\end{Code}
+%
+%
+%\n I matematiken används matriser väldigt mycket. Du kommer för första gången att träffa på dem i kursen i Linjär algebra. Vi visar här bara ett exempel på hur man använder matriser (och vektorer) för att lösa ett linjärt ekvationssystem. 
+%
+%Ett linjärt ekvationssystem med tre ekvationer och tre obekanta kan se ut så här:
+%\begin{eqnarray*}
+%3x + 5y +  z &=& 17\\
+% x + 3y + 4z &=& 23\\
+%     2y +  z &=&  8
+%\end{eqnarray*}
+%
+%\n Koefficienterna framför $x$, $y$ och $z$ stoppar man in i en matris (det har vi redan gjort ovan). Talen i högerledet stoppar man in i en vektor där talen ligger ''ovanför'' varandra, inte bredvid varandra. En sådan vektor kallas en kolonnvektor.
+%
+%\begin{Code}
+%>> b = [17; 23; 8]
+%b = 17
+%    23
+%     8
+%\end{Code}
+%
+%
+%\n Nu kan man lösa ekvationssystemet genom att skriva:
+%
+%\begin{Code}
+%>> a \ b
+%ans = 1
+%      2
+%      4
+%\end{Code}
+%
+%
+%\begin{DatorarbeteCont}
+%\item I hemuppgift H\ref{hem:ekvsyst} löste du ett ekvationssystem för hand. Lös samma ekvationssystem i Matlab.
+%\item Försök lösa följande ekvationssystem:
+%\begin{eqnarray*}
+%		 2x -  y& =& 3\\
+%		-4x + 2y &=& 5
+%\end{eqnarray*}
+%
+%\n Förklara resultatet! Tips: tänk geometriskt \ldots
+%\end{DatorarbeteCont}
+%
+%\subsubsection*{Ekvationslösning, egna funktioner}
+%Det finns i Matlab en inbyggd funktion \code{fzero} som beräknar ett nollställe till en ekvation $f(x) = 0$. Som parametrar ger man funktionens namn och en punkt som ligger i närheten av nollstället, till exempel så här:
+%
+%\begin{Code}
+%>> fzero('sin', 3)
+%ans = 3.1416
+%\end{Code}
+%
+%
+%\n Om man ska hitta nollställen till en mera komplicerad funktion så måste man skriva en egen Matlab-funktion som beräknar funktionsvärden. Nedanstående Matlabfunktion beräknar värdet av funktionen $e^{-x} - e^{-2x} + 0.05x - 0.25$ i punkten \code{x}:
+%
+%\begin{Code}
+%function fval = f(x)
+%% FVAL = F(X), compute the value of a function in x
+%fval = exp(-x) - exp(-2 * x) + 0.05 * x - 0.25;
+%\end{Code}
+%
+%\n Som du ser så skriver man inte riktigt likadant som i Java. Funktionsrubriken ser annorlunda ut, exponentialfunktionen heter \code{exp} i stället för \code{Math.exp} och man returnerar resultatet genom att tilldela ''utparametern'' \code{fval} ett värde i stället för att göra \code{return}.
+%
+%\begin{DatorarbeteCont}
+%\item Matlabfunktionen \code{f} finns i filen \file{/usr/local/cs/dod/lab5/f.m}. Kopiera filen till din egen katalog. Testa kommandona \code{help f} och \code{type f}.
+%\item Funktionen har tre nollställen, samtliga större än 0. Använd \code{fzero} för att hitta nollställena. Plotta först funktionen så att du får en uppfattning om var nollställena ligger.
+%\item Skriv in funktionen \code{inthalv} som du skrev i hemuppgift H\ref{hem:funk} i en fil med namnet \file{inthalv.m}. Använd \code{inthalv} för att beräkna de tre nollställena till funktionen \code{f} med fyra decimalers noggrannhet. 
+%\item Lös följande uppgift, om du har tid: 
+%Funktionen \code{inthalv} är inte särskilt användbar eftersom den är specialskriven för att hitta nollställen till en funktion med namnet \code{f}. Det vore betydligt mera praktiskt med en intervallhalveringsfunktion som kunde anropas med namnet på en funktion som parameter, till exempel med \code{zero = inthalv('f',a,b,tol)} eller \code{zero = inthalv('sin',a,b,tol)}, på det sätt som man anropar \code{fzero}. 
+%
+%Skriv om \code{inthalv}-funktionen så att den fungerar på detta sätt och testa att den fungerar. När du ska räkna ut ett funktionsvärde inuti \code{inthalv} måste du utnyttja Matlabfunktionen \code{feval}; studera beskrivningen av denna funktion i hjälptexten.
+%\end{DatorarbeteCont}

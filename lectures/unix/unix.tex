@@ -1,0 +1,388 @@
+
+\title{Unix/Linux}
+\section{Unix/Linux}
+
+\begin{frame}
+\label{unix}
+\begin{block}{\centering\Large Föreläsning \arabic{section} --- Unix/Linux}
+Förberedelse inför laboration 1.
+
+\begin{itemize}
+\item Operativsystem, Unix historik
+\item Filer och kataloger
+\item Kommandon
+\item Filskydd
+\item Kommandotolk
+\item Processer
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Operativsystem}
+\begin{itemize}
+\item Dator --- kör program
+\item Operativsystem --- en samling program som gör det möjligt att köra ''vanliga'' program
+\item Operativsystemet hanterar:
+\begin{itemize}
+\item de program som körs (program körs ofta parallellt, operativsystemet ser till att programmen får minne och tid att exekvera)
+\item yttre enheter (tangentbord, mus, skärm, nätverk, \ldots)
+\item lagring av data (filer, \ldots)
+\item skydd, felhantering
+kommunikation med användaren
+\end{itemize}
+
+\item Linux, Windows, Mac OS X, Unix, \ldots
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Unix}
+Historik:
+
+\begin{itemize}
+\item 1960-talet: Multics --- Multiplexed Information and Computing System --- stort operativsystem för stora datorer. Skulle lösa alla problem.
+\item 1969: Ken Thompson (AT\&T Bell Labs) började skriva Unix, litet operativsystem för små datorer, avsett för programmerare. Idéer från Multics.
+\item 1973: Unix skrevs om i C av Dennis Ritchie, började distribueras.
+\item Senare: mycket utveckling, många varianter (Linux, Mac OS X, NetBSD, A/IX, HP/UX, Irix, Android, IOS\ldots).
+\item Varumärket Unix ägs idag av The Open Group som är ett leverantörs- och teknikoberoende konsortium. Certifierar produkter (Linux ej certifierat).
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Kännetecken för Unix}
+Grundläggande:
+\begin{itemize}
+\item Kärna --- liten, grundläggande funktioner
+\item Processer, tidsdelning
+\item Filskydd
+\item Fleranvändarsystem
+\item Kommandotolk
+\end{itemize}
+Unix är:
+\begin{itemize}
+\item Litet, standardiserat, flyttbart
+\item Inte för nybörjare, fast mycket enklare att lära sig nuförtiden när det finns grafiska användargränssnitt och skrivbordsmiljöer (Unity, Gnome, KDE, Xfce \ldots)
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Filer i Unix/Linux}
+I en dator måste man kunna lagra program (Word, Excel, Java-/Scalakompilator, spelprogram, \ldots) och data (brev, hemsidor, programmeringsuppgifter, \ldots).
+
+\pindent Man lagrar program och data i \emph{filer}. En fil finns normalt på skivminne och har ett namn.
+
+\pindent Filnamn i Unix/Linux:
+
+\begin{itemize}
+\item \code{namn.tillägg} (\code{Calculator.java}, \code{Calculator.class}, \code{brev.txt}, \code{test1}, \ldots)
+\item tillägget är bara en extra upplysning, bestämmer inte filtypen
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Kataloger}
+Varje fil finns i en katalog. Kataloger kan innehålla underkataloger, så man får en hierarkisk struktur, ett \emph{filträd}:
+
+\begin{center}
+\includegraphics[scale=0.7]{images/file-tree.pdf}
+\end{center}
+
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Filnamn}
+I praktiken är det inte så rörigt som det ser ut på den förra bilden!
+Ett fullständigt (absolut) filnamn börjar från rotkatalogen och man räknar upp alla katalogerna med \code{/} emellan:
+
+\begin{Code}
+/h/d8/c/dat14xyn/dod/lab1/example.txt
+\end{Code}
+
+Men Unix/Linux håller reda på en \emph{aktuell katalog} som man själv kan ändra. Om \code{lab1} är aktuell katalog så kan man komma åt ovanstående fil med följande namn (\emph{relativt} filnamn):
+
+\begin{Code}
+example.txt
+\end{Code}
+
+Om \code{dat14xyn} är aktuell katalog så kommer man åt filen med namnet:
+
+\begin{Code}
+dod/lab1/example.txt
+\end{Code}
+
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Förkortade filnamn}
+En del filer har förkortade namn:
+
+\blankline
+\begin{tabular}{cl}
+\url{~}      & (tilde) hemkatalogen för aktuell användare (Alt Gr + $\sim$ ) \\
+\url{~user}  & hemkatalogen för användaren med användarnamnet user \\
+\code{.}      & (punkt) aktuell katalog \\
+\code{..}     & (punktpunkt) katalogen ovanför aktuell katalog i filträdet \\
+\end{tabular}
+
+\blankline
+Antag att \code{\url{~}/dod/lab1} är aktuell katalog. Man kan navigera upp och ned i filträdet enligt följande exempel:
+
+\begin{Code}
+~/ptdc-workspace/lab1/Calculator.java
+(till hemkatalogen, ner i ptdc-workspace, ner i lab1)
+
+../../ptdc-workspace/lab1/Calculator.java
+(upp ett steg, upp ett steg, ner i ptdc-workspace, ner i lab1)
+\end{Code}
+
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Kommandotolk}
+Man kommunicerar med Unix eller Linux genom att ge kommandon. Ett särskilt program i operativsystemet, kommandotolken, ''shell'', läser in kommandona och utför det som ska göras.
+
+\pindent Det finns flera olika kommandotolkar. På Linuxdatorerna i E-huset används kommandotolken \code{bash} (''Bourne-Again SHell''). Andra vanliga kommandotolkar är \code{sh}, \code{zsh} och \code{csh}.
+
+\pindent Kommandotolken läser kommandon som ges i ett terminalfönster på skärmen. Så här arbetar tolken:
+
+\begin{Code}
+	Upprepa i all oändlighet:
+		Läs ett kommando
+		Om kommandot är ett riktigt kommando:
+			utför det som ska göras,
+		annars:
+			skriv ut "XXX: command not found"
+\end{Code}
+
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Kommandoformat}
+Varje kommando skrivs på en rad:
+
+\begin{Code}
+kommandonamn -option1 -option2 ... argument1 ...
+\end{Code}
+
+\begin{itemize}
+\item Kommandot talar om vad som ska göras.
+
+\item Argumenten är (oftast) filer eller kataloger som påverkas av kommandot.
+
+\item Optionerna modifierar kommandot på något sätt.
+\end{itemize}
+
+Exempel:
+
+\halfblankline
+\begin{tabular}{lp{7cm}}
+\code{javac Calculator.java} &Kompilerar \code{Calculator.java} med Javakompilatorn, skapar \code{Calculator.class} \\
+\code{cp -i report.tex old.tex} & Kopierar \code{report.tex} till \code{old.tex}. \code{-i} betyder att systemet frågar om \code{old.tex} ska skrivas över om den redan finns \\
+\end{tabular}
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Kommandon för filhantering}
+Exempel på kommandon för att hantera filer:
+
+\blankline
+\begin{tabular}{lp{7.3cm}}
+\code{cp orig kopia} & Kopiera filen \code{orig} till \code{kopia}. \\
+\code{less fil} & Skriv ut \code{fil} på skärmen, en sida i taget. \\
+\code{ls [-la] kat} & Skriv ut en innehållsförteckning över katalogen \code{kat} (aktuell katalog om ingen katalog ges). \code{-l} skriv i ett längre format, \code{-a} skriv också ut punktfiler. \\
+\code{mv fil1 fil2} & Döp om \code{fil1} till \code{fil2}. Om \code{fil2} är en katalog så flyttas filen till den katalogen. \\
+\code{rm fil1 ...} & Tag bort de angivna filerna. \\
+\end{tabular}
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Kataloghantering}
+Exempel på kommandon för att hantera kataloger:
+
+\blankline
+\begin{tabular}{lp{8.3cm}}
+\code{cd kat} & Ändra aktuell katalog till \code{kat}. Utan argument blir det hemkatalogen (samma som \code{cd} \url{~}). \\
+\code{mkdir kat} & Skapa underkatalogen \code{kat} i den aktuella katalogen. \\
+\code{pwd} & Skriv ut namnet på aktuell katalog. \\
+\code{rmdir kat} & Tag bort \code{kat}. Man måste först ta bort alla filerna i katalogen. \\
+\end{tabular}
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Filskydd 1}
+Varje fil har en ägare. Ägaren identifieras med användarnamn och grupp, till exempel \code{dat14xyn} i gruppen \code{students}.
+
+\pindent Ägaren kan skydda filer så att andra inte kan komma åt dem eller öppna filer så att andra kan komma åt dem.
+
+\pindent Filskydd och ägare (och storlek och datum) skrivs ut om man gör \code{ls -l}:
+\begin{Code}
+hacke-3{dat14xyn}: ls -l
+-rw-r-----  1 dat14xyn  students  4940 aug 21 11:14 example.txt
+  skydd        ägare     grupp
+\end{Code}
+
+\end{frame} 
+
+
+
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Filskydd 2}
+\begin{Code}
+-rw-r-----  1 dat14xyn  students  4940 aug 21 11:14 example.txt
+  u  g  o
+\end{Code}
+
+Tre kategorier av användare:
+
+\begin{description}
+\item[\code{u}] (user) filens ägare
+\item[\code{g}] (group) medlemmar i samma grupp som ägaren
+\item[\code{o}] (others) alla andra
+\end{description}
+
+Tre olika rättigheter:
+
+\begin{description}
+\item[\code{r}] (read) tillstånd att läsa
+\item[\code{w}] (write) tillstånd att skriva
+\item[\code{x}] (execute) tillstånd att exekvera program (för kataloger betyder \code{x} tillstånd att titta på innehållet i katalogen)
+\end{description}
+
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Filskydd 3}
+Kommando för att ändra filskydd:
+
+\begin{Code}
+chmod skydd fil1 fil2 ...
+\end{Code}
+
+Filskydd kan anges symboliskt, till exempel \code{u=rw,o=r}, men också numeriskt, där man anger skydden som är satta med ettor, de som inte är satta med nollor. Till exempel:
+
+\begin{Code}
+x = 001, w = 010, r = 100, rx = 101, rw = 110, rwx = 111
+\end{Code}
+
+
+Siffrorna tolkar man sedan som binära tal, vilket ger:
+
+\begin{Code}
+x = 1, w = 2, r = 4, rx = 5, rw = 6, rwx = 7
+\end{Code}
+
+
+Fullständiga numeriska filskydd blir till exempel:
+
+\begin{Code}
+604 <=> u=rw,o=r    705 <=> u=rwx,o=rx
+\end{Code}
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{bash-finesser 1}
+Man kan editera den aktuella kommandoraden:
+
+\blankline
+\begin{tabular}{p{1.7cm}p{8cm}}
+\commandchar{Delete} & Tag bort tecknet till vänster om markören. \\
+\commandchar{Control-U} & Radera hela raden. \\
+\commandchar{$\leftarrow$\ $\rightarrow$} & Flytta sig på raden. \\
+\commandchar{Tab} & Filnamnskomplettering (man behöver bara skriva början av ett långt namn). \\
+\end{tabular}
+
+\blankline
+\code{bash} håller reda på de senaste kommandona som utförts, och man kan få tillbaka gamla kommandon:
+
+\blankline
+\begin{tabular}{p{1.7cm}p{8cm}}
+\code{$\uparrow$} & Återkalla senaste kommando (kan upprepas). \\
+\code{!!} & Gör om senaste kommando. \\
+\code{!abc} & Gör om senaste kommando som inleds med \code{abc}, till exempel \code{!javac} \\
+\end{tabular}
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{bash-finesser 2}
+När man refererar till filer kan man utnyttja jokertecken (wildcards):
+
+\blankline
+\begin{tabular}{ll}
+\code{?} & motsvarar \emph{ett} godtyckligt tecken \\
+\code{*} & motsvarar 0--flera godtyckliga tecken \\
+\end{tabular}
+
+\blankline
+Antag att vi har följande filer i vår katalog: \code{Test1.java}, \code{Test2.java}, \code{Test23.java}, \code{Final.java}, \code{Test1.class}, \code{Test2.class}, \code{Final.class}, \code{FinalReport.tex}, \code{Outline.tex}.
+
+
+\begin{Code}
+javac Test?.java (javac Test1.java Test2.java)
+rm *.class       (rm Test1.class Test2.class Final.class)
+gedit F*.tex     (gedit FinalReport.tex)
+\end{Code}
+
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Initieringsfiler}
+Många program läser en initieringsfil när de startas. Initieringsfilen innehåller inställningar för programmet. Namnen på initieringsfilerna inleds med punkt, så man ser normalt inte dessa filer när man gör \code{ls}.
+
+\pindent \code{bash} läser initieringsfilen \code{.bash\_profile} när ett nytt terminalfönster skapas. Bra rader att ha i denna fil (gör att man alltid får frågor om man verkligen vill ta bort/skriva över filer):
+
+\begin{Code}
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+\end{Code}
+
+Varning: kopiera inte andras initieringsfiler om du inte begriper vad som står i dem!
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Vad är egentligen ett kommando?}
+Kommandon är av två slag:
+
+\begin{description}
+\item[''inbyggda''] små kommandon som exekveras direkt i kommandotolken, till exempel \code{cd}, \code{pwd}, \code{exit}
+\item[''vanliga program''] kommandotolken letar efter ett program med samma namn som kommandot
+\end{description}
+
+Kommandotolken letar efter program i de kataloger som anges i sökvägen (operativsystemvariabeln \code{PATH}, som man själv kan sätta med kommandot \code{export}). När man till exempel skriver \code{javac X.java} exekveras programmet \code{/usr/bin/javac}, eftersom katalogen \code{/usr/bin} finns i sökvägen.
+
+\pindent När man ska exekvera ett eget program som finns i den aktuella katalogen skriver man:
+\begin{Code}
+./programnamn
+\end{Code}
+
+\code{./} är nödvändigt eftersom \code{.} (den aktuella katalogen) inte finns i sökvägen.
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Processer}
+Varje program som körs i Unix körs som en egen process som exekverar självständigt, ''parallellt'' med andra processer. Varje process körs några millisekunder, sedan får nästa process exekvera, osv. Detta hanteras av operativsystemet.
+
+\pindent När man exekverar ett program från ett terminalfönster ''låser'' programmet fönstret tills det avslutas --- så vill man ofta att det ska fungera.
+
+\pindent Men man kan också köra program ''i bakgrunden'' dvs frikopplade från terminalfönstret. Det gör man genom att skriva \code{\&} sist på kommandoraden, till exempel:
+
+\begin{Code}
+gedit example.txt &
+\end{Code}
+
+\end{frame} 
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Fönstersystem, skrivbordsmiljö}
+I Unix och Linux är fönstersystemet inte inbyggt (Unix utvecklades långt innan det fanns grafiska skärmar).
+
+\pindent De flesta Unix- och Linuxsystem som kör på persondatorer använder fönstersystemet X Window System, som oftast kallas bara X. X gör det möjligt att ha fönster på skärmen, att flytta dem, ikonifiera dem, osv.
+
+\pindent Exakt hur fönstren ska se ut och hur man arbetar med dem bestäms av \emph{fönsterhanteraren}, som också är ett separat program. Ovanpå fönsterhanteraren finns skrivbordsmiljön.
+
+\pindent Det bästa (enda) sättet att lära sig att använda en skrivbordsmiljö är att träna!
+\end{frame} 
+

@@ -1,0 +1,95 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}     % För svenska bokstäver
+\usepackage[utf8]{inputenc}  % Teckenkodning UTF8
+\usepackage[swedish]{babel}  % För svensk avstavning och svenska
+                             % rubriker (t ex "Innehållsförteckning")
+\usepackage{fancyvrb}        % För programlistor med tabulatorer
+\fvset{tabsize=4}            % Tabulatorpositioner
+\fvset{fontsize=\small}      % Lagom storlek för programlistor
+
+\usepackage{graphicx}
+
+\title{Dokumentnamn}
+\author{Nils Nilsson}
+\date{1 augusti 1994}        % Blir dagens datum om det utelämnas
+
+\begin{document}             % Början på dokumentet
+
+\maketitle                   % Skriver ut rubriken som vi
+                             % definierade ovan med \title, \author
+                             % och eventuellt \date
+
+
+Är vatten vått?
+
+
+Här skriver jag något
+\emph{viktigt}. Och
+i Java har vi använt
+klassen \texttt{Square}
+
+
+DoD-kursen pågår under vecka
+1--3 av läsperiod ht1. Tyvärr
+är den inte längre \ldots $\cdots$
+
+
+\quad Telefon: 046--222~80~38.
+Dagens datum: \today.
+
+
+
+\begin{itemize}
+	\item första punkten
+	\item här kommer den andra
+	punkten i listan
+	\end{itemize}
+
+	\begin{enumerate}
+		\item Nummer 1
+		\begin{itemize}
+			\item En sak
+			\item en anna sak
+		\end{itemize}
+		\item nummer 2
+		\item numm 3
+	\end{enumerate}
+
+
+\begin{description}
+	\item[SimpleWindow] Ett ekel förnster
+	\item[test] Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting. Test för någonting.  
+\end{description}
+
+En rad
+
+\vspace{20mm}
+
+En anna rad
+
+
+\begin{displaymath}
+	x^2 = y^{r-2t^4}
+\end{displaymath}
+
+\begin{displaymath}
+	sin^2 x = 4,
+	\sin^2 x = 4
+\end{displaymath}
+
+
+
+\begin{displaymath}
+	A=\left\{
+	\begin{array}{cccc}
+	a_{11} & a_{12} & \cdots & a_{1n}\\
+	a_{21} & a_{22} & \cdots & a_{2n}\\
+	\vdots & \vdots & \ddots & \vdots\\
+	a_{n1} & a_{n2} & \cdots & a_{nn}\\
+	\end{array}
+	\right(
+	\end{displaymath}
+
+\end{document}               % Slut på dokumentet

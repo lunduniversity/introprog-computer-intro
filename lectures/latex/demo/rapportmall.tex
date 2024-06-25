@@ -1,0 +1,129 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}     % För svenska bokstäver
+\usepackage[utf8]{inputenc}  % Teckenkodning UTF8
+\usepackage[swedish]{babel}  % För svensk avstavning och svenska
+                             % rubriker (t ex "Innehållsförteckning")
+\usepackage{fancyvrb}        % För programlistor med tabulatorer
+\fvset{tabsize=4}            % Tabulatorpositioner
+\fvset{fontsize=\small}      % Lagom storlek för programlistor
+
+\usepackage{graphicx}
+
+\title{Dokumentnamn}
+\author{Nils Nilsson}
+\date{1 augusti 1994}        % Blir dagens datum om det utelämnas
+
+\begin{document}             % Början på dokumentet
+
+\maketitle                   % Skriver ut rubriken som vi
+                             % definierade ovan med \title, \author
+                             % och eventuellt \date
+
+
+MATTIAS \--\-- ÄR  -{}- BÄST PÅ -\-- ALLT! \--
+
+Här skriver jag något \emph{viktigt}. Och i
+Java har vi använt klassen \texttt{Square}.
+
+\section{Specialtecken}
+
+Ej matematisk formel, utan \$7.
+
+
+
+DoD-kursen pågår under vecka
+1--3 av läsperiod ht1. Tyvärr 
+är den inte längre \ldots
+Telefon: 046--222 80 38. Dagens
+datum: 6 september 2021.
+
+Random mening --- fördtydligande --- mer text 
+
+
+Min text\footnote{det är inte min egentligen?}\footnote{någon annans?} är skirevn här!
+
+
+\section{Listor}
+
+
+\begin{itemize}
+	\item Min första punkt!
+	\item Yay, detta är ju enkelt!
+\end{itemize}
+
+My top 3 word
+\begin{enumerate}
+	\item I
+	\item AM
+	\item BEST
+\end{enumerate}
+
+\begin{description}
+	\item [SimpleWindow] Ett enkelt fönster
+	\item [Scanner] Läsa text
+	\item [Random] Slump!
+\end{description}
+
+
+Lite text och \\ lite mer
+I denna text refererar jag till tabell~\ref{tab4}
+
+\bigskip
+
+Lite mer text, men som ligger en bit längre ned!
+
+\begin{table}
+\begin{tabular}{lllrr}
+Rubrik1 & Rubrik2 & Rubrik3 & Rubrik4&      Rubrik5 \\
+\hline
+value&value & value & value & value \\
+value & value & value & value & value  
+\end{tabular}
+\caption{Min tabelltext}
+\label{tab4}
+\end{table}
+
+\section{Matematik}
+
+Formeln $x = 3y - 2$ står inne i texten.
+
+Däremot står
+\begin{displaymath}
+	x=3y-2
+\end{displaymath}
+
+\begin{equation}
+	x=3y-2
+	\label{eq1}
+\end{equation}
+\begin{equation}
+	x=3y-2
+	\label{eq2}
+\end{equation}
+\begin{equation}
+	X_{pk} = X_{pk-1} + 4
+	\label{eq3}
+\end{equation}
+
+
+\begin{equation}
+	e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots
+\end{equation}
+
+\begin{equation}
+	\sin
+\end{equation}
+
+Titta i ekvation
+
+\begin{figure}
+\includegraphics[width=2cm]{../images/bild}
+\caption{Min hejhopp-bild!}
+\label{hejhopp}
+\end{figure}
+
+Referens till figur~\ref{hejhopp}
+
+\end{document}               % Slut på dokumentet

@@ -1,0 +1,215 @@
+\documentclass[fleqn, article, a4paper]{memoir}
+
+% Swedish.
+% \usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}
+% \usepackage[swedish]{babel}
+\usepackage{pdfpages}
+
+\usepackage[shortlabels]{enumitem}
+\usepackage{selthcsexercise}
+\usepackage{microtype}
+
+% Utilities.
+\usepackage{graphicx}
+\usepackage[hyphens]{url}
+\usepackage[swedish]{varioref}
+\usepackage{listings}
+\usepackage{fontspec} % To enable use of ttf fonts
+\usepackage{enumitem} % For customizing lists
+
+% Set section count to -1, so the first section (which is hidden) becomes 0,
+% and thus the first section actually becomes 1
+\setcounter{section}{-1}
+
+%---------------------------------------------------------------
+\newenvironment{Hemarbete}%
+{\begin{Assignments}[H]}{\end{Assignments}}
+
+\newenvironment{Kontrollfragor}%
+{\begin{Assignments}[K]\tightlist}{\end{Assignments}}
+
+
+
+\newenvironment{Datorarbete}%
+{\begin{Assignments}[D]}{\end{Assignments}}
+
+\newenvironment{DatorarbeteCont}%
+{\begin{Assignments}[D]\setcounter{Ucount}{\theSavecount}}{\end{Assignments}}
+
+\newenvironment{Deluppgifter}%
+{\begin{enumerate}[a)]\firmlist}{\end{enumerate}}
+
+% \newcommand{\file}[1]{{\slshape\fontfamily{ppl}\selectfont #1}}
+\newcommand{\file}[1]{\texttt{#1}}
+
+\newcommand{\commandchar}[1]{\textsc{#1}}
+
+\newcommand{\progname}{c3pu}
+\newcommand{\progfilename}{c3pu.jar}
+
+% \newcommand{\hint}[1]{\textbf{Hint:} #1}
+% Define the hint command
+\newcommand{\hint}[1]{\par\halfblankline\textbf{Hint}: #1\par}
+
+
+% Section styles.
+\setsecheadstyle{\huge\sffamily\bfseries\raggedright} 
+\setsubsecheadstyle{\Large\sffamily\bfseries\raggedright} 
+\setsubsubsecheadstyle{\normalsize\sffamily\bfseries\raggedright} 
+
+\setsecnumformat{} % numrera inte laborationerna
+\renewcommand{\thesection}{\arabic{section}} % för referenser till laborationerna
+\renewcommand{\thefigure}{\arabic{figure}}
+
+%*****************************************************************
+\begin{document}
+\courseinfo{Datorer och datoranvändning}{2024}
+\maketitle
+\thispagestyle{titlepage}
+\vspace{-4cm}
+\section*{Datorlaborationer, Datorer och datoranvändning}
+
+Datorlaborationerna ger exempel på tillämpningar av det material som behandlas under kursen. Schema för laborationerna (tider och datorsalar) finns i kursprogrammet och på kurshemsidan. För laborationerna gäller följande:
+
+\begin{itemize}
+	\item Laborationerna är obligatoriska. Det betyder att du måste bli godkänd på alla uppgifterna under ordinarie laborationstid. Om du skulle vara sjuk vid något laborationstillfälle så måste du anmäla detta till kursansvarig (\url{mattias.nordahl@cs.lth.se}) före laborationen. Om du varit sjuk bör du göra uppgiften på egen hand och redovisa den under ditt nästa laborationstillfälle. Det kommer också att anordnas en uppsamlingslaboration efter kursens slut, för de studenter som missat någon laboration.
+
+	\item Uppgifterna i laborationerna ska lösas individuellt. Regler för samarbete finns på nästa sida.
+
+	\item Varje laboration består av två delar: hemarbete och datorarbete. Innan du kommer till laborationen ska du ha förberett dig genom att ha gjort uppgifterna som markerats som hemarbete, samt läst igenom vad som står under datorarbete. Du ska också ha gått igenom kontrollfrågorna.
+
+	\item Om du hittar någonting i uppgifterna eller andra anvisningar som är felaktigt eller oklart så är vi tacksamma om du meddelar dina synpunkter till \url{mattias.nordahl@cs.lth.se}.
+
+	      %\item  Du måste för varje laboration se till att laborationsledaren noterar dig som godkänd på listan på sista sidan i detta häfte.
+
+	\item I början av varje laboration kommer laborationsledaren att kontrollera att du har förberett dig. Kontrollen görs genom att du får en skrivning med fyra frågor som valts bland kontrollfrågorna. Du måste besvara minst tre av frågorna korrekt för att du ska få genomföra laborationen.
+
+	\item Observera att laborationerna inte syftar till att testa er, utan är ett inlärningsmoment! Under laborationerna får ni ta hjälp av allt kursmaterial eller andra resurser för att lösa uppgifterna.
+
+	\item Svaren till kontrollfrågorna kommer att finnas i laborationshandledningen eller i annat material som delas ut eller hänvisas till. Du kommer också behöva tänka eller reflektera själv med utgångspunkt från materialet.
+\end{itemize}
+
+% \subsection*{Datorlaborationerna och COVID-19}
+% Årets hösttermin blir en väldigt speciell hösttermin i skuggan av den pågående pandemin då vi måste tänka på att bedriva laborationerna på ett sådant sätt att risken för smittspridning minimeras. Din medverkan kommer att krävas för att allt ska fungera på ett bra sätt:
+% \begin{itemize}
+% \item Undvik trängsel! Tänk på att hålla avstånd till varandra så gott det går i samband med laborationen. Sprid ut er i datorsalarna så att ni har gott om utrymme mellann varandra.
+% \item Använd gärna den i salarna utplacerade handspriten för att desinficera händerna.
+% \item Alla datorer vi använder i kursen har lediga USB-uttag på framsidan av datorlådan. Om du helst föredrar att inte använda de tangentbord och datormöss som hör till datorerna kan du ta med ett eget standardtangentbord och mus med USB-anslutning och ansluta dem via dessa uttag. Ordinarie tangentbord/mus behöver inte kopplas ur.
+% \item Stanna hemma om du känner de minsta symptom som skulle kunna tyda på en virusinfektion. Vi kommer under hösten frikostigt arrangera uppsamlingstillfällen som du kan anmäla dig till för att ta igen de laborationer du missar när du stannar hemma så du behöver inte vara rädd för att missa något moment. Se kurshemsidan för information om när uppsamlingstillfällena går av stapeln och hur du gör för att anmäla dig till dem.
+% \end{itemize}
+
+
+
+\newpage
+\subsection*{Riktlinjer för inlämningsuppgifter och laborationsuppgifter}
+Bland LTHs gemensamma regler finns följande föreskrifter:
+
+\begin{itemize}\tightlist
+	\item Inlämningsuppgifter skall fullgöras individuellt om det inte särskilt anges att de skall fullgöras i grupp.
+	\item Vid arbete i grupp bestämmer ansvarig lärare om gruppindelningen och ändringar av denna. Arbetet skall utföras av dem som ingår i gruppen.
+	\item Det är tillåtet att diskutera uppgifterna och tolkningen av dessa med utomstående på ett allmänt plan men inte att få hjälp med de konkreta lösningarna.
+	\item Det är inte tillåtet att kopiera annans eller annan grupps lösningar helt eller delvis. Det är inte heller tillåtet att kopiera från exempelvis litteratur eller Internet. Vid citat skall källan tydligt anges.
+	\item Väsentlig hjälp, av annan än lärare på kursen, för att genomföra en uppgift skall redovisas i redogörelsen eller på annat tydligt sätt. Detsamma gäller om man använt någon annan form av hjälpmedel som läraren inte kan förutsättas känna till.
+	\item Institutionerna kan komplettera dessa regler skriftligen i samband med kursstarten, exempelvis i ett kursprogram.
+\end{itemize}
+
+\n Vid institutionen för datavetenskap gäller även följande kompletteringar/förtydliganden av reglerna:
+
+\begin{itemize}\tightlist
+	\item Reglerna om arbete i grupp ovan tillämpas för alla obligatoriska moment som utförs i grupp, det vill säga även laborationer och projektarbeten.
+	\item Då arbete görs i grupp skall alla gruppdeltagare delta i arbetet.
+	\item Hjälp från annan med handhavandet av apparatur, utnyttjandet av datorsystem och givna datorprogram behöver inte redovisas.
+\end{itemize}
+
+\n Kontakta ansvarig lärare om du är osäker på om viss hjälp är tillåten eller inte!
+
+\blankline
+\n Institutionen tillämpar dessa riktlinjer på alla kurser. Om vi är övertygade om att fusk skett så överlämnar vi ärendet till universitetets disciplinnämnd för vidare åtgärd. Finner disciplinnämnden de studerande skyldiga är påföljden upp till sex månaders avstängning från universitetet och högskolan.
+
+\newpage
+\section{Tips}
+
+Här samlas kort information och hjälp som kan vara användbar under laborationerna. Vid problem och frågor under laborationerna, kolla gärna om din fråga finns besvarad här.
+
+\subsection{Lab 1 --- Linux/Unix}
+\begin{itemize}
+	\item \texttt{Vad menas med att "gå till /usr/local/cs/dod/\dots"?}\\
+	      Det är en absolut sökväg som finns tillgänglig när du är inloggad på skolans datorer. Att ``gå~till'' en sökväg innebär att ändra sitt \texttt{working directory}. (ILL~1.7)
+	\item \texttt{Om jag använder min egen laptop, hur kommer jag åt \code{/usr/local/cs/dod/\dots}}?\\
+	      Du kan använda \code{ssh} för att logga in och arbeta på skoldatorerna (ILL~3.7), eller kopiera filer från skoldatorerna till din egen med \code{scp} eller \code{sftp} (ILL~4.2).
+\end{itemize}
+
+\subsection{Lab 2 --- \LaTeX}
+
+\begin{itemize}
+	\item \texttt{Hur skriver jag specialtecken i \LaTeX{}?}\\
+	      Det finns flera tecken som har särskild betydelse i \LaTeX{}. För att faktiskt skriva dessa tecken i texten, utan att de ska tolkas som specialtecken, behöver man ``bryta~ut'' dem (eng. \emph{escape}). Det görs med \emph{escape}-tecknet \texttt{\textbackslash} (bakåt snedstreck eller eng. backslash). Exempel på specialtecken är \texttt{\textbackslash\%} för procenttecken och \texttt{\textbackslash\$} för dollartecken. \texttt{\textbackslash}-tecknet är i sig också ett specialtecken och kan skrivas med kommandot \texttt{\textbackslash{textbackslash}}, eller \texttt{\textbackslash{backslash}} inom matematikläget.
+
+\end{itemize}
+
+\subsection{Lab 3 --- Versionshantering med Git}
+\begin{itemize}
+	\item \texttt{Hur stänger jag vim!?}\\
+	      Om du råkat öppna texteditorn \code{vim} (t.ex. genom att göra en git commit utan att ha ställt in en annan editor) kan du stänga den genom att trycka \code{:q} (kolon följt av \code{q}), sedan \code{Retur}. Om du redan provat annat kan du ha kommit in i något annat av Vim's editeringslägen. Tryck då först \code{Esc} för att gå tillbaka till det ``normala läget''.
+	\item \texttt{Hur arbetar man med texteditorn nano?} \\
+	      nano är en terminalbaserat texteditor. Den körs alltså direkt i terminalen utan att öppna några nya fönster, vilket kan vara fördelaktigt ibland. I editorn kan du flytta markören med piltangenterna och skriva text som förväntat. I botten av terminalen visas också operationer som kan utföras och vilken knappkombination som ska tryckas. Där används tecknet \texttt{\^{}} (den lilla ``hatten'' vid sidan om \commandchar{return}) för att betyda Ctrl-knappen. Använd t.ex. \commandchar{control-o} för att spara (Write Out), \commandchar{control-x} för att avsluta eller \commandchar{control-g} för mer hjälp.
+\end{itemize}
+
+\subsection{Lab 4 --- Maskinkod}
+\begin{itemize}
+	\item \texttt{TODO?}\\
+	      TODO
+\end{itemize}
+
+
+\newpage
+\include{modules/unix/unix_terminal}
+
+
+\newpage
+\include{modules/latex/latex}
+
+
+\newpage
+\include{modules/git/git}
+
+
+\newpage
+\include{modules/machine-code/machine-code}
+
+
+\newpage
+
+\subsection*{Datorer och datoranvändning, godkända laborationsuppgifter}
+\sectionmark{Godkända laborationsuppgifter}
+
+Efter du blivit godkänd på en laboration kan du be din handledare att signera nedan. Detta är inget som krävs, för handledaren kommer anteckna ditt godkännande och föra in i vårt betygsystem oavsett vilket. Däremot kan det fungera som en liten försäkring för din egen skull; Om det trots allt skulle ske ett misstag någonstans och ditt godkännande inte förs in i betygsystemet, så kan du visa att du blivit godkänd med nedanstående underskrift.
+
+\vspace{3mm}
+
+\noindent Värt att notera är att de flesta kurser du kommer läsa på LTH inte har något liknande analogt system för att visa att du blivit godkänd på en laboration, utan sköter det helt digitalt.
+
+\vspace{3mm}
+
+\noindent Skriv ditt namn och din namnteckning nedan:
+
+\blankline
+\blankline
+\n Namn: \dotfill\\
+
+\blankline
+\n Namnteckning: \dotfill\\
+
+\blankline
+\begin{tabular}{lcc}
+	\toprule \addlinespace
+	{\sffamily\small Godkänd laboration	} & {\sffamily\small Datum} & {\sffamily\small Laborationsledarens namnteckning} \\ \addlinespace \midrule
+	1 Linux                                                                                                              \\ \addlinespace \midrule
+	2 \LaTeX                                                                                                             \\ \addlinespace \midrule
+	3 Git                                                                                                                \\ \addlinespace \midrule
+	4 Maskinkod                                                                                                          \\ \addlinespace
+	\bottomrule
+\end{tabular}
+
+\end{document}

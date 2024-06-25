@@ -1,0 +1,36 @@
+\documentclass[fleqn, article, a4paper]{memoir}
+
+% Swedish.
+\usepackage[T1]{fontenc}
+\usepackage[swedish]{babel}
+\usepackage{pdfpages}
+
+\usepackage{selthcsexercise}
+
+% Utilities.
+\makeevenhead{normalpage}{}{}{}
+\makeoddhead{normalpage}{}{}{}
+
+\usepackage{pifont}
+\newlength{\qlength}
+\setlength{\qlength}{30mm}
+\newcommand{\qskip}[1][\qlength]{\vspace{#1}}
+
+\newcommand{\skrivning}[2]{
+\input{malldel1.tex}
+\section*{\huge Laboration #1 --- skrivning, variant #2}
+\input{malldel2.tex}
+\input{questions-#1-#2.tex}
+\input{malldel3.tex}
+\clearpage
+}
+%*****************************************************************
+\begin{document}
+\courseinfo{Datorer och datoranvändning}{2022/23}
+
+\skrivning{3}{1}
+\skrivning{3}{2}
+\skrivning{3}{3}
+\skrivning{3}{4}
+
+\end{document}

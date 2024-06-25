@@ -1,0 +1,123 @@
+\section{Laboration \arabic{section} --- Linux/Unix}
+\label{lab:unix}
+\emph{Mål:} Du ska bekanta dig med att använda LTHs Linuxdatorer. Du blir inte expert på Linux (eller Unix) på en laboration, och det behöver du inte heller vara. Men det är viktigt att du är van att arbeta med Linux (och därmed även Unix); det kommer att underlätta dina studier i fortsättningen.
+
+
+\subsection*{Hemarbete}
+\begin{Hemarbete}
+	\item Läs igenom \emph{Appendix B Terminalfönster} i \emph{Introduktion till programmering med Scala} av Björn Regnell.
+	\item Läs igenom kompendiet  \emph{Introduktion till LTH:s Linuxdatorer}. Kompendiet är tämligen långt, så börja i god tid. Laborationen innefattar ungefär det som finns i kapitel 1 (Grunderna) och 2 (Påbyggnad). De resterande kapitlen kan du skumma igenom  någorlunda kvickt, för att få en ungefärlig uppfattning av innehållet.
+	% Normala år skulle kompendiet fungera som referensmaterial för en introducerande ''datorstuga'' i introduktionsveckan, men höstterminen 2020 är denna inställd på grund av COVID-19. Därför får vi i år nöja oss med att läsa kompendiet som en förberedelse till laborationen.
+	\item Kompendiet \emph{Introduktion till LTH:s Linuxdatorer} får användas under laborationen, och hänvisas till i uppgifterna. I hänvisningarna förkortas namnet på  kompendiet till ILL.
+\end{Hemarbete}
+Länkar till det ovan refererade materialet finns på kurshemsidan under  ''Datorlaborationer'' om du inte har pappersversionerna av dem.
+
+
+\subsection*{Kontrollfrågor}
+\begin{Kontrollfragor}
+	\item Hur ser kommandot ut som loggar in på en annan dator via nätet (t.ex. om du vill logga in hemifrån)?
+	\item Hur gör man för att byta lösenord på studentdatorerna?
+	\item Vad betyder kommandot \code{pwd}?
+	\item Vad är en kommandotolk?
+	\item Hur får man tillbaka ett tidigare givet kommando, så man kan köra det igen?
+	\item Hur kan man få hjälp om användningen av ett kommando, förutsatt att man vet namnet på kommandot?
+	\item Hur skriver man ut en innehållsförteckning över den aktuella katalogen?
+	\item Vilka är kommandona för att skapa respektive ta bort kataloger?
+	\item Hur byter man aktuell katalog?
+	\item Vad betyder tecknen \code{?} och \code{*} när man skriver dem på en kommandorad?
+	\item Vad betyder tecknen \code{<} och \code{>} när man skriver dem på en kommandorad?
+	\item Förklara kort hur systemet med åtkomsträttigheter av filer och kataloger fungerar.
+	\item Vilket kommando utnyttjar man om man vill titta på innehållet i en fil en sida i taget?
+	\item Antag att programmet \code{prog} producerar många sidor utskrift. Hur gör man för att titta på utskriften en sida i taget?
+	\item Vad är en process?
+	\item Hur avbryter man ett exekverande program?
+\end{Kontrollfragor}
+
+\clearpage
+\subsection*{Datorarbete}
+Kom ihåg att laborationen är ett inlärningsmoment. Ta hjälp av labbledaren om du har frågor, och anteckna gärna frågor som du vill diskutera med handledaren under din redovisning.
+\begin{Datorarbete}
+	\item Logga in på datorn. Använd det användarnamn och det lösenord som du tidigare har kvitterat ut (ILL 1.3).
+	\item Fönsterhantering (ILL 1.4). Ägna några minuter åt att bekanta dig med fönstermiljön. Klicka runt bland menyer och applikationer.
+	\item Editering av kommandoraden och enkla Unix-kommandon.
+
+	\begin{Deluppgifter}
+		\item Öppna ett kommandofönster (Terminal).
+		\item Skriv några enkla Unix-kommandon, till exempel \code{pwd}, \code{ls}, \code{date} och \code{cal}.
+		\item Skriv avsiktligt fel och rätta felet. Prova specialtecknen för att radera enstaka tecken på kommandoraden och för att radera hela raden (ILL 3.3).
+		\item Skriv ut hjälptexten (''man-sidan'') för \code{date}-kommandot (ILL 1.8). Bläddra framåt och bakåt i texten.
+		\item Prova specialtecknen för att få tillbaka tidigare kommandon. Återkalla t.ex. kommandot för utskrift av datum och utför det på nytt. Prova både piltangenterna $\uparrow$ $\downarrow$ och \commandchar{control-r}. Du kan också prova kommandot \code{history} för att se vilka kommandon du har kört.
+		\item Använd kalenderprogrammet (\code{cal}) för att ta reda på vilken veckodag du är född.
+		\item Intresserade kan prova \code{!} (s.k. \emph{history expansion}) för att repetera tidigare kommandon. Exempelvis:
+		\begin{Code}
+			ls -l      // lista filer, med mer info
+			!!         // repetera det senaste kommandot
+			man touch  // visa manualen för touch
+			touch fil  // skapa en fil som heter 'fil'
+			!ls        // repetera det senaste kommandot som börjar med 'ls'
+		\end{Code}
+	\end{Deluppgifter}
+
+	\item Kommandon för att hantera filer och kataloger (ILL 1.7, 2.2, 2.6--2.9).
+
+	\begin{Deluppgifter}
+		\item Skriv ut en innehållsförteckning över din hemkatalog. Skriv ut en förteckning där också filer vars namn börjar med punkt (s.k. \emph{punktfiler}) skrivs ut.
+		\item Gå till katalogen \code{/usr/local/cs/dod/me/metool/src/metool}. Skriv ut en innehållsförteckning över katalogen. Skriv ut en förteckning över de filer vars namn innehåller strängen \code{Statement}.
+		\item Prova hur filnamnskomplettering fungerar. Skriv \code{less R} och tryck på \commandchar{tab}. Datorn fyller i tecken i filnamnet så länge de är unika (nu står det \code{less Re} på kommando\-raden). Det finns mer än en fil vars namn börjar med \file{Re}. Tryck på \commandchar{tab} en gång till (ibland behövs det två extra tryckningar) så får du en lista över dessa filer. Skriv \code{a} och tryck på \commandchar{tab} igen; datorn fyller i till det unika filnamnet \file{ReadStatement.java}. Tryck på \commandchar{return} för att titta på filen.
+		\item Gå till din hemkatalog och skapa en katalog för de filer som används i denna laboration. Katalogen ska heta \file{lab1} och vara en underkatalog till en katalog \file{dod}, där du ska spara allt som rör kursen Datorer och datoranvändning. Du ska i fortsättningen skapa en ny katalog för varje datorlaboration som du gör. Använd följande kommandon:
+
+		\begin{Code}
+			cd          // gå till hemkatalogen om du inte redan är där
+			mkdir dod   // skapa katlogen dod i din hemkatalog
+			cd dod      // gå till katalogen dod
+			mkdir lab1  // skapa katalogen lab1
+			cd lab1     // gå till katalogen lab1
+		\end{Code}
+
+
+		\item Kopiera filen \file{/usr/local/cs/dod/lab1/example.txt} till katalogen \file{lab1}. Skriv ut filen på skärmen med en sida i taget.
+		\item Undersök hur mycket utrymme du har tillgängligt för att lagra filer.
+		\item Tag reda på hur stor filen \file{example.txt} är. Komprimera därefter filen och tag reda på storleken hos den komprimerade filen. Återställ sedan filen till sitt ursprungliga utseende.
+		\item \label{del:h} Skriv ut de rader i filen \file{example.txt} som innehåller ordet Unix. Kommandot för att leta i en fil heter \code{grep}.
+		\item \label{del:i} Samma som uppgift \ref{del:h}, men koppla om utskriften så att den hamnar i en fil med namnet \file{unix.txt}. Skriv ut denna fil på skärmen.
+		\item Räkna (med ett kommando) antalet rader i filen \file{unix.txt}. Du har nu räknat antalet rader som innehåller ordet Unix i filen \file{example.txt}.
+		\item \label{del:k} Tag bort filen \file{unix.txt}.
+		\item Gör samma sak som i uppgift \ref{del:i}--\ref{del:k} utan att använda en temporär fil. Koppla i stället ihop kommandona med en pipe (|).
+	\end{Deluppgifter}
+	\item Editering av text. På LTHs Linuxdatorer finns flera editorer, till exempel \code{nano} (enkel, terminalbaserad), \code{gedit} (enkel, fönsterbaserad), \code{code} (enkel, fönsterbaserad) och \code{emacs} (avancerad). Du får naturligtvis använda vilken editor du vill normalt, men här ska du testa \code{gedit}. Gör gärna om uppgifterna nedan i någon annan editor senare, på egen hand. Vissa uppgifter kommer framstå som väldigt enkla, men prova gärna att göra dem t.ex. i \code{nano}.
+
+	\begin{Deluppgifter}
+		\item Starta \code{gedit} och läs in filen \file{example.txt} genom att i terminalfönstret skriva:\\
+		\code{gedit example.txt \&}
+		\item Utnyttja musen och piltangenterna för att flytta textmarkören. Ändra textinnehållet genom att ta bort tecken och skriva in tecken. Spara det ändrade innehållet till filen.
+		\item Kontrollera att filen \file{example.txt} har ändrats.
+		\item Dela en rad i två rader. Sätt ihop raden igen.
+		\item Lägg in några tomma rader, tag sedan bort dem igen.
+		\item Utnyttja rullningslisten för att flytta dig i texten. Gå till början av texten. Gå till slutet av texten. Gå till rad 43 i texten.
+		\item Markera ett textblock genom att trycka på vänster musknapp och dra markören.
+		\item Markera ett textblock genom att först flytta markören till början av blocket (med musen eller tangentbordet), sedan håll ned Skift-tangenten, och flytta markören till slutet av textblocket (med musen eller tangentbordet).
+		\item Experimentera gärna också med tangenterna \texttt{Home} och \texttt{End}, och med \texttt{Ctrl} och piltangenterna \texttt{$\leftarrow$ $\rightarrow$} för att flytta markören och markera text.
+		\item Kopiera ett markerat textblock till en annan plats i filen. Flytta sedan ett markerat textblock.
+		\item Gå till början av filen och leta upp den första förekomsten av ordet Unix. Leta sedan upp nästa förekomst, osv. Byt sedan alla Unix mot Xinu.
+	\end{Deluppgifter}
+
+	\item Hantering av processer (ILL 3.3, 3.8).
+
+	\begin{Deluppgifter}
+		\item Skriv kommandot \code{xeyes} i terminalfönstret. Flytta musen så ser du att ögonen följer musmarkören. Notera att man inte kan fortsätta att skriva kommandon i fönstret eftersom det är låst av \code{xeyes}-programmet.
+		\item Skriv \commandchar{control-c} i kommandofönstret för att avbryta \code{xeyes}-programmet. Programmets fönster försvinner när man avbryter programmet.
+		\item Skriv nu \code{xeyes \&} i terminalfönstret. \code{\&}-tecknet betyder att programmet ska köras som en självständig process som inte är kopplad till terminalfönstret. Nu kan man alltså fortsätta att skriva kommandon i terminalfönstret. Avsluta \code{xeyes} genom att högerklicka med musen på ikonen för \code{xeyes} i verktygsraden på skärmens vänstra sida. Välj \code{Quit} i menyn som visas.
+		\item Man kan tillfälligt avbryta exekveringen av ett program med \commandchar{control-z}. Skriv \code{xeyes} och sedan \commandchar{control-z}. Notera att programmet nu inte är aktivt (ögonen följer inte musmarkören). Med kommandot \code{fg} (foreground) återupptar man exekveringen igen. Om man i stället ger kommandot \code{bg} (background) återupptar man exekveringen ``i bakgrunden'', precis som om man hade startat programmet med \code{xeyes \&}.
+	\end{Deluppgifter}
+
+	% \clearpage
+	\item Inloggning på andra datorer (ILL 3.7).
+
+	\begin{Deluppgifter}
+		\item Prova att logga in på datorn \code{login.student.lth.se} med hjälp av kommandot \code{ssh}. Prova att ge några kommandon, t.ex. \code{touch} för att skapa en ny fil. Avsluta genom att skriva \code{exit}.
+		\item Datorn \code{login.student.lth.se} är på samma nätverk som datorerna i datorsalarna. Med \code{ssh} loggade du in på en annan dator, men fortfarande med ditt egna konto. Om du skapade en ny fil så kommer du fortfarande hitta den i din lokala terminal efter att du har avslutat \code{ssh}.
+		\item Datorn \code{login.student.lth.se} kan nås externt, t.ex. om du behöver logga in hemifrån.
+	\end{Deluppgifter}
+
+	\item Glöm inte att logga ut innan du lämnar datorn!
+\end{Datorarbete}

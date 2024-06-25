@@ -1,0 +1,68 @@
+
+%\newpage
+%\section{Laboration \arabic{section} --- Lågnivåprogrammering}
+%\emph{Mål:	} Du ska lära dig grunderna i hur en dator fungerar på maskinspråksnivå och träna på att skriva små program i assemblerpråk.
+%
+%
+%\subsection*{Hemarbete}
+%\begin{Hemarbete}
+%\item Titta igenom föreläsningsbilderna till veckans föreläsning. 
+%\item Läs igenom häftet ''ME -- en dator''. Om du inte har förkunskaper i programmering behöver du inte läsa igenom avsnitt 2.2 och 2.3; de avsnitten är överkurs.
+%\item \label{hem:h3prog} Skriv ett ME-program som löser följande problem: läs in två tal, skriv ut talens summa, skillnad, produkt och kvot.
+%\item \label{hem:h4prog} Skriv ett ME-program som först läser in ett tal \code{n}. Därefter ska \code{n} tal läsas och talens summa och produkt beräknas och skrivas ut.
+%\item \label{hem:h5prog} Skriv ett ME-program som läser in ett antal tal och räknar hur många av talen som är större än noll och hur många som är mindre än noll. När en nolla läses in ska inläsningen avslutas och de båda antalen skrivas ut.
+%\item \label{hem:h6prog} Bara för dig som har förkunskaper i programmering: Skriv ett ME-program som läser in ett \code{n}-värde och sedan \code{n} tal. Skriv ut talen i omvänd ordning.
+%\item \label{hem:h7prog} Bara för dig som har förkunskaper i programmering: Skriv ett ME-program som läser in ett \code{n}-värde och sedan \code{n} tal. Sortera talen i växande ordning och skriv ut dem.
+%\end{Hemarbete}
+%
+%\subsection*{Kontrollfrågor}
+%\begin{Kontrollfragor}
+%\item Översätt det binära talet \code{1001011} till hexadecimal och till decimal form.
+%\item Vad är anledningen till att man i datorer använder det binära talsystemet istället för det decimala?
+%\item Vilket är det största talet som kan representeras med två decimala siffror? Hexadecimala siffror? Binära siffror? Uttryck svaren decimalt.
+%\item PC kan betyda ''Personal Computer'', men det finns också en komponent i en processor med samma förkortning. Hur uttyds PC i en processor?
+%\item Vilka delar består en processor av?
+%\item Redogör för begreppen assemblerspråk och maskinspråk.
+%\item Vad kan det finnas för fördelar med att programmera i högnivåspråk, som exempelvis Scala eller Java, istället för i assemblerspråk?
+%\item Redogör för datorers instruktionscykel.
+%\item Vilka är parametertyperna i ME-datorn? Förklara dem kortfattat.
+%\item Förklara vad följande ME-instruktioner gör:
+%\begin{Code}
+%	read  r1
+%	add   r1,1,r1
+%	add   r1,m(1),m(2)
+%	jpos  r1,back
+%\end{Code}
+%\clearpage
+%\item Skriv om följande Javasatser med ME-instruktioner (på skrivningen före laborationen kan det komma ett annat exempel, utan \code{if}-, \code{while}- eller \code{for}-satser):
+%\begin{Code}
+%	int x = 1;
+%	int y = 2; 
+%	int z = 2 * (x + 7) - 8 / y;
+%\end{Code}
+%\item Vad skrivs ut i följande ME-program (ett annat exempel kan komma på skrivningen):
+%\begin{Code}
+%main: move   1,m(0)
+%loop: sub    m(0),5,r1
+%      jpos   r1,ends
+%      mul    m(0),2,m(0)
+%      jump   loop
+%ends: print  m(0)
+%      stop
+%\end{Code}
+%\item Laborationsledaren kontrollerar att du har skrivit programmen i hemuppgifterna H\ref{hem:h3prog}, H\ref{hem:h4prog} och H\ref{hem:h5prog}.
+%\end{Kontrollfragor}
+%
+%\subsection*{Datorarbete}
+%\begin{Datorarbete}
+%\item Gå till katalogen \file{dod} som du skapade i laboration~\ref{lab:unix}. Skapa en ny katalog med namnet \file{lab2} och gå till denna katalog.
+%\item Ge följande kommando för att starta programmet \code{METool}:
+%
+%\begin{Code}
+%java -jar /usr/local/cs/dod/lab2/metool/METool.jar &
+%\end{Code}
+%\vspace{-0.4cm}
+%\item Skriv in programmet från uppgift H\ref{hem:h3prog} i en fil \file{h\ref{hem:h3prog}.mep}. Ladda in det i METool, kompilera och rätta eventuella fel. Testkör programmet, både genom att köra från början till slut och genom att köra stegvis.
+%\item Skriv in och testa programmen från uppgift H\ref{hem:h4prog} och H\ref{hem:h5prog}. 
+%\item Du som löst uppgift H\ref{hem:h6prog} eller H\ref{hem:h7prog}: skriv in och testa programmen från dessa uppgifter. 
+%\end{Datorarbete}

@@ -1,0 +1,114 @@
+% Allt detta är stulet från Per Forebys handledning.sty!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Detta är alla formatteringskommandon som behövs för att få
+% handledningen att se ut som den gör.
+%
+% Dom ligger i denna fil för att inte huvuddokumentet ska bli så
+% hemskt plottrigt.
+%
+% Copyright (c) Per Foreby (perf@efd.lth.se), Lunds Tekniska Högskola.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{verbatim}           % Går inte med valiga verbatim. Vi
+                                % måste använda det utökade paketet.
+
+\newwrite\verbatim@out
+
+\def\@checkfile#1{\openin\@inputcheck #1 \ifeof\@inputcheck 
+  \typeout{***EXEMPEL*** Creating empty #1}
+  \immediate\openout \verbatim@out #1\immediate\write\verbatim@out{Tomrum}
+  \immediate\closeout\verbatim@out
+  \else\closein\@inputcheck \relax\fi}
+
+\newcounter{ectr}
+
+\newenvironment{exempel}%
+ {\stepcounter{ectr}\begingroup\@bsphack
+  \immediate\openout \verbatim@out ex/ex.\arabic{ectr}
+  \let\do\@makeother\dospecials\catcode`\^^M\active
+  \def\verbatim@processline{%
+    \immediate\write\verbatim@out{\the\verbatim@line}}%
+  \verbatim@start}{\immediate\closeout\verbatim@out\@esphack\endgroup
+  \@checkfile{ex/ex.\arabic{ectr}}
+  %\@checkfile{ex/fixed_ex.\arabic{ectr}}
+  \par
+%  \small
+\footnotesize
+  \vspace{4pt}
+  \list{}{\leftmargin\parindent}\item[]
+  \begin{minipage}[t]{6cm}
+%  \begin{minipage}[t]{7.8cm}
+    \verbatiminput{ex/ex.\arabic{ectr}}
+    %\verbatiminput{ex/fixed_ex.\arabic{ectr}}
+  \end{minipage}
+  \begin{minipage}[t]{5cm}
+%  \begin{minipage}[t]{4.8cm}
+    \@input{ex/ex.\arabic{ectr}}
+    % \@input{ex/demo/ex.\arabic{ectr}}
+  \end{minipage}
+  \endlist\vspace{2pt}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Som ovan fast för matteformler. (Har minipage centrerade i höjdled).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{mexempel}%
+ {\stepcounter{ectr}\begingroup\@bsphack
+  \immediate\openout \verbatim@out ex/ex.\arabic{ectr}
+  \let\do\@makeother\dospecials\catcode`\^^M\active
+  \def\verbatim@processline{%
+    \immediate\write\verbatim@out{\the\verbatim@line}}%
+  \verbatim@start}{\immediate\closeout\verbatim@out\@esphack\endgroup
+  \@checkfile{ex/ex.\arabic{ectr}}
+  %\@checkfile{ex/fixed_ex.\arabic{ectr}}
+  \par
+  %\small
+\footnotesize
+  \list{}{\topsep 0pt\parskip 0pt\partopsep 0pt\leftmargin\parindent}
+  \item[]
+  \begin{minipage}[]{6cm}
+%  \begin{minipage}[]{12cm}
+%  \begin{minipage}[]{7.8cm}
+    \vspace{4pt}
+    \verbatiminput{ex/ex.\arabic{ectr}}
+    % \verbatiminput{ex/demo/ex.\arabic{ectr}}
+    \vspace{4pt}
+  \end{minipage}
+  \begin{minipage}[]{5cm}
+%  \begin{minipage}[]{12cm}
+%  \begin{minipage}[]{4.8cm}
+    \vspace{-6pt}
+    \@input{ex/ex.\arabic{ectr}}
+    % \@input{ex/demo/ex.\arabic{ectr}}
+    \vspace{-3pt}
+  \end{minipage}
+  \endlist
+}
+
+% För mitten av mattexempel (för att minska avståndet mellan exempel
+% som kommer i följd
+%\newcommand{\mmex}{\end{mexempel}\vspace{-12pt}\begin{mexempel}}
+\newcommand{\mmex}{\end{mexempel}\begin{mexempel}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Specialvariant där inte samma inmatning kan användas till
+% båda kolumnerna. Används enligt:
+%
+% \bex
+%  text...
+% \end{verbatim}
+% \mex
+%  text...
+% \eex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{dubbelexempel}{\list{}{\leftmargin\parindent}
+  \item[]\begin{small}
+  \begin{minipage}[t]{6cm}\vspace*{-2mm}\begin{verbatim}}{\end{minipage}
+  \end{small}\endlist\vspace*{1mm}}
+\newcommand{\bex}{\begin{dubbelexempel}}
+\newcommand{\mex}{\end{minipage}\begin{minipage}[t]{5cm}}
+\newcommand{\eex}{\end{dubbelexempel}}

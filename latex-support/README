@@ -1,0 +1,35 @@
+Dessa .sty-filer kopieras dit din TeX-distribution efterfrågar dem.
+
+För TeXShop på Mac kan de till exempel ligga i 
+  ~/Library/texmf/tex/latex 
+  
+Om Windows (SN 2021-10-22):
+
+	Kör förslagsvis en editor typ TexStudio, men det räcker inte att installera TexStudio
+	- även textlive måste laddas ner och installeras
+	
+	När man väl installerat TexLive får man en katalog där det är lämpligt att lägga sina filer. 
+	På Sandras dator: C:\texlive\texmf-local\tex\latex\local
+	Lägg alla .sty-filer från katalogen latex-support i katalogen ovan
+	Kör därefter texhash i kommandopromten
+	Starta om TexStudio
+	Nu bör det funka
+
+	Uppdatering, på Mattias dator var de tvungna att ligga i underkatalogen:
+	C:\texlive\texmf-local\tex\latex\<namn>
+	där <namn> är en underkatalog som jag skapade själv, jag valde "lth".
+	Därefter körde jag texhash (texhash.exe) för att uppdatera texlive's fildatabas.
+	
+	
+
+Äldre anteckningar från Björn. 	
+För TexLive på Windows kan de till exempel ligga i 
+  C:/Users/bjornr/texmf/tex/latex/local/
+
+Det kan hända att detta kommando behöver köras i terminalen:
+texhash
+
+Och du kan behöva starta om TexLive eller TeXShop innan det funkar.
+
+Se vidare här:
+http://tex.stackexchange.com/questions/1137/where-do-i-place-my-own-sty-or-cls-files-to-make-them-available-to-all-my-te

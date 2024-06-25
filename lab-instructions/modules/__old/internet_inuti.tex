@@ -1,0 +1,225 @@
+
+
+%\section{Laboration \arabic{section} --- Internet inuti}
+%Mål: Du ska med hjälp av olika Unix-program studera hur Internet fungerar ''inuti''. Laborationen ger en orientering om fundamentala Internetprotokoll som Telnet, HTTP och SMTP samt visar hur data finner vägen genom nätet.
+%
+%
+%\subsection*{Hemarbete}
+%\begin{Hemarbete}
+%\item Läs noga igenom hela laborationen. Du bör därefter kunna svara på en del av frågorna i texten. De övriga frågorna ska du svara på under laborationen.
+%\item Läs igenom avsnittet om e-post (2.5) i kompendiet Introduktion till LTH:s Unixdatorer. 
+%\item Denna hemuppgift ska utföras vid dator. Starta en webbläsare och surfa till
+%
+%\halfblankline
+%\url{http://www.w3schools.com/html/}
+%\halfblankline
+%
+%\n eller till någon liknande handledningssida och orientera dig om möjligheterna i språket HTML. Om du är nybörjare på HTML bör du sätta ett bokmärke på denna sida så att du lätt kan hitta informationen när du behöver den.
+%\end{Hemarbete}
+%
+%\subsection*{Kontrollfrågor}
+%\begin{Kontrollfragor}
+%\item Uttyd följande förkortningar: DNS, HTTP, FTP, SMTP, WWW, TCP, POP.
+%\item Vad är en IP-adress? Hur ser en typisk sådan ut?
+%\item Hur gammalt är Internet? Hur gammal är webben? E-posten?
+%\item Var startades Internet? Varför?
+%\item Vad är Ethernet?
+%\item Vad gör en namnserver?
+%\item Ge några exempel på HTML-taggar och vad de används till.
+%\item Vilka protokoll används vid e-postkommunikation?
+%\item Vilket protokoll används för att skicka webbsidor?
+%\item Av vilka delar utgörs en URL?
+%\item Hur hög är en typisk överföringshastighet vid kommunikation via ADSL?
+%\item Vad gör en router?
+%\item Vilken är skillnaden mellan telnet och ssh?
+%\end{Kontrollfragor}
+%
+%\subsection*{Datorarbete}
+%\subsubsection*{Webbservern, webbsidor}
+%Vi ska börja med att titta närmare på vad som händer när man använder WWW. Först ser vi på servern som tillhandahåller informationen. 
+%
+%\begin{Datorarbete}
+%\item En URL (Uniform Resource Locator) är en adress till ett dokument på webben. Betrakta följande URL:
+%
+%\halfblankline
+%\url{http://users.student.lth.se/dat14xyn/dod.html}
+%\halfblankline
+%
+%\n Denna URL refererar till filen \file{dod.html} på datorn \code{users.student.lth.se}. Filerna är organiserade annorlunda när de omnämns i URL-er än i det lokala filsystemet. På datorerna i domänen  \code{student.lth.se} motsvarar ovanstående URL filen
+%
+%\halfblankline
+%\url{~}\file{dat15xyn/public\_html/dod.html}
+%\halfblankline
+%
+%\n Filen ligger alltså i en katalog \file{public\_html} som i sin tur ligger i din hemkatalog.
+%
+%Skapa katalogen som behövs (\file{dat15xyn} ska naturligtvis bytas mot ditt eget användarnamn). Se till att katalogen får rättigheterna \code{r-x} för användarna ''others''.
+%
+%\item Du ska nu tillverka en webbsida för URL-en ovan. Det enklaste sättet att skapa en webbsida är att utgå från en existerande sida som liknar den man vill skapa och modifiera den.
+%
+%\begin{Deluppgifter}
+%\item Gå till kursens hemsida:
+%
+%\halfblankline
+%\indent \url{http://cs.lth.se/EDA070/}
+%\halfblankline 
+%
+%Under laboration 4 finns en länk till en webbsida med namnet \file{dod.html}. Gå till denna sida och välj ''Save As'' i File-menyn. Se till att filen hamnar i katalogen du nyss skapade och gör den läsbar för användarna ''others''. Öppna filen i en editor och jämför med vad som visas i en webbläsare.
+%
+%\item Som den mesta informationen på WWW så är sidan skriven i HTML (Hypertext Markup Language). HTML är ett sätt att beskriva text med struktur, till exempel styckeindelning och punktlistor, liknande \LaTeX\ fast mera primitivt. Du ser i texten att det finns insprängda direktiv som beskriver textens formatering (fetstil, rubriker och liknande).
+%
+%Ändra texten litet grann efter behag. Huvudsaken är att din nya sida är annorlunda än den ursprungliga. Spara sedan din nya version. 
+%\item Ladda in din sida i webbläsaren och betrakta resultatet. 
+%
+%Texten skickas över nätet från servern till klienten i HTML-form och det är alltså upp till klienten (webbläsaren) att bestämma exakt hur formgivningen ska göras.
+%
+%\item För att se en annan formgivning ska du också prova den textbaserade webbläsaren \code{lynx}. Ge kommandot (återigen med \code{dat14xyn} utbytt mot ditt eget användarnamn):
+%
+%\begin{Code}
+%lynx http://users.student.lth.se/dat14xyn/dod.html
+%\end{Code}
+%
+%Du ser nu samma sida, men annorlunda formgiven. Tryck på \code{Q} för att avsluta \code{lynx}.
+%\end{Deluppgifter}
+%\end{Datorarbete}
+%
+%\subsubsection*{DNS, ARP, vägval och SAP}
+%Denna del av laborationen handlar om hur datapaket hittar fram till sin destination på Internet. Detta kallas vägval eller på engelska routing. Först måste vi förstå hur datorer identifieras.
+%
+%
+%Det finns två sätt att hänvisa till en dator på Internet: med datorns namn, till exempel \url{lo-5.student.lth.se}, eller med dess IP-nummer, till exempel \code{130.235.35.193}. Det viktiga för funktionaliteten är IP-numret. Namnet finns bara för att det är lättare för människor att komma ihåg.
+%
+%När ett program ska kontakta en dator med ett visst namn måste det börja med att ta reda på vilket IP-nummer som namnet motsvarar. För detta ändamål finns en så kallad \emph{namnserver}\footnote{Läs mera om namnservrar på \url{computer.howstuffworks.com/dns.htm} eller på \url{en.wikipedia.org/wiki/Domain_name_system}} (Domain Name Server, DNS) för varje domän. Det finns till exempel en namnserver för domänen \code{student.lth.se} och en annan för \code{cs.lth.se}. Namnservern innehåller en stor tabell där varje datornamn associeras till ett unikt IP-nummer.
+%
+%\begin{DatorarbeteCont}
+%\item Man kan ställa frågor till namnservern med hjälp av ett program kallat \code{host}. Vanligen ger man ett datornamn eller ett IP-nummer som argument till programmet och som svar får man båda uppgifterna. Man kan också ge fler parametrar för att ta reda på information om hela domäner. Till exempel kan man ta reda på namnet på e-postservern (''mail exchanger'') till en domän genom att före domännamnet ge optionen \code{-t MX}.
+%
+%
+%\begin{Deluppgifter}\label{mailserver}
+%\item Vilket IP-nummer har datorn du sitter vid?	
+%\item Vad heter datorn med IP-numret 193.235.142.142?	
+%
+%\item Vilken e-postserver hanterar post från \code{student.lth.se}?	
+%\end{Deluppgifter}
+%\end{DatorarbeteCont}
+%
+%\n På kablar som förbinder datorer (fiber eller koaxialkablar) utnyttjas ett ''lågnivåprotokoll'' som kallas \emph{Ethernet}. Ethernet har också ett speciellt sätt att referera till maskiner, nämligen med det så kallade Ethernetnumret eller den ''fysiska adressen''.
+%
+%Ett Ethernetnummer består av sex bytes (till skillnad från ett IP-nummer som består av fyra bytes). Numret är fysiskt knutet till den nätverkskoppling datorn är utrustad med, till exempel har varje nätverkskort ett unikt sådant nummer inbränt i ett ROM på kortet. Förutom kopplingen mellan datornamn och IP-nummer måste det finnas en motsvarande koppling mellan IP-nummer och Ethernetnummer för att kommunikationen ska fungera. Protokollet som upprätthåller dessa kopplingar heter \emph{Address Resolution Protocol} (ARP).
+%
+%Varje dator har en dynamisk tabell med kända Ethernetnummer och IP-nummer. Om ett Ethernetnummer till en viss maskin saknas då man försöker kontakta den görs en särskild uppslagning över nätet och tabellen kompletteras med information.
+%
+%Data som skickas över nätet passerar olika maskiner på vägen till sin destination. Varje nod (maskin) i nätet har information om vilken väg data avsedda för andra maskiner ska skickas (''routas'') för att nå fram på snabbaste sätt.
+%
+%\begin{DatorarbeteCont}
+%\item Man kan spåra vilken väg data tar genom nätet med kommandot \code{traceroute}. Använd detta kommando för att ta reda på vilken väg information skickas från din maskin till LTH (\url{www.lth.se}) och till några andra datorer.
+%\end{DatorarbeteCont}
+%
+%\n Flera program på en maskin kan kommunicera samtidigt med olika datorer på nätet, till exempel kan man surfa och skicka e-post samtidigt. Det som gör detta möjligt är att varje protokoll är associerat med en särskild \emph{Service Access Point} (SAP), som är ett positivt heltal. På Internet kallas SAP vanligen \emph{portnumret}.
+%
+%I Unix finns i filen \file{/etc/services} en lista på Internetprotokoll och deras motsvarande portnummer.
+%
+%\begin{DatorarbeteCont}
+%\item Protokollet NTP (Network Time Protocol) används mellan maskiner i ett nätverk för att utväxla information om vad klockan är. Många andra protokoll och applikationer är beroende av att datorernas klockor är synkroniserade med varandra, och detta sköts alltså om av NTP.
+%
+%\begin{Deluppgifter}
+%\item Vilket portnummer är associerat med NTP?	
+%\item Vilket protokoll använder port nummer 79?	
+%\end{Deluppgifter}
+%\end{DatorarbeteCont}
+%
+%
+%\subsubsection*{Telnet och HTTP}
+%Ett av de äldsta Internetprotokollen kallas \emph{Telnet}. Telnet är namnet både på protokollet och på ett program som används för att öppna vanliga datakommunikationskanaler (så kallade sockets) mellan olika accesspunkter på två maskiner. Om man känner till ett annat protokoll i detalj kan man via Telnet ''manuellt'' prata med en server på en annan maskin, till exempel med webbservern. 
+%
+%Protokollet som används för att skicka webbsidor kallas för HTTP (Hypertext Transfer Protocol). Som bekant behöver man inte känna till detta protokoll för att kunna utnyttja WWW. De klientprogram som finns för att man ska kunna surfa, exempelvis Firefox, Opera eller MS Internet Explorer, implementerar protokollet åt användaren. Nu ska vi dock ta en titt på det viktigaste kommandot i HTTP, nämligen \code{GET}. Varje gång man beordrar en webbläsare att hämta en webb\-sida utför webbläsaren detta kommando.
+%
+%\begin{DatorarbeteCont}
+%\item Börja med att ansluta till student-webbservern genom att ge kommandot
+%
+%\begin{Code}
+%telnet users.student.lth.se 80
+%\end{Code}
+%
+%\n Det första argumentet till \code{telnet} är namnet på datorn man ansluter till. Talet 80 är portnumret för protokollet HTTP. Telnet svarar med:
+%
+%\begin{Code}
+%Trying 130.235.20.66...
+%Connected to bertil.ddg.lth.se.
+%Escape character is '^]'.
+%\end{Code}
+%
+%\n och stannar och väntar på kommandon. 
+%\item Begär nu webbsidan du tillverkade tidigare genom att ge kommandot
+%
+%\begin{Code}
+%GET http://users.student.lth.se/dat14xyn/dod.html HTTP/1.0
+%<blank rad>
+%\end{Code}
+%
+%\n Du bör känna igen svaret.
+%
+%Observera att servern kopplar ner förbindelsen om man inte skriver något kommando inom några sekunder. Det kan därför vara bra att skriva kommandot först på kommandoraden och sedan markera och kopiera texten så att du sedan snabbt kan klistra in den innan servern hinner koppla ned.
+%
+%\item Ett annat protokoll är \emph{daytime}, som har portnumret 13. Pröva att med \code{telnet} ansluta till denna port på någon dator som stöder daytime-protokollet (en lista över sådana datorer finns på \url{http://tf.nist.gov/tf-cgi/servers.cgi}).
+%
+%Hur protokollen ser ut i detalj bestäms i dokument kallade RFC-er (RFC står för Request for Comments). Daytime-specifikationen i RFC 867 är extremt kort (leta upp den på nätet och titta på den); de flesta andra protokoll är betydligt mera omfattande.
+%
+%\item Om man utelämnar portnumret på kommandoraden kommer \code{telnet} att ansluta till den förvalda porten 23, där en telnet-server svarar. Det som då händer är att användaren får logga in och därefter startar servern en kommandotolk på målmaskinen. Eftersom all kommunikation över telnet sker utan kryptering (även lösenord skickas okrypterade) ska man \emph{aldrig} använda telnet för att köra på andra datorer utan i stället \code{ssh} (Secure Shell). \code{ssh} fungerar som telnet men kommunicerar krypterat och använder portnummer 22. Om du inte har testat att använda ssh tidigare mot andra datorer, gör det nu. Använd login-datorn \code{login.student.lth.se} (denna dator ska man alltid använda för inloggning utifrån). 
+%\end{DatorarbeteCont}
+%
+%\subsubsection*{SMTP -- Simple Mail Transfer Protocol}
+%Ända sedan starten av Internet har det funnits ett protokoll för att skicka e-post. Protokollet, som används än idag, heter \emph{Simple Mail Transfer Protocol} (SMTP, RFC 2821).
+%
+%Alla e-postprogram implementerar SMTP eller delar av det, på liknande sätt som en webb\-läsare förstår sig på HTTP. I protokollet specificeras ett antal kommandon, av vilka de viktigaste finns i tabell~\ref{tab:smtp}.
+%
+%\begin{table}
+%\begin{minipage}{\linewidth}
+%\centering
+%\begin{tabular}{lp{9.5cm}}
+%\code{HELP}&Ger hjälp om de övriga kommandona.\\ 
+%
+%\code{EHLO userdomain}&Hälsningsfras\footnote{\code{EHLO} hette tidigare \code{HELO}. Båda kommandona står för ''hello''.} som man alltid inleder konversationen med efter att ha anslutit sig till en SMTP-server. Parametern \code{userdomain} är den Internetdomän man ansluter ifrån, exempelvis \code{student.lth.se}.\\
+%
+%\code{MAIL FROM: <address>}&Inleder en sändning av ett brev. Parametern \code{address} är avsändarens (din) e-postadress, till exempel \url{dat14xyn@student.lu.se}\\
+%
+%\code{RCPT TO: <address}>&Anger mottagaren av det brev man vill sända. Aven i detta fall är parametern address en fullständig e-postadress, till exempel \url{dic14zze@student.lu.se}\\
+%
+%\code{DATA}&Markerar starten på texten i brevet. Efter att man har gett detta kommando skriver man texten och avslutar med en ensam punkt på en rad. Då sänds brevet iväg.\\
+%
+%\code{QUIT}&Avslutar förbindelsen med e-postservern. \\
+%\end{tabular}
+%\end{minipage}
+%\caption{SMTP-kommandon.}
+%\label{tab:smtp}
+%\end{table}
+%
+%Efter varje kommando svarar servern med en statuskod. Den är 250 om kommandot har utförts korrekt, annars ges ett felmeddelande i form av någon annan kod som specificeras av protokollet.
+%
+%SMTP använder vanligen portnummer 25 för sin kommunikation. När man ansluter till en e-postserver börjar servern alltid dialogen med att presentera sig. Man svarar därefter med \code{EHLO} som i tabellen~\vpageref{tab:smtp}. Därefter skickar man ett brev genom att ge kommandona \code{MAIL FROM}, \code{RCPT TO} och \code{DATA} tillsammans med lämpliga parametrar och data. Slutligen avslutar man med kommandot \code{QUIT}, varvid servern stänger förbindelsen.
+%
+%Allt detta gör alltså alla e-postprogram, som \code{exmh}, \code{pine} eller \code{Eudora}, åt användaren varje gång ett brev skickas. Nu ska du pröva att göra det manuellt.
+%
+%\begin{DatorarbeteCont}
+%\item Använd \code{telnet} (port 25) för att ansluta till LTH:s e-postserver (\code{mail.lth.se}) eller till den server som du identifierade i uppgift~D\ref{mailserver}. 
+%\item Utnyttja protokollspecifikationen för att skicka ett brev till dig själv. När brevet anländer, studera resultatet i ett e-postprogram.
+%\item Du ser i det mottagna brevet att mottagaradressen inte är specificerad, trots att du angav den med ett kommando till SMTP. Detta beror på att kommandot bara är en instruktion till SMTP som inte automatiskt blir ett fält i brevet. Man kan få detta fält specificerat i brevet genom att först i \code{DATA}-blocket skriva
+%\begin{Code}
+%To: dic14zze@student.lu.se
+%\end{Code}
+%\n Här bör man också ange ämne, till exempel
+%\begin{Code}
+%Subject: Ett litet test
+%\end{Code}
+%
+%\n Dessa rader tolkas på speciellt sätt av mottagarens e-postprogram och sätts in överst i avsedda fält. Testa att detta fungerar!
+%\item Denna avslutande del som handlar om SMTP har för den uppmärksamme avslöjat ett säkerhetsproblem med protokollet. Fundera över följande frågor:
+%
+%\begin{Deluppgifter}
+%\item Vari består nämnda säkerhetsproblem och vad kan det ha för konsekvenser?
+%\item Hur kan man som e-postanvändare skydda sig mot problemet?
+%\end{Deluppgifter}
+%\end{DatorarbeteCont}
+%
+%\subsubsection*{När du är klar}
+%Diskutera igenom med din handledare vad du har lärt dig och visa att du har svarat på samtliga frågor.

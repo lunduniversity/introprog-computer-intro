@@ -1,0 +1,105 @@
+% selthcscourseplan.sty: LaTeX package for course plans @cs.lth.se.
+% Options: swedish (default), english.
+% Only works with the memoir package (so ought to be a 
+% documentclass, not a package).
+
+\ProvidesPackage{selthcscourseplan}
+
+\RequirePackage[sc]{mathpazo} % Palatino with good math font.
+\RequirePackage{helvet}       % Helvetica as sans-serif font.
+
+% Palatino needs more leading. 
+\linespread{1.05}
+
+% Typeblock size, margins.
+\settypeblocksize{247mm}{160mm}{*}
+\setlrmargins{25mm}{*}{*}
+\setulmargins{25mm}{*}{*}
+\checkandfixthelayout
+
+% Options swedish/english. Changes the language of the department
+% information on the title page.
+\newcommand{\lth}{LUNDS TEKNISKA H\"OGSKOLA}
+\newcommand{\csdept}{Institutionen f\"or datavetenskap}
+\newcommand{\courseplan}{Kursprogram}
+\DeclareOption{swedish}{
+}
+\DeclareOption{english}{
+\renewcommand{\lth}{LUND INSTITUTE OF TECHNOLOGY}
+\renewcommand{\csdept}{Department of Computer Science}
+\renewcommand{\courseplan}{Course Plan}
+}
+\ProcessOptions
+
+% Chapter style. Use \chapter*{Course Name} after 
+% \begin{document}, then \courseinfo{infoline1}{infoline2}
+% immediately after. 
+\makechapterstyle{courseplan}{% 
+\renewcommand\chapterheadstart{\vspace*{-1.0cm}\noindent\lth\hfill\csdept\par\vspace{1cm}}
+\renewcommand\printchaptertitle[1]{\Huge\sffamily\bfseries\hspace{4cm}\parbox{11cm}{##1}\par\Large\hspace{4cm}\rule{11cm}{\normalrulethickness}\par\vspace{0.5cm}\hspace{4cm}\huge \courseplan\par}
+} 
+\chapterstyle{courseplan}
+
+\newcommand{\courseinfo}[2]{\parbox{\linewidth}{\large\sffamily\bfseries\hspace{4cm}#1 \par\hspace{4cm}#2}\vspace{1cm}\par\noindent\rule[-1cm]{\linewidth}{1.5pt}\vspace{-3mm}}
+
+% Pagestyle, page 1.
+\makepagestyle{titlepage}
+\makeevenhead{titlepage}{}{}{}
+\makeoddhead{titlepage}{}{}{}
+\makeheadrule{titlepage}{\textwidth}{\normalrulethickness}
+\makefootrule{titlepage}{\textwidth}{\normalrulethickness}{\footruleskip}
+
+\aliaspagestyle{chapter}{titlepage} 
+
+% Pagestyle, page 2--.
+\makepagestyle{courseplanpage}
+\makeevenhead{courseplanpage}{\thepage}{}{}
+\makeoddhead{courseplanpage}{}{}{\thepage}
+\makeheadrule{courseplanpage}{\textwidth}{\normalrulethickness}
+\makefootrule{courseplanpage}{\textwidth}{\normalrulethickness}{\footruleskip}
+
+\pagestyle{courseplanpage}
+
+% Sections.
+\setaftersecskip{1pt} 
+\setsecindent{4cm}
+
+\newcommand{\ruledsec}[1]{% 
+\large\sffamily\bfseries\raggedright #1 \vspace{-0.3cm}\rule{3.7cm}{\normalrulethickness}\hspace{0.3cm}\rule{11.99cm}{\normalrulethickness}\vspace{2mm}} 
+
+\setsecheadstyle{\ruledsec}
+
+% Items - environment for the items in a section. Use like the
+% description environment. The label will be typeset in italic
+% "in the left margin".
+\newcounter{Xcount}
+\newcommand{\itlabel}[1]{\hfill\normalfont\itshape\parbox[t]{3.7cm}{\raggedleft#1}}
+\newenvironment{Items}{%
+\list{}{%
+\setlength{\labelsep}{3mm}
+\setlength{\itemindent}{0pt}
+\setlength{\leftmargin}{4cm}
+\setlength{\labelwidth}{\leftmargin}
+\addtolength{\labelwidth}{-\labelsep}
+\setlength{\listparindent}{0pt}
+\setlength{\parsep}{0.5\baselineskip}
+\setlength{\itemsep}{\onelineskip}
+\let\makelabel\itlabel}}{\endlist}
+
+% Don't fill pages, but put footnotes at bottom.
+\raggedbottom
+\feetbelowfloat
+
+% Don't indent footnotes. 
+\setlength{\footmarkwidth}{1em}
+\setlength{\footmarksep}{-\footmarkwidth}
+\footmarkstyle{\textsuperscript{#1}\hfill}
+
+% Utility commands.
+\newcommand{\n}{\noindent} % Don't indent this line.
+
+\newcommand{\code}[1]{\texttt{#1}} % For code in text.
+
+\newcommand{\blankline}{\vspace{\baselineskip}} % extra space
+\newcommand{\halfblankline}{\vspace{0.5\baselineskip}}
+
