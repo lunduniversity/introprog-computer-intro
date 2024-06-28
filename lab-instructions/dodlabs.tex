@@ -18,6 +18,8 @@
 \usepackage{fontspec} % To enable use of ttf fonts
 \usepackage{enumitem} % For customizing lists
 
+\usepackage{wasysym}  % For smileys :)
+
 % Set section count to -1, so the first section (which is hidden) becomes 0,
 % and thus the first section actually becomes 1
 \setcounter{section}{-1}
@@ -29,13 +31,14 @@
 \newenvironment{Kontrollfragor}%
 {\begin{Assignments}[K]\tightlist}{\end{Assignments}}
 
-
-
 \newenvironment{Datorarbete}%
 {\begin{Assignments}[D]}{\end{Assignments}}
 
 \newenvironment{DatorarbeteCont}%
 {\begin{Assignments}[D]\setcounter{Ucount}{\theSavecount}}{\end{Assignments}}
+
+\newenvironment{Extrauppgifter}%
+{\begin{Assignments}[E]}{\end{Assignments}}
 
 \newenvironment{Deluppgifter}%
 {\begin{enumerate}[a)]\firmlist}{\end{enumerate}}
@@ -48,9 +51,8 @@
 \newcommand{\progname}{c3pu}
 \newcommand{\progfilename}{c3pu.jar}
 
-% \newcommand{\hint}[1]{\textbf{Hint:} #1}
 % Define the hint command
-\newcommand{\hint}[1]{\par\halfblankline\textbf{Hint}: #1\par}
+\newcommand{\hint}[2][]{\par\halfblankline\textbf{Hint\ifx#1\empty\else\space#1\fi}: #2\par}
 
 
 % Section styles.
@@ -63,6 +65,7 @@
 \renewcommand{\thefigure}{\arabic{figure}}
 
 %*****************************************************************
+\author{}
 \begin{document}
 \courseinfo{Datorer och datoranvändning}{2024}
 \maketitle

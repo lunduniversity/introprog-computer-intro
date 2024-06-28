@@ -36,12 +36,13 @@
 \lstset{showstringspaces=false}
 \lstset{lineskip=-0.7pt}      % smaller line distance
 \lstset{print=true}           % print also in draft
+\lstset{resetmargins=true}    % reset margins for each listing
 
 % Environment for writing code. The optional argument is the
 % distance above and below the code (default one blank line).
 \lstnewenvironment{Code}[1][\baselineskip]
 {\lstset{aboveskip=#1}
-\lstset{belowskip=#1}}
+    \lstset{belowskip=#1}}
 {}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -50,27 +51,27 @@
 %https://sourceforge.net/tracker/index.php?func=detail&aid=1569519&group_id=92412&atid=600660
 \makeatletter
 \AtBeginDocument{%
-\def\label#1{%
-\@bsphack
-\begingroup
-\let\label\@gobble
-\def\ref{\protect\ref}%
-\edef\@currentlabstr{%
-\expandafter\strip@prefix\meaning
-\@currentlabelname
-}%
-\protected@write\@auxout{}{%
-\string\newlabel{#1}{%
-{\@currentlabel}%
-{\insertframenumber}%
-{\expandafter\strip@period\@currentlabstr
-\relax.\relax\@@@}%
-{\@currentHref}{}%
-}%
-}%
-\endgroup
-\@esphack
-}%
+    \def\label#1{%
+        \@bsphack
+        \begingroup
+        \let\label\@gobble
+        \def\ref{\protect\ref}%
+        \edef\@currentlabstr{%
+            \expandafter\strip@prefix\meaning
+            \@currentlabelname
+        }%
+        \protected@write\@auxout{}{%
+            \string\newlabel{#1}{%
+                {\@currentlabel}%
+                    {\insertframenumber}%
+                    {\expandafter\strip@period\@currentlabstr
+                        \relax.\relax\@@@}%
+                    {\@currentHref}{}%
+            }%
+        }%
+        \endgroup
+        \@esphack
+    }%
 }
 \makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

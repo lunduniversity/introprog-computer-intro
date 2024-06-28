@@ -34,8 +34,8 @@
 \DeclareOption{swedish}{
 }
 \DeclareOption{english}{
-\renewcommand{\lth}{LUND INSTITUTE OF TECHNOLOGY}
-\renewcommand{\csdept}{Department of Computer Science}
+	\renewcommand{\lth}{LUND INSTITUTE OF TECHNOLOGY}
+	\renewcommand{\csdept}{Department of Computer Science}
 }
 \ProcessOptions
 % Pagestyle, page 1 (use \thispagestyle{titlepage} after
@@ -58,19 +58,20 @@
 \lstset{showstringspaces=false}
 \lstset{lineskip=-0.7pt}      % compensate for linespread 1.05
 \lstset{print=true}           % print also in draft
+\lstset{resetmargins=true}    % reset margins for each listing
 
 % Environment for writing code. The optional argument is the
 % distance above and below the code (default one blank line).
 \lstnewenvironment{Code}[1][\baselineskip]
 {\lstset{aboveskip=#1}
-\lstset{belowskip=#1}}
+	\lstset{belowskip=#1}}
 {}
 
 % Code in floats.
 \lstnewenvironment{CodeFloat}[2]
 {\lstset{float, frame=tb, xleftmargin=0mm,
-belowskip=0pt,
-captionpos = b, caption=#1, label = #2}}
+		belowskip=0pt,
+		captionpos = b, caption=#1, label = #2}}
 {}
 \renewcommand\lstlistingname{Lista}
 
@@ -102,25 +103,25 @@ captionpos = b, caption=#1, label = #2}}
 % parameter is the indentation (default \parindent).
 \newcounter{Ucount}
 \newenvironment{Questions}[1][\parindent]{%
-\list{\arabic{Ucount}.\hfill}{%
-\usecounter{Ucount}
-\setlength{\labelsep}{0.5em}
-\setlength{\itemindent}{0pt}
-\setlength{\leftmargin}{#1}
-\setlength{\labelwidth}{\leftmargin}
-\addtolength{\labelwidth}{-\labelsep}
-\setlength{\listparindent}{#1}
-\setlength{\parsep}{\parskip}
-\setlength{\itemsep}{\onelineskip}}}{\endlist}
+	\list{\arabic{Ucount}.\hfill}{%
+		\usecounter{Ucount}
+		\setlength{\labelsep}{0.5em}
+		\setlength{\itemindent}{0pt}
+		\setlength{\leftmargin}{#1}
+		\setlength{\labelwidth}{\leftmargin}
+		\addtolength{\labelwidth}{-\labelsep}
+		\setlength{\listparindent}{#1}
+		\setlength{\parsep}{\parskip}
+		\setlength{\itemsep}{\onelineskip}}}{\endlist}
 
 % Title control.
 \newlength{\pretitleskip}
 \setlength{\pretitleskip}{0.8cm}
 \renewcommand{\maketitlehooka}{\vspace{-1.75cm}\n\lth\hfill\csdept\vspace{\pretitleskip}}
 \pretitle{\begin{center}\sffamily\huge\bfseries}
-\posttitle{\par\end{center}}
+		\posttitle{\par\end{center}}
 \predate{\begin{center}\sffamily\Large\bfseries}
-\postdate{\par\end{center}}
+		\postdate{\par\end{center}}
 
 %--- new specifications ---
 \newcommand{\specintro}[1]{\halfblankline #1\vspace{-3mm}}
@@ -130,12 +131,12 @@ captionpos = b, caption=#1, label = #2}}
 
 \lstnewenvironment{Spec}
 {\lstset{xrightmargin=\specmargin}
-\lstset{aboveskip=\baselineskip}
-\lstset{belowskip=\baselineskip}
-\lstset{print=true}
-\lstset{frame=single}
-\lstset{framesep=5pt}
-\lstset{frameround=tttt}}
+	\lstset{aboveskip=\baselineskip}
+	\lstset{belowskip=\baselineskip}
+	\lstset{print=true}
+	\lstset{frame=single}
+	\lstset{framesep=5pt}
+	\lstset{frameround=tttt}}
 {}
 
 %--- nonrounded corners for classes (not Spec) ---%
@@ -147,4 +148,4 @@ captionpos = b, caption=#1, label = #2}}
 	\lstset{print=true}
 	\lstset{frame=single}
 	\lstset{framesep=5pt}}
-	{}
+{}

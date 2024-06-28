@@ -20,9 +20,9 @@
 \checkandfixthelayout
 
 % Section styles.
-\setsecheadstyle{\sffamily\bfseries\raggedright} 
-\setsubsecheadstyle{\sffamily\bfseries\raggedright} 
-\setsubsubsecheadstyle{\sffamily\bfseries\raggedright} 
+\setsecheadstyle{\sffamily\bfseries\raggedright}
+\setsubsecheadstyle{\sffamily\bfseries\raggedright}
+\setsubsubsecheadstyle{\sffamily\bfseries\raggedright}
 
 % Pagestyle, page 2--.
 %\renewcommand{\sectionmark}[1]{\markright{#1}} 
@@ -41,8 +41,8 @@
 \DeclareOption{swedish}{
 }
 \DeclareOption{english}{
-\renewcommand{\lth}{LUND INSTITUTE OF TECHNOLOGY}
-\renewcommand{\csdept}{Department of Computer Science}
+    \renewcommand{\lth}{LUND INSTITUTE OF TECHNOLOGY}
+    \renewcommand{\csdept}{Department of Computer Science}
 }
 \ProcessOptions
 
@@ -65,19 +65,20 @@
 \lstset{showstringspaces=false}
 \lstset{lineskip=-0.7pt} % compensate for linespread 1.1666...
 \lstset{print=true}           % print also in draft
+\lstset{resetmargins=true}    % reset margins for each listing
 
 % Environment for writing code. The optional argument is the
 % distance above and below the code (default one blank line).
 \lstnewenvironment{Code}[1][\baselineskip]
 {\lstset{aboveskip=#1}
-\lstset{belowskip=#1}}
+    \lstset{belowskip=#1}}
 {}
 
 % Code in floats.
 \lstnewenvironment{CodeFloat}[2]
-{\lstset{float, frame=tb, xleftmargin=0mm, 
-belowskip=0pt,
-captionpos = b, caption=#1, label = #2}}
+{\lstset{float, frame=tb, xleftmargin=0mm,
+        belowskip=0pt,
+        captionpos = b, caption=#1, label = #2}}
 {}
 \renewcommand\lstlistingname{Lista}
 
@@ -115,33 +116,33 @@ captionpos = b, caption=#1, label = #2}}
 \newcounter{Ucount}
 \newcounter{Savecount}
 \newenvironment{Assignments}[1][]{% 
-\list{#1\arabic{Ucount}.\hfill}{% 
-\usecounter{Ucount} 
-\setlength{\labelsep}{0.5em} 
-\setlength{\itemindent}{0pt} 
-\setlength{\leftmargin}{\asgindent} 
-\setlength{\labelwidth}{\leftmargin} 
-\addtolength{\labelwidth}{-\labelsep} 
-\setlength{\listparindent}{\parindent} 
-\setlength{\parsep}{\parskip} 
-\setlength{\itemsep}{\onelineskip}}}{\setcounter{Savecount}{\theUcount}\endlist} 
+    \list{#1\arabic{Ucount}.\hfill}{% 
+        \usecounter{Ucount}
+        \setlength{\labelsep}{0.5em}
+        \setlength{\itemindent}{0pt}
+        \setlength{\leftmargin}{\asgindent}
+        \setlength{\labelwidth}{\leftmargin}
+        \addtolength{\labelwidth}{-\labelsep}
+        \setlength{\listparindent}{\parindent}
+        \setlength{\parsep}{\parskip}
+        \setlength{\itemsep}{\onelineskip}}}{\setcounter{Savecount}{\theUcount}\endlist}
 
 % Title control.
 \newlength{\pretitleskip}
 \setlength{\pretitleskip}{0.8cm}
 \renewcommand{\maketitlehooka}{\vspace{-1.75cm}\n\lth\hfill\cscourse\\[-2pt]\csdept\hfill\csyear\\\vspace{\pretitleskip}}
-\pretitle{\begin{center}\sffamily\huge\bfseries} 
-\posttitle{\par\end{center}}
+\pretitle{\begin{center}\sffamily\huge\bfseries}
+        \posttitle{\par\end{center}}
 \predate{\begin{center}\sffamily\Large\bfseries}
-\postdate{\par\end{center}}
+        \postdate{\par\end{center}}
 
 \newcommand{\cscourse}{}
 \newcommand{\csyear}{}
 \newcommand{\courseinfo}[2]{
-\renewcommand{\cscourse}{#1}
-\renewcommand{\csyear}{#2}
-\title{}
-\date{}
+    \renewcommand{\cscourse}{#1}
+    \renewcommand{\csyear}{#2}
+    \title{}
+    \date{}
 }
 
 %--- new specifications ---
@@ -152,11 +153,11 @@ captionpos = b, caption=#1, label = #2}}
 
 \lstnewenvironment{Spec}
 {\lstset{xrightmargin=\specmargin}
-\lstset{aboveskip=\baselineskip}
-\lstset{belowskip=\baselineskip}
-\lstset{print=true}
-\lstset{frame=single}
-\lstset{framesep=5pt}
-\lstset{frameround=tttt}}
+    \lstset{aboveskip=\baselineskip}
+    \lstset{belowskip=\baselineskip}
+    \lstset{print=true}
+    \lstset{frame=single}
+    \lstset{framesep=5pt}
+    \lstset{frameround=tttt}}
 {}
 

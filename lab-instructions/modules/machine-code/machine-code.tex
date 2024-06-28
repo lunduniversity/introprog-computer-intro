@@ -4,15 +4,25 @@
 \emph{Mål:} Att förstå hur en dator fungerar på en grundläggande nivå. Man hör ibland att datorer endast förstår och arbetar med ``ettor och nollor'', men vad betyder det egentligen? I denna laboration kommer vi arbeta med en förenklad datormodell där vi kan inspektera och manipulera minnet och processorn på en låg nivå och se just hur ettor och nollor används för att utföra beräkningar.
 
 \subsection{Kort teori}
-% ta upp:
-%  - CPU, vad gör den? Vad är register?
-%  - (Arbets)Minne. Lådor där man kan stoppa in värden, addresseras med nummer.
-%  - Instruktioner. En CPU har en uppsättning instruktioner den kan utföra.
-%  - Maskinkod. Instruktioner representeras som binära tal.
-%  - Teckenkodning. Hur representeras bokstäver och andra tecken i minnet?
-%    - ASCII, enkel tabell som mappar binärt värde till symbol.
-%    - Unicode, utökad tabell som stödjer fler språk och symboler. Används inte i labben.
-%  - Programräknare. Ett speciellt register som håller koll på vilken instruktion som ska utföras härnäst.
+Här går vi väldigt kortfattat igenom några centrala koncept och begrepp som du behöver inför laborationen. Se nästa avsnitt (Hemarbete) för mer förberedande resurser du förväntas ha läst innan laborationen.
+
+\subsubsection{Central Processing Unit (CPU)}
+CPU:n, eller processorn, är hjärnan i en dator där alla beräkningar utförs. Den läser och utför instruktioner lagrade i minnet, hanterar data genom sina register, och styr övriga komponenter i systemet. \emph{Register} är små lagringsenheter inuti CPU:n som lagrar data och instruktioner som är omedelbart nödvändiga för de beräkningar som ska utföras.
+
+\subsubsection{Minne}
+Minnet i en dator fungerar som lagringsplatser där varje plats har en unik adress och kan innehålla en viss mängd data. Man kan tänka på dem som "lådor" som kan fyllas med värden som CPU:n sedan kan läsa eller ändra. Minnet används för att lagra både de data som programmen bearbetar och själva programkoden.
+
+\subsubsection{Instruktioner och Maskinkod}
+Varje CPU har en specifik uppsättning instruktioner, känd som dess instruktionsuppsättning. Dessa instruktioner, som styr CPU:n att utföra operationer såsom addition, subtraktion, och dataöverföring, är representerade i binär form -- de ettor och nollor som är datorns grundläggande språk.
+
+\subsubsection{Programräknare}
+Programräknaren är ett speciellt register i CPU:n som håller reda på adressen till nästa instruktion som ska hämtas och utföras. Detta gör det möjligt för datorn att veta vilken del av programmet som ska köras härnäst.
+
+\subsubsection{Teckenkodning}
+För att representera text och tecken använder datorer kodningsscheman. ASCII (uttalas "aski") är ett sådant schema där varje bokstav eller symbol representeras av ett unikt binärt värde. ASCII-schemat innehåller bara 128 olika tecken och inkluderar det engelska alfabetet, siffror och några specialtecken. UTF-8 är ett modernare schema som kan representera de flesta av världen alla språk och alfabet, men är också mer komplicerat, så i denna laboration kommer vi nöja oss med ASCII.
+
+\subsubsection{Notation i handledningen}
+I den här handledningen kommer vi ofta att referera till både register och minnesplatser. Den emulerade datorn som vi använder, \progname{}, har 256 minnesplatser och åtta register. Dessa register refereras till med namn som \texttt{R0}, \texttt{OP2}, och \texttt{OUT}. Minnesplatserna benämns som \texttt{M0}, \texttt{M1}, \texttt{M2}, och så vidare. För att skilja mellan när ett värde används direkt eller som en adress för att hämta ett annat värde, använder vi en asterisk (eller "stjärna", \texttt{*}). Denna notation är inspirerad av programspråket C, där asterisken används för att hantera pekare. Till exempel, om värdet 38 är lagrat i registret \texttt{R0}, refererar \texttt{R0} till själva värdet 38. Å andra sidan refererar \texttt{*R0} till värdet som finns lagrat på minnesplatsen \texttt{M38}. För mer komplexa adresseringar kan vi även använda parenteser, såsom i \texttt{*(R0+1)}, vilket då refererar till minnesplatsen \texttt{M39}.
 
 
 
@@ -60,40 +70,96 @@ Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar
     \item Bygg vidare på det tidigare exemplet och skriv ut flera tecken i rad, t.ex. \texttt{Hello,~World!}. Kom ihåg att varje tecken måste representeras som ett ASCII-värde. Ta hjälp av ASCII-tabellen för att hitta tecken och deras motsvarande decimal- eller binärvärden.
 
     \noindent När du är klar så spara ditt program genom att klicka på \texttt{File}~$\rightarrow$~\texttt{Save} och ge filen ett namn. Du kan sedan ladda in programmet igen genom att klicka på \texttt{File}~$\rightarrow$~\texttt{Open} och välja filen.
-    \hint{Tecknet " " (mellanslag) har ASCII-värdet 32.}
+    \hint[1]{Tecknet " " (mellanslag) har ASCII-värdet 32.}
+    \vspace{-2mm}
+    \hint[2]{Du kan använda upprepade \texttt{LD}- och \texttt{PRT}-instruktioner, eller \texttt{PRL} (Print Loop).}
 
-    \item Från \texttt{Examples}-menyn, öppna nu det exempel som heter \texttt{Simple addition}, och försök förstå vad det gör och hur det fungerar. Kom ihåg och ta hjälp av att varje minnescell visas med olika tolkningar, däribland decimalt och som instruktioner. Vilka värden kommer att tolkas som instruktioner och vilka som data? Vad kommer resultatet att bli när programmet körs? Till sists, kör programmet och se om du hade rätt.
+    \item Från \texttt{Examples}-menyn, öppna nu det exempel som heter \texttt{Simple~add}, och försök förstå vad det gör och hur det fungerar. Kom ihåg och ta hjälp av att varje minnescell visas med olika tolkningar, däribland decimalt och som instruktioner. Vilka värden kommer att tolkas som instruktioner och vilka som data? Vad kommer resultatet att bli när programmet körs? Till sists, kör programmet och se om du hade rätt.
+    
+    \item Nu ska du modifiera ditt program lite grand, och utöka din förståelse för CPU:n genom att hantera data dynamiskt. Föreställ dig att ett tidigare program har kört och sparat ett resultat i minnet på en okänd plats; alltså du känner inte till minnesplatsen när du skriver programmet, men programmet får reda på adressen under körning. Låt säga att adresssen nu finns sparad på minnesplats 0.
 
-    \item Modifiera programmet så att det istället utför subtraktion, samt läser de två operanderna från specifika minnesplatser, säg 18 och 19 istället. Ändra värdena på minnesplatserna 18 och 19 för att utföra beräkningen \(127-43\) och kör programmet för att se att det fungerar.
+    \begin{Deluppgifter}
+        \item \textbf{Förbered Minnet:} För att simulera den tidigare beräkningen, skriv manuellt in talen 127 och 43 på minnesplatserna 18 respektive 19. Detta är alltså de "okända" addresserna som programmet kommer att läsa från. Skriv också in värdet 18 på minnesplats 0, så att programmet vet var resultatet finns.
+        \item \textbf{Ladda Adresser:} Använd som innan instruktionen \texttt{LD} för att ladda värdet på minnesplats 0 till ett register, t.ex. \texttt{R0}. Notera att detta värdet alltså ska tolkas som en minnesaddress, och i sin tur användas för att ladda de faktiska värdena.
+        \item Använd instruktionen \texttt{LDA} (Load Address) för att ladda operanderna från \texttt{*R0} och \texttt{*(R0+1)} till operandregistren.
+        \item \textbf{Ändra till Subtraktion:} Modifiera programmet för att utföra en subtraktion \(127-43\), och skriva ut det liksom tidigare. Kontrollera att programmet ger det korrekta resultatet.
+        \item \textbf{Experiment med Operandordning:} Vad händer om du byter plats på värdena i minnesplatserna och beräknar \(43-127\)? Priva och se vad resultatet blir.
+    \end{Deluppgifter}
 
-    Vad tror du händer om man vänder på operanderna, dvs. utför beräkningen \(43-127\)? Prova att byta plats på minnesplatserna 18 och 19 och kör programmet för att se om du hade rätt. När du är klar så spara ditt program i en ny fil \texttt{subtraction.txt}.
-    \hint{Använd instruktionen \texttt{LDA}, alltså "Load Address".}
+    När du är klar så spara ditt program i en fil \texttt{subtraction.txt}.
+
+
+    \item Du ska nu modifiera programmet lite grand, så att de två operanderna läses från dynamiska minnesplatser. Låtsas att ditt program just har utfört en beräkning och sparat resultatet i minnet. Var i minnet vet vi inte när vi skriver programmet, utan endast under körning. Minnesadressen där resultatet ligger kommer dock vara tillgänglig i ett register, säg \texttt{RES}. Använd instruktionen \texttt{LDA} (Load~Address) för att läsa värdena från \texttt{*RES} och \texttt{*(RES+1)} till de två operandregistren.
+    
+    Du kan fejka den initiala beräkningen genom att manuellt skriva in värdena i minnet, t.ex. på minnesplats 18 och 19, och låta programmet helt enkelt ladda in värdet 18 i \texttt{RES}, med den tidigare \texttt{LD} instruktionen.
+
+    Ändra också programmet så att det istället för addition utför subtraktion, och låt det beräkna \(127-43\). Kör programmet och se att resultatet blir korrekt.
+    Vad tror du händer om man vänder på operanderna, dvs. utför beräkningen \(43-127\)? Prova att byta plats på minnesplatserna 18 och 19 och kör programmet igen för att se om du hade rätt. När du är klar så spara ditt program i en ny fil \texttt{subtraction.txt}.
 
     \item Skriv ett eget program som innehåller en \texttt{if}-sats. Programmet ska jämföra två tal och skriva ut Y (för "yes") om de är lika, annars N (för "no"). Använd hoppinstruktioner för att implementera villkorlig exekvering. Kör programmet och se att det fungerar som förväntat.
+    \hint{Liksom alltid inom programmering så kan målet uppnås på flera olika sätt. Nedan är två exempel i pseudokod:}
 
-    \item Öppna exempelprogrammet \texttt{Simple loop} och försök förstå vad det gör och hur det fungerar. Vad kommer resultatet att bli när programmet körs? Kör programmet och se om du hade rätt.
+    \begin{minipage}[t]{0.42\textwidth}
+        \begin{lstlisting}[xleftmargin=-15mm]
+            1. a = 5
+            2. b = 5
+            3. if a == b, jump to 5
+            4. jump to 7
+            5. load and print 'Y'
+            6. halt
+            7. load and print 'N'
+            8. halt
+        \end{lstlisting}
+    \end{minipage}
+    \begin{minipage}[t]{0.42\textwidth}
+        \begin{lstlisting}[xleftmargin=-15mm]
+            1. a = 5
+            2. b = 5
+            3. load 'Y'
+            4. if a == b, jump to 6
+            5. load 'N'
+            6. print
+            7. halt
+        \end{lstlisting}
+    \end{minipage}
 
-    \item Vi kan alltså skapa loopar genom att använda hoppinstruktioner. Skapa ett eget program som räknar från 0 till 10 och skriver ut varje tal. Använd en loop för att uppnå detta. Kör programmet och se att det fungerar som förväntat.
+    \item Nästa exempel är mycket roligt! \smiley \\
+    Öppna exempelprogrammet \texttt{Simple loop} och försök förstå vad det gör och hur det fungerar. Vad kommer resultatet att bli när programmet körs? Kör det och se om du hade rätt.
+
+    \item Vi kan alltså skapa loopar genom att använda hoppinstruktioner. Skapa ett eget program som räknar från 0 till 10 och skriver ut varje tal. Använd en loop för att uppnå detta. Kör programmet och se att det fungerar som förväntat. Spara programmet i en ny fil \texttt{count.txt}.
+    
+    \item Baserat på ditt \texttt{count}-program, skriv ett nytt loop-program som summerar alla tal från 0 till \(N\), där \(N\) är ett tal som du själv väljer. Eftersom \progname{} endast har en 8-bitars processor så är vi väldigt begränsade i hur stora tal vi kan hantera. Vilken är det största summan du kan beräkna? Spara ditt program i en ny fil \texttt{sum.txt} när du är klar.
 \end{Datorarbete}
 
 
 \subsection{Extrauppgifter (frivilliga)}
 
-\begin{Datorarbete}
+Nedanstående uppgifter krävs inte för att bli godkänd på laborationen, utan finns för dig som vill ha en extra utmaning. Kika gärna på dem och se om någon verkar intressant! I annat fall är du klar med laborationen och kan redovisa den för handledaren.
+
+\begin{Extrauppgifter}
     \item Skriv ett program som konverterar en följd av siffror till en sträng av motsvarande tecken. Programmet ska läsa in en följd av värden (som måste vara 0--9) från minnet och konvertera dem till motsvarande ASCII tecken. Alltså, den första följden av siffror ska kunna skrivas till terminalen med \texttt{PRD} instruktionen (print decimal), medan de konverterade värdena ska kunna skrivas ut med \texttt{PRT} instruktionen (print text).
 
-    \item Skriv ett program som gör \emph{två} jämförelser i ett "och"-uttryck. Programmet ska kontrollera ifall två tal båda är större än 50, och i så fall skriva ut "True", annars "False".
+    \item Skriv ett program som kontrollerar ifall två tal båda är större än 50, och i så fall skriver ut "True", annars "False". Programmet ska alltså göra \emph{två} jämförelser i ett "och"-uttryck, motsvarande ungefär:
+    \begin{Code}
+        if a > 50 && b > 50:
+            ...
+        else:
+            ...
+    \end{Code}
+    \vspace{-3mm}
+    \hint{En villkorlig hoppinstruktion som inte uppfyller villkoret kommer fortsätta att exekvera nästa instruktion som vanligt.}
 
     \item Implementera ett funktionsanrop i ditt program. Skapa en funktion som adderar två tal och returnerar summan. Använd hoppinstruktioner för att anropa funktionen och hantera returvärdet. Ditt program ska motsvara följande pseudokod:
-    \begin{verbatim}
-		1. a = 3
-		2. b = 4
-		4. sum = call add(a, b)
-		5. print sum
-		6. halt
-		7. add(a, b):
-		8.   return a + b
-	\end{verbatim}
+    \begin{Code}
+		a = 3
+		b = 4
+		sum = call add(a, b)
+		print sum
+		halt
+		add(a, b):
+		    return a + b
+	\end{Code}
+    \vspace{-3mm}
     \hint{Se nedan för förslag på hur en funktion kan implementeras. Notera att termen "funktion" används ganska löst här, eftersom det inte finns något koncept av funktioner i maskinkod.}
     \begin{enumerate}
         \item Välj för din funktion fyra register som ska ha särskild betydelse:
@@ -112,11 +178,11 @@ Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar
               \end{enumerate}
         \item För funktionen:
               \begin{enumerate}
-                  \item Använd de två talregistren för att hämta de två talen och utför beräkningen.
+                  \item Hämta de två talen från dina valda register och utför beräkningen.
                   \item Spara resultatet i returregistret.
                   \item Använd det sparade programräknarvärdet för att hoppa tillbaka till den instruktion som anropade funktionen.
               \end{enumerate}
-        \item Tänk på att funktionen ska retunera och fortsätta med instruktionen \emph{efter} anropet, så att programmet inte hamnar i en loop.
+        \item Tänk på att funktionen ska retunera och fortsätta med instruktionen \emph{efter} anropet, så att programmet inte hamnar i en oändlig loop.
 
     \end{enumerate}
 
@@ -125,170 +191,30 @@ Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar
     \item När en funktion anropas är det viktigt att inte överskriva nuvarande värden i vissa register som används av programmet. I verkliga processorer finns det därför speciella register kända som \emph{mottagarbevarade} (eng. \emph{callee-saved}), vilka ska sparas och återställas av den anropade funktionen. Implementera en funktion som använder och tillfälligt sparar registren \texttt{R1} till \texttt{R3} och återställer dem innan funktionen avslutas.
 
     \hint{Använd ett ledigt område i minnet (i verkliga system skulle detta hanteras av operativsystemet) för att temporärt spara de register som ska bevaras. Nu kan funktionen fritt använda registerna till sina beräkningar. Innan funktionen avslutas och returnerar, återställ dessa register till deras ursprungliga värden.}
-\end{Datorarbete}
 
-% Brainstorming: Vilka uppgifter ska ges till studenterna?
-% - Skriv ett program som räknar ut summan av alla tal i en lista.
-% - Skriv ut en enkel beräkning som text, t.ex. "2 + 3 = 5".
-% - Implementera en if-sats med hjälp av hoppinstriktioner, t.ex. skriv ut det största av två tal. Utöka programmet så att det kan jämföra tre tal.
-% - Implementera en loop som räknar upp ett tal från 0 till 10 och skriver ut det.
-% - Implementera en loop som summerar ett godtyckligt antal tal i minnet.
-% - Använd "load address" instruktionen, t.ex. för att hitta ett givet värde i minnet och skriva ut det samt dess adress.
-% - Implementera en funktion, alltså en del av programmet som kan anropas från andra delar av programmet. Det kommer innefatta:
-%   - Spara programräknarens nuvarande värde.
-%   - Hoppa till funktionen.
-%   - Utföra funktionens instruktioner. T.ex. addera två tal och returnera resultatet.
-%   - Hur ska funktionen returnera resultatet? Lägg det i ett särskilt register, eller skriv det till en viss adress i minnet?
-%   - Hoppa tillbaka till det sparade programräknarvärdet.
-% - Implementera ett program som leder till "segmentation fault", alltså editerar minnet utanför dess tillåtna område och t.ex. skriver över instruktioner.
+    \item I programspråket C är \emph{segmentation fault} ett ökänt och vanligt förekommande fel. Det betyder att programmet försöker skriva till eller läsa från en minnesadress som inte är tillåten (t.ex. en adress utanför programmet eller en del av minnet som inte är allokerat).    
+    Implementera ett program som medvetet leder till segmentation fault, t.ex. som demonstrerat av nedanstående pseudokod. Reflektera sedan över vad som händer och varför det är viktigt att hantera sådana fel, samt varför det kan vara svårt att felsöka dem.
 
+    \textbf{OBS: Det saknas för närvarande instruktioner för att kunna skriva detta programmet i \progname{}. Det behövs en 'store' instruktion som hämtar värdet och destinationsadressen från register.}
+    \begin{Code}
+        0. count = 0
+        1. val = 10
+        2. max = 200
+        3. if a > b, jump to 13:  // loop 5 times: 10,20,40,80,160 < 200
+        4.     a = a + a
+        5.     store a in memory address 6 + count
+        6.     count = count + 1
+        7.     jump to 3
+        8. // allokerat minne: 8, 9, 10, 11, 12
+        9.
+       10.
+       11.
+       12.
+       13. load address 10 into OUT register
+       14. print decimal value
+       15. halt
+    \end{Code}
+    \hint{Exemplet ovan är förenklat. Det kommer behövs fler instruktioner för att implementera detta programmet i \progname{}.}
+    
 
-
-% Nedan förslag är genererade av Chat-GPT
-
-
-% Grundläggande Uppgifter
-
-%     Läs och förstå minnet: Skriv ett program som läser ett
-%     specifikt värde från en definierad adress i minnet och skriver ut det på
-%     skärmen.
-
-%     Enkel addition: Implementera ett program som läser två
-%     tal från specifika minnesplatser, adderar dem och skriver resultatet till
-%     en annan plats i minnet.
-
-%     Decimal till binär omvandling: Skriv ett program som tar
-%     ett decimaltal och konverterar det till binär form, sedan lagrar
-%     binärtalen i minnet.
-
-
-% Mellannivå Uppgifter
-
-%     Implementera en loop: Skapa ett program som använder en
-%     loop för att addera en sekvens av tal från minnet och skriver ut den
-%     totala summan.
-
-%     Villkorslogik: Skriv ett program som jämför två tal och
-%     skriver ut vilket som är större, eller om de är lika.
-
-%     Implementera en enkel räknare: Skapa ett program som
-%     räknar från 1 upp till ett nummer som anges av användaren och visar varje
-%     steg i konsolen.
-
-
-% Avancerade Uppgifter
-
-%     Multiplicera utan *-operatorn: Skriv ett
-%     program som utför multiplikation av två tal genom upprepade additioner.
-
-%     Använda funktionsanrop: Implementera en subrutin som
-%     utför en matematisk operation (t.ex. addition) och kan återanvändas av
-%     huvudprogrammet.
-
-%     Skapa en miniräknare: Implementera en enkel miniräknare
-%     som kan utföra grundläggande aritmetik (addition, subtraktion,
-%     multiplikation, division) baserat på användarinmatning.
-
-
-% Frivilliga Uppgifter
-
-%     Segmentation Fault Simulator: Implementera ett program
-%     som medvetet försöker åtkomst utanför tilldelat minnesområde för att
-%     simulera ett segmentation fault och diskutera dess konsekvenser.
-
-%     Optimering: Skriv ett program och sedan försök att
-%     optimera det för att köra snabbare eller använda mindre minne, och
-%     dokumentera skillnaderna.
-
-%     Algoritmisk komplexitet: Implementera två olika
-%     algoritmer för att lösa samma problem och jämför deras prestanda i termer
-%     av exekveringstid och minnesanvändning.
-
-
-% Diskussionsfrågor och Reflektioner
-
-%     Lågnivå vs. Högnivå Programmering:
-
-%         Hur skiljer sig upplevelsen av att programmera i en lågnivåmiljö
-%         jämfört med högnivåspråk som Java eller Python?
-
-%         Vilka är fördelarna och nackdelarna med att arbeta närmare hårdvaran?
-
-%     Felsökning:
-
-%         Vilka strategier är mest effektiva när du felsöker lågnivåprogram?
-
-%         Hur kan verktyg och visualiseringar förbättra förståelsen för vad ditt
-%         program gör?
-
-%     Datorarkitektur:
-
-%         Hur har denna laboration påverkat din förståelse för hur datorer
-%         fungerar?
-
-%         Diskutera vikten av operativsystemet och dess roll i att hantera
-%         hårdvaruresurser.
-
-
-
-% Nedan är också genererat av Chat-GPT
-
-\subsection*{Fortsatta uppgifter}
-\begin{Datorarbete}
-    \item Förstå och implementera kontrollflöden:
-    \begin{enumerate}
-        \item Skapa ett program som använder en enkel \texttt{if}-sats för att bestämma och skriva ut det största av två inmatade tal. Använd hoppinstruktioner för att utföra villkorliga hopp.
-        \item Utöka programmet för att jämföra tre tal och skriva ut det största.
-    \end{enumerate}
-
-    \item Implementera loopar:
-    \begin{enumerate}
-        \item Skriv ett program som räknar från 0 till 10 och skriver ut varje tal.
-        \item Skriv ett program som räknar ut summan av alla tal i en lista lagrade i minnet. Använd en loop för att gå igenom listan.
-    \end{enumerate}
-
-    \item Använda avancerade instruktioner:
-    \begin{enumerate}
-        \item Skriv ett program som använder \texttt{load address} instruktionen för att hitta ett specifikt värde i minnet och skriva ut värdet samt dess adress.
-    \end{enumerate}
-
-    \item Funktioner och subrutiner:
-    \begin{enumerate}
-        \item Skapa en funktion som adderar två tal och returnerar resultatet. Implementera funktionen så att den kan anropas från andra delar av programmet, inklusive:
-              \begin{itemize}
-                  \item Spara programräknarens nuvarande värde.
-                  \item Hoppa till funktionens startadress.
-                  \item Utföra additionen och lagra resultatet på ett bestämt sätt (i ett register eller på en specifik minnesadress).
-                  \item Återgå till programräknarens sparade värde efter att funktionen har körts.
-              \end{itemize}
-    \end{enumerate}
-
-    \item Felsökning och felhantering:
-    \begin{enumerate}
-        \item Implementera ett program som medvetet leder till en \texttt{segmentation fault} genom att försöka skriva till eller läsa från en minnesadress utanför tillåtet område. Diskutera vad som händer och varför det är viktigt att hantera sådana fel.
-    \end{enumerate}
-\end{Datorarbete}
-
-\subsection*{Sammanfattning och reflektion}
-Under laborationen har ni fått utforska grunderna i hur datorns processor och minne samarbetar för att utföra instruktioner och hantera data. Diskutera i grupp:
-\begin{itemize}
-    \item Vilka var de största utmaningarna med att programmera på denna låga nivå?
-    \item Hur skiljer sig det från att skriva program i högnivåspråk som Java eller Python?
-    \item Vilken insikt ger detta om betydelsen av operativsystem och abstraktioner i mjukvaruutveckling?
-\end{itemize}
-
-Innan laborationen avslutas, se till att spara era program och dela dem med kursledaren. Diskutera eventuella frågor eller problem som uppstått under laborationen med er handledare.
-
-
-
-\newpage
-
-\section{Java -- Felsökning}
-\label{sec:java_troubleshoot}
-
-Om du inte kan köra \progname programmet kan det beror på att Java inte är korrekt installerat på din dator. Följande steg beskriver hur du kan felsöka och lösa problemet.
-
-\begin{itemize}
-    \item \textbf{Kontrollera att Java är installerat:} Öppna en terminal och skriv \texttt{java -version}. Om du får ett felmeddelande betyder det att Java inte är installerat. Installera Java genom att följa instruktionerna på kurshemsidan.
-    \item ...
-\end{itemize}
+\end{Extrauppgifter}
