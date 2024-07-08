@@ -13,16 +13,16 @@ CPU:n, eller processorn, är hjärnan i en dator där alla beräkningar utförs.
 Minnet i en dator fungerar som lagringsplatser där varje plats har en unik adress och kan innehålla en viss mängd data. Man kan tänka på dem som "lådor" som kan fyllas med värden som CPU:n sedan kan läsa eller ändra. Minnet används för att lagra både de data som programmen bearbetar och själva programkoden.
 
 \subsubsection{Instruktioner och Maskinkod}
-Varje CPU har en specifik uppsättning instruktioner, känd som dess instruktionsuppsättning. Dessa instruktioner, som styr CPU:n att utföra operationer såsom addition, subtraktion, och dataöverföring, är representerade i binär form -- de ettor och nollor som är datorns grundläggande språk.
+Varje CPU har en specifik uppsättning instruktioner, känd som dess instruktionsuppsättning. Dessa instruktioner styr CPU:n till att utföra operationer, så som addition och subtraktion eller dataöverföring mellan minnesplatser och register. Vanligt förekommande instruktioner är \texttt{ADD} (addition), \texttt{MOV} (flytta data), och \texttt{JMP} (hoppa till en annan instruktion). Varje instruktion har en binär representation, alltså en sekvens av ettor och nollor. Detta är datorns grundläggande språk, kallat maskinkod.
 
 \subsubsection{Programräknare}
 Programräknaren är ett speciellt register i CPU:n som håller reda på adressen till nästa instruktion som ska hämtas och utföras. Detta gör det möjligt för datorn att veta vilken del av programmet som ska köras härnäst.
 
 \subsubsection{Teckenkodning}
-För att representera text och tecken använder datorer kodningsscheman. ASCII (uttalas "aski") är ett sådant schema där varje bokstav eller symbol representeras av ett unikt binärt värde. ASCII-schemat innehåller bara 128 olika tecken och inkluderar det engelska alfabetet, siffror och några specialtecken. UTF-8 är ett modernare schema som kan representera de flesta av världen alla språk och alfabet, men är också mer komplicerat, så i denna laboration kommer vi nöja oss med ASCII.
+För att representera text och tecken använder datorer kodningsscheman. ASCII (uttalas "aski") är ett sådant schema där varje bokstav eller symbol representeras av ett unikt binärt värde. ASCII-schemat innehåller bara 128 olika tecken och inkluderar det engelska alfabetet, siffror och några specialtecken. UTF-8 är ett modernare schema som kan representera de flesta av världens alla språk och alfabet, men är också mer komplicerat, så i denna laboration kommer vi nöja oss med ASCII.
 
 \subsubsection{Notation i handledningen}
-I den här handledningen kommer vi ofta att referera till både register och minnesplatser. Den emulerade datorn som vi använder, \progname{}, har 256 minnesplatser och åtta register. Dessa register refereras till med namn som \texttt{R0}, \texttt{OP2}, och \texttt{OUT}. Minnesplatserna benämns som \texttt{M0}, \texttt{M1}, \texttt{M2}, och så vidare. För att skilja mellan när ett värde används direkt eller som en adress för att hämta ett annat värde, använder vi en asterisk (eller "stjärna", \texttt{*}). Denna notation är inspirerad av programspråket C, där asterisken används för att hantera pekare. Till exempel, om värdet 38 är lagrat i registret \texttt{R0}, refererar \texttt{R0} till själva värdet 38. Å andra sidan refererar \texttt{*R0} till värdet som finns lagrat på minnesplatsen \texttt{M38}. För mer komplexa adresseringar kan vi även använda parenteser, såsom i \texttt{*(R0+1)}, vilket då refererar till minnesplatsen \texttt{M39}.
+I labben kommer vi behöva kunna referera till både register och minnesplatser. Den emulerade datorn som vi kommer använda, \progname{}, har 256 minnesplatser och åtta register. Dessa register har index 0--7 men refereras typiskt till med sina namn, t.ex. \texttt{R0}, \texttt{OP2}, och \texttt{OUT}. Minnesplatserna har index 0--255 och benämns som \texttt{M0}, \texttt{M1}, \texttt{M2}, och så vidare. För att skilja mellan när ett värde används direkt eller som en adress för att referera till ett annat värde, använder vi en asterisk (eller "stjärna", \texttt{*}). Denna notation är inspirerad av programspråket C, där asterisk används för att hantera pekare. Som exempel: Om värdet 38 är lagrat i registret \texttt{R0}, så refererar \texttt{R0} till värdet 38. Å andra sidan, betyder \texttt{*R0} att värdet 38 används som en adress, och refererar alltså till värdet som finns i minnet på plats 38, alltså \texttt{M38}. För mer komplexa adresseringar kan vi även använda parenteser, såsom i \texttt{*(R0+1)}, vilket då refererar till minnesplatsen \texttt{M39}.
 
 
 
@@ -45,9 +45,6 @@ Länkar till det ovan refererade materialet finns på kurshemsidan under  ''Dato
 \begin{Kontrollfragor}
     \item Todo.
 \end{Kontrollfragor}
-
-\subsection*{Bakgrund}
-Här följer en kort sammanfattning av materialet ni har läst som hemarbete, som kommer vara användbart under laborationen.
 
 % 
 
