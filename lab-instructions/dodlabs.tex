@@ -18,7 +18,23 @@
 \usepackage{fontspec} % To enable use of ttf fonts
 \usepackage{enumitem} % For customizing lists
 
-\usepackage{wasysym}  % For smileys :)
+\usepackage{amsmath}  % For \text{}
+\usepackage{pifont}   % Provides the star symbols
+
+%---------------------------------------------------------------
+
+% Define the command for difficulty rating
+\newcommand{\difficulty}[2][]{%
+  \emph{Svårighet:} %
+  \ifnum#2>0 \ding{72}\else \ding{73}\fi
+  \ifnum#2>1 \ding{72}\else \ding{73}\fi
+  \ifnum#2>2 \ding{72}\else \ding{73}\fi
+  \ifnum#2>3 \ding{72}\else \ding{73}\fi
+  \ifnum#2>4 \ding{72}\else \ding{73}\fi
+  \ifx\relax#1\relax \else \hspace{3mm}(\textit{#1})\fi
+  \par\noindent
+}
+
 
 % Set section count to -1, so the first section (which is hidden) becomes 0,
 % and thus the first section actually becomes 1
@@ -54,6 +70,9 @@
 % Define the hint command
 \newcommand{\hint}[2][]{\par\halfblankline\textbf{Hint\ifx#1\empty\else\space#1\fi}: #2\par}
 
+\lstset{
+	escapeinside={(*@}{@*)},
+}
 
 % Section styles.
 \setsecheadstyle{\huge\sffamily\bfseries\raggedright} 
@@ -161,8 +180,9 @@ Här samlas kort information och hjälp som kan vara användbar under laboration
 
 \subsection{Lab 4 --- Maskinkod}
 \begin{itemize}
-	\item \texttt{TODO?}\\
-	      TODO
+	\item \emph{Inga frågor ännu.}
+	% \item \texttt{TODO}\\
+	%       TODO
 \end{itemize}
 
 
