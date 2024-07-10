@@ -4,13 +4,17 @@
 \emph{Mål:} Att förstå hur en dator fungerar på en grundläggande nivå. Man hör ibland att datorer endast förstår och arbetar med ``ettor och nollor'', men vad betyder det egentligen? I denna laboration kommer vi arbeta med en förenklad datormodell där vi kan inspektera och manipulera minnet och processorn på en låg nivå och se just hur ettor och nollor används för att utföra beräkningar.
 
 \subsection{Kort teori}
-Här går vi väldigt kortfattat igenom några centrala koncept och begrepp som du behöver inför laborationen. Se nästa avsnitt (Hemarbete) för mer förberedande resurser du förväntas ha läst innan laborationen.
+Här går vi kortfattat igenom några centrala begrepp som du behöver inför laborationen. Gör också uppgifterna i avsnittet ``Obligatoriska förberedelser (hemarbete)'' \emph{innan} laborationen.
 
-\subsubsection{Central Processing Unit (CPU)}
-CPU:n, eller processorn, är hjärnan i en dator där alla beräkningar utförs. Den läser och utför instruktioner lagrade i minnet, hanterar data genom sina register, och styr övriga komponenter i systemet. \emph{Register} är små lagringsenheter inuti CPU:n som lagrar data och instruktioner som är omedelbart nödvändiga för de beräkningar som ska utföras.
+\subsubsection{Processor (CPU, Central Processing Unit) och Register}
+CPU:n, eller \emph{processorn}, är hjärnan i en dator och utför alla dess beräkningar. Den läser och exekverar instruktioner från arbetsminnet, hanterar data via sina inbyggda register, och koordinerar övriga komponenter i systemet. \emph{Register} är små, snabba lagringsenheter inuti CPU:n som temporärt lagrar data för snabb tillgång under beräkningarna. De är begränsade i antal men erbjuder extremt snabb dataåtkomst —- upp till 100 gånger snabbare än arbetsminnet. Därför vill man vanligtvis ladda in data från arbetsminnet till registren en gång, använda dem genomgående i beräkningar, och först när beräkningarna är klara skriva tillbaka resultatet till arbetsminnet.
 
-\subsubsection{Minne}
-Minnet i en dator fungerar som lagringsplatser där varje plats har en unik adress och kan innehålla en viss mängd data. Man kan tänka på dem som "lådor" som kan fyllas med värden som CPU:n sedan kan läsa eller ändra. Minnet används för att lagra både de data som programmen bearbetar och själva programkoden.
+\subsubsection{Arbetsminne (RAM, Random Access Memory)}
+Arbetsminnet i en dator fungerar som lagringsplatser som kan innehålla en viss mängd data. Man kan tänka på dem som ``lådor'' som kan fyllas med värden som CPU:n sedan kan läsa eller ändra. Varje låda har en unik adress så att CPU:n direkt kan hämta eller skriva data.
+Arbetsminnet används för att temporärt lagra både programkod och de data som programmen arbetar med.
+Det är långsammare än processorns register, men kan vara betydligt större. En modern dator har typiskt flera miljarder minnesplatser (mäts i GB, Giga Byte). 
+Till skillnad från permanenta lagringsenheter som hårddiskar och SSD-enheter, är arbetsminnet \emph{flyktigt}, vilket betyder att dess innehåll försvinner när datorn stängs av. Det är dock många storleksordningar snabbare än både hårddiskar och SSD-enheter\footnote{Läsning från RAM tar typiskt 10--100ns, från SSD 10--100$\mu$s och från hårddisk flera millisekunder.}.
+
 
 \subsubsection{Instruktioner och Maskinkod}
 Varje CPU har en specifik uppsättning instruktioner, känd som dess instruktionsuppsättning. Dessa instruktioner styr CPU:n till att utföra operationer, så som addition och subtraktion eller dataöverföring mellan minnesplatser och register. Vanligt förekommande instruktioner är \texttt{ADD} (addition), \texttt{MOV} (flytta data), och \texttt{JMP} (hoppa till en annan instruktion). Varje instruktion har en binär representation, alltså en sekvens av ettor och nollor. Detta är datorns grundläggande språk, kallat maskinkod.
@@ -21,12 +25,17 @@ Programräknaren är ett speciellt register i CPU:n som håller reda på adresse
 \subsubsection{Teckenkodning}
 För att representera text och tecken använder datorer kodningsscheman. ASCII (uttalas "aski") är ett sådant schema där varje bokstav eller symbol representeras av ett unikt binärt värde. ASCII-schemat innehåller bara 128 olika tecken och inkluderar det engelska alfabetet, siffror och några specialtecken. UTF-8 är ett modernare schema som kan representera de flesta av världens alla språk och alfabet, men är också mer komplicerat, så i denna laboration kommer vi nöja oss med ASCII.
 
+\subsubsection{\progname{}}
+I labben ska du arbeta med en fiktiv dator, kallad \progname{}, som emulerar (härmar) hur en riktig dator fungerar i princip, men förenklat.
+Den har en 8-bitars processor, med åtta register, samt ett arbetsminne med 256 platser. Varje minnesplats är åtta bitar, vilket betyder att varje plats kan lagra ett heltal mellan 0 och 255.
+Du kan direkt editera individuella bitar i minnet och i processorns register, och köra dem som instruktioner. Du kommer alltså skriva och köra program i maskinkod.
+
 \subsubsection{Notation i handledningen}
-I labben kommer vi behöva kunna referera till både register och minnesplatser. Den emulerade datorn som vi kommer använda, \progname{}, har 256 minnesplatser och åtta register. Dessa register har index 0--7 men refereras typiskt till med sina namn, t.ex. \texttt{R0}, \texttt{OP2}, och \texttt{OUT}. Minnesplatserna har index 0--255 och benämns som \texttt{M0}, \texttt{M1}, \texttt{M2}, och så vidare. För att skilja mellan när ett värde används direkt eller som en adress för att referera till ett annat värde, använder vi en asterisk (eller "stjärna", \texttt{*}). Denna notation är inspirerad av programspråket C, där asterisk används för att hantera pekare. Som exempel: Om värdet 38 är lagrat i registret \texttt{R0}, så refererar \texttt{R0} till värdet 38. Å andra sidan, betyder \texttt{*R0} att värdet 38 används som en adress, och refererar alltså till värdet som finns i minnet på plats 38, alltså \texttt{M38}. För mer komplexa adresseringar kan vi även använda parenteser, såsom i \texttt{*(R0+1)}, vilket då refererar till minnesplatsen \texttt{M39}.
+I handledningen behöver vi ibland kunna referera till register och minnesplatser. Registerna i \progname{} har index 0--7, men refereras typiskt till med sina namn: \texttt{R0}--\texttt{R2}, \texttt{OP1}, \texttt{OP2} och \texttt{RES}, samt \texttt{OUT} och \texttt{PC}. Platserna i arbetsminnet har index 0--255 och benämns som \texttt{M0}, \texttt{M1}, \texttt{M2}, och så vidare. För att skilja mellan när ett värde används direkt eller som en adress för att referera till ett annat värde, använder vi en asterisk (eller ``stjärna'', \texttt{*}). Denna notation är inspirerad av programspråket C, där asterisk används för att hantera pekare. Som exempel: Om värdet 38 är lagrat i registret \texttt{R0}, så refererar \texttt{R0} till värdet 38. Å andra sidan, betyder \texttt{*R0} att värdet 38 används som en adress, och refererar till \texttt{M38}, alltså värdet som finns i arbetsminnet på plats 38. För mer komplexa adresseringar kan vi även använda parenteser, såsom i \texttt{*(R0+1)}, vilket då refererar till minnesplatsen \texttt{M39}.
 
 
 
-\subsection*{Hemarbete}
+\subsection*{Obligatoriska förberedelser (hemarbete)}
 \begin{Hemarbete}\firmlist
     \item Titta igenom föreläsningsbilderna från föreläsning 4 (titel todo).
     \item Läs igenom ...
@@ -88,14 +97,6 @@ Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar
 
     När du är klar så spara ditt program i en fil \texttt{subtraction.txt}.
 
-
-    \item \difficulty{1} Du ska nu modifiera programmet lite grand, så att de två operanderna läses från dynamiska minnesplatser. Låtsas att ditt program just har utfört en beräkning och sparat resultatet i minnet. Var i minnet vet vi inte när vi skriver programmet, utan endast under körning. Minnesadressen där resultatet ligger kommer dock vara tillgänglig i ett register, säg \texttt{RES}. Använd instruktionen \texttt{LDA} (Load~Address) för att läsa värdena från \texttt{*RES} och \texttt{*(RES+1)} till de två operandregistren.
-    
-    Du kan fejka den initiala beräkningen genom att manuellt skriva in värdena i minnet, t.ex. på minnesplats 18 och 19, och låta programmet helt enkelt ladda in värdet 18 i \texttt{RES}, med den tidigare \texttt{LD} instruktionen.
-
-    Ändra också programmet så att det istället för addition utför subtraktion, och låt det beräkna \(127-43\). Kör programmet och se att resultatet blir korrekt.
-    Vad tror du händer om man vänder på operanderna, dvs. utför beräkningen \(43-127\)? Prova att byta plats på minnesplatserna 18 och 19 och kör programmet igen för att se om du hade rätt. När du är klar så spara ditt program i en ny fil \texttt{subtraction.txt}.
-
     \item \difficulty{1} Skriv ett eget program som innehåller en \texttt{if}-sats. Programmet ska jämföra två tal och skriva ut Y (för "yes") om de är lika, annars N (för "no"). Använd hoppinstruktioner för att implementera villkorlig exekvering. Kör programmet och se att det fungerar som förväntat.
     \hint{Liksom alltid inom programmering så kan målet uppnås på flera olika sätt. Nedan är två exempel i pseudokod:}
 
@@ -128,7 +129,7 @@ Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar
 
     \item \difficulty{1} Vi kan alltså skapa loopar genom att använda hoppinstruktioner. Skapa ett eget program som räknar från 0 till 10 och skriver ut varje tal. Använd en loop för att uppnå detta. Kör programmet och se att det fungerar som förväntat. Spara programmet i en ny fil \texttt{count.txt}.
     
-    \item \difficulty{1} Baserat på ditt \texttt{count}-program, skriv ett nytt loop-program som summerar alla tal från 0 till \(N\), där \(N\) är ett tal som du själv väljer. Eftersom \progname{} endast har en 8-bitars processor så är vi väldigt begränsade i hur stora tal vi kan hantera. Vilken är det största summan du kan beräkna? Spara ditt program i en ny fil \texttt{sum.txt} när du är klar.
+    \item \difficulty{1} Baserat på ditt \texttt{count}-program, skriv ett nytt loop-program som summerar alla tal från 0 till \(N\), där \(N\) är ett tal som du själv väljer. Eftersom \progname{} endast har en 8-bitars processor så är vi väldigt begränsade i hur stora tal vi kan hantera. Vilken är den största summan du kan beräkna? Vad händer om du beränar en större summa? Spara ditt program i en ny fil \texttt{sum.txt} när du är klar.
 \end{Datorarbete}
 
 
@@ -200,7 +201,7 @@ Nedanstående uppgifter krävs inte för att bli godkänd på laborationen, utan
     Implementera ett program som medvetet leder till segmentation fault, t.ex. som demonstrerat av nedanstående pseudokod. Reflektera sedan över vad som händer och varför det kan så vara svårt att felsöka denna typ av fel.
 
     \halfblankline
-    \textbf{OBS!} Tänk på att spara ditt program innan du kör det, gärna en kopia också, eftersom när du får det att ``fungera'' så kommer det att skriva över sig själv och till slut krascha. Spara alltså \emph{inte} programmet efter att det skrivit över sig själv!
+    \textbf{OBS!} Tänk på att spara ditt program \emph{innan} du kör det, gärna en kopia också, eftersom när du får det att ``fungera'' så kommer det att skriva över sig själv och till slut krascha. Spara alltså \emph{inte} programmet efter att det skrivit över sig själv!
 
     \hint[1]{Pseudokoden nedan använder en mix av hög- och lågnivåinstruktioner, för att både visa det logiska programflödet men samtidigt ge ledtrådar till kluriga lågnivådetaljer. Din kod kommer behöva använda fler rader och instruktioner, och du behöver tänka på hur minnesadresser och register används, så radnummer kommer inte stämmer.}
 
