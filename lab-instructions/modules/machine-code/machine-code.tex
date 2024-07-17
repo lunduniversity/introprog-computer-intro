@@ -31,7 +31,17 @@ Den har en 8-bitars processor, med åtta register, samt ett arbetsminne med 256 
 Du kan direkt editera individuella bitar i minnet och i processorns register, och köra dem som instruktioner. Du kommer alltså skriva och köra program i maskinkod.
 
 \subsubsection{Notation i handledningen}
-I handledningen behöver vi ibland kunna referera till register och minnesplatser. Registerna i \progname{} har index 0--7, men refereras typiskt till med sina namn: \texttt{R0}--\texttt{R2}, \texttt{OP1}, \texttt{OP2} och \texttt{RES}, samt \texttt{OUT} och \texttt{PC}. Platserna i arbetsminnet har index 0--255 och benämns som \texttt{M0}, \texttt{M1}, \texttt{M2}, och så vidare. För att skilja mellan när ett värde används direkt eller som en adress för att referera till ett annat värde, använder vi en asterisk (eller ``stjärna'', \texttt{*}). Denna notation är inspirerad av programspråket C, där asterisk används för att hantera pekare. Som exempel: Om värdet 38 är lagrat i registret \texttt{R0}, så refererar \texttt{R0} till värdet 38. Å andra sidan, betyder \texttt{*R0} att värdet 38 används som en adress, och refererar till \texttt{M38}, alltså värdet som finns i arbetsminnet på plats 38. För mer komplexa adresseringar kan vi även använda parenteser, såsom i \texttt{*(R0+1)}, vilket då refererar till minnesplatsen \texttt{M39}.
+I handledningen behöver vi ibland kunna referera till register och minnesplatser. Registerna i \progname{} har index 0--7, men refereras typiskt till med sina namn:
+
+\begin{description}[leftmargin=20mm]
+    \item[\texttt{R0}--\texttt{R2}] Register 0, 1 och 2 är allmänna register och kan användas fritt.
+    \item[\texttt{OP1}, \texttt{OP2}] Register som typiskt används som operanderna i beräkningar.
+    \item[\texttt{RES}] Ett register som ofta används för att spara resultatet av en beräkning.
+    \item[\texttt{OUT}] Ett register som används för att skriva ut data till konsolen.
+    \item[\texttt{PC}] Programräknaren, som håller reda på vilken instruktion som ska köras härnäst.
+\end{description}
+
+Platserna i arbetsminnet har index 0--255 och benämns som \texttt{M0}, \texttt{M1}, \texttt{M2}, och så vidare. För att skilja mellan när ett värde används direkt eller som en adress för att referera till ett annat värde, använder vi en asterisk (eller ``stjärna'', \texttt{*}). Denna notation är inspirerad av programspråket C, där asterisk används för att hantera pekare. Som exempel: Om värdet 38 är lagrat i registret \texttt{R0}, så refererar \texttt{R0} till värdet 38. Å andra sidan, betyder \texttt{*R0} att värdet 38 används som en adress, och refererar till \texttt{M38}, alltså värdet som finns i arbetsminnet på plats 38. För mer komplexa adresseringar kan vi även använda parenteser, såsom i \texttt{*(R0+1)}, vilket då refererar till minnesplatsen \texttt{M39}.
 
 
 
@@ -70,34 +80,34 @@ Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar
     \item \difficulty{1} I programmet finns ett antal exempelprogram som kan laddas in, under menyn \texttt{Examples}. Öppna det exempel som heter \texttt{Tiny program}. Detta är ett mycket enkelt program som bara använder fyra minnesceller, varav tre innehåller instruktioner och en innehåller data. Prova att stega igenom programmet och se vad som händer vid varje steg. Nedan är en beskrivning av vad programmet gör:
     \begin{enumerate}
         \item Eftersom programräknaren startar på värdet 0 kommer processorn att läsa värdet på den minnesplatsen först och tolka det som en instruktion.
-        \item Instruktionen är \texttt{LOD (dst: OUT)}, eller "Load into OUT", vilket betyder att värdet i nästa minnescell ska laddas in till registret som heter \texttt{OUT} (registret med index 6).
+        \item Instruktionen är \texttt{LD (72 $\rightarrow$ OUT)}, eller "Load 72 into OUT". \texttt{LD}-instruktionen läser värdet på nästa minnesplats, i detta fall det decimala värdet 72, och laddar in det till ett register. Registret bestäms av intruktionens \emph{operand}, alltså instruktionens fyra sista bitar. Här anges registret med index 6, som är \texttt{OUT}.
         \item När instruktionen körs så läses alltså värdet på minnesplats 1, och kopieras till registret \texttt{OUT}. Därefter ökar programräknaren med 2, eftersom instruktionen är två byte lång.
         \item Nu pekar programräknaren på minnesplats 2, som innehåller instruktionen \texttt{PRT}, eller "Print text". Denna instruktion skriver ut värdet som finns i registret \texttt{OUT} till konsolen, som ett ASCII-tecken. Därefter ökar programräknaren med 1.
         \item Till sist så körs instruktionen på minnesplats 3, som är \texttt{HLT}, eller "Halt", som avslutar programmet.
     \end{enumerate}
 
-    \item \difficulty{1} Bygg vidare på det tidigare exemplet och skriv ut flera tecken i rad, t.ex. \texttt{Hello,~World!}. Kom ihåg att varje tecken måste representeras som ett ASCII-värde. Ta hjälp av ASCII-tabellen för att hitta tecken och deras motsvarande decimal- eller binärvärden.
+    \item \difficulty{2} Bygg vidare på det tidigare exemplet och skriv ut flera tecken i rad, t.ex. \texttt{Hello,~World!}. Kom ihåg att varje tecken måste representeras som ett ASCII-värde. Ta hjälp av ASCII-tabellen för att hitta tecken och deras motsvarande decimal- eller binärvärden.
 
-    \noindent När du är klar så spara ditt program genom att klicka på \texttt{File}~$\rightarrow$~\texttt{Save} och ge filen ett namn. Du kan sedan ladda in programmet igen genom att klicka på \texttt{File}~$\rightarrow$~\texttt{Open} och välja filen.
+    När du är klar så spara ditt program genom att klicka på \texttt{File}~$\rightarrow$~\texttt{Save} och ge filen ett namn. Du kan sedan ladda in programmet igen genom att klicka på \texttt{File}~$\rightarrow$~\texttt{Open} och välja filen.
     \hint[1]{Tecknet " " (mellanslag) har ASCII-värdet 32.}
     \vspace{-2mm}
     \hint[2]{Du kan använda upprepade \texttt{LD}- och \texttt{PRT}-instruktioner, eller \texttt{PRL} (Print Loop).}
 
-    \item \difficulty{1} Från \texttt{Examples}-menyn, öppna nu det exempel som heter \texttt{Simple~add}, och försök förstå vad det gör och hur det fungerar. Kom ihåg och ta hjälp av att varje minnescell visas med olika tolkningar, däribland decimalt och som instruktioner. Vilka värden kommer att tolkas som instruktioner och vilka som data? Vad kommer resultatet att bli när programmet körs? Till sists, kör programmet och se om du hade rätt.
+    \item \difficulty{2} Från \texttt{Examples}-menyn, öppna nu det exempel som heter \texttt{Simple~add}, och försök förstå vad det gör och hur det fungerar. Kom ihåg och ta hjälp av att varje minnescell visas med olika tolkningar, däribland decimalt och som instruktioner. Vilka värden kommer att tolkas som instruktioner och vilka som data? Vad kommer resultatet att bli när programmet körs? Till sists, kör programmet och se om du hade rätt.
     
-    \item \difficulty{1} Nu ska du modifiera ditt program lite grand, och utöka din förståelse för CPU:n genom att hantera data dynamiskt. Föreställ dig att ett tidigare program har kört och sparat ett resultat i minnet på en okänd plats; alltså du känner inte till minnesplatsen när du skriver programmet, men programmet får reda på adressen under körning. Låt säga att adresssen nu finns sparad på minnesplats 0.
+    \item \difficulty{4} Nu ska du modifiera ditt program lite grand, och utöka din förståelse för CPU:n genom att hantera data dynamiskt. Föreställ dig att ett tidigare program har kört och sparat ett resultat i minnet på en okänd plats; alltså du känner inte till minnesplatsen när du skriver programmet, men programmet får reda på adressen under körning. Låt säga att adresssen nu finns sparad på minnesplats 0.
 
     \begin{Deluppgifter}
-        \item \textbf{Förbered Minnet:} För att simulera den tidigare beräkningen, skriv manuellt in talen 127 och 43 på minnesplatserna 18 respektive 19. Detta är alltså de "okända" addresserna som programmet kommer att läsa från. Skriv också in värdet 18 på minnesplats 0, så att programmet vet var resultatet finns.
-        \item \textbf{Ladda Adresser:} Använd som innan instruktionen \texttt{LD} för att ladda värdet på minnesplats 0 till ett register, t.ex. \texttt{R0}. Notera att detta värdet alltså ska tolkas som en minnesaddress, och i sin tur användas för att ladda de faktiska värdena.
+        \item \textbf{Förbered Minnet:} För att simulera den tidigare beräkningen, skriv manuellt in talen 127 och 43 på minnesplatserna 18 respektive 19. Detta är alltså de "okända" addresserna som programmet kommer att läsa från.
+        \item \textbf{Ladda Adresser:} Använd som innan instruktionen \texttt{LD} för att ladda in värdet 18 till ett register, t.ex. \texttt{R0}. Notera att detta värdet alltså ska tolkas som en minnesaddress, och i sin tur användas för att ladda de faktiska värdena.
         \item Använd instruktionen \texttt{LDA} (Load Address) för att ladda operanderna från \texttt{*R0} och \texttt{*(R0+1)} till operandregistren.
         \item \textbf{Ändra till Subtraktion:} Modifiera programmet för att utföra en subtraktion \(127-43\), och skriva ut det liksom tidigare. Kontrollera att programmet ger det korrekta resultatet.
-        \item \textbf{Experiment med Operandordning:} Vad händer om du byter plats på värdena i minnesplatserna och beräknar \(43-127\)? Priva och se vad resultatet blir.
+        \item \textbf{Experiment med Operandordning:} Vad händer om du byter plats på värdena i minnesplatserna och beräknar \(43-127\)? Prova och se vad resultatet blir.
     \end{Deluppgifter}
 
     När du är klar så spara ditt program i en fil \texttt{subtraction.txt}.
 
-    \item \difficulty{1} Skriv ett eget program som innehåller en \texttt{if}-sats. Programmet ska jämföra två tal och skriva ut Y (för "yes") om de är lika, annars N (för "no"). Använd hoppinstruktioner för att implementera villkorlig exekvering. Kör programmet och se att det fungerar som förväntat.
+    \item \difficulty{3} Skriv ett eget program som innehåller en \texttt{if}-sats. Programmet ska jämföra två tal och skriva ut Y (för "yes") om de är lika, annars N (för "no"). Använd hoppinstruktioner för att implementera villkorlig exekvering. Kör programmet och se att det fungerar som förväntat.
     \hint{Liksom alltid inom programmering så kan målet uppnås på flera olika sätt. Nedan är två exempel i pseudokod:}
 
     \begin{minipage}[t]{0.42\textwidth}
@@ -124,12 +134,12 @@ Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar
         \end{lstlisting}
     \end{minipage}
 
-    \item \difficulty{1} Nästa exempel är mycket roligt! :) \\
+    \item \difficulty{2} Nästa exempel är mycket roligt! :) \\
     Öppna exempelprogrammet \texttt{Simple loop} och försök förstå vad det gör och hur det fungerar. Vad kommer resultatet att bli när programmet körs? Kör det och se om du hade rätt.
 
-    \item \difficulty{1} Vi kan alltså skapa loopar genom att använda hoppinstruktioner. Skapa ett eget program som räknar från 0 till 10 och skriver ut varje tal. Använd en loop för att uppnå detta. Kör programmet och se att det fungerar som förväntat. Spara programmet i en ny fil \texttt{count.txt}.
+    \item \difficulty{3} Vi kan alltså skapa loopar genom att använda hoppinstruktioner. Skapa ett eget program som räknar från 0 till 10 och skriver ut varje tal. Använd en loop för att uppnå detta. Kör programmet och se att det fungerar som förväntat. Spara programmet i en ny fil \texttt{count.txt}.
     
-    \item \difficulty{1} Baserat på ditt \texttt{count}-program, skriv ett nytt loop-program som summerar alla tal från 0 till \(N\), där \(N\) är ett tal som du själv väljer. Eftersom \progname{} endast har en 8-bitars processor så är vi väldigt begränsade i hur stora tal vi kan hantera. Vilken är den största summan du kan beräkna? Vad händer om du beränar en större summa? Spara ditt program i en ny fil \texttt{sum.txt} när du är klar.
+    \item \difficulty{2} Baserat på ditt \texttt{count}-program, skriv ett nytt loop-program som summerar alla tal från 0 till \(N\), där \(N\) är ett tal som du själv väljer. Eftersom \progname{} endast har en 8-bitars processor så är vi väldigt begränsade i hur stora tal vi kan hantera. Vilken är den största summan du kan beräkna? Vad händer om du beräknar en större summa? Spara ditt program i en ny fil \texttt{sum.txt} när du är klar.
 \end{Datorarbete}
 
 
@@ -141,9 +151,9 @@ Nedanstående uppgifter krävs inte för att bli godkänd på laborationen, utan
 \noindent\textbf{Notera att svårighetsvärdena inte är satta. Alla uppgifter är temporärt märkta med svårighetsgrad 1/5, eftersom vi inväntar feedback på faktisk svårighet.}
 
 \begin{Extrauppgifter}
-    \item \difficulty{1} Skriv ett program som konverterar en följd av siffror till en sträng av motsvarande tecken. Programmet ska läsa in en följd av värden (som måste vara 0--9) från minnet och konvertera dem till motsvarande ASCII tecken. Alltså, den första följden av siffror ska kunna skrivas till terminalen med \texttt{PRD} instruktionen (print decimal), medan de konverterade värdena ska kunna skrivas ut med \texttt{PRT} instruktionen (print text).
+    \item \difficulty{4} Skriv ett program som konverterar en följd av siffror till en sträng av motsvarande tecken. Programmet ska läsa in en följd av värden (som måste vara 0--9) från minnet och konvertera dem till motsvarande ASCII tecken. Alltså, den första följden av siffror ska kunna skrivas till terminalen med \texttt{PRD} instruktionen (print decimal), medan de konverterade värdena ska kunna skrivas ut med \texttt{PRT} instruktionen (print text).
 
-    \item \difficulty{1}Skriv ett program som kontrollerar ifall två tal båda är större än 50, och i så fall skriver ut "True", annars "False". Programmet ska alltså göra \emph{två} jämförelser i ett "och"-uttryck, motsvarande ungefär:
+    \item \difficulty{2}Skriv ett program som kontrollerar ifall två tal båda är större än 50, och i så fall skriver ut "True", annars "False". Programmet ska alltså göra \emph{två} jämförelser i ett "och"-uttryck, motsvarande ungefär:
     \begin{Code}
         if a > 50 && b > 50:
             ...
@@ -153,7 +163,7 @@ Nedanstående uppgifter krävs inte för att bli godkänd på laborationen, utan
     \vspace{-3mm}
     \hint{En villkorlig hoppinstruktion som inte uppfyller villkoret kommer fortsätta att exekvera nästa instruktion som vanligt.}
 
-    \item \difficulty{1} Implementera ett funktionsanrop i ditt program. Skapa en funktion som adderar två tal och returnerar summan. Använd hoppinstruktioner för att anropa funktionen och hantera returvärdet. Ditt program ska motsvara följande pseudokod:
+    \item \difficulty{4} Implementera ett funktionsanrop i ditt program. Skapa en funktion som adderar två tal och returnerar summan. Använd hoppinstruktioner för att anropa funktionen och hantera returvärdet. Ditt program ska motsvara följande pseudokod:
     \begin{Code}
         a = 3
         b = 4
@@ -190,13 +200,13 @@ Nedanstående uppgifter krävs inte för att bli godkänd på laborationen, utan
 
     \end{enumerate}
 
-    \item \difficulty{1} Skriv ett program som multiplicerar två tal genom upprepade additioner. Använd en loop för att utföra multiplikationen och spara resultatet i en minnescell.
+    \item \difficulty{4} Skriv ett program som multiplicerar två tal genom upprepade additioner. Använd en loop för att utföra multiplikationen och spara resultatet i en minnescell.
 
-    \item \difficulty{1} När en funktion anropas är det viktigt att inte överskriva nuvarande värden i vissa register som används av programmet. I verkliga processorer finns det därför speciella register kända som \emph{mottagarbevarade} (eng. \emph{callee-saved}), vilka ska sparas och återställas av den anropade funktionen. Implementera en funktion som använder och tillfälligt sparar registren \texttt{R1} till \texttt{R3} och återställer dem innan funktionen avslutas.
+    \item \difficulty{4} När en funktion anropas är det viktigt att inte överskriva nuvarande värden i vissa register som används av programmet. I verkliga processorer finns det därför speciella register kända som \emph{mottagarbevarade} (eng. \emph{callee-saved}), vilka ska sparas och återställas av den anropade funktionen. Implementera en funktion som använder och tillfälligt sparar registren \texttt{R1} till \texttt{R3} och återställer dem innan funktionen avslutas.
 
     \hint{Använd ett ledigt område i minnet (i verkliga system skulle detta hanteras av operativsystemet) för att temporärt spara de register som ska bevaras. Nu kan funktionen fritt använda registerna till sina beräkningar. Innan funktionen avslutas och returnerar, återställ dessa register till deras ursprungliga värden.}
 
-    \item \difficulty[Väldigt svår. Lösningsförslag i Examples-menyn, \texttt{Segfault}.]{1}
+    \item \difficulty[Väldigt svår. Lösningsförslag i Examples-menyn, \texttt{Segfault}.]{5}
     I programspråket C är \emph{segmentation fault} ett ökänt och vanligt förekommande fel. Det betyder att programmet försöker skriva till eller läsa från en minnesadress som inte är tillåten (t.ex. en adress utanför programmet eller en del av minnet som inte är allokerat).    
     Implementera ett program som medvetet leder till segmentation fault, t.ex. som demonstrerat av nedanstående pseudokod. Reflektera sedan över vad som händer och varför det kan så vara svårt att felsöka denna typ av fel.
 
@@ -205,7 +215,7 @@ Nedanstående uppgifter krävs inte för att bli godkänd på laborationen, utan
 
     \hint[1]{Pseudokoden nedan använder en mix av hög- och lågnivåinstruktioner, för att både visa det logiska programflödet men samtidigt ge ledtrådar till kluriga lågnivådetaljer. Din kod kommer behöva använda fler rader och instruktioner, och du behöver tänka på hur minnesadresser och register används, så radnummer kommer inte stämmer.}
 
-    \hint[2]{Förklaring: Tanken med programmet är att det får ett startvärde (\(val = 10\)) och ett maxvärde (\(max = 200\)). Startvärdet dubbleras så länge det är mindre än maxvärdet, och varje beräknat värde sparas också i en vektor (array). Vi vill alltså beräkna vektorn \(nums = [20, 40, 160, 320]\). Med andra startvärden blir vektorn annorlunda. Om startvärdet är $1$ så blir vektorn $nums = [2, 4, 8, 16, 32, 64, 128, 256]$, där antalet element är $|nums| = 8$. I värstafallet behöver vektorn alltså ha plats för åtta värden.}
+    \hint[2]{Förklaring: Tanken med programmet är att det får ett startvärde (\(val = 10\)) och ett maxvärde (\(max = 200\)). Startvärdet dubbleras så länge det är mindre än maxvärdet, och varje beräknat värde sparas också i en vektor (array). Vi vill alltså beräkna vektorn \(nums = [20, 40, 80, 160, 320]\). Med andra startvärden blir vektorn annorlunda. Om startvärdet är $1$ så blir vektorn $nums = [2, 4, 8, 16, 32, 64, 128, 256]$, där antalet element är $|nums| = 8$. I värstafallet behöver vektorn alltså ha plats för åtta värden.}
 
  
     \begin{Code}
@@ -216,11 +226,11 @@ Nedanstående uppgifter krävs inte för att bli godkänd på laborationen, utan
         4. 0           // nums = int[8], i.e. 8 empty memory cells
         (*@\dots@*)
        11. 0
-       12. if val > max, jump to 13:   // loop until val >= max
+       12. if val > max, jump to 17:   // loop until val >= max
        13.     val = val + val
        14.     store val in nums[idx]  // i.e. in m[4 + idx]
        15.     idx = idx + 1
-       16.     jump to 10
+       16.     jump to 12
        17. halt                        // do something with nums...
                                        // for this example,
                                        // just stop the program
