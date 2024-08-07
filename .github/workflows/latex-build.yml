@@ -18,7 +18,7 @@ jobs:
           latexmk_use_xelatex: true
           work_in_root_file_dir: true
         env:
-          TEXINPUTS: ".:lab-instructions//:./latex-support//:"
+          TEXINPUTS: ".:../latex-support//:"
 
       - name: Rename the output PDF
         run: |
