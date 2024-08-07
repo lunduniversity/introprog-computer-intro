@@ -17,7 +17,7 @@ jobs:
           root_file: lab-instructions/dodlabs.tex
           latexmk_use_xelatex: true
         env:
-          TEXINPUTS: ".:./latex-support//:"
+          TEXINPUTS: ".:lab-instructions//:./latex-support//:"
 
       - name: Rename the output PDF
         run: |
