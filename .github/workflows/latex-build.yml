@@ -16,9 +16,12 @@ jobs:
         with:
           latexmk_use_xelatex: true
           working_directory: lab-instructions
-          root_file: dodlabs.tex
+          work_in_root_file_dir: true
+          root_file: |
+            lab-instructions/modules/latex/example/latexlosning.tex
+            lab-instructions/dodlabs.tex
         env:
-          TEXINPUTS: ".:../latex-support//:"
+          TEXINPUTS: ".:../latex-support//:./latex-support//:"
 
       - name: Rename the output PDF
         run: |
