@@ -15,7 +15,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 # Define the tag and message
-TAG="test-lab_$1"
+TAG="lab_$1"
 MESSAGE="Release $TAG"
 
 # Check if the tag already exists
