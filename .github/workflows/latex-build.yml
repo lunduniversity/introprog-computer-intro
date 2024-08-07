@@ -15,7 +15,6 @@ jobs:
         uses: xu-cheng/latex-action@3.2.0
         with:
           latexmk_use_xelatex: true
-          working_directory: lab-instructions
           work_in_root_file_dir: true
           root_file: |
             lab-instructions/modules/latex/example/latexlosning.tex
