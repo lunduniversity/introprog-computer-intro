@@ -95,17 +95,19 @@ Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar
 
     \item \difficulty{2} Från \texttt{Examples}-menyn, öppna nu det exempel som heter \texttt{Simple~add}, och försök förstå vad det gör och hur det fungerar. Kom ihåg och ta hjälp av att varje minnescell visas med olika tolkningar, däribland decimalt och som instruktioner. Vilka värden kommer att tolkas som instruktioner och vilka som data? Vad kommer resultatet att bli när programmet körs? Till sists, kör programmet och se om du hade rätt.
     
-    \item \difficulty{4} Nu ska du modifiera ditt program lite grand, och utöka din förståelse för CPU:n genom att hantera data dynamiskt. Föreställ dig att ett tidigare program har kört och sparat ett resultat i minnet på en okänd plats; alltså du känner inte till minnesplatsen när du skriver programmet, men programmet får reda på adressen under körning. Låt säga att adresssen nu finns sparad på minnesplats 0.
+    \item \difficulty{4} Nu ska du modifiera ditt program lite grand, och utöka din förståelse för CPU:n genom att hantera data dynamiskt. Föreställ dig att ett tidigare program har kört och sparat ett resultat i minnet på en okänd plats; alltså du känner inte till minnesplatsen när du skriver programmet, men programmet får reda på adressen under körning.
 
     \begin{Deluppgifter}
         \item \textbf{Förbered Minnet:} För att simulera den tidigare beräkningen, skriv manuellt in talen 127 och 43 på minnesplatserna 18 respektive 19. Detta är alltså de "okända" addresserna som programmet kommer att läsa från.
-        \item \textbf{Ladda Adresser:} Använd som innan instruktionen \texttt{LD} för att ladda in värdet 18 till ett register, t.ex. \texttt{R0}. Notera att detta värdet alltså ska tolkas som en minnesaddress, och i sin tur användas för att ladda de faktiska värdena.
-        \item Använd instruktionen \texttt{LDA} (Load Address) för att ladda operanderna från \texttt{*R0} och \texttt{*(R0+1)} till operandregistren.
-        \item \textbf{Ändra till Subtraktion:} Modifiera programmet för att utföra en subtraktion \(127-43\), och skriva ut det liksom tidigare. Kontrollera att programmet ger det korrekta resultatet.
-        \item \textbf{Experiment med Operandordning:} Vad händer om du byter plats på värdena i minnesplatserna och beräknar \(43-127\)? Prova och se vad resultatet blir.
+        \item \textbf{Ladda Adresser:} Använd instruktionen \texttt{LD} för att ladda in värdet 18 till ett register, t.ex. \texttt{R0}. Notera att detta värdet alltså ska tolkas som en minnesaddress, och i sin tur användas för att ladda de faktiska värdena. Register \texttt{R0} kommer alltså att innehålla adressen som ska läsas från.
+        \item \textbf{Ladda Värden:} Använd instruktionen \texttt{LDA} (Load Address) för att ladda värden från en given address till ett register. Alltså, ladda in operanderna som ska adderas från \texttt{*R0} och \texttt{*(R0+1)} till operandregistren, \texttt{OP1} och \texttt{OP2}.
+        \item \textbf{Ändra till Subtraktion:} Modifiera programmet för att utföra en subtraktion istället för addition, alltså beräkna \(127-43\), och skriva ut resultatet liksom tidigare. Kontrollera att programmet ger det korrekta resultatet.
+        \item \textbf{Experiment med Operandordning:} Vad tror du händer om du byter plats på värdena i minnesplatserna och beräknar \(43-127\)? Prova och se vad resultatet blir.
     \end{Deluppgifter}
 
-    När du är klar så spara ditt program i en fil \texttt{subtraction.txt}.
+    \noindent När du är klar så spara ditt program i en fil \texttt{subtraction.txt}.
+
+    \hint{För deluppgift c): \texttt{LDA} instruktionen laddar in värdet från en minnesplats, vars address ges av ett register. \texttt{*RO} betyder att värdet i \texttt{R0} används som en adress, och värdet på den adressen laddas in till ett register, t.ex. \texttt{OP1}. \texttt{*(R0+1)} betyder att värdet i \texttt{R0} först ökas med 1, och det nya värdet används som adress för att ladda in ett värde. Du behöver alltså öka värdet i \texttt{R0} manuellt innan du använder det för att ladda in nästa värde.}
 
     \item \difficulty{3} Skriv ett eget program som innehåller en \texttt{if}-sats. Programmet ska jämföra två tal och skriva ut Y (för "yes") om de är lika, annars N (för "no"). Använd hoppinstruktioner för att implementera villkorlig exekvering. Kör programmet och se att det fungerar som förväntat.
     \hint{Liksom alltid inom programmering så kan målet uppnås på flera olika sätt. Nedan är två exempel i pseudokod:}
@@ -136,6 +138,9 @@ Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar
 
     \item \difficulty{2} Nästa exempel är mycket roligt! :) \\
     Öppna exempelprogrammet \texttt{Simple loop} och försök förstå vad det gör och hur det fungerar. Vad kommer resultatet att bli när programmet körs? Kör det och se om du hade rätt.
+
+    % Force a new page, to not split the next assignment
+    \newpage
 
     \item \difficulty{3} Vi kan alltså skapa loopar genom att använda hoppinstruktioner. Skapa ett eget program som räknar från 0 till 10 och skriver ut varje tal. Använd en loop för att uppnå detta. Kör programmet och se att det fungerar som förväntat. Spara programmet i en ny fil \texttt{count.txt}.
     
