@@ -18,6 +18,7 @@ jobs:
 
       - name: Compile LaTeX document
         run: |
+          export TEXINPUTS=./latex-support//:
           cd lab-instructions
           xelatex dodlabs.tex
 
