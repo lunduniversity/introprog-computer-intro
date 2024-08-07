@@ -15,17 +15,14 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: lab-instructions/dodlabs.tex
-
-      - name: Compile LaTeX document
-        run: |
-          cd lab-instructions
-          export TEXINPUTS=../latex-support//:
-          xelatex dodlabs.tex
+          latexmk_use_xelatex: true
+        env:
+          TEXINPUTS: ".:./latex-support//:"
 
       - name: Rename the output PDF
         run: |
           TAG_NAME=${GITHUB_REF#refs/tags/}
-          mv dodlabs.pdf dodlabs_${TAG_NAME}.pdf
+          mv lab-instructions/dodlabs.pdf lab-instructions/dodlabs_${TAG_NAME}.pdf
 
       - name: Create Release
         id: create_release
