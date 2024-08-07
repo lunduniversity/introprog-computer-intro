@@ -39,7 +39,8 @@ if git rev-parse "$TAG" >/dev/null 2>&1; then
 fi
 
 # Create the annotated tag
-git tag -a "$TAG" -m "$MESSAGE"
+# git tag -a "$TAG" -m "$MESSAGE"
+git tag -a "$TAG"
 
 # Push the tag to the remote repository
 git push origin "$TAG"
