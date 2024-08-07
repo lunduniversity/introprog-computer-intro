@@ -24,7 +24,7 @@ jobs:
 
       - name: Rename the output PDF
         run: |
-          TAG_NAME=${GITHUB_REF#refs/tags/}
+          TAG_NAME=${GITHUB_REF#refs/tags/lab_}
           mv lab-instructions/dodlabs.pdf lab-instructions/dodlabs_${TAG_NAME}.pdf
 
       - name: Create Release
