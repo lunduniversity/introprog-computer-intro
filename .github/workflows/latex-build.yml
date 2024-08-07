@@ -18,14 +18,14 @@ jobs:
 
       - name: Compile LaTeX document
         run: |
-          export TEXINPUTS=./latex-support//:
           cd lab-instructions
+          export TEXINPUTS=../latex-support//:
           xelatex dodlabs.tex
 
       - name: Rename the output PDF
         run: |
           TAG_NAME=${GITHUB_REF#refs/tags/}
-          mv lab-instructions/dodlabs.pdf lab-instructions/dodlabs_${TAG_NAME}.pdf
+          mv dodlabs.pdf dodlabs_${TAG_NAME}.pdf
 
       - name: Create Release
         id: create_release

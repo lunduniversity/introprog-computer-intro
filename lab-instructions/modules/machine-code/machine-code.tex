@@ -71,8 +71,6 @@ Länkar till det ovan refererade materialet finns på kurshemsidan under  ''Dato
 \subsection*{Datorarbete}
 Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar en förenklad dator. Programmet är skrivet i Java och kan köras på de flesta datorer. Datorn har ett minne och en processor med register som kan utföra enkla operationer. Programmet låter oss inspektera och manipulera minnet och processorn på en låg nivå och se hur datorn tolkar och utför instruktioner.
 
-\halfblankline
-\noindent\textbf{Notera att svårighetsvärdena inte är satta. Alla uppgifter är temporärt märkta med svårighetsgrad 1/5, eftersom vi inväntar feedback på faktisk svårighet.}
 
 \begin{Datorarbete}
     \item \difficulty{1} Börja med att starta \progname{}. Om du inte gjort det redan så läs igenom användarmanualen som beskriver hur programmet fungerar. Den öppnas automatiskt när programmet startas, eller via menyn \texttt{Help}~$\rightarrow$~\texttt{Show Help}.
@@ -95,6 +93,9 @@ Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar
 
     \item \difficulty{2} Från \texttt{Examples}-menyn, öppna nu det exempel som heter \texttt{Simple~add}, och försök förstå vad det gör och hur det fungerar. Kom ihåg och ta hjälp av att varje minnescell visas med olika tolkningar, däribland decimalt och som instruktioner. Vilka värden kommer att tolkas som instruktioner och vilka som data? Vad kommer resultatet att bli när programmet körs? Till sists, kör programmet och se om du hade rätt.
     
+    % Force a new page, to not split the next assignment
+    \newpage
+
     \item \difficulty{4} Nu ska du modifiera ditt program lite grand, och utöka din förståelse för CPU:n genom att hantera data dynamiskt. Föreställ dig att ett tidigare program har kört och sparat ett resultat i minnet på en okänd plats; alltså du känner inte till minnesplatsen när du skriver programmet, men programmet får reda på adressen under körning.
 
     \begin{Deluppgifter}
@@ -152,8 +153,6 @@ Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar
 
 Nedanstående uppgifter krävs inte för att bli godkänd på laborationen, utan finns för dig som vill ha en extra utmaning. Kika gärna på dem och se om någon verkar intressant! I annat fall är du klar med laborationen och kan redovisa den för handledaren.
 
-\halfblankline
-\noindent\textbf{Notera att svårighetsvärdena inte är satta. Alla uppgifter är temporärt märkta med svårighetsgrad 1/5, eftersom vi inväntar feedback på faktisk svårighet.}
 
 \begin{Extrauppgifter}
     \item \difficulty{4} Skriv ett program som konverterar en följd av siffror till en sträng av motsvarande tecken. Programmet ska läsa in en följd av värden (som måste vara 0--9) från minnet och konvertera dem till motsvarande ASCII tecken. Alltså, den första följden av siffror ska kunna skrivas till terminalen med \texttt{PRD} instruktionen (print decimal), medan de konverterade värdena ska kunna skrivas ut med \texttt{PRT} instruktionen (print text).
