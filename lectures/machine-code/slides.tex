@@ -1,0 +1,36 @@
+\documentclass[trans]{beamer} 
+
+\includeonly{machine-code}
+
+\usepackage{selthcsslides}
+\usecolortheme{lucolors}
+
+% \usepackage[swedish]{babel}
+% Swedish setup using polyglossia for better multilingual support
+\usepackage{polyglossia}
+\setmainlanguage{swedish}
+
+\usepackage{url}
+\usepackage{datetime2}
+
+\author[]{Mattias Nordahl}
+\institute{\url{mattias.nordahl@cs.lth.se}}
+\date{} 
+
+%***************************************************************
+\begin{document} 
+
+\title{Datorer och datoranvändning\\Maskinkod} 
+
+\frame[plain]{
+\maketitle
+
+\vspace{-2\baselineskip}
+}
+
+\date{\the\year/\the\numexpr\year-1999} 
+
+% Include actual slides
+\include{machine-code}
+
+\end{document} 

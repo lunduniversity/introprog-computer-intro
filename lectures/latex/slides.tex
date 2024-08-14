@@ -1,41 +1,42 @@
 \documentclass[trans]{beamer} 
 
-\includeonly{
-	latex
-}
-\usepackage{sansmathaccent}
-\pdfmapfile{+sansmathaccent.map}
+\includeonly{latex}
 
 \usepackage{selthcsslides}
+\usepackage{../../latex-support/leftrightexample-new} % Per Foreby
 \usecolortheme{lucolors}
 
-% Swedish.
-\usepackage[T1]{fontenc}
-\usepackage[swedish]{babel}
+% The Madrid theme, for some reason, does not show bullet points in itemize
+% environments. This is a workaround to fix that.
+\setbeamertemplate{itemize item}[default]
+\setbeamertemplate{itemize subitem}[default]
+
+% \usepackage[swedish]{babel}
+% Swedish setup using polyglossia for better multilingual support
+\usepackage{polyglossia}
+\setmainlanguage{swedish}
 
 \usepackage{url}
-\usepackage{leftrightexample-new} % Per Foreby
+\usepackage{datetime2}
+
+\author[]{Mattias Nordahl}
+\institute{\url{mattias.nordahl@cs.lth.se}}
+\date{}
 
 %***************************************************************
-\begin{document} 
 
-\title{Datorer och datoranvändning\\Föreläsning 2 --- \LaTeX} 
-%\author[]{Roger Henriksson} 
-%\institute{\url{roger.henriksson@cs.lth.se}}
-%\date{} 
-\author[]{Mattias Nordahl} 
-\institute{\url{mattias.nordahl@cs.lth.se}}
-\date{} 
+\begin{document}
+
+\title{Datorer och datoranvändning\\Föreläsning 2 --- \LaTeX}
 
 \frame[plain]{
-\maketitle
-
-\vspace{-2\baselineskip}
+	\maketitle
+	\vspace{-2\baselineskip}
 }
 
-\date{2022/23} 
+\date{\the\year/\the\numexpr\year-1999}
 
 % Include actual slides
 \include{latex}
 
-\end{document} 
+\end{document}

@@ -1,49 +1,56 @@
 \documentclass[trans]{beamer} 
 
-\includeonly{
-	unix
-}
-\usepackage{sansmathaccent}
-\pdfmapfile{+sansmathaccent.map}
+\includeonly{unix}
 
 \usepackage{selthcsslides}
 \usecolortheme{lucolors}
 
-% Swedish.
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[swedish]{babel}
+% The Madrid theme, for some reason, does not show bullet points in itemize
+% environments. This is a workaround to fix that.
+\setbeamertemplate{itemize item}[default]
+\setbeamertemplate{itemize subitem}[default]
 
-% \lstset{
-%     inputencoding=utf8,
-%     extendedchars=true,
-%     literate={å}{{a}}1 {ä}{{a}}1 {ö}{{o}}1,
-% }
+% \usepackage[swedish]{babel}
+% Swedish setup using polyglossia for better multilingual support
+\usepackage{polyglossia}
+\setmainlanguage{swedish}
 
 \usepackage{url}
-%\usepackage{3latex/leftrightexample-new} % Per Foreby
+\usepackage{datetime2}
 
-%\author[]{Roger Henriksson} 
-%\institute{\url{roger.henriksson@cs.lth.se}}
-%\date{} 
+\usepackage{listings}
+\lstset{resetmargins=true}
+
+% Redefine the Code listing environment to reset margins for each listing
+\lstnewenvironment{GobbleCode}[2][\baselineskip]
+{\lstset{
+	aboveskip=#1,
+    belowskip=#1,
+	resetmargins=true,
+	xleftmargin=0em,
+	gobble=#2,
+	tabsize=4,
+}}
+{}
+
 \author[]{Mattias Nordahl} 
 \institute{\url{mattias.nordahl@cs.lth.se}}
 \date{} 
 
-%***************************************************************
-\begin{document} 
 
-\title{Datorer och datoranvändning\\Föreläsning 1 --- Unix/Linux} 
+%***************************************************************
+\begin{document}
+
+\title{Datorer och datoranvändning\\Föreläsning 1 --- Unix/Linux}
 
 \frame[plain]{
-\maketitle
-
-\vspace{-2\baselineskip}
+	\maketitle
+	\vspace{-2\baselineskip}
 }
 
-\date{2022/23} 
+\date{\the\year/\the\numexpr\year-1999}
 
 % Include actual slides
 \include{unix}
 
-\end{document} 
+\end{document}

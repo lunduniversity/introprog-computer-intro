@@ -15,7 +15,7 @@ for dir in "${subdirectories[@]}"; do
     cd "$dir"
     
     # Compile the LaTeX file
-    pdflatex slides.tex
+    latexmk -xelatex slides.tex
     
     # Check if compilation was successful
     if [ -f slides.pdf ]; then
