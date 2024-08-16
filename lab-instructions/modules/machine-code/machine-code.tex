@@ -7,7 +7,7 @@
 Här går vi kortfattat igenom några centrala begrepp som du behöver inför laborationen. Gör också uppgifterna i avsnittet ``Obligatoriska förberedelser (hemarbete)'' \emph{innan} laborationen.
 
 \subsubsection{Processor (CPU, Central Processing Unit) och Register}
-CPU:n, eller \emph{processorn}, är hjärnan i en dator och utför alla dess beräkningar. Den läser och exekverar instruktioner från arbetsminnet, hanterar data via sina inbyggda register, och koordinerar övriga komponenter i systemet. \emph{Register} är små, snabba lagringsenheter inuti CPU:n som temporärt lagrar data för snabb tillgång under beräkningarna. De är begränsade i antal men erbjuder extremt snabb dataåtkomst —- upp till 100 gånger snabbare än arbetsminnet. Därför vill man vanligtvis ladda in data från arbetsminnet till registren en gång, använda dem genomgående i beräkningar, och först när beräkningarna är klara skriva tillbaka resultatet till arbetsminnet.
+CPU:n, eller \emph{processorn}, är hjärnan i en dator och utför alla dess beräkningar. Den läser och exekverar instruktioner från arbetsminnet, hanterar data via sina inbyggda register, och koordinerar övriga komponenter i systemet. \emph{Register} är små, snabba lagringsenheter inuti CPU:n som temporärt lagrar data för snabb tillgång under beräkningarna. De är begränsade i antal men erbjuder extremt snabb dataåtkomst -- upp till 100 gånger snabbare än arbetsminnet. Därför vill man vanligtvis använda registerna så mycket som möjligt, genom att ladda in data från arbetsminnet till registren en gång, använda dem genomgående i beräkningar, och först när beräkningarna är klara skriva tillbaka resultatet till arbetsminnet.
 
 \subsubsection{Arbetsminne (RAM, Random Access Memory)}
 Arbetsminnet i en dator fungerar som lagringsplatser som kan innehålla en viss mängd data. Man kan tänka på dem som ``lådor'' som kan fyllas med värden som CPU:n sedan kan läsa eller ändra. Varje låda har en unik adress så att CPU:n direkt kan hämta eller skriva data.
@@ -25,8 +25,8 @@ Programräknaren är ett speciellt register i CPU:n som håller reda på adresse
 \subsubsection{Teckenkodning}
 För att representera text och tecken använder datorer kodningsscheman. ASCII (uttalas "aski") är ett sådant schema där varje bokstav eller symbol representeras av ett unikt binärt värde. ASCII-schemat innehåller bara 128 olika tecken och inkluderar det engelska alfabetet, siffror och några specialtecken. UTF-8 är ett modernare schema som kan representera de flesta av världens alla språk och alfabet, men är också mer komplicerat, så i denna laboration kommer vi nöja oss med ASCII.
 
-\subsubsection{\progname{}}
-I labben ska du arbeta med en fiktiv dator, kallad \progname{}, som emulerar (härmar) hur en riktig dator fungerar i princip, men förenklat.
+\subsubsection{\progname}
+I labben ska du arbeta med en fiktiv dator, kallad \progname, som emulerar (härmar) hur en riktig dator fungerar i princip, men förenklat.
 Den har en 8-bitars processor, med åtta register, samt ett arbetsminne med 256 platser. Varje minnesplats är åtta bitar, vilket betyder att varje plats kan lagra ett heltal mellan 0 och 255.
 Du kan direkt editera individuella bitar i minnet och i processorns register, och köra dem som instruktioner. Du kommer alltså skriva och köra program i maskinkod.
 
@@ -43,26 +43,42 @@ I handledningen behöver vi ibland kunna referera till register och minnesplatse
 
 Platserna i arbetsminnet har index 0--255 och benämns som \texttt{M0}, \texttt{M1}, \texttt{M2}, och så vidare. För att skilja mellan när ett värde används direkt eller som en adress för att referera till ett annat värde, använder vi en asterisk (eller ``stjärna'', \texttt{*}). Denna notation är inspirerad av programspråket C, där asterisk används för att hantera pekare. Som exempel: Om värdet 38 är lagrat i registret \texttt{R0}, så refererar \texttt{R0} till värdet 38. Å andra sidan, betyder \texttt{*R0} att värdet 38 används som en adress, och refererar till \texttt{M38}, alltså värdet som finns i arbetsminnet på plats 38. För mer komplexa adresseringar kan vi även använda parenteser, såsom i \texttt{*(R0+1)}, vilket då refererar till minnesplatsen \texttt{M39}.
 
-
+\newpage
 
 \subsection*{Obligatoriska förberedelser (hemarbete)}
 \begin{Hemarbete}\firmlist
-    \item Titta igenom föreläsningsbilderna från föreläsning 4 (titel todo).
-    \item Läs igenom ...
+    \item Läs igenom den korta teorin ovan och se till att du förstår begreppen.
+    \item Titta igenom föreläsningsbilderna från föreläsning 4.
     \item Läs igenom uppgifterna under rubriken Datorarbete.
     \item Förbered din dator för laborationen genom att installera Java om du inte redan gjort det. Instruktioner finns på kurshemsidan.
-    \item Ladda ned programmet \textbf{\progname{}} från kurshemsidan och packa upp det i en lämplig katalog. Programmet består av en \texttt{.jar}-fil som innehåller allt som behövs för att köra programmet.
+    \item Ladda ned programmet \textbf{\progname} (länk nedan) och packa upp det i en lämplig katalog. Programmet består av en \texttt{.jar}-fil som innehåller allt som behövs för att köra programmet.\\
+    $\rightarrow$ \url{https://github.com/lunduniversity/introprog-cpu-emulator/releases/latest}
     \item Kontrollera att du kan köra programmet genom att dubbelklicka på \texttt{.jar}-filen. Om det inte fungerar kan du istället starta programmet från terminalen med kommandot:
     \begin{center}
-        {\code{java -jar \progfilename{}}}
+        {\code{java -jar \progfilename}}
     \end{center}
+    Där \code{\progversion} är versionsnummret, vilket eventuellt kan vara annorlunda.
     \item Läs igenom användarmanualen för programmet som beskriver hur det fungerar. Manualen öppnas automatiskt när programmet startas, eller via menyn \texttt{Help}~$\rightarrow$~\texttt{Show Help}.
 \end{Hemarbete}
-Länkar till det ovan refererade materialet finns på kurshemsidan under  ''Datorlaborationer'' om du inte har pappersversionerna av dem.
 
 \subsection*{Kontrollfrågor}
 \begin{Kontrollfragor}
-    \item Todo.
+    \item Vad står förkortningen CPU för?
+    \item Vad är huvudfunktionen hos en CPU?
+    \item Nämn två typer av minne som finns i en dator.
+    \item Vad används registren i en CPU till?
+    \item Vad är en programräknare och vad gör den?
+    \item Vad menas med termen "cache" i kontexten av CPU?
+    \item Hur representeras informationen i datorns minne?
+    \item Vad innebär binärt tal?
+    \item Hur konverterar man ett decimaltal till ett binärt tal?
+    \item Vad är en maskininstruktion?
+    \item Vad är en assembler?
+    \item Hur skiljer sig maskinkod från högnivå programmeringsspråk?
+    \item Vad är ett operativsystem och vilken roll spelar det i en dator?
+    \item Vad är en bit och vad är en byte?
+    \item Vad är ett hexadecimalt tal och varför används det ofta i datavetenskap?
+    \item Ge ett exempel på en enkel operation som en ALU (Arithmetic Logic Unit) kan utföra.
 \end{Kontrollfragor}
 
 % 
@@ -73,7 +89,7 @@ Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar
 
 
 \begin{Datorarbete}
-    \item \difficulty{1} Börja med att starta \progname{}. Om du inte gjort det redan så läs igenom användarmanualen som beskriver hur programmet fungerar. Den öppnas automatiskt när programmet startas, eller via menyn \texttt{Help}~$\rightarrow$~\texttt{Show Help}.
+    \item \difficulty{1} Börja med att starta \progname. Om du inte gjort det redan så läs igenom användarmanualen som beskriver hur programmet fungerar. Den öppnas automatiskt när programmet startas, eller via menyn \texttt{Help}~$\rightarrow$~\texttt{Show Help}.
 
     \item \difficulty{1} I programmet finns ett antal exempelprogram som kan laddas in, under menyn \texttt{Examples}. Öppna det exempel som heter \texttt{Tiny program}. Detta är ett mycket enkelt program som bara använder fyra minnesceller, varav tre innehåller instruktioner och en innehåller data. Prova att stega igenom programmet och se vad som händer vid varje steg. Nedan är en beskrivning av vad programmet gör:
     \begin{enumerate}
@@ -99,8 +115,8 @@ Under laborationen kommer vi att arbeta med programmet \progname{} som simulerar
     \item \difficulty{4} Nu ska du modifiera ditt program lite grand, och utöka din förståelse för CPU:n genom att hantera data dynamiskt. Föreställ dig att ett tidigare program har kört och sparat ett resultat i minnet på en okänd plats; alltså du känner inte till minnesplatsen när du skriver programmet, men programmet får reda på adressen under körning.
 
     \begin{Deluppgifter}
-        \item \textbf{Förbered Minnet:} För att simulera den tidigare beräkningen, skriv manuellt in talen 127 och 43 på minnesplatserna 18 respektive 19. Detta är alltså de "okända" addresserna som programmet kommer att läsa från.
-        \item \textbf{Ladda Adresser:} Använd instruktionen \texttt{LD} för att ladda in värdet 18 till ett register, t.ex. \texttt{R0}. Notera att detta värdet alltså ska tolkas som en minnesaddress, och i sin tur användas för att ladda de faktiska värdena. Register \texttt{R0} kommer alltså att innehålla adressen som ska läsas från.
+        \item \textbf{Förbered Minnet:} För att simulera den tidigare beräkningen, skriv manuellt in talen 127 och 43 på minnesplatserna 18 respektive 19. Detta är alltså de "okända" värdena som programmet kommer att läsa.
+        \item \textbf{Ladda Adresser:} Använd instruktionen \texttt{LD} för att ladda in värdet 18 till ett register, t.ex. \texttt{R0}. Notera att detta värdet alltså ska tolkas som en minnesaddress, och i sin tur användas för att ladda de faktiska värdena. Register \texttt{R0} kommer alltså att innehålla adressen som värdet finns på.
         \item \textbf{Ladda Värden:} Använd instruktionen \texttt{LDA} (Load Address) för att ladda värden från en given address till ett register. Alltså, ladda in operanderna som ska adderas från \texttt{*R0} och \texttt{*(R0+1)} till operandregistren, \texttt{OP1} och \texttt{OP2}.
         \item \textbf{Ändra till Subtraktion:} Modifiera programmet för att utföra en subtraktion istället för addition, alltså beräkna \(127-43\), och skriva ut resultatet liksom tidigare. Kontrollera att programmet ger det korrekta resultatet.
         \item \textbf{Experiment med Operandordning:} Vad tror du händer om du byter plats på värdena i minnesplatserna och beräknar \(43-127\)? Prova och se vad resultatet blir.
