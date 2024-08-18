@@ -5,6 +5,11 @@
 \usepackage{selthcsslides}
 \usecolortheme{lucolors}
 
+% The Madrid theme, for some reason, does not show bullet points in itemize
+% environments. This is a workaround to fix that.
+\setbeamertemplate{itemize item}[default]
+\setbeamertemplate{itemize subitem}[default]
+
 % \usepackage[swedish]{babel}
 % Swedish setup using polyglossia for better multilingual support
 \usepackage{polyglossia}
@@ -12,6 +17,22 @@
 
 \usepackage{url}
 \usepackage{datetime2}
+
+\usepackage{listings}
+\lstset{resetmargins=true}
+
+
+% Code listing environment that removes leading whitespace
+\lstnewenvironment{GobbleCode}[2][\baselineskip]
+{\lstset{
+	aboveskip=#1,
+    belowskip=#1,
+	resetmargins=true,
+	xleftmargin=0em,
+	gobble=#2,
+	tabsize=4,
+}}
+{}
 
 \author[]{Mattias Nordahl}
 \institute{\url{mattias.nordahl@cs.lth.se}}

@@ -170,23 +170,23 @@ Här samlas kort information och hjälp som kan vara användbar under laboration
 	\item \texttt{Vad menas med att "gå till /usr/local/cs/dod/\dots"?}\\
 	      Det är en absolut sökväg som finns tillgänglig när du är inloggad på skolans datorer. Att ``gå~till'' en sökväg innebär att ändra sitt \texttt{working directory}. (ILL~1.7)
 	\item \texttt{Om jag använder min egen laptop, hur kommer jag åt \code{/usr/local/cs/dod/\dots}}?\\
-	      Du kan använda \code{ssh} för att logga in och arbeta på skoldatorerna (ILL~3.7), eller kopiera filer från skoldatorerna till din egen med \code{scp} eller \code{sftp} (ILL~4.2).
+	Du kan använda \code{ssh} för att logga in och arbeta på skoldatorerna (ILL~3.7), eller kopiera filer från skoldatorerna till din egen med \code{scp} eller \code{sftp} (ILL~4.2).
 \end{itemize}
 
-\subsection{Lab 2 --- \LaTeX}
+\subsection{Lab 2 --- Versionshantering med Git}
+\begin{itemize}
+	\item \texttt{Hur stänger jag vim!?}\\
+		  Om du råkat öppna texteditorn \code{vim} (t.ex. genom att göra en git commit utan att ha ställt in en annan editor) kan du stänga den genom att trycka \code{:q} (kolon följt av \code{q}), sedan \code{Retur}. Om du redan provat annat kan du ha kommit in i något annat av Vim's editeringslägen. Tryck då först \code{Esc} för att gå tillbaka till det ``normala läget''.
+	\item \texttt{Hur arbetar man med texteditorn nano?} \\
+		  nano är en terminalbaserat texteditor. Den körs alltså direkt i terminalen utan att öppna några nya fönster, vilket kan vara fördelaktigt ibland. I editorn kan du flytta markören med piltangenterna och skriva text som förväntat. I botten av terminalen visas också operationer som kan utföras och vilken knappkombination som ska tryckas. Där används tecknet \texttt{\^{}} (den lilla ``hatten'' vid sidan om \commandchar{return}) för att betyda Ctrl-knappen. Använd t.ex. \commandchar{control-o} för att spara (Write Out), \commandchar{control-x} för att avsluta eller \commandchar{control-g} för mer hjälp.
+\end{itemize}
+
+\subsection{Lab 3 --- \LaTeX}
 
 \begin{itemize}
 	\item \texttt{Hur skriver jag specialtecken i \LaTeX{}?}\\
 	      Det finns flera tecken som har särskild betydelse i \LaTeX{}. För att faktiskt skriva dessa tecken i texten, utan att de ska tolkas som specialtecken, behöver man ``bryta~ut'' dem (eng. \emph{escape}). Det görs med \emph{escape}-tecknet \texttt{\textbackslash} (bakåt snedstreck eller eng. backslash). Exempel på specialtecken är \texttt{\textbackslash\%} för procenttecken och \texttt{\textbackslash\$} för dollartecken. \texttt{\textbackslash}-tecknet är i sig också ett specialtecken och kan skrivas med kommandot \texttt{\textbackslash{textbackslash}}, eller \texttt{\textbackslash{backslash}} inom matematikläget.
 
-\end{itemize}
-
-\subsection{Lab 3 --- Versionshantering med Git}
-\begin{itemize}
-	\item \texttt{Hur stänger jag vim!?}\\
-	      Om du råkat öppna texteditorn \code{vim} (t.ex. genom att göra en git commit utan att ha ställt in en annan editor) kan du stänga den genom att trycka \code{:q} (kolon följt av \code{q}), sedan \code{Retur}. Om du redan provat annat kan du ha kommit in i något annat av Vim's editeringslägen. Tryck då först \code{Esc} för att gå tillbaka till det ``normala läget''.
-	\item \texttt{Hur arbetar man med texteditorn nano?} \\
-	      nano är en terminalbaserat texteditor. Den körs alltså direkt i terminalen utan att öppna några nya fönster, vilket kan vara fördelaktigt ibland. I editorn kan du flytta markören med piltangenterna och skriva text som förväntat. I botten av terminalen visas också operationer som kan utföras och vilken knappkombination som ska tryckas. Där används tecknet \texttt{\^{}} (den lilla ``hatten'' vid sidan om \commandchar{return}) för att betyda Ctrl-knappen. Använd t.ex. \commandchar{control-o} för att spara (Write Out), \commandchar{control-x} för att avsluta eller \commandchar{control-g} för mer hjälp.
 \end{itemize}
 
 \subsection{Lab 4 --- Maskinkod}
@@ -202,18 +202,14 @@ Här samlas kort information och hjälp som kan vara användbar under laboration
 \newpage
 \include{./modules/unix/unix_terminal}
 
+\newpage
+\include{./modules/git/git}
 
 \newpage
 \include{./modules/latex/latex}
 
-
-\newpage
-\include{./modules/git/git}
-
-
 \newpage
 \include{./modules/machine-code/machine-code}
-
 
 \newpage
 

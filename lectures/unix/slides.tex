@@ -2,9 +2,6 @@
 
 \includeonly{unix}
 
-% Include before selthcsslides to avoid styles being overridden
-% \usepackage{enumitem}
-
 \usepackage{selthcsslides}
 \usecolortheme{lucolors}
 
@@ -25,7 +22,7 @@
 \lstset{resetmargins=true}
 
 
-% Redefine the Code listing environment to reset margins for each listing
+% Code listing environment that removes leading whitespace
 \lstnewenvironment{GobbleCode}[2][\baselineskip]
 {\lstset{
 	aboveskip=#1,
