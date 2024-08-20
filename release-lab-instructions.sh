@@ -5,18 +5,21 @@
 # workflow when a new tag is pushed, which will create a release on GitHub
 # using the tag.
 
+# Usage: ./release-lab-instructions <version-number> ["Optional tag commit message"]
 
 # Check for the correct number of input parameters
-if [ "$#" -ne 1 ]; then
+if [ "$#" -lt 1 ]; then
     echo "Error: Incorrect number of arguments."
-    echo "Usage: $0 <version-number>"
-    echo "Example: $0 v1.0.1"
+    echo "Usage: $0 <version-number> [\"tag commit message\"]"
+    echo "Example: $0 v1.0.1 \"Initial release\""
+    echo "If no commit message is specified, the default editor will be opened."
     exit 1
 fi
 
+
 # Define the tag and message
 TAG="lab_$1"
-MESSAGE="Release $TAG"
+MESSAGE="Lab instructions $1"
 
 # Check if the tag already exists
 if git rev-parse "$TAG" >/dev/null 2>&1; then
@@ -39,8 +42,13 @@ if git rev-parse "$TAG" >/dev/null 2>&1; then
 fi
 
 # Create the annotated tag
-# git tag -a "$TAG" -m "$MESSAGE"
-git tag -a "$TAG"
+if [ -z "$2" ]; then
+    # If no message is provided, open the editor to allow the user to enter a message
+    git tag -a "$TAG"
+else
+    # If a message is provided, use it directly
+    git tag -a "$TAG" -m "$2"
+fi
 
 # Push the tag to the remote repository
 git push origin "$TAG"

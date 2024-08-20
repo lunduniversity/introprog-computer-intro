@@ -95,7 +95,23 @@
 %*****************************************************************
 \author{}
 \begin{document}
-\courseinfo{Datorer och datoranvändning}{2024}
+
+\clearpage
+\thispagestyle{empty} % Removes page number
+\vspace*{30mm}
+\begin{center}
+	\sffamily
+	\renewcommand{\baselinestretch}{1.1}
+	\Huge\bfseries Datorlaborationer \\[5mm]
+	EDAA60 / EITA65 \\[2mm]
+	\LARGE\bfseries	Datorer och datoranvändning \\[7mm]
+	\large Lunds universitet, LTH --- \the\year
+\end{center}
+\clearpage
+
+
+%*****************************************************************
+\courseinfo{Datorer och datoranvändning}{\the\year}
 \maketitle
 \thispagestyle{titlepage}
 \vspace{-4cm}
@@ -115,7 +131,7 @@ Datorlaborationerna ger exempel på tillämpningar av det material som behandlas
 	      %\item  Du måste för varje laboration se till att laborationsledaren noterar dig som godkänd på listan på sista sidan i detta häfte.
 
 	\item I början av varje laboration kommer laborationsledaren att kontrollera att du har förberett dig. Kontrollen görs genom att du får svara på några frågor som valts bland kontrollfrågorna. Om du uppenbart inte har förberett dig så har laborationsledaren rätt att be dig att förbereda dig och komma tillbaka vid ett senare tillfälle.
-	
+
 	\item \emph{Förtydligande av förberedelsekontrollen}: Kontrollen är inte menad att vara svår, utan syftar till att se att du har gjort en insats för att gå igenom det förberedande materialet, så att du kan få ut så mycket som möjligt av laborationen och laborationsledaren.
 
 	\item Observera att laborationerna inte syftar till att testa er, utan är ett inlärningsmoment! Under laborationerna får ni ta hjälp av allt kursmaterial eller andra resurser för att lösa uppgifterna. Ta också hjälp av laborationsledaren om ni fastnar eller behöver hjälp.
@@ -170,15 +186,15 @@ Här samlas kort information och hjälp som kan vara användbar under laboration
 	\item \texttt{Vad menas med att "gå till /usr/local/cs/dod/\dots"?}\\
 	      Det är en absolut sökväg som finns tillgänglig när du är inloggad på skolans datorer. Att ``gå~till'' en sökväg innebär att ändra sitt \texttt{working directory}. (ILL~1.7)
 	\item \texttt{Om jag använder min egen laptop, hur kommer jag åt \code{/usr/local/cs/dod/\dots}}?\\
-	Du kan använda \code{ssh} för att logga in och arbeta på skoldatorerna (ILL~3.7), eller kopiera filer från skoldatorerna till din egen med \code{scp} eller \code{sftp} (ILL~4.2).
+	      Du kan använda \code{ssh} för att logga in och arbeta på skoldatorerna (ILL~3.7), eller kopiera filer från skoldatorerna till din egen med \code{scp} eller \code{sftp} (ILL~4.2).
 \end{itemize}
 
 \subsection{Lab 2 --- Versionshantering med Git}
 \begin{itemize}
 	\item \texttt{Hur stänger jag vim!?}\\
-		  Om du råkat öppna texteditorn \code{vim} (t.ex. genom att göra en git commit utan att ha ställt in en annan editor) kan du stänga den genom att trycka \code{:q} (kolon följt av \code{q}), sedan \code{Retur}. Om du redan provat annat kan du ha kommit in i något annat av Vim's editeringslägen. Tryck då först \code{Esc} för att gå tillbaka till det ``normala läget''.
+	      Om du råkat öppna texteditorn \code{vim} (t.ex. genom att göra en git commit utan att ha ställt in en annan editor) kan du stänga den genom att trycka \code{:q} (kolon följt av \code{q}), sedan \code{Retur}. Om du redan provat annat kan du ha kommit in i något annat av Vim's editeringslägen. Tryck då först \code{Esc} för att gå tillbaka till det ``normala läget''.
 	\item \texttt{Hur arbetar man med texteditorn nano?} \\
-		  nano är en terminalbaserat texteditor. Den körs alltså direkt i terminalen utan att öppna några nya fönster, vilket kan vara fördelaktigt ibland. I editorn kan du flytta markören med piltangenterna och skriva text som förväntat. I botten av terminalen visas också operationer som kan utföras och vilken knappkombination som ska tryckas. Där används tecknet \texttt{\^{}} (den lilla ``hatten'' vid sidan om \commandchar{return}) för att betyda Ctrl-knappen. Använd t.ex. \commandchar{control-o} för att spara (Write Out), \commandchar{control-x} för att avsluta eller \commandchar{control-g} för mer hjälp.
+	      nano är en terminalbaserat texteditor. Den körs alltså direkt i terminalen utan att öppna några nya fönster, vilket kan vara fördelaktigt ibland. I editorn kan du flytta markören med piltangenterna och skriva text som förväntat. I botten av terminalen visas också operationer som kan utföras och vilken knappkombination som ska tryckas. Där används tecknet \texttt{\^{}} (den lilla ``hatten'' vid sidan om \commandchar{return}) för att betyda Ctrl-knappen. Använd t.ex. \commandchar{control-o} för att spara (Write Out), \commandchar{control-x} för att avsluta eller \commandchar{control-g} för mer hjälp.
 \end{itemize}
 
 \subsection{Lab 3 --- \LaTeX}
@@ -192,8 +208,8 @@ Här samlas kort information och hjälp som kan vara användbar under laboration
 \subsection{Lab 4 --- Maskinkod}
 \begin{itemize}
 	\item \emph{Inga frågor ännu.}
-	% \item \texttt{TODO}\\
-	%       TODO
+	      % \item \texttt{TODO}\\
+	      %       TODO
 \end{itemize}
 
 \newpage
