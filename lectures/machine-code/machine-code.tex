@@ -14,72 +14,216 @@
             \item Maskinkod och instruktioner.
             \item Assembly-språk.
             \item Kompilerare och tolkar.
+            \item c3pu (labförberedelse).
         \end{itemize}
     \end{block}
 \end{frame}
 
 \begin{frame}[fragile=singleslide]
     \frametitle{Bakgrund}
+    \begin{columns}
+        \begin{column}{0.75\textwidth}
+            \begin{block}{Varför lära sig Maskinkod?}
+                \begin{itemize}
+                    \item \textbf{Effektiv Problemlösning:} Förstå hur datorer utför uppgifter kan leda till snabbare och mer effektiva lösningar när du programmerar.
+                    \pause
+                    \item \textbf{Förbättrade felsökningsfärdigheter:} Kunskap om maskinkod kan avslöja djupliggande orsaker till buggar, vilket gör det enklare att fixa komplexa problem.
+                    \pause
+                    \item \textbf{Bättre teknikval:} Grundläggande förståelse för maskinkod kan vägleda dig i val av hårdvara och optimeringar, likt valet av motor för en bil baserat på användningsområde.
+                    \pause
+                    \item \textbf{Innovativt tänkande:} Förståelsen för datorns fundamentala operationer möjliggör kreativa och nyskapande tekniklösningar.
+                \end{itemize}
+            \end{block}
+        \end{column}
+        \begin{column}{0.25\textwidth}
+            \begin{center}
+                \begin{tikzpicture}
+                    \node (hl) [rectangle, draw, fill=blue!20, text width=6em, text centered, minimum height=2em] {Högnivåspråk};
+                    \node (al) [rectangle, draw, fill=green!20, below=of hl, text width=6em, text centered, minimum height=2em] {Assembly};
+                    \node (mc) [rectangle, draw, fill=red!20, below=of al, text width=6em, text centered, minimum height=2em] {Maskinkod};
+                    \node (hw) [rectangle, draw, fill=orange!20, below=of mc, text width=6em, text centered, minimum height=2em] {Hårdvara};
 
+                    \draw[->] (hl) -- (al);
+                    \draw[->] (al) -- (mc);
+                    \draw[->] (mc) -- (hw);
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile=singleslide]
+    \frametitle{Vad är en dator?}
+    \begin{columns}[T] % The [T] option is used to align the columns content at the top
+        \begin{column}{0.6\textwidth}
+            \begin{block}{Komponenter}
+                \begin{itemize}
+                    \item \textbf{CPU:} Datorns hjärna, innehåller ALU, kontrollenhet, och internminne (cache).
+                    \pause
+                    \item \textbf{Minne:} Lagring av data och instruktioner. RAM och permanent lagring (t.ex., hårddisk).
+                    \pause
+                    \item \textbf{I/O-enheter:} För inmatning och utmatning, t.ex., mus, tangentbord, skärm.
+                \end{itemize}
+            \end{block}
+            \begin{block}{Programvara vs. Hårdvara}
+                \begin{itemize}
+                    \item \textbf{Hårdvara:} Fysiska delarna av datorn.
+                    \item \textbf{Programvara:} Instruktioner för att utföra uppgifter.
+                \end{itemize}
+            \end{block}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{center}
+                \begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
+                    % Define CPU and its internal components
+                    \node (cpu) [rectangle, draw, fill=blue!20, minimum height=9.2em, minimum width=9.5em, rounded corners, align=center, label=above:CPU] {};
+                    \node (cu) [rectangle, draw, fill=green!30, below=.5em of cpu.north, minimum height=1.5em, minimum width=9em, align=center] {Control Unit};
+                    \node (alu) [rectangle, draw, fill=red!30, below=.5em of cu, minimum height=1.5em, minimum width=9em, align=center] {ALU};
+                    \node (pm) [rectangle, draw, fill=orange!40, below=.5em of alu, minimum height=1.5em, minimum width=9em, align=center] {Primary Cache};
+                    \node (sm) [rectangle, draw, fill=yellow!40, below=.2em of pm, minimum height=1.5em, minimum width=9em, align=center] {Secondary Cache};
+                    
+                    % Define I/O Devices
+                    \node (io) [rectangle, draw, fill=gray!30, below=of cpu, minimum height=3em, minimum width=9.5em, rounded corners, align=center, label=above:I/O Devices] {Mouse, Keyboard,\\Screen, etc.};
+
+                    % Define RAM
+                    \node (ram) [rectangle, draw, fill=purple!40, left=of cpu, yshift=-3.1em, xshift=3em, minimum height=15.5em, minimum width=3em, rounded corners, align=center, label=above:RAM] {};
+
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+    \end{columns}
     
+\end{frame}
 
+\begin{frame}[fragile=singleslide]
+    \frametitle{Binära tal - Introduktion}
+    \begin{block}{Olika talsystem}
+        \begin{itemize}
+            \item Talsystem används för att representera tal med symboler.
+            \item Decimal (bas 10) - vanligaste, använder siffror 0-9.
+        \end{itemize}
+    \end{block}
+    \begin{block}{Binärt talsystem}
+        \begin{itemize}
+            \item Binärt (bas 2) - används av datorer, använder bara 0 och 1.
+            \item Varje siffra kallas en \textit{bit}.
+        \end{itemize}
+    \end{block}
+    \begin{block}{Varför binära tal i datorer?}
+        \begin{itemize}
+            \item Enkelt att representera elektroniskt (ström finns/ström saknas).
+            \item Pålitligt att tolka signaler som hög (1) eller låg (0) spänning.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+    \frametitle{Binära tal - I Datorer}
+    \begin{block}{Bits, Bytes och Ord}
+        \begin{itemize}
+            \item \textbf{Bit:} Grundläggande enhet av data i datorer (0 eller 1).
+            \item \textbf{Byte:} Grupp av 8 bitar.
+            \item \textbf{Ord:} Processor-specifik grupp av bitar (t.ex., 32-bit eller 64-bit).
+        \end{itemize}
+    \end{block}
+    \begin{block}{Användning av binära tal}
+        \begin{itemize}
+            \item Lagring och bearbetning av all data och instruktioner.
+            \item Varje byte kan representera ett tecken i text, t.ex., ASCII-kod.
+            \item Större grupper (ord) hanterar mer komplexa data som heltal och flyttal.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+    \frametitle{Hexadecimala Tal}
+    \begin{block}{Hexadecimala Talsystemet}
+        \begin{itemize}
+            \item Hexadecimal (bas 16) - använder siffror 0-9 och bokstäverna A-F.
+            \item Varje tecken representerar fyra binära siffror (bitar).
+        \end{itemize}
+    \end{block}
+    \begin{block}{Varför Hexadecimala Tal?}
+        \begin{itemize}
+            \item \textbf{Förenkling:} Lättare att läsa och skriva stora binära tal.
+            \item \textbf{Minnesadressering:} Används ofta för att representera minnesadresser. Hjälpsamt för att hitta och felsöka minnesproblem.
+        \end{itemize}
+    \end{block}
+    \begin{block}{Exempel}
+        \begin{itemize}
+            \item Binärt: \texttt{1011 1010} = Hex: \texttt{BA}
+            \item Större binärtal: \texttt{1011 1010 0101 1110} = Hex: \texttt{BA5E}
+        \end{itemize}
+    \end{block}
 \end{frame}
 
 
 
 
-% Slide 1: Introduction to Machine Code
-% Overview of today’s lecture
-% Importance of machine code in computer science
+\begin{frame}[fragile=singleslide]
+    \frametitle{Central Processing Unit (CPU)}
+    % Structure and function of the CPU
+    %  - ALU, registers, control unit
+    %  - Role of the CPU in executing machine code
+\end{frame}
 
-% Slide 2: What is a Computer?
-% Basic definition and components of a computer (CPU, Memory, I/O)
-% Role of software vs. hardware
+\begin{frame}[fragile=singleslide]
+    \frametitle{Minne i datorer}
+    % Types of memory: RAM, ROM, cache
+    % How memory works with the CPU
+\end{frame}
 
-% Slide 3: Understanding Binary Numbers
-% Explanation of binary system (bits, bytes)
-% Conversion between binary and decimal systems
+\begin{frame}[fragile=singleslide]
+    \frametitle{Grundläggande om maskinkod}
+    % Definition and characteristics of machine code
+    % Differences between machine code, assembly language, and high-level programming languages
+\end{frame}
 
-% Slide 4: The Central Processing Unit (CPU)
-% Structure and function of the CPU
-% Role of the CPU in executing machine code
+\begin{frame}[fragile=singleslide]
+    \frametitle{Maskininstruktioner}
+    % Components of a machine instruction: opcode, operands
+    % How instructions are executed by the CPU
+\end{frame}
 
-% Slide 5: Memory in Computing
-% Types of memory (RAM, ROM, Cache)
-% How memory works with the CPU
+\begin{frame}[fragile=singleslide]
+    \frametitle{Assembly-språk}
+    % Introduction to assembly language as a low-level programming language
+    % Relationship between assembly language and machine code
+\end{frame}
 
-% Slide 6: Basics of Machine Code
-% Definition and characteristics of machine code
-% Differences between machine code, assembly language, and high-level programming languages
+\begin{frame}[fragile=singleslide]
+    \frametitle{Skriva enkel maskinkod}
+    % Example of a simple program in machine code
+    % Explanation of what each part of the program does
+\end{frame}
 
-% Slide 7: Machine Instructions
-% Components of a machine instruction (opcode, operands)
-% How instructions are executed by the CPU
+\begin{frame}[fragile=singleslide]
+    \frametitle{Maskinkod och moderna datorer}
+    % Relevance of machine code in contemporary software development
+    % Overview of how high-level languages are translated into machine code
+\end{frame}
 
-% Slide 8: Assembly Language Overview
-% Introduction to assembly language as a low-level programming language
-% Relationship between assembly language and machine code
+\begin{frame}[fragile=singleslide]
+    \frametitle{Kompilatorer och tolkar}
+    % Explanation of compilers and interpreters
+    % How they translate high-level code into executable machine code
+\end{frame}
 
-% Slide 9: Writing Simple Machine Code
-% Example of a simple program in machine code
-% Explanation of what each part of the program does
+\begin{frame}[fragile=singleslide]
+    \frametitle{Utmaningar med att arbeta med maskinkod}
+    % Difficulties and limitations of coding in machine code
+    % Importance of understanding machine code for debugging and optimization
+\end{frame}
 
-% Slide 10: Machine Code and Modern Computing
-% Relevance of machine code in contemporary software development
-% Overview of how high-level languages are translated into machine code
+\begin{frame}[fragile=singleslide]
+    \frametitle{Sammanfattning}
+    % Recap of the key points covered
+    % Encouragement to explore more about how programming languages work at the machine level
+\end{frame}
 
-% Slide 11: Compilers and Interpreters
-% Explanation of compilers and interpreters
-% How they translate high-level code into executable machine code
-
-% Slide 12: Challenges of Working with Machine Code
-% Difficulties and limitations of coding in machine code
-% Importance of understanding machine code for debugging and optimization
-
-% Slide 13: Conclusion
-% Recap of the key points covered
-% Encouragement to explore more about how programming languages work at the machine level
-
-% Slide 14: Questions and Discussion
-% Open the floor for questions
-% Suggest further reading materials and resources
+\begin{frame}[fragile=singleslide]
+    \frametitle{Frågor och diskussion}
+    % Open the floor for questions
+    % Suggest further reading materials and resources
+\end{frame}
