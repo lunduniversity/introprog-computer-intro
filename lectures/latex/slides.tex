@@ -1,4 +1,9 @@
-\documentclass[trans]{beamer} 
+\ifdefined\ishandout
+    \documentclass[handout]{beamer}
+\else
+    \documentclass{beamer}
+    \setbeamercovered{transparent}
+\fi
 
 \includeonly{latex}
 
@@ -19,6 +24,10 @@
 \usepackage{url}
 \usepackage{datetime2}
 
+% \usepackage{fontspec}  			% Allows loading system fonts
+% \setmainfont{Latin Modern Roman}  % Set the main (serif) font
+% \setsansfont{Latin Modern Roman}  % Force sans-serif font to use the same font
+
 \author[]{Mattias Nordahl}
 \institute{\url{mattias.nordahl@cs.lth.se}}
 \date{}
@@ -27,11 +36,11 @@
 
 \begin{document}
 
-\title{Datorer och datoranvändning\\Föreläsning 2 --- \LaTeX}
+\title{Datorer och datoranvändning\\Föreläsning 3 --- \LaTeX}
 
 \frame[plain]{
-	\maketitle
-	\vspace{-2\baselineskip}
+    \maketitle
+    \vspace{-2\baselineskip}
 }
 
 \date{\the\year/\the\numexpr\year-1999}

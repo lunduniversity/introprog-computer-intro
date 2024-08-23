@@ -1,4 +1,9 @@
-\documentclass[trans]{beamer} 
+\ifdefined\ishandout
+    \documentclass[handout]{beamer}
+\else
+    \documentclass{beamer}
+    \setbeamercovered{transparent}
+\fi
 
 \includeonly{intro}
 
@@ -12,6 +17,11 @@
 
 \usepackage{url}
 \usepackage{datetime2}
+
+\usepackage{fontspec}  			  % Allows loading system fonts
+\setmainfont{Latin Modern Roman}  % Set the main (serif) font
+\setsansfont{Latin Modern Roman}  % Force sans-serif font to use the same font
+
 
 \author[]{Mattias Nordahl}
 \institute{\url{mattias.nordahl@cs.lth.se}}

@@ -1,4 +1,9 @@
-\documentclass[trans]{beamer} 
+\ifdefined\ishandout
+    \documentclass[handout]{beamer}
+\else
+    \documentclass{beamer}
+    \setbeamercovered{transparent}
+\fi
 
 \includeonly{machine-code}
 
@@ -18,6 +23,11 @@
 \usepackage{url}
 \usepackage{datetime2}
 
+\usepackage{fontspec}  			  % Allows loading system fonts
+\setmainfont{Latin Modern Roman}  % Set the main (serif) font
+\setsansfont{Latin Modern Roman}  % Force sans-serif font to use the same font
+
+
 \usepackage{listings}
 \lstset{resetmargins=true}
 
@@ -28,12 +38,12 @@
 % Code listing environment that removes leading whitespace
 \lstnewenvironment{GobbleCode}[2][\baselineskip]
 {\lstset{
-	aboveskip=#1,
+    aboveskip=#1,
     belowskip=#1,
-	resetmargins=true,
-	xleftmargin=0em,
-	gobble=#2,
-	tabsize=4,
+    resetmargins=true,
+    xleftmargin=0em,
+    gobble=#2,
+    tabsize=4,
 }}
 {}
 
