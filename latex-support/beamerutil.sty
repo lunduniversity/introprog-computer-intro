@@ -1,0 +1,10 @@
+
+\ProvidesPackage{beamerutil}
+
+% Define custom commands for revealing content in presentation mode
+\newcommand{\ii}[1]{\item<+->{#1}}      % Itemize, incremental
+\newcommand{\is}[1]{\item<.->{#1}}      % Itemize, sequential
+\newcommand{\ti}[1]{\uncover<+->{#1}}   % Text, incremental
+\newcommand{\ts}[1]{\uncover<.->{#1}}   % Text, sequential
+\newcommand{\di}[2]{\item<+->[#1]{#2}}  % Description, incremental
+\newcommand{\ds}[2]{\item<.->[#1]{#2}}  % Description, sequential

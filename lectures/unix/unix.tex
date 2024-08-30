@@ -8,69 +8,79 @@
         Förberedelse inför laboration 1.
 
         \begin{itemize}
-            \item Operativsystem, Unix historik
-            \item Filer och kataloger
-            \item Kommandon
-            \item Filskydd
-            \item Kommandotolk
-            \item Processer
+            \ii{Operativsystem, Unix historik}
+            \is{Filer och kataloger}
+            \is{Kommandon}
+            \is{Filskydd}
+            \is{Kommandotolk}
+            \is{Processer}
         \end{itemize}
     \end{block}
 \end{frame}
 
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
     \frametitle{Operativsystem}
     \begin{itemize}
-        \item Dator --- kör program
-        \item Operativsystem --- en samling program som gör det möjligt att köra ''vanliga'' program
-        \item Operativsystemet hanterar:
+        \ii{Dator --- kör program}
+        \ii{Program --- instruktioner för datorn}
+        \ii{Operativsystem --- en samling program som gör det möjligt att köra ``vanliga'' program}
+        \ii{Operativsystemet hanterar:}
               \begin{itemize}
-                  \item de program som körs (program körs ofta parallellt, operativsystemet ser till att programmen får minne och tid att exekvera)
-                  \item yttre enheter (tangentbord, mus, skärm, nätverk, \ldots)
-                  \item lagring av data (filer, \ldots)
-                  \item skydd, felhantering
+                  \is{de program som körs (program körs ofta parallellt, operativsystemet ser till att programmen får minne och tid att exekvera)}
+                  \ii{yttre enheter (tangentbord, mus, skärm, nätverk, \ldots)}
+                  \ii{lagring av data (filer, \ldots)}
+                  \ii{skydd, felhantering}
                         kommunikation med användaren
               \end{itemize}
 
-        \item Exempel:
+        \ii{Exempel:}
               \begin{itemize}
-                  \item Linux, Windows, Mac OS X, Unix, \ldots
+                  \is{Linux, Windows, Mac OS X, Unix, \ldots}
               \end{itemize}
     \end{itemize}
 \end{frame}
 
-
-
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
     \frametitle{Unix historia}
     \begin{itemize}
-        \item 1960-talet: Multics --- Multiplexed Information and Computing System --- stort operativsystem för stora datorer. Skulle lösa alla problem.
-        \item 1969: Ken Thompson (AT\&T Bell Labs) började skriva Unix, litet operativsystem för små datorer, avsett för programmerare. Idéer från Multics.
-        \item 1973: Unix skrevs om i C av Dennis Ritchie, började distribueras.
-        \item Senare: mycket utveckling, många varianter (Linux, Mac OS X, NetBSD, A/IX, HP/UX, Irix, Android, IOS\ldots).
-        \item Varumärket Unix ägs idag av The Open Group som är ett leverantörs- och teknikoberoende konsortium. Certifierar produkter (Linux ej certifierat).
+        \ii{1960-talet: Multics, ett stort projekt avsedd för stora datorer.}
+        \ii{1969: Ken Thompson på AT\&T Bell Labs utvecklar Unix, ett enklare system för mindre datorer med inspiration från Multics.}
+        \ii{1973: Unix omskrivs i C av Dennis Ritchie, vilket underlättar distribution och anpassning.}
+        \ii{Utvecklingen fortsätter med många varianter: Linux, BSD, Mac OS X, och Android bland andra.}
+        \ii{Unix varumärket ägs av The Open Group som certifierar Unix-kompatibla system (Linux är ej certifierat).}
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
+    \frametitle{Linux och GNU}
+    \begin{itemize}
+        \ii{1983: GNU-verktygen -- fritt Unix-liknande operativsystem.}
+        \ii{1991: Linus Torvalds skapar Linuxkärnan -- hanterar hårdvaruinteraktioner.}
+        \ii{Linuxkärnan + GNU-verktyg = GNU/Linux -- skapar en fullständig användarmiljö.}
+        \ii{``Linux'' används ofta som kortform för hela systemet.}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
     \frametitle{Kännetecken för Unix}
-    Grundläggande:
+    \ti{Grundläggande:}
     \begin{itemize}
-        \item Kärna --- liten, grundläggande funktioner
-        \item Processer, tidsdelning
-        \item Filskydd
-        \item Fleranvändarsystem
-        \item Kommandotolk (terminalfönster)
+        \is{Kärna --- liten, grundläggande funktioner}
+        \ii{Processer, tidsdelning}
+        \ii{Filskydd}
+        \ii{Fleranvändarsystem}
+        \ii{Kommandotolk (terminalfönster)}
     \end{itemize}
-    Unix är:
+    \ti{Unix är:}
     \begin{itemize}
-        \item Litet, standardiserat, flyttbart
-        \item (Urspringligen) Inte för nybörjare. Enklare nu med grafiska skrivbordsmiljöer.
+        \is{Litet, standardiserat, flyttbart}
+        \ii{(Urspringligen) Inte för nybörjare. Enklare nu med grafiska skrivbordsmiljöer.}
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
     \frametitle{Vilket operativsystem använder du?}
 
     \begin{figure}
@@ -80,29 +90,34 @@
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
     \frametitle{Filer i Unix/Linux}
     I en dator måste man kunna lagra
     \begin{itemize}
-        \item program (Word, Excel, Java-/Scalakompilator, spelprogram, \ldots)
-        \item data (foton, document, programmeringsuppgifter, \ldots)
+        \ii{program (Word, Excel, Java-/Scalakompilator, spelprogram, \ldots)}
+        \ii{data (foton, document, programmeringsuppgifter, \ldots)}
     \end{itemize}
 
     \halfblankline
 
-    Man lagrar program och data i \emph{filer}. En fil finns normalt på skivminne och har ett namn.
+    \ti{Man lagrar program och data i \emph{filer}, som har ett namn.}
 
     \halfblankline
+    \ti{Filer ligger alltid i en katalog (mapp).}
 
-    Filnamn i Unix/Linux:
+    \halfblankline
+    \ti{Filer och kataloger lagras på ``permanent'' minne (hårddisk, SSD, \ldots).}
+
+    \halfblankline
+    \ti{Filnamn i Unix/Linux:}
 
     \begin{itemize}
-        \item \code{namn.tillägg} (\code{Calc.scala}, \code{Calc.class}, \code{brev.txt}, \code{test1}, \ldots)
-        \item Tillägget är bara en extra upplysning, bestämmer inte filtypen!
+        \is{\code{namn.tillägg} (\code{Calc.scala}, \code{Calc.class}, \code{brev.txt}, \code{test1}, \ldots)}
+        \ii{Tillägget är bara en extra upplysning, bestämmer inte filtypen!}
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
     \frametitle{Kataloger}
     Varje fil finns i en katalog. Kataloger kan innehålla underkataloger, så man får en hierarkisk struktur, ett \emph{filträd}:
 
@@ -113,7 +128,7 @@
 
 \end{frame}
 
-% \begin{frame}[fragile=singleslide]
+% \begin{frame}[fragile]
 %     \frametitle{Filnamn}
 %     I praktiken är det inte så rörigt som det ser ut på den förra bilden!
 %     Ett fullständigt (absolut) filnamn börjar från rotkatalogen och man räknar upp alla katalogerna med \code{/} emellan:
@@ -134,31 +149,36 @@
 
 % \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile,t]
     \frametitle{Filnamn och sökvägar}
 
-    \textbf{Absolut filnamn:}
-    \begin{Code}
-        /h/d24/b/uw3307bq-s/dod/lab1/example.txt
-    \end{Code}
-
-    \textbf{Relativt filnamn:}
-    \begin{Code}
-        dod/lab1/example.txt
-    \end{Code}
-
-    \textbf{Termer:}
+    \ti{\textbf{Termer:}}
     \begin{itemize}
-        \item Sökväg (eng. path) -- vägen till en fil
-        \item Absolut sökväg -- från rotkatalogen
-        \item Relativ sökväg -- från aktuell katalog
-        \item Aktuell katalog -- \emph{där du är i filträdet}
+        \is{Sökväg (eng. path) -- vägen till en fil}
+        \ii{Absolut sökväg -- från rotkatalogen}
+        \ii{Relativ sökväg -- från aktuell katalog}
+        \ii{Aktuell katalog -- \emph{där du är i filträdet}}
     \end{itemize}
+
+    \blankline
+    \ti{\textbf{Absolut filnamn:}}
+    \begin{onlyenv}<.->
+        \begin{GobbleCode}{6}
+            /h/d24/b/uw3307bq-s/dod/lab1/example.txt
+        \end{GobbleCode}
+    \end{onlyenv}
+
+    \ti{\textbf{Relativt filnamn:}}
+    \begin{onlyenv}<.->
+        \begin{GobbleCode}{6}
+            dod/lab1/example.txt
+        \end{GobbleCode}
+    \end{onlyenv}
 
 \end{frame}
 
 
-% \begin{frame}[fragile=singleslide]
+% \begin{frame}[fragile]
 %     \frametitle{Förkortade filnamn}
 %     En del filer har förkortade namn:
 
@@ -183,38 +203,46 @@
 
 % \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile,t]
     \frametitle{Förkortade filnamn}
 
-    \textbf{Förkortningar:}
+    \ti{\textbf{Förkortningar:}}
 
-    Vissa filnamn har speciella betydelser:
+    \ts{Vissa filnamn har speciella betydelser:}
 
     \blankline
-    \begin{tabular}{cl}
-        \url{~}     & Hemkatalog (tilde) \\
-        \url{~user} & Användarens hemkatalog \\
-        \code{.}    & Aktuell katalog (punkt) \\
-        \code{..}   & Överordnad katalog (punktpunkt) \\
-    \end{tabular}
+    \begin{onlyenv}<.->
+        \begin{tabular}{cl}
+            \url{~}     & Hemkatalog (tilde) \\
+            \url{~user} & Användarens hemkatalog \\
+            \code{.}    & Aktuell katalog (punkt) \\
+            \code{..}   & Överordnad katalog (punktpunkt) \\
+        \end{tabular}
+    \end{onlyenv}
     \blankline
 
-    \textbf{Exempel:}
+    \ti{\textbf{Exempel:}}
 
-    Om \code{\url{~}/dod/lab1} är aktuell katalog:
+    \ts{Om \code{\url{~}/dod/lab1} är aktuell katalog:}
 
-    \begin{GobbleCode}{6}
-        ~/pgk/lab1/kojo.scala
-        (till hemkatalogen, ner i pfk, ner i lab1)
-
-        ../../pgk/lab1/kojo.scala
-        (upp ett steg, upp ett steg, ner i pgk, ner i lab1)
-    \end{GobbleCode}
+    \begin{onlyenv}<+->
+        \begin{GobbleCode}{10}
+            ~/pgk/lab1/kojo.scala
+            (till hemkatalogen, ner i pfk, ner i lab1)
+        \end{GobbleCode}
+    \end{onlyenv}
+    \vspace{-1em}
+    \begin{onlyenv}<+->
+        \begin{GobbleCode}{10}
+            ../../pgk/lab1/kojo.scala
+            (upp ett steg, upp ett steg, ner i pgk, ner i lab1)
+        \end{GobbleCode}
+    \end{onlyenv}
 
 \end{frame}
 
 
-% \begin{frame}[fragile=singleslide]
+% \begin{frame}[fragile]
 %     \frametitle{Kommandotolk}
 %     Man kommunicerar med Unix eller Linux genom att ge kommandon. Ett särskilt program i operativsystemet, kommandotolken, ''shell'', läser in kommandona och utför det som ska göras.
 
@@ -233,29 +261,29 @@
 
 % \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
     \frametitle{Kommandotolk (shell) och terminal}
 
-    Termerna \emph{kommandotolk} och \emph{terminal} används ofta synonymt, men har olika betydelser:
+    \ti{Termerna \emph{kommandotolk} och \emph{terminal} används ofta synonymt, men har olika betydelser:}
+    
     \halfblankline
-
     \begin{description}
-        \item [Kommandotolk] För kommunikation med operativsystemet, via kommandon
-        \item [Terminal] Program som låter användaren skriva kommandon till kommandotolken
-        \item [Shell] Engelska för kommandotolk
+        \di{Kommandotolk}{För kommunikation med operativsystemet, via kommandon}
+        \di{Terminal}{Program som låter användaren skriva kommandon till kommandotolken}
+        \di{Shell}{Engelska för kommandotolk}
     \end{description}
 
     \blankline
     
-    Exempel på shells:
+    \ti{Exempel på shells:}
     \begin{itemize}
-        \item \code{bash} (Bourne-Again SHell)
-        \item \code{sh}, \code{zsh}, \code{csh}
+        \is{\code{bash} (Bourne-Again SHell)}
+        \is{\code{sh}, \code{zsh}, \code{csh}}
     \end{itemize}
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
     \frametitle{Kommandotolk (shell) och terminal}
 
     Så här fungerar en kommandotolk:
@@ -270,90 +298,89 @@
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
     \frametitle{Bash vs. Zsh för Mac-användare}
 
-    \textbf{Bash och Zsh:}
+    \ti{\textbf{Bash och Zsh:}}
     \begin{itemize}
-        \item Bash är standard i de flesta Linux-system.
-        \item Zsh är standard i macOS från Catalina.
-        \item Båda är kraftfulla skal i Unix-system.
-        \item För grundläggande användning, t.ex. denna kurs, fungerar båda bra.
+        \is{Bash är standard i de flesta Linux-system.}
+        \is{Zsh är standard i macOS från Catalina.}
+        \is{Båda är kraftfulla skal i Unix-system.}
+        \is{För grundläggande användning, t.ex. denna kurs, fungerar båda bra.}
     \end{itemize}
 
-    \textbf{Att byta till Bash (valfritt):}
+    \ti{\textbf{Att byta till Bash (valfritt):}}
     \begin{itemize}
-        \item Öppna Terminal och skriv \code{bash} för att temporärt byta till Bash.
-        \item Installera senaste Bash via Homebrew: \code{brew install bash}
+        \is{Öppna Terminal och skriv \code{bash} för att temporärt byta till Bash.}
+        \is{Installera senaste Bash via Homebrew: \code{brew install bash}}
     \end{itemize}
 
-    \textbf{Skillnader:}
+    \ti{\textbf{Skillnader:}}
     \begin{itemize}
-        \item Zsh upplevs av många som mer användarvänligt. Erbjuder fler funktioner och anpassningsmöjligheter, men kan vara överväldigande för nybörjare.
-        \item Bash är mer konservativt och har bättre kompatibilitet.
+        \is{Zsh upplevs av många som mer användarvänligt. Erbjuder fler funktioner och anpassningsmöjligheter, men kan vara överväldigande för nybörjare.}
+        \is{Bash är mer konservativt och har bättre kompatibilitet.}
     \end{itemize}
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
     \frametitle{Unix-shellalternativ för Windows-användare}
 
-    \textbf{Git Bash:}
+    \ti{\textbf{Git Bash:}}
     \begin{itemize}
-        \item Enkel Bash-tillgång, minimal konfiguration.
-        \item Installeras med Git för Windows.
+        \is{Enkel Bash-tillgång, minimal konfiguration.}
+        \is{Installeras med Git för Windows.}
     \end{itemize}
 
-    \textbf{WSL (Windows Subsystem for Linux):}
+    \ti{\textbf{WSL (Windows Subsystem for Linux):}}
     \begin{itemize}
-        \item Kör fullständig Linux i Windows.
+        \is{Kör fullständig Linux i Windows.}
     \end{itemize}
 
-    \textbf{Cygwin:}
+    \ti{\textbf{Cygwin:}}
     \begin{itemize}
-        \item Ger bred Unix-vertygsuppsättning.
-        \item Mer konfiguration.
+        \is{Ger bred Unix-vertygsuppsättning.}
+        \is{Mer konfiguration.}
     \end{itemize}
 
     \blankline
-    \textbf{Vilket ska jag välja?}
+    \ti{\textbf{Vilket ska jag välja?}}
     \begin{itemize}
-        \item \textbf{Git Bash}: Grundläggande Bash och Git. (Rekommenderas)
-        \item \textbf{WSL}: Fullständig Linux-utveckling. (Rekommenderas)
-        \item \textbf{Cygwin}: Omfattande Unix-funktionalitet. (Avråds)
+        \is{\textbf{Git Bash}: Grundläggande Bash och Git. (Rekommenderas)}
+        \is{\textbf{WSL}: Fullständig Linux-utveckling. (Rekommenderas)}
+        \is{\textbf{Cygwin}: Omfattande Unix-funktionalitet. (Avråds)}
     \end{itemize}
 
 \end{frame}
 
 
-
-
-
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile,t]
     \frametitle{Kommandoformat}
-    Varje kommando skrivs på en rad:
+    \ti{Varje kommando skrivs på en rad:}
 
     \begin{GobbleCode}{6}
         kommandonamn -option1 -option2 ... argument1 ...
     \end{GobbleCode}
 
     \begin{itemize}
-        \item Kommandot talar om vad som ska göras.
-        \item Argumenten är (oftast) filer eller kataloger som påverkas av kommandot.
-        \item Optionerna modifierar kommandot på något sätt.
+        \ii{Kommandot talar om vad som ska göras.}
+        \ii{Optionerna modifierar kommandot på något sätt.}
+        \ii{Argumenten är (oftast) filer eller kataloger som påverkas av kommandot.}
     \end{itemize}
 
     \halfblankline
-    Exempel:
+    \ti{Exempel:}
 
     \halfblankline
-    \begin{tabular}{lp{60mm}}
-        \code{scalac Calc.scala}  & Kompilerar \code{Calc.scala} med Scalakompilatorn                                         \\
-        \code{cp -i report.tex old.tex} & Kopierar \code{report.tex} till \code{old.tex}. \code{-i} betyder att systemet frågar om \code{old.tex} ska skrivas över, om den redan finns. \\
-    \end{tabular}
+    \begin{onlyenv}<.->
+        \begin{tabular}{lp{60mm}}
+            \code{scalac Calc.scala}  & Kompilerar \code{Calc.scala} med Scalakompilatorn                                         \\
+            \code{cp -i report.tex old.tex} & Kopierar \code{report.tex} till \code{old.tex}. \code{-i} betyder att systemet frågar om \code{old.tex} ska skrivas över, om den redan finns. \\
+        \end{tabular}
+    \end{onlyenv}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
     \frametitle{Kommandon för filhantering}
     Exempel på kommandon för att hantera filer:
 
@@ -367,7 +394,7 @@
     \end{tabular}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
     \frametitle{Kataloghantering}
     Exempel på kommandon för att hantera kataloger:
 
@@ -380,7 +407,7 @@
     \end{tabular}
 \end{frame}
 
-% \begin{frame}[fragile=singleslide]
+% \begin{frame}[fragile]
 %     \frametitle{Filskydd 1}
 %     Varje fil har en ägare. Ägaren identifieras med användarnamn och grupp, till exempel \code{ma1337no-s} i gruppen \code{students}.
 
@@ -396,31 +423,34 @@
 % \end{frame}
 
 
-\begin{frame}[fragile=singleslide]
-    \frametitle{Filskydd 1}
+\begin{frame}[fragile,t]
+    \frametitle{Filskydd 1/3}
 
-    \textbf{Filägande:}
+    \ti{\textbf{Filägande:}}
     \begin{itemize}
-        \item Ägare identifieras via användarnamn och grupp (t.ex., \code{ma1337no-s} i \code{students})
+        \is{Ägare identifieras via användarnamn och grupp\\
+            \hspace{1em}(t.ex., \code{ma1337no-s} i \code{students})}
     \end{itemize}
 
-    \textbf{Filsäkerhet:}
+    \ti{\textbf{Filsäkerhet:}}
     \begin{itemize}
-        \item Ändra åtkomsträttigheter för att skydda eller dela filer
+        \is{Ändra åtkomsträttigheter för att skydda eller dela filer}
     \end{itemize}
 
-    \textbf{Visa detaljer:}
-    \begin{GobbleCode}{6}
-        hacke-3{ma1337no-s}: ls -l
-        -rw-r-----  1 ma1337no-s  students  4940 aug 21 11:14 example.txt
-         (skydd)       (ägare)     (grupp)
-    \end{GobbleCode}
+    \ti{\textbf{Visa detaljer:}}
+    \begin{onlyenv}<.->
+        \begin{GobbleCode}{10}
+            hacke-3{ma1337no-s}: ls -l
+            -rw-r-----  1 ma1337no-s  students  4940 aug 21 11:14 example.txt
+             (skydd)       (ägare)     (grupp)
+        \end{GobbleCode}
+    \end{onlyenv}
 
 \end{frame}
 
 
-\begin{frame}[fragile=singleslide]
-    \frametitle{Filskydd 2}
+\begin{frame}[fragile]
+    \frametitle{Filskydd 2/3}
     \begin{GobbleCode}{6}
         -rw-r-----  1 ma1337no-s  students  4940 aug 21 11:14 example.txt
           u  g  o
@@ -444,44 +474,56 @@
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]
-    \frametitle{Filskydd 3}
-    Kommando för att ändra filskydd:
+\begin{frame}[fragile,t]
+    \frametitle{Filskydd 3/3}
+    \ti{Kommando för att ändra filskydd:}
 
-    \begin{GobbleCode}{4}
-        chmod skydd fil1 fil2 ...
-    \end{GobbleCode}
+    \begin{onlyenv}<.->
+        \begin{GobbleCode}{8}
+            chmod skydd fil1 fil2 ...
+        \end{GobbleCode}
+    \end{onlyenv}
 
-    Filskydd kan anges symboliskt, till exempel \code{u=rw,o=r}, men också numeriskt, där man anger skydden som är satta med ettor, de som inte är satta med nollor. Till exempel:
+    \ti{Filskydd kan anges symboliskt, till exempel \code{u=rw,o=r}}
+    
+    \halfblankline 
+    \ti{Eller numeriskt, enligt:}
 
-    \begin{GobbleCode}{4}
-        x = 001, w = 010, r = 100, rx = 101, rw = 110, rwx = 111
-    \end{GobbleCode}
-
-
-    Siffrorna tolkar man sedan som binära tal, vilket ger:
-
-    \begin{GobbleCode}{4}
-        x = 1, w = 2, r = 4, rx = 5, rw = 6, rwx = 7
-    \end{GobbleCode}
-
-
-    Fullständiga numeriska filskydd blir till exempel:
-
-    \begin{GobbleCode}{4}
-        604 <=> u=rw,o=r    705 <=> u=rwx,o=rx
-    \end{GobbleCode}
+    \begin{onlyenv}<+->
+        \begin{GobbleCode}{8}
+            x = 001, w = 010, r = 100, rx = 101, rw = 110, rwx = 111
+        \end{GobbleCode}
+    \end{onlyenv}
+    
+    
+    \ti{Siffrorna tolkar man sedan som binära tal, vilket ger:}
+    
+    \begin{onlyenv}<.->
+        \begin{GobbleCode}{8}
+            x = 1, w = 2, r = 4, rx = 5, rw = 6, rwx = 7
+        \end{GobbleCode}
+    \end{onlyenv}
+    
+    
+    \ti{Fullständiga numeriska filskydd blir till exempel:}
+    
+    \begin{onlyenv}<.->
+        \begin{GobbleCode}{8}
+            604 <=> u=rw,o=r    755 <=> u=rwx,g=rx,o=rx
+        \end{GobbleCode}
+    \end{onlyenv}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
     \frametitle{bash-finesser 1}
     Man kan editera den aktuella kommandoraden:
 
     \blankline
     \begin{tabular}{p{2.2cm}p{8cm}}
-        \commandchar{Delete}                      & Ta bort tecknet till vänster om markören.                                 \\
-        \commandchar{Control-U}                   & Radera hela raden.                                                        \\
         \commandchar{$\leftarrow$\ $\rightarrow$} & Flytta markören på raden.                                                 \\
+        \commandchar{Control-K}                   & Radera hela raden.                                                        \\
+        \commandchar{Control-U}                   & Radera allt till vänster.                                                 \\
+        \commandchar{Control-L}                   & Töm terminalfönstret.                                                     \\
         \commandchar{Tab}                         & Filnamnskomplettering (man behöver bara skriva början av ett långt namn). \\
     \end{tabular}
 
@@ -496,35 +538,40 @@
     \end{tabular}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile,t]
     \frametitle{bash-finesser 2}
-    När man refererar till filer kan man utnyttja jokertecken (wildcards):
+    \ti{När man refererar till filer kan man utnyttja jokertecken (wildcards):}
 
     \blankline
-    \begin{tabular}{ll}
-        \code{?} & motsvarar \emph{ett} godtyckligt tecken \\
-        \code{*} & motsvarar 0--flera godtyckliga tecken   \\
-    \end{tabular}
+    \begin{onlyenv}<.->
+        \begin{tabular}{ll}
+            \code{?} & motsvarar \emph{ett} godtyckligt tecken \\
+            \code{*} & motsvarar 0--flera godtyckliga tecken   \\
+        \end{tabular}
+    \end{onlyenv}
 
     \blankline
-    Antag att vi har följande filer i vår katalog:
-    \begin{GobbleCode}{4}
-        Test1.java  Test2.java  Test23.java  Final.java
-        Test1.class Test2.class Final.class  FinalReport.tex
-        Outline.tex
-    \end{GobbleCode}
-
-    Då kan vi till exempel skriva:
-
-    \begin{GobbleCode}{4}
-        javac Test?.java (javac Test1.java Test2.java)
-        rm *.class       (rm Test1.class Test2.class Final.class)
-        gedit F*.tex     (gedit FinalReport.tex)
-    \end{GobbleCode}
+    \ti{Antag att vi har följande filer i vår katalog:}
+    \begin{onlyenv}<.->
+        \begin{GobbleCode}{8}
+            Test1.java  Test2.java  Test23.java  Final.java
+            Test1.class Test2.class Final.class  FinalReport.tex
+            Outline.tex
+        \end{GobbleCode}
+    \end{onlyenv}
+    
+    \ti{Då kan vi till exempel skriva:}
+    \begin{onlyenv}<.->
+        \begin{GobbleCode}{8}
+            javac Test?.java (javac Test1.java Test2.java)
+            rm *.class       (rm Test1.class Test2.class Final.class)
+            gedit F*.tex     (gedit FinalReport.tex)
+        \end{GobbleCode}
+    \end{onlyenv}
 
 \end{frame}
 
-% \begin{frame}[fragile=singleslide]
+% \begin{frame}[fragile]
 %     \frametitle{Initieringsfiler}
 %     Många program läser en initieringsfil när de startas. Initieringsfilen innehåller inställningar för programmet. Namnen på initieringsfilerna inleds med punkt, så man ser normalt inte dessa filer när man gör \code{ls}.
 
@@ -539,36 +586,38 @@
 %     Varning: kopiera inte andras initieringsfiler om du inte begriper vad som står i dem!
 % \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile,t]
     \frametitle{Initieringsfiler}
 
-    \textbf{Om initieringsfiler:}
+    \ti{\textbf{Om initieringsfiler:}}
     \begin{itemize}
-        \item Används ofta för att konfigurera program.
-        \item Filnamn börjar med punkt och är dolda, s.k. \emph{punktfiler}.
+        \is{Används ofta för att konfigurera program.}
+        \ii{Filnamn börjar med punkt och är dolda, s.k. \emph{punktfiler}.}
     \end{itemize}
     
-    \textbf{\code{bash} initieringsfil:}
+    \ti{\textbf{\code{bash} initieringsfil:}}
     \begin{itemize}
-        \item bash läser \code{.bash\_profile} (från hemkatalogen) när ett nytt terminalfönster öppnas.
-        \item Nyttiga alias för att förhindra oavsiktliga filoperationer:
+        \is{bash läser \code{.bash\_profile} (från hemkatalogen) när ett nytt terminalfönster öppnas.}
+        \ii{Nyttiga alias för att förhindra oavsiktliga filoperationer:}
     \end{itemize}
 
-    \begin{Code}
-        alias rm='rm -i'
-        alias cp='cp -i'
-        alias mv='mv -i'
-    \end{Code}
+    \begin{onlyenv}<.->
+        \begin{Code}
+            alias rm='rm -i'
+            alias cp='cp -i'
+            alias mv='mv -i'
+        \end{Code}
+    \end{onlyenv}
 
-    \textbf{Varning:}
+    \ti{\textbf{Varning:}}
     \begin{itemize}
-        \item Kopiera inte initieringsfiler utan att förstå innehållet!
+        \is{Kopiera inte initieringsfiler utan att förstå innehållet!}
     \end{itemize}
 
 \end{frame}
 
 
-% \begin{frame}[fragile=singleslide]
+% \begin{frame}[fragile]
 %     \frametitle{Vad är egentligen ett kommando?}
 %     Kommandon är av två slag:
 
@@ -587,31 +636,33 @@
 %     \code{./} är nödvändigt eftersom \code{.} (den aktuella katalogen) inte finns i sökvägen.
 % \end{frame}
 
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile,t]
     \frametitle{Vad är egentligen ett kommando?}
 
-    \textbf{Typer av kommandon:}
+    \ti{\textbf{Typer av kommandon:}}
     \begin{description}
-        \item[Inbyggda] Direkt exekverade i kommandotolken (t.ex. \code{cd}, \code{pwd}, \code{exit}).
-        \item[Vanliga program] Kommandotolken söker efter programfiler i \code{PATH}.
+        \di{Inbyggda}{Kör direkt i kommandotolken (t.ex. \code{cd}, \code{pwd}, \code{ls}).}
+        \di{Vanliga program}{Kommandotolken söker efter programfiler i \code{PATH}.}
     \end{description}
 
-    \textbf{Programexekvering:}
+    \ti{\textbf{Programexekvering:}}
     \begin{itemize}
-        \item \code{PATH} definierar var program letas upp (\code{export PATH=...} för anpassning).
-        \item Ex: \code{/usr/bin/javac} finns i \code{PATH}, så \code{javac X.java} går att köra.
+        \is{\code{PATH} definierar var program letas upp (\code{export PATH=...} för anpassning).}
+        \ii{Ex: \code{/usr/bin/javac} finns i \code{PATH}, så \code{javac X.java} går att köra.}
     \end{itemize}
 
-    \textbf{Köra egna program:}
-    \begin{Code}
-        ./programnamn
-    \end{Code}
-    Använd \code{./} för program i den aktuella katalogen, eftersom \code{.} inte ingår i \code{PATH}.
+    \ti{\textbf{Köra egna program:}}
+    \begin{onlyenv}<.->
+        \begin{Code}
+            ./programnamn
+        \end{Code}
+    \end{onlyenv}
+    \ti{Använd \code{./} för program i den aktuella katalogen, eftersom \code{.} inte ingår i \code{PATH}.}
 
 \end{frame}
 
 
-% \begin{frame}[fragile=singleslide]
+% \begin{frame}[fragile]
 %     \frametitle{Processer}
 %     Varje program som körs i Unix körs som en egen process som exekverar självständigt, ''parallellt'' med andra processer. Varje process körs några millisekunder, sedan får nästa process exekvera, osv. Detta hanteras av operativsystemet.
 
@@ -624,31 +675,33 @@
 %     \end{Code}
 
 % \end{frame}
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile,t]
     \frametitle{Processer}
 
-    \textbf{Grundläggande om Processer:}
+    \ti{\textbf{Grundläggande om Processer:}}
     \begin{itemize}
-        \item Varje program körs som en egen process, oberoende och ''parallellt'' med andra.
-        \item Processväxling sker kontinuerligt, hanteras automatiskt av operativsystemet.
+        \ii{Varje program körs som en egen process, oberoende och ''parallellt'' med andra.}
+        \ii{Processväxling sker kontinuerligt, hanteras automatiskt av operativsystemet.}
     \end{itemize}
 
-    \textbf{Exekvering i Terminal:}
+    \ti{\textbf{Exekvering i Terminal:}}
     \begin{itemize}
-        \item Standard: Kommandotolken väntar på programmet. Terminalen framstår som upptagen tills programmet avslutas.
-        \item Bakgrundskörning: Använd \code{\&} för att köra programmet frikopplat från terminalen.
+        \ii{Standard: Kommandotolken väntar på programmet. Terminalen framstår som upptagen tills programmet avslutas.}
+        \ii{Bakgrundskörning: Använd \code{\&} för att köra programmet frikopplat från terminalen.}
     \end{itemize}
 
-    \textbf{Exempel:}
-    \begin{Code}
-        gedit example.txt &
-    \end{Code}
-    \textit{Öppnar \code{gedit} i bakgrunden, terminalen blir omedelbart tillgänglig för nya kommandon.}
+    \ti{\textbf{Exempel:}}
+    \begin{onlyenv}<.->
+        \begin{Code}
+            gedit example.txt &
+        \end{Code}
+    \end{onlyenv}
+    \ti{\textit{Öppnar \code{gedit} i bakgrunden, terminalen blir omedelbart tillgänglig för nya kommandon.}}
 
 \end{frame}
 
 
-% \begin{frame}[fragile=singleslide]
+% \begin{frame}[fragile]
 %     \frametitle{Fönstersystem, skrivbordsmiljö}
 %     I Unix och Linux är fönstersystemet inte inbyggt (Unix utvecklades långt innan det fanns grafiska skärmar).
 
@@ -658,24 +711,24 @@
 
 %     \pindent Det bästa (enda) sättet att lära sig att använda en skrivbordsmiljö är att träna!
 % \end{frame}
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
     \frametitle{Fönstersystem, skrivbordsmiljö}
 
-    \textbf{Fönstersystem:}
+    \ti{\textbf{Fönstersystem:}}
     \begin{itemize}
-        \item I Unix och Linux är fönstersystemet inte inbyggt (Unix utvecklades långt innan det fanns grafiska skärmar).
-        \item Fönstersystemet X Window System (ofta kallat \emph{X}).
+        \ii{I Unix och Linux är fönstersystemet inte inbyggt (Unix utvecklades långt innan det fanns grafiska skärmar).}
+        \ii{Fönstersystemet X Window System (ofta kallat \emph{X}).}
     \end{itemize}
 
-    \textbf{Fönsterhanterare och skrivbordsmiljö:}
+    \ti{\textbf{Fönsterhanterare och skrivbordsmiljö:}}
     \begin{itemize}
-        \item Fönsterhanteraren bestämmer utseende och funktion hos fönstren.
-        \item Skrivbordsmiljön bygger vidare på fönsterhanteraren för en fullständig användarupplevelse.
+        \ii{Fönsterhanteraren bestämmer utseende och funktion hos fönstren.}
+        \ii{Skrivbordsmiljön bygger vidare på fönsterhanteraren för en fullständig användarupplevelse.}
     \end{itemize}
 
-    \textbf{Lära sig skrivbordsmiljön:}
+    \ti{\textbf{Lära sig skrivbordsmiljön:}}
     \begin{itemize}
-        \item För många av er är Linux nytt. Bästa sättet att bli bekant med en skrivbordsmiljö är att träna!
+        \ii{För många av er är Linux nytt. Bästa sättet att bli bekant med en skrivbordsmiljö är att träna!}
     \end{itemize}
 
 \end{frame}
