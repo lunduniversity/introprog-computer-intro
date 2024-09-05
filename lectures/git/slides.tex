@@ -10,6 +10,11 @@
 \usepackage{selthcsslides}
 \usecolortheme{lucolors}
 
+% The Madrid theme, for some reason, does not show bullet points in itemize
+% environments. This is a workaround to fix that.
+\setbeamertemplate{itemize item}[default]
+\setbeamertemplate{itemize subitem}[default]
+
 % \usepackage[swedish]{babel}
 % Swedish setup using polyglossia for better multilingual support
 \usepackage{polyglossia}

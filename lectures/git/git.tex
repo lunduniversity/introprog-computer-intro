@@ -1,0 +1,61 @@
+
+
+\begin{frame}
+    \frametitle{Vad är versionshantering?}
+    
+    motivation, t.ex.: ``Har du någonsin...'', mejlat filer fram och tillbaka, etc.
+    
+    Det är en form av versionshantering.
+    
+    Har du någonsin...
+    förlorat en fil, skrivit över en fil, etc.
+    
+    lista fler exempel som är relevanta för studenter...
+    
+\end{frame}
+    \frametitle{Versionshanteringssystem}
+    
+    \begin{frame}
+    Hjälper oss att hantera komplexiteten det innebär att hålla reda på alla filer som hör till ett projekt -- källkod, dokumentation, etc.
+
+    \blankline
+    Låter oss gå tillbaka till äldre versioner av filerna om nödvändigt.
+
+    \blankline
+    Gör det möjligt för oss att arbeta parallellt med filerna i projektet utan att komma i vägen för varandra.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Versionshanteringssystem}
+    
+    \begin{block}{Vad är ett versionshanteringssystem?}
+        Programvara som lagrar alla versioner som har existerat under projektets gång i någon form av databas.
+    \end{block}
+    
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Versionshanteringssystem}
+
+    % todo: add figures!
+    
+    \begin{block}{Todo}
+        \begin{itemize}
+        \item Centraliserade system (CVS, SVN)
+        \begin{itemize}
+            \item En central databas, ett repositorium (repo), håller reda på alla filer.
+            \item Utvecklare \textit{checkar ut} en lokal kopia av filerna och arbetar med dem.
+            \item När arbetet är klart checkar utvecklaren in filerna igen (kopierar dem till det centrala repot) varvid en ny version av projektet skapas.
+        \end{itemize}
+        \item Distribuerade system (Git)
+        \begin{itemize}
+            \item Finns inget centralt repo.
+            \item I stället klonar man ett repo (gör en komplett kopia av repot).
+            \item Ändringar kan hämtas (\textit{pull}), eller överföras till (\textit{push}), andra repon.
+        \end{itemize}
+        \end{itemize}
+    \end{block}
+    
+\end{frame}
+
