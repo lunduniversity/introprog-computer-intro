@@ -10,6 +10,8 @@
 \usepackage{selthcsslides}
 \usecolortheme{lucolors}
 
+\usepackage{../../latex-support/beamerutil}
+
 % The Madrid theme, for some reason, does not show bullet points in itemize
 % environments. This is a workaround to fix that.
 \setbeamertemplate{itemize item}[default]
@@ -20,8 +22,19 @@
 \usepackage{polyglossia}
 \setmainlanguage{swedish}
 
-\usepackage{url}
 \usepackage{datetime2}
+\usepackage{url}
+% \usepackage{xcolor}   % Required for color customization of links
+% \usepackage{hyperref} % hyperref with colored links
+% \hypersetup{
+%     colorlinks=true,
+%     linkcolor=blue,
+%     filecolor=magenta,      
+%     urlcolor=blue,
+% }
+
+\usepackage{tikz}
+
 
 \usepackage{fontspec}  			  % Allows loading system fonts
 \setmainfont{Latin Modern Roman}  % Set the main (serif) font
@@ -35,7 +48,7 @@
 %***************************************************************
 \begin{document} 
 
-\title{Datorer och datoranvändning\\Introduktion} 
+\title{Datorer och datoranvändning\\Versionshantering och Git} 
 
 \frame[plain]{
 \maketitle
@@ -43,6 +56,9 @@
 \vspace{-2\baselineskip}
 }
 
+\title{Versionshantering och Git}
+\institute{}
+\author{Mattias Nordahl}
 \date{\the\year/\the\numexpr\year-1999} 
 
 % Include actual slides
