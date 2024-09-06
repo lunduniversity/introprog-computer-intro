@@ -1,17 +1,22 @@
 #!/bin/bash
 
-# Array of subdirectory names
-subdirectories=("intro" "unix" "git" "latex" "machine-code")
+# Check for no input arguments and print usage if none are found
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <document1> [<document2> ...]"
+    echo "Documents: intro, unix, git, latex, machine-code"
+    exit 1
+fi
 
-# Counter for lecture number
-lecture_number=0
-
-# Arrays to hold paths of PDFs for final merge
-presentation_pdfs=()
-handout_pdfs=()
+# Array of subdirectory names you want to compile (passed as command-line arguments)
+subdirectories=("$@")
 
 # Loop through each subdirectory
 for dir in "${subdirectories[@]}"; do
+    if [ ! -d "$dir" ]; then
+        echo "Directory $dir does not exist."
+        continue
+    fi
+
     # Navigate into the directory
     cd "$dir"
     
@@ -21,13 +26,10 @@ for dir in "${subdirectories[@]}"; do
     # # Check if presentation compilation was successful
     if [ -f slides.pdf ]; then
         # Define new PDF name for the presentation version
-        presentation_pdf_name="../lecture${lecture_number}-$dir-presentation.pdf"
+        presentation_pdf_name="../lecture-$dir-presentation.pdf"
         
         # Copy and rename the compiled PDF to the main directory
         cp slides.pdf "$presentation_pdf_name"
-        
-        # Add the presentation PDF name to the array for merging
-        presentation_pdfs+=("$presentation_pdf_name")
     else
         echo "Presentation compilation failed in $dir"
     fi
@@ -38,29 +40,16 @@ for dir in "${subdirectories[@]}"; do
     # Check if handout compilation was successful
     if [ -f slides_handout.pdf ]; then
         # Define new PDF name for the handout version
-        handout_pdf_name="../lecture${lecture_number}-$dir-handout.pdf"
+        handout_pdf_name="../lecture-$dir-handout.pdf"
         
         # Copy and rename the compiled PDF to the main directory
         cp slides_handout.pdf "$handout_pdf_name"
-        
-        # Add the handout PDF name to the array for merging
-        handout_pdfs+=("$handout_pdf_name")
     else
         echo "Handout compilation failed in $dir"
     fi
     
-    # Increment the lecture number
-    ((lecture_number++))
-    
     # Go back to the main directory
     cd ..
 done
-
-# Merge all presentation PDFs into one file
-# pdfunite "${presentation_pdfs[@]}" "lecture1-$((${lecture_number}-1))-all-presentations.pdf"
-
-# Merge all handout PDFs into one file
-pdfunite "${handout_pdfs[@]}" "lecture1-$((${lecture_number}-1))-all-handouts.pdf"
-
 
 echo "All operations completed."

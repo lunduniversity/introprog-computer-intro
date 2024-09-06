@@ -98,7 +98,6 @@
     \begin{block}{Git}
         \begin{itemize}
             \ii{Ett \emph{verktyg} för versionshantering som körs lokalt på din dator.}
-            \ii{Hantera projektets historik, \emph{commit}, \emph{branch}, \emph{merge} och andra operationer lokalt.}
         \end{itemize}
     \end{block}
 
@@ -107,7 +106,6 @@
             \ii{En \emph{tjänst} för att hosta Git-repositories online.}
             \ii{Underlättar samarbete med andra utvecklare genom att erbjuda funktioner som pull requests, issues och projektöversikt.}
             \ii{Använder Git internt för att hantera repositories, precis som lokala installationer av Git.}
-            \ii{Ger tillgång till backup, integration med CI/CD-verktyg och andra utvecklarverktyg.}
         \end{itemize}
     \end{block}
     
@@ -225,26 +223,181 @@
     
 \end{frame}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 \begin{frame}
-    \frametitle{Git-modellen}
+    \frametitle{Vilka problem kan uppstå?}
 
-    \begin{center}
-            \includegraphics[width=\textwidth]{figs/model-rm-reset.png}
-    \end{center}
+    \begin{itemize}
+        \ii{\emph{Merge}: Git kombinerar ändringar från olika grenar automatiskt.}
+        \ii{\emph{Merge-konflikt}: Uppstår när Git inte kan avgöra hur vissa ändringar ska kombineras.}
+        \ii{Konflikter sker ofta när samma del av en fil ändrats på flera grenar.}
+        \ii{Exempel: Flera redigerar samma rad, eller ändrar/byter namn på samma filer.}
+        \ii{Konflikter måste lösas manuellt för att slutföra en \emph{merge}.}
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Exempel: Merge-konflikt i källkoden}
+
+    \begin{block}{\small Kod före merge}
+        \begin{GobbleCode}[0pt]{10}
+            def greet(): String = {
+                "Hello, world!"
+            }
+        \end{GobbleCode}
+    \end{block}
+
+    \begin{block}{\small Kod efter merge (med konflikt)}
+        \begin{GobbleCode}[0pt]{10}
+            def greet(): String = {
+            <<<<<<< HEAD
+                "Hello, world!"
+            =======
+                "Hi, everyone!"
+            >>>>>>> branch
+            }
+        \end{GobbleCode}
+    \end{block}
+
+    \begin{itemize}
+        \ii{Konflikten visas med \texttt{<<<<<<<}, \texttt{=======}, och \texttt{>>>>>>>}.}
+        \ii{Utvecklaren måste välja vilken version som ska behållas eller kombinera dem manuellt.}
+    \end{itemize}
     
 \end{frame}
 
 
+\begin{frame}[fragile]
+    \frametitle{Ett större exempel}
+
+    \begin{GobbleCode}[2pt]{6}
+        object Main {
+            def main(args: Array[String]): Unit = {
+                println("Starting calculation...")
+                println("Result: " + calculateSum(5, 10))
+            }
+
+            def calculateSum(a: Int, b: Int): Int = {
+        <<<<<<< HEAD
+                val sum = a + b
+                println("Sum calculated: " + sum)
+                sum
+        =======
+                val sum = a + b
+                println("Calculating sum for: " + a + " and " + b)
+                println("Sum is: " + sum)
+                sum * 2 // Doubles the result
+        >>>>>>> branch
+            }
+        }
+    \end{GobbleCode}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Arbeta distribuerat med Git}
+
+    \begin{itemize}
+        \ii{\emph{Klona}: Kopiera ett repository från internet till din dator.}
+        \ii{\emph{Pull}: Hämta ändringar från ett fjärrrepository.}
+        \ii{\emph{Push}: Skicka dina ändringar till ett fjärrrepository.}
+        \ii{\emph{Pull request}: Föreslå ändringar till ett repository.}
+        \begin{itemize}
+            \ii{Mycket vanligt i \emph{open source}-projekt.}
+            \ii{Kallas ibland \emph{merge request}.}
+        \end{itemize}
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Remote}
+
+    \begin{itemize}
+        \ii{Git använder termen \emph{remote}. Lokal ``spegling'' av fjärrrepository.}
+        \ii{Standardnamn för remote är \texttt{origin}.}
+        \ii{Möjligt att ha flera remotes för olika kopior av projektet.}
+        \ii{Kolla med \texttt{git remote [-a, -v, -vv]}}
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Local vs remote: commit och push}
+
+    \begin{center}
+            \includegraphics[width=.9\textwidth]{figs/local_remote_commit_push.png}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Local vs remote: fetch och merge}
+
+    \begin{center}
+            \includegraphics[width=.9\textwidth]{figs/local_remote_fetch_merge.png}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Påminnelse - Context}
+
+    \begin{center}
+            \includegraphics[height=.5\textheight]{figs/model-rm-reset.png}
+    \end{center}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Lokala och fjärrändringar i Git}
+
+    \begin{block}{Vad händer om både lokala och fjärrändringar finns?}
+        \begin{itemize}
+            \ii{\emph{git fetch} hämtar fjärrändringar, uppdaterar din lokala spegling av remote, men påverkar inte dina lokala grenar.}
+            \ii{\emph{git pull} försöker automatiskt slå samman de inkommande  ändringarna med dina lokala grenar.}
+            \ii{Om konflikt uppstår vid merge måste du lösa den manuellt.}
+            \ii{Efter att konflikter är lösta, kan du \emph{commit} och \emph{push} dina ändringar.}
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{``Ocommittade'' ändringar}
+        \begin{itemize}
+            \ii{Om du har lokala ändringar (i ditt workspace) som inte är committade, kan du göra merge.}
+            \ii{Lösning: gör först \emph{commit} eller \emph{stash}.}
+        \end{itemize}
+    \end{block}
+
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Veckans laboration}
+
+    \ti{På veckans laboration kommer ni:}
+    \begin{itemize}
+        \ii{Arbeta er igenom ett enkelt scenario som visar hur ni kan använda Git och Github för ett litet projekt.}
+        \ii{Tänkt att kunna genomföras individuellt, men OK och uppmuntras till att samarbeta, speciellt i den sista delen av laborationen.}
+    \end{itemize}
+
+    \halfblankline
+    \ti{Glöm inte att:}
+    \begin{itemize}
+        \ii{Installera Git på din egen dator.}
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Vad händer nu?}
+    \begin{itemize}
+        \ii{Läs avsnittet om Git i Scalakompendiet (Björn Regnell).}
+        \ii{Se avsnitt 1.1, 1.2, 1.3, 1.6 samt 1.7 av youtube-serien ``Git and GitHub for Poets''.}
+        \ii{Läs kapitel 1, 2 och 3.1--3.2 i Pro Git-boken (Chacon \& Straub).}
+        \ii{Länkar till materialet finns på kurshemsidan:
+        
+        \halfblankline
+        \url{https://cs.lth.se/dod/datorlaborationer/}}
+    \end{itemize}
+
+\end{frame}

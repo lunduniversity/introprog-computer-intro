@@ -33,6 +33,18 @@
 %     urlcolor=blue,
 % }
 
+% Code listing environment that removes leading whitespace
+\lstnewenvironment{GobbleCode}[2][\baselineskip]
+{\lstset{
+    aboveskip=#1,
+    belowskip=#1,
+    resetmargins=true,
+    xleftmargin=0em,
+    gobble=#2,
+    tabsize=4,
+}}
+{}
+
 \usepackage{tikz}
 
 
