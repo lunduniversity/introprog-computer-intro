@@ -21,7 +21,7 @@
 
     \begin{block}{Vad är ett versionshanteringssystem?}
         \halfblankline
-        \ti{Ett verktyg för att göra versionshantering enkare, genom att spåra och hantera ändringar i projektfiler över tid.}
+        \ti{Ett verktyg för att göra versionshantering enklare, genom att spåra och hantera ändringar i projektfiler över tid.}
         \halfblankline
     \end{block}
 
@@ -32,29 +32,20 @@
             \ii{``Vem la till den här raden?''}
         \end{itemize}
         \ii{Möjlighet att återgå till äldre versioner av filer vid behov.}
-        \ii{Möjliggör parallellt arbete och konflikthantering (\emph{merge conflicts}).}
+        \ii{Möjliggör parallellt arbete och konflikthantering.}
     \end{itemize}
     
 \end{frame}
 
 \begin{frame}
-    \frametitle{Typer av versionshanteringssystem}
-
+    \frametitle{Typer av versionshanteringssystem (1/2)}
+    
     \begin{block}{Centraliserade system}
         \begin{itemize}
             \ii{En central server lagrar alla filer och versioner. (\emph{repository})}
             \ii{Användare hämtar \textbf{en} version, ändrar, och sparar tillbaka den.}
             \ii{Kommandon: \emph{checkout} (hämta filer), \emph{commit} (spara till servern).}
             \ii{Exempel: Subversion (SVN), Perforce}
-        \end{itemize}
-    \end{block}
-
-    \begin{block}{Distribuerade system}
-        \begin{itemize}
-            \ii{Ingen central server -- varje användare är en ``nod'' i systemet.}
-            \ii{Varje användare har en lokal kopia av hela projektets historik.}
-            \ii{Kommandon: \emph{clone} (kopiera hela repository), \emph{commit} (spara ändringar \textbf{lokalt}), och \emph{push/pull} (synkronisera ändringar).}
-            \ii{Exempel: Git, Mercurial}
         \end{itemize}
     \end{block}
     
@@ -66,6 +57,20 @@
     \begin{center}
         \includegraphics[width=0.80\textwidth]{figs/fig1_central_model.png}
     \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Typer av versionshanteringssystem (2/2)}
+
+    \begin{block}{Distribuerade system}
+        \begin{itemize}
+            \ii{Ingen central server -- varje användare är en ``nod'' i systemet.}
+            \ii{Varje användare har en lokal kopia av hela projektets historik.}
+            \ii{Kommandon: \emph{clone} (kopiera hela repository), \emph{commit} (spara ändringar \textbf{lokalt}), och \emph{push/pull} (synkronisera ändringar).}
+            \ii{Exempel: Git, Mercurial}
+        \end{itemize}
+    \end{block}
+
 \end{frame}
 
 \begin{frame}
@@ -217,7 +222,6 @@
         \ii{Arbeta på olika delar av projektet samtidigt, utan att störa varandra.}
         \ii{Testa nya funktioner, experimentera säkert.}
         \ii{Skapa snabb fix för fel utan att stoppa ny utveckling.}
-        \ii{Underlättar granskning och sammanslagning till huvudversion.}
         \ii{Branches i Git är lätta att skapa och använda!}
     \end{itemize}
     
@@ -323,6 +327,15 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Påminnelse - Context}
+
+    \begin{center}
+            \includegraphics[height=.5\textheight]{figs/model-rm-reset.png}
+    \end{center}
+    
+\end{frame}
+
+\begin{frame}
     \frametitle{Local vs remote: commit och push}
 
     \begin{center}
@@ -341,12 +354,21 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Påminnelse - Context}
+    \frametitle{Båda samtidigt!? -- push (TODO!)}
 
-    \begin{center}
-            \includegraphics[height=.5\textheight]{figs/model-rm-reset.png}
-    \end{center}
-    
+    % \begin{center}
+    %         \includegraphics[width=.9\textwidth]{figs/local_remote_commit_fetch.png}
+    % \end{center}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Båda samtidigt!? -- fetch (TODO!)}
+
+    % \begin{center}
+    %         \includegraphics[width=.9\textwidth]{figs/local_remote_commit_fetch.png}
+    % \end{center}
+
 \end{frame}
 
 \begin{frame}
