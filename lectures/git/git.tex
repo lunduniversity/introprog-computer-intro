@@ -354,43 +354,171 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Båda samtidigt!? -- push (TODO!)}
+    \frametitle{Båda samtidigt!? -- push}
 
-    % \begin{center}
-    %         \includegraphics[width=.9\textwidth]{figs/local_remote_commit_fetch.png}
-    % \end{center}
-
-\end{frame}
-
-\begin{frame}
-    \frametitle{Båda samtidigt!? -- fetch (TODO!)}
-
-    % \begin{center}
-    %         \includegraphics[width=.9\textwidth]{figs/local_remote_commit_fetch.png}
-    % \end{center}
+    \begin{center}
+            \includegraphics[width=\textwidth]{figs/local_remote_push_conflict.png}
+    \end{center}
 
 \end{frame}
 
 \begin{frame}
-    \frametitle{Lokala och fjärrändringar i Git}
+    \frametitle{Båda samtidigt!? -- fetch}
 
-    \begin{block}{Vad händer om både lokala och fjärrändringar finns?}
-        \begin{itemize}
-            \ii{\emph{git fetch} hämtar fjärrändringar, uppdaterar din lokala spegling av remote, men påverkar inte dina lokala grenar.}
-            \ii{\emph{git pull} försöker automatiskt slå samman de inkommande  ändringarna med dina lokala grenar.}
-            \ii{Om konflikt uppstår vid merge måste du lösa den manuellt.}
-            \ii{Efter att konflikter är lösta, kan du \emph{commit} och \emph{push} dina ändringar.}
-        \end{itemize}
-    \end{block}
-
-    \begin{block}{``Ocommittade'' ändringar}
-        \begin{itemize}
-            \ii{Om du har lokala ändringar (i ditt workspace) som inte är committade, kan du göra merge.}
-            \ii{Lösning: gör först \emph{commit} eller \emph{stash}.}
-        \end{itemize}
-    \end{block}
+    \begin{center}
+            \includegraphics[width=\textwidth]{figs/local_remote_fetch_conflict.png}
+    \end{center}
 
 \end{frame}
+
+\begin{frame}
+    \frametitle{Båda samtidigt!? -- merge efter fetch}
+
+    \begin{center}
+            \includegraphics[width=\textwidth]{figs/local_remote_fetch_merge_conflict.png}
+    \end{center}
+
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Merge-situationer}
+
+    \ti{Vad kan vid merge?}
+    \begin{itemize}
+        \ii{fast-forward merge}
+        \ii{merge commit}
+        \ii{konflikt}
+        \ii{rebase}
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Fast-forward merge}
+    \vspace{-1.5em}
+    \begin{center}
+        \begin{tikzpicture}
+            % Place the image at 50% scale
+            \only<1->{
+                \node (img) at (0, 0) {\includegraphics[scale=0.5]{figs/merge_case_ff.png}};
+            }
+
+            % Overlay 1: Cover the lower 2/3 of the image with a white box
+            \only<1>{
+                \fill[white] ([yshift=-0.33\textheight]img.north west) rectangle (img.south east);
+            }
+            % % Overlay 2: Cover the lower 1/3 of the image with a white box
+            \only<2>{
+                \fill[white] ([yshift=-0.6\textheight]img.north west) rectangle (img.south east);
+            }
+            % Overlay 3: Show the full image (no white box needed)
+            \uncover<3>{
+                % No white box, full image visible
+            }
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Vanlig merge -- skapar en ``merge commit''}
+    \begin{center}
+        \begin{tikzpicture}
+            % Place the image at 50% scale
+            \only<1->{
+                \node (img) at (0, 0) {\includegraphics[scale=0.5]{figs/merge_case_commit.png}};
+            }
+
+            % Overlay 1: Cover the lower 2/3 of the image with a white box
+            \only<1>{
+                \fill[white] ([yshift=-0.28\textheight]img.north west) rectangle (img.south east);
+            }
+            % % Overlay 2: Cover the lower 1/3 of the image with a white box
+            \only<2>{
+                \fill[white] ([yshift=-0.55\textheight]img.north west) rectangle (img.south east);
+            }
+            % Overlay 3: Show the full image (no white box needed)
+            \uncover<3>{
+                % No white box, full image visible
+            }
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Mergekonflikt}
+    \ti{Vid konflikt, se föregående figur.}
+    \begin{itemize}
+        \ii{Om ändringarna i de två grenarna inte kan kombineras automatiskt, uppstår en konflikt.}
+        \ii{Git markerar konflikter i filerna och pausar merge-processen.}
+        \ii{Efter konflikten lösts, finns alltså ny ändringar i worspace\dots}
+        \ii{...och du måste göra en ny commit för att slutföra merge.}
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Rebase}
+    \vspace{-.5em}
+    \begin{center}
+        \begin{tikzpicture}
+            % Place the image at 50% scale
+            \only<1->{
+                \node (img) at (0, 0) {\includegraphics[scale=0.46]{figs/merge_case_rebase.png}};
+            }
+
+            % Overlay 1: Cover the lower 2/3 of the image with a white box
+            \only<1>{
+                \fill[white] ([yshift=-0.14\textheight]img.north west) rectangle (img.south east);
+            }
+            % % Overlay 2: Cover the lower 1/3 of the image with a white box
+            \only<2>{
+                \fill[white] ([yshift=-0.36\textheight]img.north west) rectangle (img.south east);
+            }
+            % % Overlay 3: Cover the lower 1/3 of the image with a white box
+            \only<3>{
+                \fill[white] ([yshift=-0.59\textheight]img.north west) rectangle (img.south east);
+            }
+            % Overlay 4: Show the full image (no white box needed)
+            \uncover<4>{
+                % No white box, full image visible
+            }
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+
+
+\begin{frame}
+    \frametitle{Bra att veta}
+
+    \begin{itemize}
+        \ii{\code{HEAD} är en \emph{symbolisk referens} till den branch som är utcheckad i ditt workspace.}
+        \ii{``Detatched HEAD'' -- om du checkar ut en specifik commit, snarare än en branch.}
+    \end{itemize}
+\end{frame}
+
+
+% \begin{frame}
+%     \frametitle{Lokala och fjärrändringar i Git}
+
+%     \begin{block}{Vad händer om både lokala och fjärrändringar finns?}
+%         \begin{itemize}
+%             \ii{\emph{git fetch} hämtar fjärrändringar, uppdaterar din lokala spegling av remote, men påverkar inte dina lokala grenar.}
+%             \ii{\emph{git pull} försöker automatiskt slå samman de inkommande  ändringarna med dina lokala grenar.}
+%             \ii{Om konflikt uppstår vid merge måste du lösa den manuellt.}
+%             \ii{Efter att konflikter är lösta, kan du \emph{commit} och \emph{push} dina ändringar.}
+%         \end{itemize}
+%     \end{block}
+
+%     \begin{block}{``Ocommittade'' ändringar}
+%         \begin{itemize}
+%             \ii{Om du har lokala ändringar (i ditt workspace) som inte är committade, kan du inte göra merge.}
+%             \ii{Lösning: gör först \emph{commit} eller \emph{stash}.}
+%         \end{itemize}
+%     \end{block}
+
+% \end{frame}
 
 
 \begin{frame}
