@@ -400,21 +400,22 @@
     \begin{center}
         \begin{tikzpicture}
             % Place the image at 50% scale
-            \only<1->{
-                \node (img) at (0, 0) {\includegraphics[scale=0.5]{figs/merge_case_ff.png}};
-            }
+            \node (img) at (0, 0) {\includegraphics[scale=0.5]{figs/merge_case_ff.png}};
 
-            % Overlay 1: Cover the lower 2/3 of the image with a white box
-            \only<1>{
-                \fill[white] ([yshift=-0.33\textheight]img.north west) rectangle (img.south east);
-            }
-            % % Overlay 2: Cover the lower 1/3 of the image with a white box
-            \only<2>{
-                \fill[white] ([yshift=-0.6\textheight]img.north west) rectangle (img.south east);
-            }
-            % Overlay 3: Show the full image (no white box needed)
-            \uncover<3>{
-                % No white box, full image visible
+            % Only show partial overlays in the presentation mode
+            \mode<beamer>{
+                % Overlay 1: Cover the lower 2/3 of the image with a white box
+                \only<1>{
+                    \fill[white] ([yshift=-0.33\textheight]img.north west) rectangle (img.south east);
+                }
+                % % Overlay 2: Cover the lower 1/3 of the image with a white box
+                \only<2>{
+                    \fill[white] ([yshift=-0.6\textheight]img.north west) rectangle (img.south east);
+                }
+                % Overlay 3: Show the full image (no white box needed)
+                \uncover<3>{
+                    % No white box, full image visible
+                }
             }
         \end{tikzpicture}
     \end{center}
@@ -425,21 +426,22 @@
     \begin{center}
         \begin{tikzpicture}
             % Place the image at 50% scale
-            \only<1->{
-                \node (img) at (0, 0) {\includegraphics[scale=0.5]{figs/merge_case_commit.png}};
-            }
+            \node (img) at (0, 0) {\includegraphics[scale=0.5]{figs/merge_case_commit.png}};
 
-            % Overlay 1: Cover the lower 2/3 of the image with a white box
-            \only<1>{
-                \fill[white] ([yshift=-0.28\textheight]img.north west) rectangle (img.south east);
-            }
-            % % Overlay 2: Cover the lower 1/3 of the image with a white box
-            \only<2>{
-                \fill[white] ([yshift=-0.55\textheight]img.north west) rectangle (img.south east);
-            }
-            % Overlay 3: Show the full image (no white box needed)
-            \uncover<3>{
-                % No white box, full image visible
+            % Only show partial overlays in the presentation mode
+            \mode<beamer>{
+                % Overlay 1: Cover the lower 2/3 of the image with a white box
+                \only<1>{
+                    \fill[white] ([yshift=-0.28\textheight]img.north west) rectangle (img.south east);
+                }
+                % % Overlay 2: Cover the lower 1/3 of the image with a white box
+                \only<2>{
+                    \fill[white] ([yshift=-0.55\textheight]img.north west) rectangle (img.south east);
+                }
+                % Overlay 3: Show the full image (no white box needed)
+                \uncover<3>{
+                    % No white box, full image visible
+                }
             }
         \end{tikzpicture}
     \end{center}
@@ -463,25 +465,26 @@
     \begin{center}
         \begin{tikzpicture}
             % Place the image at 50% scale
-            \only<1->{
-                \node (img) at (0, 0) {\includegraphics[scale=0.46]{figs/merge_case_rebase.png}};
-            }
+            \node (img) at (0, 0) {\includegraphics[scale=0.46]{figs/merge_case_rebase.png}};
 
-            % Overlay 1: Cover the lower 2/3 of the image with a white box
-            \only<1>{
-                \fill[white] ([yshift=-0.14\textheight]img.north west) rectangle (img.south east);
-            }
-            % % Overlay 2: Cover the lower 1/3 of the image with a white box
-            \only<2>{
-                \fill[white] ([yshift=-0.36\textheight]img.north west) rectangle (img.south east);
-            }
-            % % Overlay 3: Cover the lower 1/3 of the image with a white box
-            \only<3>{
-                \fill[white] ([yshift=-0.59\textheight]img.north west) rectangle (img.south east);
-            }
-            % Overlay 4: Show the full image (no white box needed)
-            \uncover<4>{
-                % No white box, full image visible
+            % Only show partial overlays in the presentation mode
+            \mode<beamer>{
+                % Overlay 1: Cover the lower 2/3 of the image with a white box
+                \only<1>{
+                    \fill[white] ([yshift=-0.14\textheight]img.north west) rectangle (img.south east);
+                }
+                % % Overlay 2: Cover the lower 1/3 of the image with a white box
+                \only<2>{
+                    \fill[white] ([yshift=-0.36\textheight]img.north west) rectangle (img.south east);
+                }
+                % % Overlay 3: Cover the lower 1/3 of the image with a white box
+                \only<3>{
+                    \fill[white] ([yshift=-0.59\textheight]img.north west) rectangle (img.south east);
+                }
+                % Overlay 4: Show the full image (no white box needed)
+                \uncover<4>{
+                    % No white box, full image visible
+                }
             }
         \end{tikzpicture}
     \end{center}
@@ -497,29 +500,6 @@
         \ii{``Detatched HEAD'' -- om du checkar ut en specifik commit, snarare än en branch.}
     \end{itemize}
 \end{frame}
-
-
-% \begin{frame}
-%     \frametitle{Lokala och fjärrändringar i Git}
-
-%     \begin{block}{Vad händer om både lokala och fjärrändringar finns?}
-%         \begin{itemize}
-%             \ii{\emph{git fetch} hämtar fjärrändringar, uppdaterar din lokala spegling av remote, men påverkar inte dina lokala grenar.}
-%             \ii{\emph{git pull} försöker automatiskt slå samman de inkommande  ändringarna med dina lokala grenar.}
-%             \ii{Om konflikt uppstår vid merge måste du lösa den manuellt.}
-%             \ii{Efter att konflikter är lösta, kan du \emph{commit} och \emph{push} dina ändringar.}
-%         \end{itemize}
-%     \end{block}
-
-%     \begin{block}{``Ocommittade'' ändringar}
-%         \begin{itemize}
-%             \ii{Om du har lokala ändringar (i ditt workspace) som inte är committade, kan du inte göra merge.}
-%             \ii{Lösning: gör först \emph{commit} eller \emph{stash}.}
-%         \end{itemize}
-%     \end{block}
-
-% \end{frame}
-
 
 \begin{frame}
     \frametitle{Veckans laboration}
