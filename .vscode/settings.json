@@ -1,4 +1,8 @@
 {
   "editor.formatOnSave": false,
-  "latex-workshop.latex.recipe.default": "latexmk (xelatex)"
+  "latex-workshop.latex.recipe.default": "latexmk (xelatex)",
+  "latex-workshop.latex.search.rootFiles.exclude": [
+    "**/latex.tex"
+  ],
+  "latex-workshop.latex.rootFile.useSubFile": false
 }

@@ -1,0 +1,105 @@
+\ProvidesPackage{latex_utils}
+
+% Kräver användning av följande paket
+\RequirePackage{verbatim}
+\RequirePackage{listings}
+\RequirePackage{fancyvrb}      % För förbättrad verbatim-hantering
+\RequirePackage{xcolor}        % För syntaxfärgläggning
+\RequirePackage{newverbs}      % Ger utökade verbatim-möjligheter
+
+% Definiera färger för syntaxfärgläggning
+\definecolor{keywordcolor}{rgb}{0.3, 0.3, 0.9}
+\definecolor{commentcolor}{rgb}{0.9, 0.7, 0.1}
+
+
+% Definierar en specifik stil för LaTeX-kodexempel
+\lstdefinestyle{latexex}{
+  language=[LaTeX]TeX,
+  breaklines=true,                   % Aktiverar automatisk radbrytning
+  breakatwhitespace=true,            % Radbrytning vid mellanslag
+  basicstyle=\ttfamily\scriptsize,   % Grundstil för koden
+  keywordstyle=\color{keywordcolor}, % Färg för nyckelord
+  commentstyle=\color{commentcolor}, % Färg för kommentarer
+  showstringspaces=false             % Visar inte mellanslag inom strängar
+  xleftmargin=0pt,                   % Ingen marginal till vänster
+  xrightmargin=0pt,                  % Ingen marginal till höger
+  breakautoindent=true,             % Ingen indragning vid radbrytning
+  breakindent=0pt,                   % Ingen indragning vid radbrytning
+  frame=none,                        % Ram runt koden
+  columns=fullflexible,              % Flexibel kolumnbredd
+  resetmargins=true,                 % Återställ marginaler
+  aboveskip=0pt,                     % Avstånd ovanför kod
+  belowskip=0pt,                     % Avstånd under kod
+  framexleftmargin=0pt,              % Ingen marginal till vänster om ramen
+  framesep=0pt,                      % Ingen marginal runt ramen
+  rulesep=0pt,                       % Ingen marginal runt regeln
+}
+
+% Ny miljö för att visa LaTeX-kod och dess resultat sida vid sida
+\newcounter{exlatexctr} % Räknare för unika filnamn
+\newwrite\tempfile      % Temporär filhanterare
+
+% \newenvironment{exlatex}{%
+%   \VerbatimEnvironment
+%   \stepcounter{exlatexctr} % Ökar räknaren
+%   \Collectverb{\processExLatex}
+% }{}
+
+% \newcommand{\processExLatex}[1]{%
+%   \immediate\openout\tempfile=ex/ex.\theexlatexctr % Öppnar en ny fil för skrivning
+%   \immediate\write\tempfile{#1} % Skriver innehållet till fil
+%   \immediate\closeout\tempfile % Stänger filen
+%   \noindent
+%   \begin{minipage}[t]{.48\textwidth}
+%     {\tiny\emph{Källkod:}}
+    
+%     \vspace{1mm}
+%     \only<.->{
+%       \lstinputlisting[style=latexex]{ex/ex.\theexlatexctr} % Visar rå LaTeX-kod med listings
+%     }
+%   \end{minipage}%
+%   \hfill
+%   \vrule
+%   \hfill
+%   \begin{minipage}[t]{.48\textwidth}
+%     {\tiny\emph{Resultat:}}
+    
+%     \vspace{1mm}
+%     \only<+->{
+%       \input{ex/ex.\theexlatexctr} % Visar kompilerad LaTeX-kod
+%     }
+%   \end{minipage}%
+% }
+
+
+\newenvironment{exlatex}{%
+  \only<1>{
+    \stepcounter{exlatexctr}% Stega upp räknaren
+  }
+  \VerbatimEnvironment
+  \begin{VerbatimOut}{ex/ex.\theexlatexctr}%
+}{%
+  \end{VerbatimOut}
+  \noindent
+  \begin{minipage}[t]{.48\textwidth}%
+    \ti{{\tiny\textbf\texttt\sc KÄLLKOD:}}
+
+    \vspace{1mm}
+    \only<.->{
+      \lstinputlisting[style=latexex]{ex/ex.\theexlatexctr}% Rå LaTeX-kod
+    }
+  \end{minipage}%
+  \hfill
+  \only<.->{%
+    \vrule
+  }
+  \hfill
+  \begin{minipage}[t]{.48\textwidth}%
+    \ts{{\tiny\textbf\texttt\sc RESULTAT:}}
+
+    \vspace{1mm}
+    \only<+->{
+      \input{ex/ex.\theexlatexctr} % Kompilerad LaTeX-kod
+    }
+  \end{minipage}%
+}

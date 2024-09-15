@@ -2,14 +2,15 @@
     \documentclass[handout]{beamer}
 \else
     \documentclass{beamer}
-    \setbeamercovered{transparent}
+    % \setbeamercovered{transparent}
 \fi
 
 \includeonly{latex}
 
 \usepackage{selthcsslides}
-\usepackage{../../latex-support/leftrightexample-new} % Per Foreby
+% \usepackage{../../latex-support/leftrightexample-new} % Per Foreby
 \usecolortheme{lucolors}
+\usepackage{latex_utils}
 
 \usepackage{beamerutil}
 
@@ -17,6 +18,8 @@
 % environments. This is a workaround to fix that.
 \setbeamertemplate{itemize item}[default]
 \setbeamertemplate{itemize subitem}[default]
+\setbeamertemplate{enumerate item}[default]
+\setbeamertemplate{enumerate subitem}[default]
 
 % \usepackage[swedish]{babel}
 % Swedish setup using polyglossia for better multilingual support
@@ -33,6 +36,19 @@
 \author[]{Mattias Nordahl}
 \institute{\url{mattias.nordahl@cs.lth.se}}
 \date{}
+
+\usepackage{tikz}
+% For environment overlays
+\newenvironment{envi}{%
+  \begin{onlyenv}<+->
+}{%
+  \end{onlyenv}
+}
+\newenvironment{envs}{%
+  \begin{onlyenv}<.->
+}{%
+  \end{onlyenv}
+}
 
 %***************************************************************
 
