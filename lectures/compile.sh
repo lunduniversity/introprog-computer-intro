@@ -22,6 +22,7 @@ for dir in "${subdirectories[@]}"; do
     
     # Compile the presentation version of the LaTeX file
     latexmk -xelatex slides.tex
+    latexmk -xelatex slides.tex
     
     # # Check if presentation compilation was successful
     if [ -f slides.pdf ]; then
@@ -35,6 +36,7 @@ for dir in "${subdirectories[@]}"; do
     fi
 
     # Compile the handout version of the LaTeX file with the \ishandout definition
+    latexmk -xelatex slides_handout.tex
     latexmk -xelatex slides_handout.tex
 
     # Check if handout compilation was successful

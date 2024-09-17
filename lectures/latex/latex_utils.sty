@@ -6,6 +6,7 @@
 \RequirePackage{fancyvrb}      % För förbättrad verbatim-hantering
 \RequirePackage{xcolor}        % För syntaxfärgläggning
 \RequirePackage{newverbs}      % Ger utökade verbatim-möjligheter
+\RequirePackage{tcolorbox}     % Ger möjlighet att skapa färgade rutor
 
 % Definiera färger för syntaxfärgläggning
 \definecolor{keywordcolor}{rgb}{0.3, 0.3, 0.9}
@@ -15,6 +16,7 @@
 % Definierar en specifik stil för LaTeX-kodexempel
 \lstdefinestyle{latexex}{
   language=[LaTeX]TeX,
+  morekeywords={begin,end,documentclass,usepackage,author,title,date,maketitle,frame,includegraphics,centering,tableofcontents,section,subsection,subsubsection,paragraph,subparagraph,itemize,enumerate,description,figure,table,tabular,centering,includegraphics,resizebox,rotatebox,subfigure,subtable,subfloat,subcaption,subref,ref,eqref,label,footnote,cite,printbibliography,printindex,printglossary,printglossaries},
   breaklines=true,                   % Aktiverar automatisk radbrytning
   breakatwhitespace=true,            % Radbrytning vid mellanslag
   basicstyle=\ttfamily\scriptsize,   % Grundstil för koden
@@ -33,6 +35,30 @@
   framexleftmargin=0pt,              % Ingen marginal till vänster om ramen
   framesep=0pt,                      % Ingen marginal runt ramen
   rulesep=0pt,                       % Ingen marginal runt regeln
+  keepspaces=true,                   % Behåll mellanslag
+}
+\lstdefinestyle{scalaex}{
+  language=Scala,
+  morekeywords={val,var,def,object,class,trait,extends,with,override,import,package,implicit,case,match,if,else,while,for,return,throw,try,catch,finally,do,until,then,else,match,case,=>,_,:,=},
+  breaklines=true,                   % Aktiverar automatisk radbrytning
+  breakatwhitespace=true,            % Radbrytning vid mellanslag
+  basicstyle=\ttfamily\scriptsize,   % Grundstil för koden
+  keywordstyle=\color{keywordcolor}, % Färg för nyckelord
+  commentstyle=\color{commentcolor}, % Färg för kommentarer
+  showstringspaces=false             % Visar inte mellanslag inom strängar
+  xleftmargin=0pt,                   % Ingen marginal till vänster
+  xrightmargin=0pt,                  % Ingen marginal till höger
+  breakautoindent=true,             % Ingen indragning vid radbrytning
+  breakindent=0pt,                   % Ingen indragning vid radbrytning
+  frame=none,                        % Ram runt koden
+  columns=fullflexible,              % Flexibel kolumnbredd
+  resetmargins=true,                 % Återställ marginaler
+  aboveskip=0pt,                     % Avstånd ovanför kod
+  belowskip=0pt,                     % Avstånd under kod
+  framexleftmargin=0pt,              % Ingen marginal till vänster om ramen
+  framesep=0pt,                      % Ingen marginal runt ramen
+  rulesep=0pt,                       % Ingen marginal runt regeln
+  keepspaces=true,                   % Behåll mellanslag
 }
 
 % Ny miljö för att visa LaTeX-kod och dess resultat sida vid sida
@@ -52,7 +78,7 @@
 %   \noindent
 %   \begin{minipage}[t]{.48\textwidth}
 %     {\tiny\emph{Källkod:}}
-    
+
 %     \vspace{1mm}
 %     \only<.->{
 %       \lstinputlisting[style=latexex]{ex/ex.\theexlatexctr} % Visar rå LaTeX-kod med listings
@@ -63,7 +89,7 @@
 %   \hfill
 %   \begin{minipage}[t]{.48\textwidth}
 %     {\tiny\emph{Resultat:}}
-    
+
 %     \vspace{1mm}
 %     \only<+->{
 %       \input{ex/ex.\theexlatexctr} % Visar kompilerad LaTeX-kod
@@ -78,7 +104,7 @@
   }
   \VerbatimEnvironment
   \begin{VerbatimOut}{ex/ex.\theexlatexctr}%
-}{%
+    }{%
   \end{VerbatimOut}
   \noindent
   \begin{minipage}[t]{.48\textwidth}%
@@ -99,7 +125,47 @@
 
     \vspace{1mm}
     \only<+->{
-      \input{ex/ex.\theexlatexctr} % Kompilerad LaTeX-kod
+      {\footnotesize\input{ex/ex.\theexlatexctr}} % Kompilerad LaTeX-kod
     }
+  \end{minipage}%
+}
+
+% Define the new environments for manual examples
+% Environment to display the source code
+\newenvironment{exsrc}{%
+  \only<1>{
+    \stepcounter{exlatexctr}% Stega upp räknaren
+  }
+  \VerbatimEnvironment
+  \begin{VerbatimOut}{ex/ex.\theexlatexctr}%
+    }{%
+  \end{VerbatimOut}
+  \noindent
+  \begin{minipage}[t]{.48\textwidth}%
+    \ti{{\tiny\textbf\texttt\sc KÄLLKOD:}}
+
+    \vspace{1mm}
+    \only<.->{
+      \lstinputlisting[style=latexex]{ex/ex.\theexlatexctr}% Rå LaTeX-kod
+    }
+  \end{minipage}%
+  \hfill
+  \only<.->{%
+    \vrule
+  }
+  \hfill
+}
+
+% Environment to display the result
+\newenvironment{exresult}{%
+  \begin{minipage}[t]{.48\textwidth}%
+    \ts{{\tiny\textbf\texttt\sc RESULTAT:}}
+
+    \vspace{1mm}
+    \begin{envi}
+    \begin{footnotesize}
+}{%
+    \end{footnotesize}
+    \end{envi}
   \end{minipage}%
 }

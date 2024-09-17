@@ -5,13 +5,12 @@
 
 \begin{frame}[fragile]
   \label{latex}
-  \begin{block}{\centering\Large Föreläsning 2 --- \LaTeX}
-    Förberedelse inför laboration 2.
+  \begin{block}{\centering\Large Föreläsning 3 --- \LaTeX}
+    Förberedelse inför laboration 3.
 
     \begin{itemize}
       \ii{Ordbehandling}
       \ii{\LaTeX}
-      \ii{Mall för rapport}
       \ii{Dokumentstruktur: dokumentklasser, omgivningar, text, stycken, listor, tabeller, \ldots}
       \ii{Programlistor}
       \ii{Matematiska formler}
@@ -46,9 +45,9 @@
 
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}[fragile,t]
   \frametitle{\LaTeX\ - Arbetssätt och Exempel}
-
+  \vspace{3em}
 
   \ti{I \LaTeX\ skriver man text och formateringskommandon i en textfil.}
   \blankline
@@ -62,7 +61,19 @@
 
 \end{frame}
 
+\begin{frame}[fragile,t]
+  \frametitle{Ett större exempel}
+  \vspace{3em}
 
+  \begin{exlatex}
+If $f$ is continuous on the closed interval $a \leq x \leq b$ and differentiable on the open interval $a < x < b$, then there exists a point $\xi$, $a < \xi < b$ such that:
+
+\begin{displaymath}
+  f(b) - f(a) = f'(\xi)(b - a).
+\end{displaymath}
+  \end{exlatex}
+
+\end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Interaktiv Demonstration}
@@ -73,38 +84,6 @@
     \bigskip
     \Large Jämför {\sc Wysiwyg} med \LaTeX
   \end{center}
-
-\end{frame}
-
-
-% \begin{frame}[fragile]
-% \frametitle{Layout av text}
-% I de flesta ordbehandlare finns det
-% formatmallar där man till exempel kan bestämma att alla rubriker på
-% en viss nivå ska ha ett visst utseende. Om man vill ändra
-% utseendet på alla rubriker så räcker det att ändra i mallen.
-
-% \blankline
-% Det brukar också finnas möjlighet till automatisk numrering av 
-% rubriker, automatisk generering av innehållsförteckning och 
-% sakregister och liknande. 
-
-% \blankline
-% När man skriver matematisk text använder man ofta en ekvationseditor
-% för att skriva de matematiska symbolerna. Ekvationseditorer är inte
-% enkla att använda, och slutresultatet brukar inte bli bra.
-% \end{frame} 
-
-
-\begin{frame}[fragile]
-  \frametitle{Ett större exempel}
-  \begin{exlatex}
-If $f$ is continuous on the closed interval $a \leq x \leq b$ and differentiable on the open interval $a < x < b$, then there exists a point $\xi$, $a < \xi < b$ such that:
-
-\begin{displaymath}
-  f(b) - f(a) = f'(\xi)(b - a).
-\end{displaymath}
-  \end{exlatex}
 
 \end{frame}
 
@@ -180,47 +159,32 @@ If $f$ is continuous on the closed interval $a \leq x \leq b$ and differentiable
   \end{center}
 \end{frame}
 
-\begin{frame}[fragile,t]
-  \frametitle{Dokumentklasser}
-  \vspace{3em}
-  \begin{itemize}
-    \ii{\emph{Dokumentklassen} styr dokumentets övergripande utseende.}
-    \ii{Vanliga dokumentklasser: \code{article}, \code{report}, \code{book}, \code{letter}, \code{beamer}.}
-    \ii{\code{article} används mest; \code{beamer} för presentationer.}
-  \end{itemize}
-
-  \blankline
-  \begin{envi}
-    \begin{lstlisting}[style=latexex]
-      % Exempel på användning av dokumentklassen article
-      \documentclass{article}
-      \begin{document}
-      Hej världen! Detta är ett enkelt dokument.
-      \end{document}
-    \end{lstlisting}
-  \end{envi}
-
-  \note{
-    \begin{itemize}
-      \item \code{article} är idealisk för vetenskapliga artiklar, rapporter och anteckningar.
-      \item \code{beamer} används för att skapa visuellt engagerande presentationer.
-    \end{itemize}
-  }
-\end{frame}
-
-\begin{frame}[fragile,t]
+\begin{frame}[fragile]
   \frametitle{Använda Kommandon i LaTeX}
 
   \begin{itemize}
     \ii{\LaTeX-kommandon styr hur text formateras och struktureras.}
     \ii{Kan ändra typsnitt, storlek, färg, och mer.}
     \ii{De kan även organisera text i avsnitt, listor och tabeller.}
+    \ii{Kommandon finns i två former: enkla kommandon och omgivningar.}
+    \begin{itemize}
+      \ii{Enkla kommandon: \code{\textbackslash textbf\{text\}}, \code{\textbackslash textit\{text\}}}
+      \ii{Omgivningar: \code{\textbackslash begin\{itemize\}...\textbackslash end\{itemize\}}}
+    \end{itemize}
   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Exempel}
+  \vspace{2em}
 
   \begin{exlatex}
 % Ex: enkelt kommando
-\textbf{Fetstil} gör texten fet, \textit{kursiv stil} gör texten kursiv. Ofta används \emph{emfas} för att markera \emph{viktig text}.
+\textbf{Fetstil} gör texten fet, \textit{kursiv stil} gör texten kursiv. Ofta används \emph{emfas} för att markera \emph{viktig text}.  
+  \end{exlatex}
 
+  \blankline
+  \begin{exlatex}
 % Ex: listor enumerate/itemize
 \begin{enumerate}
   \item Listor hjälper till att organisera information.
@@ -237,6 +201,40 @@ If $f$ is continuous on the closed interval $a \leq x \leq b$ and differentiable
 \end{frame}
 
 \begin{frame}[fragile,t]
+  \frametitle{Dokumentklasser}
+  \vspace{3em}
+  \begin{itemize}
+    \ii{\emph{Dokumentklassen} styr dokumentets övergripande utseende.}
+    \ii{Vanliga dokumentklasser: \code{article}, \code{report}, \code{book}, \code{letter}, \code{beamer}.}
+    \ii{\code{article} används mest; \code{beamer} för presentationer.}
+  \end{itemize}
+
+  \blankline
+  \begin{envi}
+    \begin{lstlisting}[style=latexex]
+      % Exempel på användning av dokumentklassen article
+      \documentclass{article}
+
+      % "Preamble" - inställningar och paket, t.ex.:
+      \usepackage{graphicx}          % för att inkludera bilder
+      \title{Enkelt LaTeX-dokument}  % sätt dokumentets titel
+
+      \begin{document}
+      \maketitle                     % skapa titelsida
+      Hej världen! Detta är ett enkelt dokument.
+      \end{document}
+    \end{lstlisting}
+  \end{envi}
+
+  \note{
+    \begin{itemize}
+      \item \code{article} är idealisk för vetenskapliga artiklar, rapporter och anteckningar.
+      \item \code{beamer} används för att skapa visuellt engagerande presentationer.
+    \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}[fragile,t]
   \frametitle{Omgivningar}
   \vspace{1em}
   \begin{itemize}
@@ -246,9 +244,8 @@ If $f$ is continuous on the closed interval $a \leq x \leq b$ and differentiable
   \end{itemize}
 
   \blankline
-  \begin{envi}
-    \begin{exlatex}
-% Exempel på en enkel omgivning
+  \begin{exlatex}
+% Exempel med omgivningar
 \begin{itemize}
   \item Detta är en punktlista.
   \item Listor hjälper till att organisera information.
@@ -258,8 +255,7 @@ If $f$ is continuous on the closed interval $a \leq x \leq b$ and differentiable
     \item Och resten
   \end{enumerate}
 \end{itemize}
-    \end{exlatex}
-  \end{envi}
+  \end{exlatex}
 
   \note{
     \begin{itemize}
@@ -271,474 +267,564 @@ If $f$ is continuous on the closed interval $a \leq x \leq b$ and differentiable
 
 
 
-% \begin{frame}[fragile]
-%   \frametitle{Löpande text}
-%   Radslut och antal mellanslag mellan ord har ingen betydelse,
-%   \LaTeX\ formaterar så att det blir snyggt. En
-%   eller flera blanka rader ger ett nytt stycke. Exempel:
-
-%   \bex
-%   Det här
-%   är en text som jag
-%   har    skrivit. Det är
-%   en lång text med flera
-%   rader.
-
-%   Här börjar det ett
-%   nytt stycke i texten.
-%   \end{verbatim}
-%   \mex
-%   Det här
-%   är en text som jag
-%   har    skrivit. Det är
-%   en lång text med flera
-%   rader.
-
-%   \hspace{1em}Här börjar det ett
-%   nytt stycke i texten.
-%   \eex
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Rubriker}
-%   \LaTeX\ numrerar rubriker automatiskt. Man anger en rubrik med
-%   \verb+\section+ eller \verb+\subsection+.
-
-%   \bex
-%   \section{Inledning}
-%   \section{Utförande}
-%   \subsection{Del 1}
-%   \subsection{Del 2}
-%   \section{Slutsatser}
-%   \end{verbatim}
-%   \mex
-%   {\Large\bfseries 1 Inledning} \\[1ex]
-%   {\Large\bfseries 2 Utförande} \\[1ex]
-%   {\large\bfseries 2.1 Del 1} \\[1ex]
-%   {\large\bfseries 2.2 Del 2} \\[1ex]
-%   {\Large\bfseries 3 Slutsatser}
-%   \eex
-
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Ändra textens utseende}
-%   Det finns många kommandon för att ändra utseende på texten. Två
-%   sådana kommandon  är \verb+\emph+ för att betona text och \verb+\texttt+
-%   för att skriva med skrivmaskinstypsnitt. Exempel:
-
-%   \begin{exempel}
-%     Här skriver jag något
-%     \emph{viktigt}. Och
-%     i Java har vi använt
-%     klassen \texttt{Square}.
-%   \end{exempel}
-
-%   Det finns också kommandon för fetstil, lutande text, osv, och för att
-%   ändra storlek på texten. Använd sparsamt!
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Specialtecken}
-%   Med tecknet \code{\%} inleder man en kommentar som sträcker sig till slutet av raden.
-
-%   \blankline
-%   En del tecken används för kommandon och måste skrivas på speciellt sätt:
-
-%   \begin{Code}
-%     \$ \% \_ \# \& \{ \} \textbackslash
-%   \end{Code}
-
-%   Det finns streck, mellanrum och punkter av olika slag:
-
-%   \begin{exempel}
-%     DoD-kursen pågår under vecka
-%     1--3 av läsperiod ht1. Tyvärr
-%     är den inte längre \ldots
-
-%     \quad Telefon: 046--222~80~38.
-%     Dagens datum: \today.
-%   \end{exempel}
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Fotnoter}
-%   Fotnoter är lätta att skriva:
-
-%   \bex
-%   Om man använder \LaTeX
-%   \footnote{uttalas
-%     ''lah-tekh''} så
-%   blir det bra. Alla rapporter
-%   blir automatiskt snyggt
-%   utformade.
-%   \end{verbatim}
-%   \mex
-%   Om man använder \LaTeX
-%   \footnote{uttalas
-%     ''lah-tekh''} så
-%   blir det bra. Alla rapporter
-%   blir automatiskt snyggt
-%   utformade.
-%   \eex
-
-%   Fotnoter numreras automatiskt 1,2,\ldots
-%   Fast här blev ''numret'' på fotnoten ''a'' av olika anledningar.
-%   Observera att man skriver två apostrofer (\verb+''+) i stället
-%   för citationstecken (\code{"}).
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Listor}
-%   Punktlistor är enkla:
-
-%   \begin{exempel}
-%     \begin{itemize}
-%       \ii{första punkten}
-%       \ii{här kommer den andra}
-%       punkten i listan
-%     \end{itemize}
-%   \end{exempel}
-
-%   Numrerade listor är lika enkla:
-
-%   \begin{exempel}
-%     \begin{enumerate}
-%       \ii{första punkten}
-%       \ii{här kommer den andra}
-%       punkten i listan
-%     \end{enumerate}
-%   \end{exempel}
-
-%   OBS! Pga hur detta dokument är formaterat så får listelementen inga punkter eller siffror, men i den vanliga dokumentklassen \code{\{article\}} blir det som förväntat.
-%   % I detta dokument används dokumentklassen \code{beamer}, och där blir numren siffror i cirklar. I den vanliga dokumentklassen \code{\{article\}} blir numren 1., 2., \ldots
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Definitioner}
-%   \begin{exempel}
-%     Några klasser som vi använder:
-
-%     \begin{description}
-%       \di{SimpleWindow}{Beskriver ett}
-%       enkelt ritfönster
-%       \di{Scanner}{Inläsning från}
-%       tangentbordet
-%       \di{Random}{Slumptal}
-%     \end{description}
-%   \end{exempel}
-
-%   I dokumentklassen \code{article} blir det något annorlunda layout på definitioner. Använd en \code{tabular}-omgivning med kolumnspecifikationen \code{p\{bredd\}} för att få layout som liknar den ovan.
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Tabeller}
-%   En tabell där den första kolumnen är vänsterinpassad (\code{l}), den
-%   andra centrerad (\code{c}) och den tredje högerinpassad (\code{r}). \code{\&} avgränsar kolumnerna,
-%   \verb+\\+ betyder ny rad, \verb+~+ är ett ''hårt'' blanktecken. \verb+\hline+ är ett streck.
-
-%   \bex
-%   \begin{tabular}{lcr}
-%     Produkt & Typ    & Pris    \\
-%     \hline
-%     Skruvar & stora  & 0.18~kr \\
-%     Muttrar & M16    & 0.38~kr \\
-%     Spikar  & 12~tum & 0.12~kr
-%   \end{tabular}
-%   \end{verbatim}
-%   \mex
-%   \begin{tabular}[t]{lcr}
-%     Produkt & Typ    & Pris    \\
-%     \hline
-%     Skruvar & stora  & 0.18~kr \\
-%     Muttrar & M16    & 0.38~kr \\
-%     Spikar  & 12~tum & 0.12~kr
-%   \end{tabular}
-%   \eex
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Flytande tabeller}
-%   Med en \verb+\table+-omgivning skapar man en tabell med en förklarande
-%   text och ett nummer. \LaTeX\ placerar tabellen där det är
-%   lämpligt.
-
-%   \bex
-%   \begin{table}
-%     \begin{tabular}{lcr}
-%       Produkt & Typ    & Pris    \\
-%       \hline
-%       Skruvar & stora  & 0.18~kr \\
-%       Muttrar & M16    & 0.38~kr \\
-%       Spikar  & 12~tum & 0.12~kr
-%     \end{tabular}
-%     \caption{Våra produkter}
-%   \end{table}
-%   \end{verbatim}
-%   \mex
-%   \begin{tabular}[t]{lcr}
-%     Produkt & Typ    & Pris    \\
-%     \hline
-%     Skruvar & stora  & 0.18~kr \\
-%     Muttrar & M16    & 0.38~kr \\
-%     Spikar  & 12~tum & 0.12~kr
-%   \end{tabular}
-%   \begin{center}
-%     {Tabell 7. Våra produkter}
-%   \end{center}
-%   \eex
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Att referera till etiketter}
-%   Om man sätter en etikett på en tabell kan man referera till den
-%   från texten. Exempel:
-
-%   \bex
-%   \begin{table}
-%     \begin{tabular}{lcr}
-%       Produkt & Typ   & Pris    \\
-%       \hline
-%       Skruvar & stora & 0.18~kr \\
-%     \end{tabular}
-%     \caption{Våra produkter}
-%     \label{produkter}
-%   \end{table}
-%   Senare i texten: våra produkter
-%   finns i tabell~\ref{produkter}.
-%   \end{verbatim}
-%   \mex
-%   \begin{tabular}[t]{lcr}
-%     Produkt & Typ   & Pris    \\
-%     \hline
-%     Skruvar & stora & 0.18 kr \\
-%   \end{tabular}
-%   \begin{center}
-%     {Tabell 7. Våra produkter}
-%   \end{center}
-%   Senare i texten: våra produkter
-%   finns i tabell~7.
-%   \eex
-%   Figurer hanteras likadant som tabeller, i en
-%   \verb+\figure+-omgivning.
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Programlistor}
-%   För att infoga en programlista i en rapport använder man
-%   kommandot \verb+\VerbatimInput{filnamn}+ från paketet
-%   \texttt{fancyvrb}. Man bör \emph{inte} använda ''standard''-
-%   kommandot \verb+\verbatiminput+ eftersom det kommandot
-%   ignorerar alla tabulatortecken i programmet, och det medför att
-%   indragningarna försvinner.
-
-%   \bex
-%   \usepackage{fancyvrb}
-%   \fvset{tabsize=4}
-%   \fvset{fontsize=\small}
-
-%   \VerbatimInput{Point.java}
-%   \end{verbatim}
-%   \mex
-%   %\vspace{-30pt}
-%   \begin{verbatim}
-% class Point {
-%     private int x;
-%     private int y;
-
-%     public Point(int x, int y) {
-%         this.x = x;
-%         this.y = y;
-%     }
-% }
-% \end{verbatim}
-%   \eex
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Öka eller minska avstånd}
-%   Ibland behöver man öka avståndet i vertikalled mellan två avsnitt i texten, till exempel före eller efter en tabell. Det kan man göra med kommandot \verb/\vspace{längd}/, där längden kan anges i millimeter eller punkter eller något annat som \LaTeX\ känner igen. Längden kan vara negativ om man vill minska avståndet. Det finns också specialkommandon för att lägga in ett litet, mellanstort och stort avstånd:
-
-%   \begin{Code}
-%     \smallskip  \medskip  \bigskip
-%   \end{Code}
-
-%   Man kan öka eller minska horisontellt avstånd med \verb/\hspace{längd}/.
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Matematiska formler}
-%   \LaTeX\ är \emph{mycket} bra på att formatera matematisk text.
-%   Alla (tror jag) artiklar och böcker som innehåller matematiska formler
-%   är skrivna med \LaTeX. Man kan skriva
-%   formler antingen inuti löpande text eller på en egen rad:
-%   \begin{itemize}
-%     \ii{I texten: formeln inleds med \code{\$} och avslutas med \code{\$}.}
-%     \item<+-> På egen rad: formeln inleds med \verb+\begin{displaymath}+
-%           och avslutas med \verb+\end{displaymath}+.
-%           \verb+\begin{equation}+ och \verb+\end{equation}+ ger samma
-%           resultat men formeln numreras. Med \verb+\label+ och \verb+\ref+
-%           kan man etikettera och referera till ekvationer.
-%   \end{itemize}
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Enkla formler}
-%   \begin{mexempel}
-%     Formeln $x=3y-2$ står
-%     inne i texten. Däremot
-%     står
-%     \begin{displaymath}
-%       x=3y-2
-%     \end{displaymath}
-%     för sig själv precis som
-%     \begin{equation}
-%       x=3y-2
-%       \label{xochy}
-%     \end{equation}
-%     I ekvation~\ref{xochy} fann
-%     vi att \ldots
-%   \end{mexempel}
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Symboler, index}
-%   \begin{mexempel}
-%     \begin{displaymath}
-%       \alpha \leq \pi \approx 3.141592654
-%     \end{displaymath}
-%   \end{mexempel}
-
-%   \vspace{1cm}
-
-%   \begin{mexempel}
-%     \begin{displaymath}
-%       x_{k+1}=x_{k}-f(x_{k})/f'(x_{k})
-%     \end{displaymath}
-%   \end{mexempel}
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Exponenter, rötter}
-%   \begin{mexempel}
-%     \begin{displaymath}
-%       e^x = 1+x+x^2/2!+x^3/3!+\cdots
-%     \end{displaymath}
-%   \end{mexempel}
-
-%   \vspace{1cm}
-
-%   \begin{mexempel}
-%     \begin{displaymath}
-%       x_{1,2}=\frac{p}{2}\pm
-%       \sqrt{\frac{p^2}{4}-q}
-%     \end{displaymath}
-%   \end{mexempel}
-
-% \end{frame}
-
-
-
-% \begin{frame}[fragile]
-%   \frametitle{Integraler, summor}
-%   \begin{mexempel}
-%     \begin{displaymath}
-%       \int_{-\infty}^{\infty}
-%       e^{-x^2} dx
-%     \end{displaymath}
-%   \end{mexempel}
-
-%   \vspace{1cm}
-
-%   \begin{mexempel}
-%     \begin{displaymath}
-%       \sum_{k=1}^n\frac{1}{a_k}
-%     \end{displaymath}
-%   \end{mexempel}
-
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Funktioner}
-%   \begin{mexempel}
-%     \begin{displaymath}
-%       \sin^2 x + \cos^2 x = 1
-%     \end{displaymath}
-%   \end{mexempel}
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Matriser, parenteser}
-%   \begin{mexempel}
-%     \begin{displaymath}
-%       A=\left(
-%       \begin{array}{cccc}
-%         a_{11} & a_{12} & \cdots & a_{1n} \\
-%         a_{21} & a_{22} & \cdots & a_{2n} \\
-%         \vdots & \vdots & \ddots & \vdots \\
-%         a_{n1} & a_{n2} & \cdots & a_{nn} \\
-%       \end{array}
-%       \right)
-%     \end{displaymath}
-%   \end{mexempel}
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Bilder}
-%   Bilder kan inkluderas i \LaTeX-dokument om de är i formatet
-%   \code{pdf}, \code{jpeg} eller \code{png} (\texttt{eps} om man använder \code{latex}). Man måste använda paketet \texttt{graphicx} (eller \code{graphics}).
-%   \vspace{20mm}
-%   \bex
-%   \usepackage{graphicx}
-
-%   \includegraphics[height=40mm]{images/bild.pdf}
-%   \end{verbatim}
-%   \mex
-%   \vspace{-25mm}\hspace{15mm}
-%   \includegraphics[height=30mm]{images/enkelmodell.pdf}
-%   \eex
-
-%   ImageMagick-programmet \texttt{convert} kan konvertera
-%   från och till de flesta bildformat:
-%   \begin{verbatim}
-%    convert bild.fig bild.pdf
-% \end{verbatim}
-% \end{frame}
-
-% \begin{frame}[fragile]
-%   \frametitle{Egna kommandon}
-%   Man kan lätt definiera egna kommandon, till exempel ett kortare namn
-%   för en text som man använder ofta. Kommandon kan ha parametrar.
-
-%   \vspace{10mm}
-
-%   \begin{mexempel}
-%     \newcommand{\java}[1]
-%     {\texttt{#1}}
-
-%     Klasser: \java{Random},
-%     \java{Scanner} och
-%     \java{PrintStream}.
-%   \end{mexempel}
-
-%   \vspace{10mm}
-
-%   Man kan definiera om existerande kommandon med
-%   \verb+\renewcommand+. Det kan ställa till förvirring, så
-%   gör inte det.
-% \end{frame}
-
-%\begin{frame}[fragile]
-%\frametitle{\LaTeX\ på egen dator}
-%
-%En sammanfattning av LaTeX-installationer finns på \url{www.latex-project.org}, sidan Getting LaTeX.
-%
-%\begin{description}
-%\item[Linux] LaTeX kanske redan finns på datorn; hämtas annars med den vanliga pakethanteraren.
-%\item[Mac] Använd MacTeX (bygger på TeXLive, som uppdateras varje år).
-%\item[Windows] proTeXt verkar vara enklast.
-%\end{description}
-%
-%Som IDE rekommenderas Texmaker (\url{www.xm1math.net/texmaker}) eller TeXShop (bara för Mac, \url{www.texshop.org}).
-%\end{frame} 
-
+\begin{frame}[fragile,t]
+  \frametitle{Löpande text}
+  \vspace{1em}
+  \begin{itemize}
+    \ii{Radslut och antal mellanslag mellan ord har ingen betydelse.}
+    \ii{En eller flera blanka rader ger ett nytt stycke.}
+  \end{itemize}
+
+  \blankline
+  \begin{exlatex}
+Det här      är en text
+ som jag  har skrivit.
+Det är
+en lång text med flera
+     rader.
+
+Här börjar det ett
+nytt stycke i texten.
+  \end{exlatex}
+
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Rubriker}
+  \vspace{2em}
+  \LaTeX\ numrerar rubriker automatiskt. Man anger en rubrik med
+  \verb+\section+ eller \verb+\subsection+.
+
+  \blankline
+  \begin{exsrc}
+\section{Inledning}
+\section{Utförande}
+\subsection{Del 1}
+\subsection{Del 2}
+\section{Slutsatser}
+  \end{exsrc}
+  \begin{exresult}
+{\Large\bfseries 1 Inledning} \\[1ex]
+{\Large\bfseries 2 Utförande} \\[1ex]
+{\large\bfseries 2.1 Del 1} \\[1ex]
+{\large\bfseries 2.2 Del 2} \\[1ex]
+{\Large\bfseries 3 Slutsatser}
+  \end{exresult}
+
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Ändra textens utseende}
+  \vspace{2em}
+
+  \begin{itemize}
+    \ii{\code{\textbackslash emph\{viktigt\}} -- Betonar text}
+    \ii{\code{\textbackslash texttt\{Square\}} -- Skrivmaskinstypsnitt, används ofta för kod}
+  \end{itemize}
+
+  \blankline
+  
+  \begin{exlatex}
+Här skriver jag något \emph{viktigt}.
+Och i Scala har vi skapat klassen \texttt{Square}.
+I sällsynta fall kan man vilja skriva något \textbf{i fetstil}.
+  \end{exlatex}
+  
+  \blankline
+  \ti{Använd sparsamt: fetstil, lutande text, storleksändringar}
+\end{frame}
+
+
+\begin{frame}[fragile,t]
+  \frametitle{Specialtecken}
+
+  \begin{itemize}
+    \ii{\code{\%} – Kommentar till slutet av raden}
+    \ii{Tecken som kräver speciell hantering:}
+  \end{itemize}
+
+  \begin{envs}
+    \begin{Code}
+      \$ \% \_ \# \& \{ \} \textbackslash
+    \end{Code}
+  \end{envs}
+
+  \ti{Streck, mellanrum, och punkter:}
+  
+  \begin{exlatex}
+dod-kursen skrivs med bindestreck.
+Den pågår under vecka 1--4.
+Tyvärr är den inte längre\ldots
+
+Ibland vill man göra en lång paus i en mening --- för att skapa spänning.
+
+\quad Telefon: 046--222~80~38. 
+Dagens datum: \today.
+  \end{exlatex}
+\end{frame}
+
+
+\begin{frame}[fragile,t]
+  \frametitle{Fotnoter}
+  \vspace{2em}
+
+  \ti{Fotnoter är lätta att skriva:}
+
+  \begin{exlatex}
+  Om man använder \LaTeX
+  \footnote{uttalas
+    ``lah-tekh''} så
+  blir det bra. Alla rapporter
+  blir automatiskt snyggt
+  utformade.
+  \end{exlatex}
+
+  \blankline
+  \begin{itemize}
+    \ii{Fotnoter numreras automatiskt: 1, 2, \ldots}
+    \ii{Här blir det dock fotnoten \emph{a} av olika anledningar.}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Citationstecken}
+  \vspace{3em}
+
+  \ti{Det finns olika typer av citationstecken:}
+
+  \begin{itemize}
+    \ii{\textasciigrave\textasciigrave text\textquotesingle\textquotesingle\ -- Typografiskt korrekta citationstecken (``text'')}
+    \ii{\textquotesingle\textquotesingle text\textquotesingle\textquotesingle\ -- Raka citationstecken för speciella fall (''text'')}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Listor}
+  \vspace{1em}
+  
+  \ti{Punktlistor är enkla:}
+
+  \begin{exlatex}
+\begin{itemize}
+  \item första punkten
+  \item här kommer den andra
+  punkten i listan
+\end{itemize}
+  \end{exlatex}
+
+  \blankline
+  \ti{Numrerade listor är lika enkla:}
+
+  \begin{exlatex}
+\begin{enumerate}
+  \item första punkten
+  \item här kommer den andra
+  punkten i listan
+\end{enumerate}
+  \end{exlatex}
+
+  % OBS! Pga hur detta dokument är formaterat så får listelementen inga punkter eller siffror, men i den vanliga dokumentklassen \code{\{article\}} blir det som förväntat.
+  % I detta dokument används dokumentklassen \code{beamer}, och där blir numren siffror i cirklar. I den vanliga dokumentklassen \code{\{article\}} blir numren 1., 2., \ldots
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Definitioner}
+  \vspace{2em}
+
+  \ti{Man kan skapa fina definitioner:}
+
+  \begin{exlatex}
+Några klasser som vi använder:
+
+\begin{description}
+  \item[Scanner] Inläsning från tangentbordet
+  \item[Random] Slumptal
+  \item[File] För att läsa och skriva filer
+\end{description}
+  \end{exlatex}
+
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Tabeller}
+  \vspace{2em}
+  
+  \ti{Tabeller är enkla att skapa:}
+  \begin{itemize}
+    \ii{Använd \code{tabular}-omgivningen}
+    \ii{Specificera antal kolumner och hur texten ska justeras}
+    \ii{Använd \code{\&} för att skilja kolumner och \code{\textbackslash\textbackslash} för att skilja rader}
+  \end{itemize}
+
+  \begin{exlatex}
+\begin{tabular}{lcr}
+  Produkt & Typ    & Pris    \\
+  \hline
+  Skruvar & stora  & 0.18~kr \\
+  Muttrar & M16    & 0.38~kr \\
+  Spikar  & 12~tum & 0.12~kr
+\end{tabular}
+  \end{exlatex}
+
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Flytande tabeller}
+  \vspace{2em}
+
+  \ti{Med en \texttt{table}-omgivning skapar man en \emph{flytande tabell}, som \LaTeX\ själv placerar där det är lämpligt.}
+
+  \ti{Man kan ange sin preferens för placering med \texttt{h}~(here), \texttt{t}~(top), \texttt{b}~(bottom), \texttt{p}~(page).}
+
+  \begin{exlatex}
+\begin{table}[t]
+  \begin{tabular}{lcr}
+    Produkt & Typ    & Pris    \\
+    \hline
+    Skruvar & stora  & 0.18~kr \\
+    Muttrar & M16    & 0.38~kr \\
+    Spikar  & 12~tum & 0.12~kr
+  \end{tabular}
+  \caption{Våra produkter}
+\end{table}
+  \end{exlatex}
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Att referera till etiketter}
+  \vspace{1em}
+
+  \ti{Med \emph{etiketter} (label) kan man referera till tabeller från texten:}
+
+  \ti{(Figurer hanteras likadant som tabeller, i en \texttt{figure}-omgivning.)}
+
+  \begin{exlatex}
+\begin{table}
+  \begin{tabular}{lcr}
+    Produkt & Typ    & Pris    \\
+    \hline
+    Skruvar & stora  & 0.18~kr \\
+    Muttrar & M16    & 0.38~kr \\
+    Spikar  & 12~tum & 0.12~kr
+  \end{tabular}
+  \caption{Våra produkter}
+  \label{produkter}
+\end{table}
+Senare i texten kan vi referera till vår tabell \ref{produkter}, som visar våra produkter.
+
+Senare i texten kan vi referera till vår tabell~\ref{produkter}, som visar våra produkter.
+  \end{exlatex}
+
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Programlistor}
+  \vspace{.5em}
+
+  \begin{itemize}
+    \ii{För programkod kan man använda \texttt{verbatim}-omgivningen.}
+    \ii{Den visar texten precis som den är skriven.}
+    \ii{Med paketet \texttt{fancyvrb} kan man också använda \texttt{\textbackslash VerbatimInput}-kommandot för att inkludera kod från en fil.}
+    \ii{\textbf{Notera} att \texttt{verbatim} inte hanterar tabulatortecken korrekt!}
+  \end{itemize}
+
+  \halfblankline
+  \begin{exsrc}
+\usepackage{fancyvrb}
+\fvset{tabsize=4, fontsize=\small}
+
+\VerbatimInput{Point.scala}
+\end{exsrc}
+\begin{exresult}%
+{\small
+\begin{verbatim}
+class Point(val x: Int, 
+            val y: Int) {
+  
+  def move(dx: Int, 
+            dy: Int): Point = 
+    new Point(x + dx, y + dy)
+}
+\end{verbatim}
+}  
+  \end{exresult}
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Programlistor med \texttt{listings}}
+  \vspace{.5em}
+
+  \begin{itemize}
+    \ii{Paketet \texttt{listings} är ett bättre alternativ.}
+    \ii{Stöd för syntaxfärgning och flera programmeringsspråk.}
+    \ii{Många anpassningsmöjligheter: teckensnitt, färger, tabstorlek, \ldots}
+  \end{itemize}
+
+  \begin{exsrc}
+\lstset{
+  language=Scala,
+  basicstyle=\ttfamily\small,
+  % fler inställningar ...
+}
+
+\begin{lstlisting}
+  class Point(val x: Int, 
+    val y: Int) {
+
+      def move(dx: Int, 
+        dy: Int): Point = 
+      new Point(x + dx, y + dy)
+  }
+\end{lstlisting}
+  \end{exsrc}
+  \begin{exresult}
+\begin{lstlisting}[style=scalaex]
+class Point(val x: Int, 
+  val y: Int) {
+
+    def move(dx: Int, 
+      dy: Int): Point = 
+    new Point(x + dx, y + dy)
+}
+  \end{lstlisting}
+  \end{exresult}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Öka eller minska avstånd}
+
+  \begin{itemize}
+    \ii{Vertikalt avstånd: \texttt{\textbackslash vspace\{längd\}}}
+    \ii{Längder kan anges i cm, mm, in, pt, \ldots}
+    \ii{Negativ längd minskar avståndet.}
+    \ii{Snabbkommandon: \code{\textbackslash smallskip}, \code{\textbackslash medskip}, \code{\textbackslash bigskip}}
+    \ii{Horisontellt avstånd: \texttt{\textbackslash hspace\{längd\}}}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Matematiska formler}
+  \ti{\LaTeX\ är mycket bra på att formatera matematisk text.}
+
+  \blankline
+  \begin{itemize}
+    \ii{I löpande text: \code{\$ \dots\ \$}}
+    \ii{På egen rad: \texttt{\textbackslash begin\{displaymath\} \dots\ \textbackslash end\{displaymath\}}}
+    \ii{Numrerad formel: \code{\textbackslash begin\{equation\} \dots\ \textbackslash end\{equation\}}}
+    \ii{Etikett och referens: \code{\textbackslash label} och \code{\textbackslash ref}}
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile,t]
+  \frametitle{Enkla formler}
+  \vspace{2em}
+
+  \begin{exlatex}
+Formeln $x=3y-2$ står inne i texten. Däremot står
+\begin{displaymath}
+  x=3y-2
+\end{displaymath}
+för sig själv precis som
+\begin{equation}
+  x=3y-2
+  \label{xochy}
+\end{equation}
+
+I ekvation~\ref{xochy} fann
+vi att \ldots
+  \end{exlatex}
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Symboler, index}
+  \vspace{2em}
+
+  \begin{exlatex}
+\begin{displaymath}
+  \alpha \leq \pi \approx 3.141592654
+\end{displaymath}
+  \end{exlatex}
+
+  \vspace{1cm}
+
+  \begin{exlatex}
+\begin{displaymath}
+  x_{k+1} =
+  x_{k} -
+  \frac{f(x_{k})}{f'(x_{k})}
+\end{displaymath}
+  \end{exlatex}
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Exponenter, rötter}
+  \vspace{2em}
+
+  \begin{exlatex}
+\begin{displaymath}
+  e^x = 1+x+x^2/2!+x^3/3!+\cdots
+\end{displaymath}
+  \end{exlatex}
+
+  \vspace{1cm}
+
+  \begin{exlatex}
+\begin{displaymath}
+  x_{1,2}=\frac{p}{2}\pm
+  \sqrt{\frac{p^2}{4}-q}
+\end{displaymath}
+  \end{exlatex}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile,t]
+  \frametitle{Integraler, summor}
+  \vspace{2em}
+
+  \begin{exlatex}
+\begin{displaymath}
+  \int_{-\infty}^{\infty}
+  e^{-x^2} dx
+\end{displaymath}
+  \end{exlatex}
+
+  \vspace{1cm}
+
+  \begin{exlatex}
+\begin{displaymath}
+  \sum_{k=1}^n\frac{1}{a_k}
+\end{displaymath}
+  \end{exlatex}
+
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Funktioner}
+  \vspace{2em}
+
+  \begin{exlatex}
+\begin{displaymath}
+  \sin^2 x + \cos^2 x = 1
+\end{displaymath}
+  \end{exlatex}
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Matriser, parenteser}
+  \vspace{2em}
+
+  \begin{exlatex}
+\begin{displaymath}
+A=\left(
+\begin{array}{cccc}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn} \\
+\end{array}
+\right)
+\end{displaymath}
+  \end{exlatex}
+\end{frame}
+
+
+\begin{frame}[fragile,t]
+  \frametitle{Bilder}
+  \vspace{2em}
+
+  \ti{Inkludera bilder i format: \code{pdf}, \code{jpeg}, \code{png}}
+
+  \ti{Använd paketet \texttt{graphicx} (eller \code{graphics})}
+
+  \blankline
+
+  \vspace{2mm}
+  \begin{exsrc}
+\includegraphics[height=40mm]
+    {images/bild.pdf}
+  \end{exsrc}
+  \begin{exresult}
+\includegraphics[height=30mm]{images/enkelmodell.pdf}
+  \end{exresult}
+
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Bilder med figurmiljö}
+  \vspace{1em}
+
+  \ti{Slå in bilder i en \texttt{figure}-omgivningen, för att lägga till en bildtext och en etikett.}
+
+  \begin{exsrc}
+\begin{figure}
+  \centering
+  \includegraphics[height=40mm]
+      {images/bild.pdf}
+  \caption{Exempelbild}
+  \label{fig:exempelbild}
+\end{figure}
+Från text kan vi nu referera till figur~\ref{fig:exempelbild}.
+  \end{exsrc}
+  \begin{exresult}
+\begin{figure}
+  \centering
+  \includegraphics[height=30mm]{images/enkelmodell.pdf}
+  \caption{Exempelbild}
+  \label{fig:exempelbild2}
+\end{figure}
+Från text kan vi nu referera till figur~\ref{fig:exempelbild2}.
+  \end{exresult}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Egna kommandon}
+  Man kan lätt definiera egna kommandon, till exempel ett kortare namn
+  för en text som man använder ofta. Kommandon kan ha parametrar.
+
+  \vspace{10mm}
+
+  \begin{exlatex}
+\newcommand{\scala}[1]
+  {\texttt{\textcolor{red}{#1}}}
+
+Klasser: \scala{Random},
+\scala{Scanner}, \scala{FileUtils} och
+\scala{PrintStream}.
+  \end{exlatex}
+
+  \vspace{10mm}
+
+  Man kan definiera om existerande kommandon med
+  \verb+\renewcommand+. Det kan ställa till förvirring, så
+  gör inte det.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\LaTeX\ på egen dator}
+  
+  \ti{En sammanfattning av LaTeX-installationer finns på \url{www.latex-project.org}, sidan Getting LaTeX.}
+
+  \blankline
+  \begin{description}
+    \di{Linux}{Installera LaTeX via den vanliga pakethanteraren (t.ex. \texttt{apt}).}
+    \di{Mac}{Använd \texttt{MacTeX} (baserad på \texttt{TeXLive}, uppdateras årligen).}
+    \di{Windows}{Rekommenderat: \texttt{TeXLive} (\url{www.tug.org/texlive/}) för en komplett LaTeX-distribution.}
+  \end{description}
+  
+  \halfblankline
+  \begin{itemize}
+    \ii{För redigering, använd moderna verktyg som t.ex. \texttt{TeXstudio}, \texttt{TeXShop} (för Mac), eller \texttt{VS Code} med \texttt{LaTeX Workshop}-tillägget.}
+    \ii{\textbf{Notera}, ni får lov att använda Overleaf om ni föredrar det!}
+  \end{itemize}
+
+\end{frame}

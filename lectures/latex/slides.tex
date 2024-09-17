@@ -1,6 +1,7 @@
 \ifdefined\ishandout
     \documentclass[handout]{beamer}
-\else
+    \else
+    % \documentclass[handout]{beamer}
     \documentclass{beamer}
     % \setbeamercovered{transparent}
 \fi
@@ -8,18 +9,29 @@
 \includeonly{latex}
 
 \usepackage{selthcsslides}
-% \usepackage{../../latex-support/leftrightexample-new} % Per Foreby
 \usecolortheme{lucolors}
 \usepackage{latex_utils}
 
 \usepackage{beamerutil}
 
-% The Madrid theme, for some reason, does not show bullet points in itemize
+% The Madrid theme, for some reason, does not show bullet points in list
 % environments. This is a workaround to fix that.
 \setbeamertemplate{itemize item}[default]
 \setbeamertemplate{itemize subitem}[default]
 \setbeamertemplate{enumerate item}[default]
 \setbeamertemplate{enumerate subitem}[default]
+
+% Beamer uses letters for footnotes by default. Change to numbers.
+% (Doesn't seem to work, though. I'll leave it for now.)
+\setbeamertemplate{footnote}{\insertfootnotemark}
+
+% Number captions
+\setbeamertemplate{caption}[numbered]
+
+% Adjust size of verbatim examples
+\usepackage{fancyvrb}
+\fvset{tabsize=2, fontsize=\scriptsize}
+
 
 % \usepackage[swedish]{babel}
 % Swedish setup using polyglossia for better multilingual support
@@ -28,6 +40,7 @@
 
 \usepackage{url}
 \usepackage{datetime2}
+\usepackage{xcolor}
 
 % \usepackage{fontspec}  			% Allows loading system fonts
 % \setmainfont{Latin Modern Roman}  % Set the main (serif) font
