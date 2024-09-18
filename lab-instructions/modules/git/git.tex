@@ -1,3 +1,5 @@
+\def\reponame{dod-lab2}
+
 \section{Laboration \arabic{section} --- Versionshantering med Git och GitHub}
 
 \emph{Mål:} Du ska bekanta dig med grundläggande tekniker för versionshantering och att arbeta flera personer i samma utvecklingsprojekt med hjälp av Git och GitHub. Laborationen kommer att utgöra en guidad tur genom ett enkelt användningsfall. Syftet är alltså inte att bli experter, utan att få se och senare kunna känna igen kommandon och få en känsla för arbetssättet.
@@ -36,11 +38,11 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 
 	\item Logga in på ditt konto på GitHub och skapa ett nytt repositorium för laborationen. Klicka på den gröna knappen med texten ''New'' uppe till vänster på sidan du kommer till när du loggat in.
 
-	Ge repositoriet namnet ''edaa60-lab3'' och ange att det ska vara privat (\emph{private}). Klicka även i rutan framför ''Initialize this repository with a README''. Det senare innebär att det redan från början finns ett innehåll i repositoriet vilket underlättar när vi sedan ska skapa vår lokala klon på vår egen dator. I drop-down-menyn ''Add .gitignore:'' väljer du ''Scala''. Vi ska nämligen utveckla ett enkelt system i Scala och filen .gitignore talar bland annat om för Git att inte bry sig om de filer som scalakompilatorn genererar. Den är inte nödvändig, men gör att vi slipper lite distraherande meddelanden från Git senare. Klicka på ''Create repository'' för att skapa repositoriet.
+	Ge repositoriet namnet t.ex. \code{\reponame} och ange att det ska vara privat (\emph{private}). Klicka även i rutan framför ''Initialize this repository with a README''. Det senare innebär att det redan från början finns ett innehåll i repositoriet vilket underlättar när vi sedan ska skapa vår lokala klon på vår egen dator. I drop-down-menyn ''Add .gitignore:'' väljer du ''Scala''. Vi ska nämligen utveckla ett enkelt program i Scala och filen \code{.gitignore} talar bland annat om för Git att inte bry sig om de filer som scalakompilatorn genererar. Genererade filer vill man normalt inte ha med i sitt repository, för då tycker git att repot har ändrats varje gång man t.ex. provkör sitt program. Klicka till slut på ''Create repository'' för att skapa repositoriet.
 
-	Du kan du nu redigera filen README.md genom att klicka på pennsymbolen efter filnamnet (eller genom att öppna filen genom att klicka på filnamnet i listan och därefter klicka på pennsymbolen till höger i fönstret). I README-filen brukar man skriva en beskrivning av vad repositoriet innehåller för något och saker man behöver veta för att komma igång med innehållet. Skriv något kort relaterat till laborationen.
+	Du kan nu redigera filen \code{README.md} genom att klicka på pennsymbolen efter filnamnet (eller klicka på filnamnet för att öppna filen och därefter klicka på pennsymbolen till höger i fönstret). I README-filen brukar man skriva en beskrivning av vad repositoriet innehåller för något och saker man behöver veta för att komma igång med innehållet. Skriv något kort relaterat till laborationen.
 
-	När du är färdig sparar du filen genom att göra en så kallad \emph{commit}. Varje commit bör medföljas ev en beskrivning av varför filen ändrades. Ofta räcker det med en kort kommentar. Skriv en sådan kort kommentar i rutan under rubriken ''Commit changes''. Du kan t.ex. skriva ''Provided initial description of the project". Om en längre beskrivning är motiverad kan denna lämnas i rutan undertill. Klicka sedan på ''Commit changes''. Gå tillbaka till repositoriets huvudsida (klicka på den blå länken ''edaa60-lab3'') och betrakta resultatet.
+	När du är färdig sparar du filen genom att göra en så kallad \emph{commit}. Varje commit bör medföljas ev en beskrivning av varför filen ändrades. Ofta räcker det med en kort kommentar. Skriv en sådan kort kommentar i rutan under rubriken ''Commit changes''. Du kan t.ex. skriva ''Provided initial description of the project". Om en längre beskrivning är motiverad kan denna lämnas i rutan undertill. Klicka sedan på ''Commit changes''. Gå tillbaka till repositoriets huvudsida (klicka på den blå länken ''\reponame'') och betrakta resultatet.
 
 	Nu ska vi se hur vi kan arbeta med git på vår lokala dator!
 
@@ -50,10 +52,25 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 	\code{[\ref{git-config}]} Använd kommandot \code{git config} med flaggan \code{global} för att sätta ditt användarnamn, e-postadress och din föredragna editor. Du kan t.ex. använda editorn \code{nano} (kör direkt i terminalen) eller \code{gedit} (öppnas i eget fönster).
 	\\
 
-	Editorn du anger kommer användas när du gör \code{git commit} i terminalen, där git ber dig att skriva en commit-kommentar. Att välja en editor som fungerar direkt i terminalen, snarare än att behöva öppna ett nytt fönster, kan då vara smidigt.
+	Editorn du anger kommer användas när du gör \code{git commit} i terminalen, där git ber dig att skriva en commit-kommentar. Att välja en editor som fungerar direkt i terminalen, så som \code{nano}, snarare än att behöva öppna ett nytt fönster, kan då vara smidigt.
 
-	% Tack Alexander Sandström för att skriva ihop detta steg!
-	\item Nu börjar vi närma oss att kunna göra en lokal klon av vårt repo och börja arbeta med git, men vi behöver sätta upp en sak till: en SSH-nyckel. I en alltmer osäker cyberrymd krävs det numera att man kopplar upp sig till GitHub via protokollet SSH (som vi använde för att koppla upp oss mot annan skoldator i slutet av labb 1). För att slippa behöva uppge inloggningsuppgifter vid varje git-kommando används en nyckel (key eller key-pair) som måste genereras på den egna maskinen innan man kan klona repositoriet lokalt. Om du redan har satt upp en SSH-nyckel kan du hoppa över denna del.
+	\item Utöver att konfigurera git att använda en viss editor och ditt korrekta namn och e-postadress, kan det vara bra att konfigurera en ytterligare grej:
+	\begin{Code}
+	git config --global pull.rebase false
+	\end{Code}
+	När man använder \code{git pull} (som du kommer få göra senare) så finns det två sätt att göra det på: \emph{merge} och \emph{rebase}. Det är två olika sätt att försöka sammanfoga ändringar från det centrala repositoriet med dina lokala ändringar. Det är en smaksak vilket man föredrar, båda har för- och nackdelar, men för nya git-användare är det rekkommenderat att inte använda \code{rebase}. Därför sätter vi \code{pull.rebase} till \code{false}. Detta är faktiskt standardinställningen, men i nyare versioner av git måste man ändå uttryckligen göra denna inställning.
+
+	% Tack Alexander Sandström som skriv ihop detta steg!
+	\item Nu börjar vi närma oss att kunna göra en lokal klon av vårt repo och börja arbeta med git, men vi behöver sätta upp en sak till: en SSH-nyckel.
+	
+	\halfblankline
+	Om du redan har satt upp en SSH-nyckel kan du hoppa över denna del.
+	\halfblankline
+	
+	\noindent I en alltmer osäker cyberrymd krävs det numera att man kopplar upp sig till GitHub via protokollet SSH (som vi använde för att koppla upp oss mot annan skoldator i slutet av labb~1). Med en SSH-nyckel så slipper man ange inloggningsuppgifter vid varje git-kommando. Det är också mycket säkrare eftersom du inte skickar dina inloggningsuppgifter via internet.
+	
+	Du ska generera ett så kallat nyckelpar (en privat och en publik nyckel) på din dator, och berätta för GitHub vilken din \emph{publika} nyckel är (\emph{ge \textbf{aldrig} ut din privata nyckel till \textbf{någon}}). Därefter sköts all kryptering och annan säkerhet automatiskt varje gång du snackar med GitHub via terminalen.
+	
 
 	\vspace*{3mm}
 
@@ -62,29 +79,36 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 	\begin{enumerate}
 		\item Öppna terminalen
 		\item Skriv följande i terminalen:\\
-		      \code{ssh-keygen -t ed25519 -C \textquotedblleft din\_email@exempel.se\textquotedblright}
+		      \code{ssh-keygen -t ed25519 -C \textquotedblleft valfri kommentar\textquotedblright}
 
-		\item SSH ber dig att döpa filen, default namnet går bra att använda, tryck Enter.
+		\item SSH ber dig att döpa filen, default-namnet går bra att använda, tryck Enter.
 		\item Ingen passphrase behövs i detta läge, tryck Enter två gånger
 	\end{enumerate}
 
 
-	\noindent Nu har du genererat ett så kallat nyckel-par med en privat och en publik nyckel (mer om detta i senare kurser, men för intresserade, se fotnot\footnote{\url{https://en.wikipedia.org/wiki/Public-key_cryptography}}). Gör \code{ls} på din dolda ssh-katalog för att se filerna:
+	\noindent Nu har du genererat ett så kallat nyckelpar med en privat och en publik nyckel (mer om detta i senare kurser, men för intresserade, se fotnot\footnote{\url{https://en.wikipedia.org/wiki/Public-key_cryptography}}). Gör \code{ls} på din dolda ssh-katalog för att se filerna:
 	\begin{Code}
 		> ls ~/.ssh
 		id_ed25519         # din privata nyckel
 		id_ed25519.pub     # din publika nyckel
-		known_hosts
 	\end{Code}
 
 	Nu saknas endast att lägga till din publika nyckel i ditt GitHub-konto så att hemsidan kan autentisera dig. Följande guide beskriver de sista stegen under rubriken ``Adding a new SSH key to your account'': \url{https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account#adding-a-new-ssh-key-to-your-account}.
 
 	När alla stegen är gjorda på hemsidan ska det vara fritt fram att börja använda git och arbeta mot GitHub utan att behöva uppge användarnamn och lösenord. Var inte rädd att fråga din handledare om du fastnar vid något av stegen.
 
-	\item Det är nu dags att skapa en lokal kopia, eller \emph{klon}, av vårt repositorium på vår lokala dator. Skapa en katalog på lämpligt ställe med hjälp av kommandon i terminalfönstret, t.ex. \file{$\sim$/dod/lab3}. Gå sedan till katalogen du nyss skapade med hjälp av kommandot \code{cd}.
+	\item Det är nu dags att skapa en lokal kopia, eller \emph{klon}, av vårt repositorium på vår lokala dator. Skapa en katalog på lämpligt ställe med hjälp av kommandon i terminalfönstret, t.ex. \file{$\sim$/dod/lab2}. Gå sedan till katalogen du nyss skapade med hjälp av kommandot \code{cd}.
 
-	För att kunna klona vårt repositorium behöver vi en referens till det. Gå därför till webbsidan för ditt repositorium. Där hittar du en grön knapp med texten ''Code''. Om du klickar på denna får du upp en drop-downmeny som bland annat innehåller en URL, som du ska kopiera. Kontrollera att du tittar på SSH-varianten snarare än HTTS, URL:en ska vara på formatet \url{git@github.com:<username>/dod-lab3.git}.
+	För att kunna klona vårt repositorium behöver vi en referens till det. Gå därför till webbsidan för ditt repositorium. Där hittar du en grön knapp med texten ''Code''. Om du klickar på denna får du upp en drop-downmeny som bland annat innehåller en URL, som du ska kopiera.
 	\\
+	
+	
+	\textbf{OBS!} Kontrollera att du tittar på SSH-varianten snarare än HTTS, URL:en ska vara på formatet:
+	\vspace{-.5em}
+	\begin{Code}
+		git@github.com:<username>/dod-lab2.git
+	\end{Code}
+	\vspace{.5em}
 
 	\code{[\ref{git-clone}]} Använd nu kommandot \code{git clone} för att klona repositoriet.
 	\\
@@ -170,11 +194,11 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 
 	I fortsättningen av laborationen kommer vi att simulera en sådan parallell utveckling genom att du själv skapar en andra klon av repositoriet och arbetar med den parallellt med den klon vi tidigare skapade. Vi kommer också att se exempel på hur man kan arbeta med Git inifrån ett utvecklingsverktyg utan att använda sig av terminalen.
 
-	%För att skapa en ny klon av repositoriet på GitHub behöver vi en ny tom katalog att arbeta i. Låt oss kalla den \file{lab3b}. Starta ett nytt terminalfönster, gå till en lämplig plats med \code{cd} skapa den nya katalogen med hjälp av följande kommandon:
+	%För att skapa en ny klon av repositoriet på GitHub behöver vi en ny tom katalog att arbeta i. Låt oss kalla den \file{lab2b}. Starta ett nytt terminalfönster, gå till en lämplig plats med \code{cd} skapa den nya katalogen med hjälp av följande kommandon:
 	%
 	%\begin{Code}
-	%	mkdir lab3b
-	%	cd lab3b
+	%	mkdir lab2b
+	%	cd lab2b
 	%\end{Code}
 
 	Som utvecklingsverktyg kommer vi använder oss av editorn Visual Studio Code (i fortsättningen förkortat \emph{VS Code}). VS Code är en generell texteditor med stöd för många olika programmeringsspråk och som även har inbyggt stöd för Git. I VS Code ska vi klona ditt repositorium igen, och alltså ha två kloner på olika ställen på din dator; en som vi arbetar med i terminalen och en som vi arbetar med i VS Code.
@@ -185,7 +209,7 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 		code
 	\end{Code}
 
-	Efter en kort stund ska ett nytt fönster öppnas. För att skapa en ny klon av ditt repositorium på GitHub kan du trycka CTRL+SHIFT+P. Då får du upp något som kallas för ''kommandopaletten''. Sök eller scrolla ner i listan tills du hittar kommandot ''Git: Clone'' och välj detta. Skriv sedan in URL:en till ditt repositorium på GitHub (samma som när du gjorde \code{git clone} i terminalen tidigare) och tryck ENTER. Du får nu upp en fildialog för att välja var du vill placera det nya klonade repositoriet. Skapa en ny katalog bredvid katalogen du skapade tidigare (\file{lab3}) kallad t.ex. \file{lab3b} och välj denna som målkatalog. Om allt gått väl kommer VS Code att skapa en ny klon och du får en dialogruta som frågar om du vill öppna det nya repositoriet. Välj ''Open''!
+	Efter en kort stund ska ett nytt fönster öppnas. För att skapa en ny klon av ditt repositorium på GitHub kan du trycka CTRL+SHIFT+P. Då får du upp något som kallas för ''kommandopaletten''. Sök eller scrolla ner i listan tills du hittar kommandot ''Git: Clone'' och välj detta. Skriv sedan in URL:en till ditt repositorium på GitHub (samma som när du gjorde \code{git clone} i terminalen tidigare) och tryck ENTER. Du får nu upp en fildialog för att välja var du vill placera det nya klonade repositoriet. Skapa en ny katalog bredvid katalogen du skapade tidigare (\file{lab2}) kallad t.ex. \file{lab2b} och välj denna som målkatalog. Om allt gått väl kommer VS Code att skapa en ny klon och du får en dialogruta som frågar om du vill öppna det nya repositoriet. Välj ''Open''!
 
 	\item Längst ut åt vänster finns en rad symboler som representerar olika verktyg. Den översta kallas för ''Explorer'' och används för att se vilka filer som finns i katalogen och för att editera dessa. Gå in i filen \file{HelloWorld.scala} och ändra återigen utskriften så att något nytt skrivs ut samt spara filen.
 
@@ -280,7 +304,7 @@ Här ges lösningar till de uppgifter som är markerade. Försök gärna lösa u
 
 	\item\label{git-clone} Byt ut URL:en mot din egen:
 	      \begin{Code}
-		      git clone https://github.com/fornamnefternamn/edaa60-lab3.git
+		      git clone https://github.com/fornamnefternamn/edaa60-lab2.git
 	      \end{Code}
 
 	\item\label{git-add} Lägg till fil till \emph{staging area}:
