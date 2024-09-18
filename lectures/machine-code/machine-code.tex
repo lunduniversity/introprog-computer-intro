@@ -3,46 +3,64 @@
 \section{Maskinkod}
 
 
-\begin{frame}
-    \begin{block}{\centering\Large Föreläsning \arabic{section} --- Maskinkod}
-        Förberedelse inför laboration 4.
+\begin{frame}[fragile,t]
+    \begin{block}{\centering\Large Föreläsning 4 --- Maskinkod}
 
+        \halfblankline
+
+        \ti{Förberedelse inför laboration 4}
+
+        \halfblankline
         \begin{itemize}
-            \item Vad är en dator?
-            \item Binära tal.
-            \item CPU och Minne.
-            \item Maskinkod och instruktioner.
-            \item Assembly-språk.
-            \item Kompilerare och tolkar.
-            \item c3pu (labförberedelse).
+            \ii{Vad är en dator?}
+            \ii{Binära tal}
+            \ii{CPU och Minne}
+            \ii{Maskinkod och instruktioner}
+            \ii{Assembly-språk}
+            \ii{Kompilerare och tolkar}
+            \ii{\emph{c3pu} -- används på laborationen}
         \end{itemize}
+
+        \halfblankline
     \end{block}
+
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile,t]
     \frametitle{Bakgrund}
-    \begin{columns}
-        \begin{column}{0.75\textwidth}
-            \begin{block}{Varför lära sig Maskinkod?}
+    \vspace{2em}
+
+    \begin{columns}[T]
+        \begin{column}{0.65\textwidth}
+            \ti{Varför lära sig Maskinkod?}
+
+            \blankline
+            \begin{itemize}
+                \ii{Djupare förståelse -- insikt i hur datorer fungerar på en grundläggande nivå.}
                 \begin{itemize}
-                    \item \textbf{Djupare förståelse:} Ger insikt i hur datorer fungerar på en grundläggande nivå. Vad händer i datorn med kod som vi skrivit?
-                    \item \textbf{Effektiv Problemlösning:} Förståelse om hur datorer utför uppgifter kan leda till snabbare och mer effektiva lösningar när du programmerar.
-                    \item \textbf{Förbättrade felsökningsfärdigheter:} Kunskap om maskinkod kan avslöja djupliggande orsaker till buggar, vilket gör det enklare att fixa komplexa problem.
-                    \item \textbf{Innovativt tänkande:} Förståelsen för datorns fundamentala operationer möjliggör kreativa och nyskapande tekniklösningar.
+                    \ii{\emph{Vad händer i datorn med kod som vi skrivit?}}
                 \end{itemize}
-            \end{block}
+                \ii{Effektiv problemlösning och innovativt tänkande.}
+                \begin{itemize}
+                    \ii{\emph{Hur kan vi skriva snabb och effektiv kod?}}
+                    \ii{\emph{Hur kan vi hitta på innovativa lösningar?}}
+                \end{itemize}
+            \end{itemize}
         \end{column}
-        \begin{column}{0.25\textwidth}
+        \begin{column}{0.35\textwidth}
+            \vspace{-2em}
             \begin{center}
                 \begin{tikzpicture}
-                    \node (hl) [rectangle, draw, fill=blue!20, text width=6em, text centered, minimum height=2em] {Högnivåspråk};
-                    \node (al) [rectangle, draw, fill=green!20, below=of hl, text width=6em, text centered, minimum height=2em] {Assembly};
-                    \node (mc) [rectangle, draw, fill=red!20, below=of al, text width=6em, text centered, minimum height=2em] {Maskinkod};
-                    \node (hw) [rectangle, draw, fill=orange!20, below=of mc, text width=6em, text centered, minimum height=2em] {Hårdvara};
+                    \only<+->{
+                        \node (hl) [rectangle, draw, fill=blue!20, text width=6em, text centered, minimum height=2em] {Högnivåspråk};
+                        \node (al) [rectangle, draw, fill=green!20, below=of hl, text width=6em, text centered, minimum height=2em] {Assembly};
+                        \node (mc) [rectangle, draw, fill=red!20, below=of al, text width=6em, text centered, minimum height=2em] {Maskinkod};
+                        \node (hw) [rectangle, draw, fill=orange!20, below=of mc, text width=6em, text centered, minimum height=2em] {Hårdvara};
 
-                    \draw[->] (hl) -- (al);
-                    \draw[->] (al) -- (mc);
-                    \draw[->] (mc) -- (hw);
+                        \draw[->] (hl) -- (al);
+                        \draw[->] (al) -- (mc);
+                        \draw[->] (mc) -- (hw);
+                    }
                 \end{tikzpicture}
             \end{center}
         \end{column}
@@ -50,23 +68,31 @@
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}[fragile,t]
     \frametitle{Vad är en dator?}
+
+
     \begin{columns}[T] % The [T] option is used to align the columns content at the top
         \begin{column}{0.6\textwidth}
-            \begin{block}{Komponenter}
-                \begin{itemize}
-                    \item<+> \textbf{CPU:} Datorns hjärna, innehåller ALU, kontrollenhet, och internminne (cache).
-                    \item<+> \textbf{Minne:} Lagring av data och instruktioner. RAM och permanent lagring (t.ex., hårddisk).
-                    \item<+> \textbf{I/O-enheter:} För inmatning och utmatning, t.ex., mus, tangentbord, skärm.
-                \end{itemize}
-            \end{block}
-            \begin{block}{Programvara vs. Hårdvara}<+->
-                \begin{itemize}
-                    \item \textbf{Hårdvara:} Fysiska delarna av datorn.
-                    \item \textbf{Programvara:} Instruktioner för att utföra uppgifter.
-                \end{itemize}
-            \end{block}
+            \ti{Komponenter}
+
+            \halfblankline
+            \begin{itemize}
+                \ii{\textbf{CPU:} ALU, kontrollenhet, cache}
+                \ii{\textbf{Minne:} RAM och lagring (hårddisk)}
+                \ii{\textbf{I/O-enheter:} In- och utmatning (mus, tangentbord, skärm)}
+                \ii{\textbf{Moderkort:} Kopplar ihop alla komponenter}
+            \end{itemize}
+
+            \blankline
+            \ti{Programvara vs. Hårdvara}
+
+            \halfblankline
+            \begin{itemize}
+                \ii{\textbf{Hårdvara:} Fysiska delarna av datorn}
+                \ii{\textbf{Mjukvara (programvara):} Instruktioner för att utföra uppgifter}
+            \end{itemize}
+
         \end{column}
         \begin{column}{0.4\textwidth}
             \begin{center}
@@ -77,7 +103,7 @@
                     \node (alu) [rectangle, draw, fill=red!30, below=.5em of cu, minimum height=1.5em, minimum width=9em, align=center] {ALU};
                     \node (pm) [rectangle, draw, fill=orange!40, below=.5em of alu, minimum height=1.5em, minimum width=9em, align=center] {Primary Cache};
                     \node (sm) [rectangle, draw, fill=yellow!40, below=.2em of pm, minimum height=1.5em, minimum width=9em, align=center] {Secondary Cache};
-                    
+
                     % Define I/O Devices
                     \node (io) [rectangle, draw, fill=gray!30, below=of cpu, minimum height=3em, minimum width=9.5em, rounded corners, align=center, label=above:I/O Devices] {Mouse, Keyboard,\\Screen, etc.};
 
@@ -88,137 +114,238 @@
             \end{center}
         \end{column}
     \end{columns}
-    
+
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile,t]
     \frametitle{Binära tal - Introduktion}
-    \begin{block}{Olika talsystem}
-        \begin{itemize}
-            \item Talsystem används för att representera tal med symboler.
-            \item Decimal (bas 10) - vanligaste, använder siffror 0-9.
-        \end{itemize}
-    \end{block}
-    \begin{block}{Binärt talsystem}
-        \begin{itemize}
-            \item Binärt (bas 2) - används av datorer, använder bara 0 och 1.
-            \item Varje siffra kallas en \textit{bit}.
-        \end{itemize}
-    \end{block}
-    \begin{block}{Varför binära tal i datorer?}
-        \begin{itemize}
-            \item Enkelt att representera elektroniskt (ström finns/ström saknas).
-            \item Pålitligt att tolka signaler som hög (1) eller låg (0) spänning.
-        \end{itemize}
-    \end{block}
+
+
+    \ti{Olika talsystem}
+
+    \halfblankline
+    \begin{itemize}
+        \ii{Talsystem används för att representera tal med symboler.}
+        \ii{Decimal (bas 10) -- vanligast, använder siffror 0-9.}
+    \end{itemize}
+
+    \blankline
+    \ti{Binärt talsystem}
+
+    \halfblankline
+    \begin{itemize}
+        \ii{Binärt (bas 2) -- används av datorer, bara två siffror, 0 och 1.}
+        \ii{Varje siffra kallas en \textit{bit}.}
+    \end{itemize}
+
+    \blankline
+    \ti{Varför binära tal i datorer?}
+
+    \halfblankline
+    \begin{itemize}
+        \ii{Enkelt att representera elektroniskt (ström finns/ström saknas).}
+        \ii{Pålitligt att tolka signaler som hög (1) eller låg (0) spänning.}
+    \end{itemize}
+
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile,t]
     \frametitle{Binära tal - I Datorer}
-    \begin{block}{Bits, Bytes och Ord}
-        \begin{itemize}
-            \item \textbf{Bit:} Grundläggande enhet av data i datorer (0 eller 1).
-            \item \textbf{Byte:} Grupp av 8 bitar.
-            \item \textbf{Ord:} Processor-specifik grupp av bitar (t.ex., 32-bit eller 64-bit).
-        \end{itemize}
-    \end{block}
-    \begin{block}{Användning av binära tal}
-        \begin{itemize}
-            \item Lagring och bearbetning av all data och instruktioner.
-            \item Varje byte kan representera ett tecken i text, t.ex., ASCII-kod.
-            \item Större grupper (ord) hanterar mer komplexa data som heltal och flyttal.
-        \end{itemize}
-    \end{block}
+
+
+    \ti{Bits, Bytes och Ord}
+
+    \halfblankline
+    \begin{itemize}
+        \ii{\textbf{Bit:} Grundläggande enhet av data i datorer (0 eller 1).}
+        \ii{\textbf{Byte:} Grupp av 8 bitar.}
+        \ii{\textbf{Ord:} Processor-specifik grupp av bitar (t.ex., 32-bit eller 64-bit).}
+    \end{itemize}
+
+    \blankline
+    \ti{Användning av binära tal}
+
+    \halfblankline
+    \begin{itemize}
+        \ii{Lagring och bearbetning av all data och instruktioner.}
+        \ii{Varje byte kan representera ett tecken i text, t.ex., ASCII-kod.}
+        \ii{Större grupper (ord) hanterar mer komplexa data som heltal och flyttal.}
+    \end{itemize}
+
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile,t]
     \frametitle{Hexadecimala Tal}
-    \begin{block}{Hexadecimala Talsystemet}
+
+    \ti{Hexadecimala Talsystemet}
+
+    \begin{itemize}
+        \ii{Hexadecimal (bas 16) - använder siffror 0-9 och bokstäverna A-F.}
+    \end{itemize}
+
+    \blankline
+    \ti{Varför Hexadecimala Tal?}
+
+    \begin{itemize}
+        \ii{Förenkling!}
         \begin{itemize}
-            \item Hexadecimal (bas 16) - använder siffror 0-9 och bokstäverna A-F.
-            \item Varje tecken representerar fyra binära siffror (bitar).
+            \ii{Varje tecken representerar fyra binära siffror (bitar).}
+            \ii{Lättare att läsa och skriva stora binära tal.}
         \end{itemize}
-    \end{block}
-    \begin{block}{Varför Hexadecimala Tal?}
-        \begin{itemize}
-            \item \textbf{Förenkling:} Lättare att läsa och skriva stora binära tal.
-            \item \textbf{Minnesadressering:} Används ofta för att representera minnesadresser. Hjälpsamt för att hitta och felsöka minnesproblem.
-        \end{itemize}
-    \end{block}
-    \begin{block}{Exempel}
-        \begin{itemize}
-            \item Binärt: \texttt{1011 1010} = Hex: \texttt{BA}
-            \item Större binärtal: \texttt{1011 1010 0101 1110} = Hex: \texttt{BA5E}
-        \end{itemize}
-    \end{block}
+        \ii{Används ofta för att representera \emph{minnesadresser}}
+        \ii{Hjälpsamt för att hitta och felsöka minnesproblem.}
+    \end{itemize}
+
+    \blankline
+    \ti{Exempel}
+
+    \begin{itemize}
+        \ii{Binärt: \texttt{1011 1010} = Hex: \texttt{BA}}
+        \ii{Större binärtal: \texttt{1011 1010 0101 1110} = Hex: \texttt{BA5E}}
+    \end{itemize}
+
 \end{frame}
 
 
 
 
-\begin{frame}
+\begin{frame}[fragile,t]
     \frametitle{Central Processing Unit (CPU)}
-    % Structure and function of the CPU
-    %  - ALU, registers, control unit
-    %  - Role of the CPU in executing machine code
+
+    \ti{Struktur och funktion}
+    \begin{itemize}
+        \ii{ALU (Aritmetisk-logisk enhet) -- utför beräkningar och logiska operationer}
+        \ii{Register -- lagrar tillfällig data under exekvering}
+        \ii{Kontrollenhet -- styr och koordinerar CPU:ns aktiviteter}
+    \end{itemize}
+
+    \blankline
+    \ti{Alltså, CPU:n gör:}
+    \begin{itemize}
+        \ii{Läser instruktioner från minnet}
+        \ii{Avkodar (tolkar) dem}
+        \ii{Utför instruktionerna (exekverar)}
+    \end{itemize}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Minne i datorer}
-    % Types of memory: RAM, ROM, cache
-    % How memory works with the CPU
+
+\begin{frame}[fragile,t]
+    \frametitle{minne i datorer}
+
+    \ti{Typer av minne}
+    \begin{itemize}
+        \ii{RAM -- arbetsminne som lagrar data och instruktioner temporärt}
+        \ii{ROM -- lagrar permanent data, t.ex. firmware}
+        \ii{Cache -- snabbare minne nära CPU:n för att optimera åtkomst}
+    \end{itemize}
+
+    \blankline
+    \ti{Samspel med CPU:n}
+    \begin{itemize}
+        \ii{CPU:n läser och skriver data till och från RAM}
+        \ii{Cache används för att minska åtkomsttiden till ofta använd data}
+    \end{itemize}
 \end{frame}
 
-\begin{frame}
+
+\begin{frame}[fragile,t]
     \frametitle{Grundläggande om maskinkod}
-    % Definition and characteristics of machine code
-    % Differences between machine code, assembly language, and high-level programming languages
+
+    \ti{Definition och egenskaper}
+    \begin{itemize}
+        \ii{Maskinkod -- binära instruktioner direkt förstådda av CPU:n}
+        \ii{Består av enkla operationer som aritmetik, logik, och flytta data}
+        \ii{Den specifika instruktionsuppsättningen varierar beroende på CPU}
+        \ii{Vanliga instruktioner: \texttt{MOV}, \texttt{ADD}, \texttt{SUB}, \texttt{JMP}}
+    \end{itemize}
+
+    \blankline
+    \ti{Hur förhåller sig olika ``nivåer'' av språk?}
+    \begin{itemize}
+        \ii{Maskinkod -- lägst nivå, direkt förstådd av CPU:n}
+        \ii{Assemblerspråk -- låg nivå, men använder textrepresentation av instruktioner}
+        \ii{Högnivåspråk -- mer abstrakta, översätts till maskinkod via kompilatorer}
+    \end{itemize}
 \end{frame}
 
-\begin{frame}
+
+\begin{frame}[fragile,t]
     \frametitle{Maskininstruktioner}
-    % Components of a machine instruction: opcode, operands
-    % How instructions are executed by the CPU
+
+    \ti{komponenter}
+    \begin{itemize}
+        \ii{Opcode -- specificerar vilken operation som ska utföras}
+        \ii{Operand(er) -- data eller adresser som operationen ska tillämpas på}
+    \end{itemize}
+
+    \blankline
+    \ti{exekvering av instruktioner}
+    \begin{itemize}
+        \ii{CPU:n hämtar instruktionen från minnet}
+        \ii{Avkodar opcode och identifierar operand(er)}
+        \ii{Utför operationen och sparar resultatet}
+    \end{itemize}
+
+    \blankline
+    \ti{exempel}
+    \begin{itemize}
+        \ii{Exempel skiljer sig mellan olika CPU-arkitekturer}
+    \end{itemize}
 \end{frame}
 
-\begin{frame}
+
+\begin{frame}[fragile,t]
     \frametitle{Assembly-språk}
+
+
     % Introduction to assembly language as a low-level programming language
     % Relationship between assembly language and machine code
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile,t]
     \frametitle{Skriva enkel maskinkod}
+
+
     % Example of a simple program in machine code
     % Explanation of what each part of the program does
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile,t]
     \frametitle{Maskinkod och moderna datorer}
+
+
     % Relevance of machine code in contemporary software development
     % Overview of how high-level languages are translated into machine code
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile,t]
     \frametitle{Kompilatorer och tolkar}
+
+
     % Explanation of compilers and interpreters
     % How they translate high-level code into executable machine code
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile,t]
     \frametitle{Utmaningar med att arbeta med maskinkod}
+
+
     % Difficulties and limitations of coding in machine code
     % Importance of understanding machine code for debugging and optimization
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile,t]
     \frametitle{Sammanfattning}
+
+
     % Recap of the key points covered
     % Encouragement to explore more about how programming languages work at the machine level
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile,t]
     \frametitle{Frågor och diskussion}
+
+
     % Open the floor for questions
     % Suggest further reading materials and resources
 \end{frame}
