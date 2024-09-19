@@ -157,9 +157,9 @@
 
     \halfblankline
     \begin{itemize}
-        \ii{\textbf{Bit:} Grundläggande enhet av data i datorer (0 eller 1).}
-        \ii{\textbf{Byte:} Grupp av 8 bitar.}
-        \ii{\textbf{Ord:} Processor-specifik grupp av bitar (t.ex., 32-bit eller 64-bit).}
+        \ii{\textbf{Bit:} Grundläggande enhet av data i datorer (0 eller 1)}
+        \ii{\textbf{Byte:} Grupp av 8 bitar}
+        \ii{\textbf{Ord:} Processor-specifik grupp av bitar (t.ex., 32-bit eller 64-bit)}
     \end{itemize}
 
     \blankline
@@ -167,9 +167,9 @@
 
     \halfblankline
     \begin{itemize}
-        \ii{Lagring och bearbetning av all data och instruktioner.}
-        \ii{Varje byte kan representera ett tecken i text, t.ex., ASCII-kod.}
-        \ii{Större grupper (ord) hanterar mer komplexa data som heltal och flyttal.}
+        \ii{Lagring och bearbetning av all data och instruktioner}
+        \ii{Varje byte kan t.ex. representera ett litet heltal (0--255) eller ett tecken (ASCII-kod)}
+        \ii{Större grupper (ord) hanterar mer komplexa data som heltal och flyttal}
     \end{itemize}
 
 \end{frame}
@@ -177,14 +177,14 @@
 \begin{frame}[fragile,t]
     \frametitle{Hexadecimala Tal}
 
-    \ti{Hexadecimala Talsystemet}
+    \ti{Hexadecimala talsystemet}
 
     \begin{itemize}
         \ii{Hexadecimal (bas 16) - använder siffror 0-9 och bokstäverna A-F.}
     \end{itemize}
 
     \blankline
-    \ti{Varför Hexadecimala Tal?}
+    \ti{Varför Hexadecimala tal?}
 
     \begin{itemize}
         \ii{Förenkling!}
@@ -230,122 +230,161 @@
 
 
 \begin{frame}[fragile,t]
-    \frametitle{minne i datorer}
+    \frametitle{Minne i datorer}
 
     \ti{Typer av minne}
     \begin{itemize}
         \ii{RAM -- arbetsminne som lagrar data och instruktioner temporärt}
         \ii{ROM -- lagrar permanent data, t.ex. firmware}
         \ii{Cache -- snabbare minne nära CPU:n för att optimera åtkomst}
+        \ii{Hårddisk, SSD, etc. -- permanent lagring av data}
     \end{itemize}
 
     \blankline
-    \ti{Samspel med CPU:n}
+    \ti{Var används vilket minne?}
     \begin{itemize}
-        \ii{CPU:n läser och skriver data till och från RAM}
-        \ii{Cache används för att minska åtkomsttiden till ofta använd data}
+        \ii{Moderkortet har litet ROM, för att starta datorn}
+        \ii{CPU:n kan komma åt RAM via moderkortet}
+        \ii{Cache används för att minska åtkomsttiden till ofta använd data\\
+            \emph{(Finns ofta flera nivåer av cache)}}
     \end{itemize}
 \end{frame}
 
 
 \begin{frame}[fragile,t]
-    \frametitle{Grundläggande om maskinkod}
+    \frametitle{Maskinkod -- definition och egenskaper}
 
-    \ti{Definition och egenskaper}
+    \ti{Vad är maskinkod?}
     \begin{itemize}
-        \ii{Maskinkod -- binära instruktioner direkt förstådda av CPU:n}
-        \ii{Består av enkla operationer som aritmetik, logik, och flytta data}
-        \ii{Den specifika instruktionsuppsättningen varierar beroende på CPU}
-        \ii{Vanliga instruktioner: \texttt{MOV}, \texttt{ADD}, \texttt{SUB}, \texttt{JMP}}
+        \ii{Binära instruktioner direkt förstådda av CPU:n}
+        \ii{Utför enkla operationer som aritmetik, logik, och flyttning av data}
+        \ii{CPU:n använder en specifik instruktionsuppsättning (ISA)}
     \end{itemize}
 
     \blankline
-    \ti{Hur förhåller sig olika ``nivåer'' av språk?}
+    \ti{Exempel på maskininstruktioner}
     \begin{itemize}
-        \ii{Maskinkod -- lägst nivå, direkt förstådd av CPU:n}
-        \ii{Assemblerspråk -- låg nivå, men använder textrepresentation av instruktioner}
-        \ii{Högnivåspråk -- mer abstrakta, översätts till maskinkod via kompilatorer}
+        \ii{\texttt{MOV}, \texttt{ADD}, \texttt{SUB}, \texttt{JMP}}
     \end{itemize}
 \end{frame}
-
 
 \begin{frame}[fragile,t]
     \frametitle{Maskininstruktioner}
 
-    \ti{komponenter}
+    \ti{Komponenter av en instruktion}
     \begin{itemize}
-        \ii{Opcode -- specificerar vilken operation som ska utföras}
-        \ii{Operand(er) -- data eller adresser som operationen ska tillämpas på}
+        \ii{Opcode -- specificerar operationen (t.ex. \texttt{ADD})}
+        \ii{Operand(er) -- data eller adresser för operationen (t.ex. register)}
     \end{itemize}
 
     \blankline
-    \ti{exekvering av instruktioner}
+    \ti{Exekvering av instruktioner (fetch-decode-execute)}
     \begin{itemize}
         \ii{CPU:n hämtar instruktionen från minnet}
         \ii{Avkodar opcode och identifierar operand(er)}
         \ii{Utför operationen och sparar resultatet}
     \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,t]
+    \frametitle{Assembly-språk}
+
+    \ti{Vad är Assembly-språk?}
+    \begin{itemize}
+        \ii{Lågnivåspråk nära maskinkod, använder textrepresentation av instruktioner}
+        \ii{Varje assembly-instruktion motsvaras direkt av en maskininstruktion}
+        \ii{CPU-specifikt, beroende på arkitektur}
+    \end{itemize}
 
     \blankline
-    \ti{exempel}
+    \ti{Översättning till maskinkod}
     \begin{itemize}
-        \ii{Exempel skiljer sig mellan olika CPU-arkitekturer}
+        \ii{Assembler konverterar assembly till maskinkod som CPU:n kan exekvera}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,t]
+    \frametitle{Exempel på en assembly-instruktion}
+
+    \ti{Instruktion: \texttt{ADD R1, R2, R2}}
+    \begin{itemize}
+        \ii{Adderar värdet i \texttt{R1} och \texttt{R2}, lagrar resultatet i \texttt{R2}}
+        \ii{R1 och R2 är register som används för temporär datalagring i CPU:n}
+    \end{itemize}
+
+    \blankline
+    \ti{Relation till maskinkod}
+    \begin{itemize}
+        \ii{Opcode för \texttt{ADD} + binär representation av register (\texttt{R1}, \texttt{R2})}
+        \ii{Exempel: \texttt{ADD R1, R2, R2} $\rightarrow$ \texttt{1001 0001 0010 0010}}
     \end{itemize}
 \end{frame}
 
 
 \begin{frame}[fragile,t]
-    \frametitle{Assembly-språk}
+    \frametitle{Instruktionsuppsättningsarkitektur (ISA)}
 
+    \ti{Vad är ISA?}
+    \begin{itemize}
+        \ii{ISA specificerar alla maskininstruktioner som en CPU kan förstå och utföra}
+        \ii{Olika CPU-arkitekturer har olika uppsättningar}
+        \ii{Påverkar hur assembly-språk och maskinkod ser ut för olika processorer}
+    \end{itemize}
 
-    % Introduction to assembly language as a low-level programming language
-    % Relationship between assembly language and machine code
+    \blankline
+    \ti{Exempel på ISA:er}
+    \begin{itemize}
+        \ii{x86 -- Används i de flesta persondatorer}
+        \ii{ARM -- Vanlig i mobila enheter}
+        \ii{RISC-V -- Öppen arkitektur, växande i popularitet}
+    \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile,t]
-    \frametitle{Skriva enkel maskinkod}
+    \frametitle{Maskinkod vs. Högnivåspråk}
 
+    \ti{Utmaningar med att skriva i maskinkod}
+    \begin{itemize}
+        \ii{Maskinkod är lågnivå och svår att läsa och skriva för människor}
+        \ii{Svårt att hantera tillstånd och strukturer, och att debugga}
+        \ii{Inga if/else och loopar -- ersätts med jämförelser och hopp}
+        \ii{Funktioner är manuellt hanterade med stack- och registeroperationer}
+        \ii{Ingen objektorientering (klasser, arv, etc.)}
+    \end{itemize}
 
-    % Example of a simple program in machine code
-    % Explanation of what each part of the program does
+    \blankline
+    \ti{Varför högnivåspråk?}
+    \begin{itemize}
+        \ii{Abstraktioner för vanliga strukturer, vilket gör kod enklare att skriva, läsa och underhålla}
+        \ii{Kompilatorer hanterar översättning av komplexa strukturer till maskinkod}
+    \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile,t]
-    \frametitle{Maskinkod och moderna datorer}
 
+\begin{frame}[fragile]
+    \frametitle{Laboration -- \texttt{c3pu}}
 
-    % Relevance of machine code in contemporary software development
-    % Overview of how high-level languages are translated into machine code
+        \ti{\large Så, vad ska ni göra på laborationen?}
+
+        \halfblankline
+        \begin{itemize}
+            \ii{Översätta kod till assembly?}
+            \ii{Nej, värre än så \dots}
+            \ii{Skriva egen assembly-kod?}
+            \ii{Nej, ännu värre än så!}
+            \ii{\textbf{Skriva faktisk maskinkod!}\\
+                \texttt{01010111 01010100 01000110 00100001 00111111}}
+        \end{itemize}
+
 \end{frame}
 
-\begin{frame}[fragile,t]
-    \frametitle{Kompilatorer och tolkar}
+\begin{frame}[fragile]
+    \frametitle{\texttt{c3pu} -- Demo}
 
+    \begin{center}
+        \Huge DEMO
 
-    % Explanation of compilers and interpreters
-    % How they translate high-level code into executable machine code
-\end{frame}
-
-\begin{frame}[fragile,t]
-    \frametitle{Utmaningar med att arbeta med maskinkod}
-
-
-    % Difficulties and limitations of coding in machine code
-    % Importance of understanding machine code for debugging and optimization
-\end{frame}
-
-\begin{frame}[fragile,t]
-    \frametitle{Sammanfattning}
-
-
-    % Recap of the key points covered
-    % Encouragement to explore more about how programming languages work at the machine level
-\end{frame}
-
-\begin{frame}[fragile,t]
-    \frametitle{Frågor och diskussion}
-
-
-    % Open the floor for questions
-    % Suggest further reading materials and resources
+        \halfblankline
+        \Large \texttt{c3pu} -- en enkel CPU-simulator
+    \end{center}
 \end{frame}
