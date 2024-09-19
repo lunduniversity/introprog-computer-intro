@@ -132,7 +132,7 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 		}
 	\end{lstlisting}
 
-	Prova att kompilera och testköra programmet för att verifiera att det fungerar:
+	Prova att kompilera och testköra programmet för att verifiera att det fungerar (\emph{OBS! Nedan instruktioner kan vara fel, gör så som du lärt dig i pgk-kursen!}):
 
 	\begin{Code}
 		scalac HelloWorld.scala
@@ -146,25 +146,46 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 		git status
 	\end{Code}
 
-	Git har upptäckt att det finns en fil (\code{HelloWorld.scala}) som Git tror du kanske vill ha med i ditt projekt och föreslår att du ska lägga till den. Observera att Git ignorerar filerna som slutar på \code{.class}. Detta beror på att innehållet i \code{.gitignore} instruerar Git att ignorera dessa filer. Vilka andra filer ignoreras? Öppna \code{.gitignore} och titta efter!
+	Git har upptäckt att det finns en fil (\code{HelloWorld.scala}) som Git tror du kanske vill ha med i ditt projekt och föreslår att du ska lägga till den.
 
-	För att Git ska hålla reda på vår nya fil måste vi instruera Git att addera den till sin databas. Det görs i två steg: Först väljer vi vilka filer det gäller genom att lägga till dem i s.k. \emph{staging area} (\code{git~add}). Därefter ger vi kommandot för att faktiskt lägga till (\code{git~commit}). I vårt fall har vi bara en fil, så det första steget kan verka onödigt, men ibland vill man ha mer kontroll över vilka filer som ska eller inte ska läggas till, innan man gör en commit.
+	Observera att det antagligen också finns flera andra filer i katalogen som git har upptäckt. När du körde ditt scalaprogram så genererades t.ex. en fil som slutar på \code{.class} och några dolda kataloger vars namn börjar med en punkt, t.ex. \code{.metals}, \code{.scala-build} och \code{.vscode}. Genererade filer så som dessa vill man normalt inte ha med i sitt repository. Genom att skriva dessa filnamn i filen \code{.gitignore} så kommer Git att ignorera dem. Öppna filen \code{.gitignore} i valfri texteditor och lägg till namnen på de filer du vill ignorera, t.ex.:
+
+	\begin{Code}
+	*.class				# alla filer som slutar på .class
+	.metals/			# katalogen .metals/
+	.scala-build/		# katalogen .scala-build/
+	.vscode/			# katalogen .vscode/
+	*.tasty				# alla filer som slutar på .tasty
+	\end{Code}
+	
+	
+	Spara filen när du är klar, och kolla statusen för projektet igen med \code{git status}. Nu borde de genererade filerna inte längre visas, och bara filen \code{HelloWorld.scala} ska visas som ''untracked''.
+
+	För att lagra vår Scala-fil i repositoriet så att git kan hålla reda på den måste vi utföra två steg: Först berättar vi vilka filer vi vill lagra genom att lägga till dem i s.k. \emph{staging area} (\code{git~add}); Därefter ger vi kommandot \code{git~commit} för att faktiskt lägga till de utvalda filerna. Ofta vill man spara alla filändringar man gjort, så det första steget kan verka onödigt, men ibland vill man ha mer kontroll över vilka filer som ska eller inte ska läggas till, innan man gör en commit.
 	\\
 
 	\code{[\ref{git-add}]} Lägg till din fil i staging area med kommandot \code{git add}, och kolla status igen efteråt.
 	\\
 
-	Vi ser att Git har förberett för att spara filen i sin databas, men ännu inte gjort det. Det görs först när man gör en \emph{commit}. Då sparas en permanent fryst version av den eller de aktuella filer som finns i staging area, tillsammans med användarens kommentar som beskriver syftet med ändringen som gjorts. Om det räcker med en kort kommentar (vilket det oftast gör) kan man skriva kommentaren direkt på kommandoraden med optionen \code{-m}.
-	Om man inte använder optionen \code{-m} kommer den editor du angav när du tidigare konfiguerade Git att startas. En temporär fil som Git bevakar öppnas i editorn, som du kan skriva vad du vill i på vanligt vis, och när du är klar så sparar och stänger du filen. Detta är användbart när längre kommentarer krävs.
+	En extra detalj man kan notera är att \code{git add} inte egentligen lägger till \emph{filer} i staging area, utan snarare \emph{förändringar}. Efter status-kommandot ser vi att Git har förberett för att spara filen i repositoriet, men ännu inte gjort det. Om du nu ändrar något mer i filen och kör \code{git status} igen kommer så rapporterar Git att förändringar har lagts till i staging area samt att andra förändringar har gjorts i filen som ännu inte lagts till. Det finns alltså just nu olika innehåll i ditt workspace och i staging area.
+	
+	Gör \code{git add} igen för att också lägga till de nya ändringarna i staging area. Nu kan vi göra en commit!
 	\\
 
 	\code{[\ref{git-commit}]} Spara den nuvarande versionen av din fil i databasen med kommandot \code{git~commit}.
 	\\
+	
+	När du gör en commit måste du samtidigt förse git med ett commit-meddelade som beskriver syftet med ändringen. Git kommer då att öppna en editor (den du konfigurerade tidigare) där du kan skriva ditt meddelande. När du är klar så spara och stäng filen. Då slutförs committen och det lagras en ny permanent version av de filer och förändringar som du lagt i staging area.
+	
+	Ofta räcker det med en kort commit-kommentar, som berättar \emph{syftet} med committen, snarare än exakt vad som ändrats, och då kan man skriva den direkt på kommandoraden med optionen \code{-m}.
 
+	\begin{Code}
+		git commit -m "Förtydligade utskriften i programmet"
+	\end{Code}
 
-	Vid utskrift av projektets status bör det nu framgå att alla filer i katalogen är synkroniserade med de som finns i (det lokala) repositoriets databas.
+	Vid utskrift av projektets status bör det nu framgå att alla filer i katalogen är ``up-to-date'' med (det lokala) repositoriet.
 
-	Du kan nu fortsätta att arbeta med scalaprogrammet i \code{HelloWorld.scala}. Ändra programmet med din favoriteditor så att något annat än ''Hello, world!'' skrivs ut, spara, kompilera och testkör.
+	Du kan nu fortsätta att arbeta med Scala-programmet i \code{HelloWorld.scala}. Ändra programmet med din favoriteditor så att något annat än ''Hello, world!'' skrivs ut, spara, kompilera och testkör.
 
 	När du är nöjd med din ändring undersöker vi projektets status igen:
 
@@ -178,7 +199,7 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 	\code{[\ref{git-commit-a}]} Välj en av metoderna och gör commit på dina ändringar! Kontrollera med \code{git~status} att ditt lokala repositorium är uppdaterat.
 	\\
 
-	\item De ändringar vi nu gjort finns bara lagrade i vårt lokala repositorium på vår egen dator. För att kunna dela med oss av vårt uppdaterade projekt till andra, eller för att vi själva ska kunna komma åt projektet från andra platser, vill vi ladda upp våra ändringar till den centrala lagringsplatsen på GitHub.
+	\item Alla ändringar vi gjort hittils finns bara lagrade i vårt lokala repositorium på vår egen dator. För att kunna dela med oss av vårt uppdaterade projekt till andra, eller för att vi själva ska kunna komma åt projektet från andra platser, vill vi ladda upp våra ändringar till den centrala lagringsplatsen på GitHub.
 
 	% Börja med att gå till webbsidan för ditt projekt på GitHub. Inget har förändrats här sedan sist, eller hur?
 	% För att kopiera våra ändringar till GitHub används gitkommandot \code{push}. Gå tillbaka till terminalen och
@@ -188,11 +209,11 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 		git push
 	\end{Code}
 
-	Efter att du kört kommandot så gå tillbaka till ditt projekt på GitHub och ladda om den. Undersök vilka förändringar som skett i projektet. Klicka på \code{HelloWorld.scala} och kontrollera innehållet. Klicka på ''History'' och undersök vilka versioner av filen som finns sparade samt vad de innehåller.
+	Efter att du kört kommandot så gå tillbaka till ditt projekt på GitHub och ladda om sidan. Undersök vilka förändringar som skett i projektet. Klicka på \code{HelloWorld.scala} och kontrollera innehållet. Klicka på ''History'' och undersök vilka versioner av filen som finns sparade samt vad de innehåller.
 
 	\item En av de stora vinsterna med att använda Git är att det underlättar mycket när flera personer arbetar tillsammans på samma projekt, eller om en och samma person vill arbeta med olika saker på projektet parallellt -- på en och samma eller flera datorer. Om man samarbetar med en annan person behöver man ge den personen rättighet att arbeta med projektet på GitHub. För att bjuda in en annan person till projektet så klicka på ''Settings'' på projektets webbsida och välj därefter ''Manage access'' i menyn till vänster. Här har du möjlighet att bjuda in en annan GitHub-användare till projektet. Klicka dig dit för att se hur sidan ser ut.
 
-	I fortsättningen av laborationen kommer vi att simulera en sådan parallell utveckling genom att du själv skapar en andra klon av repositoriet och arbetar med den parallellt med den klon vi tidigare skapade. Vi kommer också att se exempel på hur man kan arbeta med Git inifrån ett utvecklingsverktyg utan att använda sig av terminalen.
+	I fortsättningen av laborationen kommer vi att simulera en sådan parallell utveckling genom att du själv skapar en andra klon av repositoriet och arbetar med de två klonerna parallellt. (Eller, om ni är två personer som samarbetar, kan ni ha vars en klon.) Vi kommer också att se exempel på hur man kan arbeta med Git inifrån ett utvecklingsverktyg utan att använda sig av terminalen.
 
 	%För att skapa en ny klon av repositoriet på GitHub behöver vi en ny tom katalog att arbeta i. Låt oss kalla den \file{lab2b}. Starta ett nytt terminalfönster, gå till en lämplig plats med \code{cd} skapa den nya katalogen med hjälp av följande kommandon:
 	%
