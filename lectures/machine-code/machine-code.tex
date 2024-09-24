@@ -51,7 +51,7 @@
             \vspace{-2em}
             \begin{center}
                 \begin{tikzpicture}
-                    \only<+->{
+                    \only<3->{
                         \node (hl) [rectangle, draw, fill=blue!20, text width=6em, text centered, minimum height=2em] {Högnivåspråk};
                         \node (al) [rectangle, draw, fill=green!20, below=of hl, text width=6em, text centered, minimum height=2em] {Assembly};
                         \node (mc) [rectangle, draw, fill=red!20, below=of al, text width=6em, text centered, minimum height=2em] {Maskinkod};
@@ -120,22 +120,42 @@
 \begin{frame}[fragile,t]
     \frametitle{Binära tal - Introduktion}
 
-
     \ti{Olika talsystem}
 
-    \halfblankline
     \begin{itemize}
         \ii{Talsystem används för att representera tal med symboler.}
         \ii{Decimal (bas 10) -- vanligast, använder siffror 0-9.}
+        \ii{Siffrors position bestämmer 10-potensvärdet. Exempel:\\
+            \halfblankline
+            \hspace{5mm}\(274 = 2\cdot 100 + 7\cdot 10 + 4\cdot 1\)\\
+            \hspace{5mm}\(274 = 2\cdot 10^2 + 7\cdot 10^1 + 4\cdot 10^0\)}
     \end{itemize}
 
     \blankline
     \ti{Binärt talsystem}
-
-    \halfblankline
     \begin{itemize}
         \ii{Binärt (bas 2) -- används av datorer, bara två siffror, 0 och 1.}
         \ii{Varje siffra kallas en \textit{bit}.}
+        \ii{Siffrors position bestämmer 2-potensvärdet. Exempel:\\
+            \halfblankline
+            \hspace{5mm}\(1011_2 = 1\cdot 2^3 + 0\cdot 2^2 + 1\cdot 2^1 + 1\cdot 2^0\)\\
+            \hspace{5mm}\(1011_2 = 1\cdot 8 + 0\cdot 4 + 1\cdot 2 + 1\cdot 1 = 11\)}
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile,t]
+    \frametitle{Binära tal - Varför?}
+
+    \ti{Effekten av olika baser}
+    \begin{itemize}
+        \ii{Basen bestämmer antalet symboler (siffror) som används för att representera tal.}
+        \ii{Större bas kräver färre symboler för att representera samma tal.}
+        \ii{Exempel:}
+        \begin{itemize}
+            \is{Talet $999_{10}$ skrivs med 3 siffror}
+            \ii{Motsvarande i binärt: $1111100111_2$, 10 siffror.}
+        \end{itemize}
     \end{itemize}
 
     \blankline
@@ -146,7 +166,6 @@
         \ii{Enkelt att representera elektroniskt (ström finns/ström saknas).}
         \ii{Pålitligt att tolka signaler som hög (1) eller låg (0) spänning.}
     \end{itemize}
-
 \end{frame}
 
 \begin{frame}[fragile,t]
@@ -193,7 +212,6 @@
             \ii{Lättare att läsa och skriva stora binära tal.}
         \end{itemize}
         \ii{Används ofta för att representera \emph{minnesadresser}}
-        \ii{Hjälpsamt för att hitta och felsöka minnesproblem.}
     \end{itemize}
 
     \blankline
@@ -217,10 +235,11 @@
         \ii{ALU (Aritmetisk-logisk enhet) -- utför beräkningar och logiska operationer}
         \ii{Register -- lagrar tillfällig data under exekvering}
         \ii{Kontrollenhet -- styr och koordinerar CPU:ns aktiviteter}
+        \ii{Cache -- snabbt minne för att optimera åtkomst till data}
     \end{itemize}
 
     \blankline
-    \ti{Alltså, CPU:n gör:}
+    \ti{CPU:n gör:}
     \begin{itemize}
         \ii{Läser instruktioner från minnet}
         \ii{Avkodar (tolkar) dem}
@@ -234,10 +253,10 @@
 
     \ti{Typer av minne}
     \begin{itemize}
-        \ii{RAM -- arbetsminne som lagrar data och instruktioner temporärt}
-        \ii{ROM -- lagrar permanent data, t.ex. firmware}
-        \ii{Cache -- snabbare minne nära CPU:n för att optimera åtkomst}
         \ii{Hårddisk, SSD, etc. -- permanent lagring av data}
+        \ii{RAM -- arbetsminne som lagrar data och instruktioner temporärt}
+        \ii{Cache -- snabbare minne nära CPU:n för att optimera åtkomst}
+        \ii{ROM -- lagrar permanent data, t.ex. firmware}
     \end{itemize}
 
     \blankline
@@ -258,7 +277,7 @@
     \begin{itemize}
         \ii{Binära instruktioner direkt förstådda av CPU:n}
         \ii{Utför enkla operationer som aritmetik, logik, och flyttning av data}
-        \ii{CPU:n använder en specifik instruktionsuppsättning (ISA)}
+        \ii{CPU:n använder en specifik instruktionsuppsättning (ISA -- \emph{Instruction Set Architecture})}
     \end{itemize}
 
     \blankline
@@ -275,6 +294,7 @@
     \begin{itemize}
         \ii{Opcode -- specificerar operationen (t.ex. \texttt{ADD})}
         \ii{Operand(er) -- data eller adresser för operationen (t.ex. register)}
+        \ii{Exempel: \texttt{ADD R1, R2, R3}}
     \end{itemize}
 
     \blankline
@@ -282,7 +302,7 @@
     \begin{itemize}
         \ii{CPU:n hämtar instruktionen från minnet}
         \ii{Avkodar opcode och identifierar operand(er)}
-        \ii{Utför operationen och sparar resultatet}
+        \ii{Utför operationen}
     \end{itemize}
 \end{frame}
 
@@ -343,7 +363,7 @@
 \begin{frame}[fragile,t]
     \frametitle{Maskinkod vs. Högnivåspråk}
 
-    \ti{Utmaningar med att skriva i maskinkod}
+    \ti{Utmaningar med maskinkod}
     \begin{itemize}
         \ii{Maskinkod är lågnivå och svår att läsa och skriva för människor}
         \ii{Svårt att hantera tillstånd och strukturer, och att debugga}
@@ -372,7 +392,7 @@
             \ii{Nej, värre än så \dots}
             \ii{Skriva egen assembly-kod?}
             \ii{Nej, ännu värre än så!}
-            \ii{\textbf{Skriva faktisk maskinkod!}\\
+            \ii{\textbf{Skriva maskinkod för hand!}\\
                 \texttt{01010111 01010100 01000110 00100001 00111111}}
         \end{itemize}
 
