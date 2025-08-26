@@ -1,14 +1,33 @@
 \ifdefined\ishandout
     \documentclass[handout]{beamer}
-\else
+    \else
+    % \documentclass[handout]{beamer}
     \documentclass{beamer}
-    \setbeamercovered{transparent}
+    % \setbeamercovered{transparent}
 \fi
 
 \includeonly{intro}
 
 \usepackage{selthcsslides}
 \usecolortheme{lucolors}
+
+\usepackage{beamerutil}
+
+% The Madrid theme, for some reason, does not show bullet points in list
+% environments. This is a workaround to fix that.
+\setbeamertemplate{itemize item}[default]
+\setbeamertemplate{itemize subitem}[default]
+\setbeamertemplate{enumerate item}[default]
+\setbeamertemplate{enumerate subitem}[default]
+
+% Beamer uses letters for footnotes by default. Change to numbers.
+% (Doesn't seem to work, though. I'll leave it for now.)
+\setbeamertemplate{footnote}{\insertfootnotemark}
+
+% Number captions
+\setbeamertemplate{caption}[numbered]
+
+
 
 % \usepackage[swedish]{babel}
 % Swedish setup using polyglossia for better multilingual support
@@ -17,10 +36,15 @@
 
 \usepackage{url}
 \usepackage{datetime2}
+\usepackage{xcolor}
 
-\usepackage{fontspec}  			  % Allows loading system fonts
-\setmainfont{Latin Modern Roman}  % Set the main (serif) font
-\setsansfont{Latin Modern Roman}  % Force sans-serif font to use the same font
+% \usepackage{fontspec}  			% Allows loading system fonts
+% \setmainfont{Latin Modern Roman}  % Set the main (serif) font
+% \setsansfont{Latin Modern Roman}  % Force sans-serif font to use the same font
+
+\author[]{Mattias Nordahl}
+\institute{\url{mattias.nordahl@cs.lth.se}}
+\date{}
 
 
 \author[]{Mattias Nordahl}
@@ -30,7 +54,7 @@
 %***************************************************************
 \begin{document} 
 
-\title{Datorer och datoranvändning\\Introduktion} 
+\title{{\small\bf EDAB05---Programmering, grundkurs}\\Datorer och datoranvändning (dod)\\Introduktion} 
 
 \frame[plain]{
 \maketitle

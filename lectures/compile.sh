@@ -6,12 +6,21 @@ if [ $# -eq 0 ]; then
     echo "Documents: intro, unix, git, latex, machine-code"
     exit 1
 fi
+# Array of all possible document subdirectories
+all_documents=("intro" "unix" "git" "latex" "machine-code")
 
-# Array of subdirectory names you want to compile (passed as command-line arguments)
-subdirectories=("$@")
+# If 'all' is passed as an argument, replace it with all actual documents
+if [[ " $* " =~ " all " ]]; then
+    subdirectories=("${all_documents[@]}")
+else
+    subdirectories=("$@")
+fi
+
+echo "Subdirectories to compile: ${subdirectories[*]}"
 
 # Loop through each subdirectory
 for dir in "${subdirectories[@]}"; do
+    echo "Compiling in directory: $dir"
     if [ ! -d "$dir" ]; then
         echo "Directory $dir does not exist."
         continue

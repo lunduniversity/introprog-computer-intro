@@ -26,18 +26,17 @@
         \ii{Program --- instruktioner för datorn}
         \ii{Operativsystem --- en samling program som gör det möjligt att köra ``vanliga'' program}
         \ii{Operativsystemet hanterar:}
-              \begin{itemize}
-                  \is{de program som körs (program körs ofta parallellt, operativsystemet ser till att programmen får minne och tid att exekvera)}
-                  \ii{yttre enheter (tangentbord, mus, skärm, nätverk, \ldots)}
-                  \ii{lagring av data (filer, \ldots)}
-                  \ii{skydd, felhantering}
-                        kommunikation med användaren
-              \end{itemize}
+        \begin{itemize}
+            \is{de program som körs (program körs ofta parallellt, operativsystemet ser till att programmen får minne och tid att exekvera)}
+            \ii{yttre enheter (tangentbord, mus, skärm, nätverk, \ldots)}
+            \ii{lagring av data (filer, \ldots)}
+            \ii{skydd, felhantering, kommunikation med användaren}
+        \end{itemize}
 
         \ii{Exempel:}
-              \begin{itemize}
-                  \is{Linux, Windows, Mac OS X, Unix, \ldots}
-              \end{itemize}
+        \begin{itemize}
+            \is{Linux, Windows, Mac OS X, Unix, \ldots}
+        \end{itemize}
     \end{itemize}
 \end{frame}
 
@@ -76,7 +75,7 @@
     \ti{Unix är:}
     \begin{itemize}
         \is{Litet, standardiserat, flyttbart}
-        \ii{(Urspringligen) Inte för nybörjare. Enklare nu med grafiska skrivbordsmiljöer.}
+        \ii{(Ursprungligen) Inte för nybörjare. Enklare nu med grafiska skrivbordsmiljöer.}
     \end{itemize}
 \end{frame}
 
@@ -213,9 +212,9 @@
     \blankline
     \begin{onlyenv}<.->
         \begin{tabular}{cl}
-            \url{~}     & Hemkatalog (tilde) \\
-            \url{~user} & Användarens hemkatalog \\
-            \code{.}    & Aktuell katalog (punkt) \\
+            \url{~}     & Hemkatalog (tilde)              \\
+            \url{~user} & Användarens hemkatalog          \\
+            \code{.}    & Aktuell katalog (punkt)         \\
             \code{..}   & Överordnad katalog (punktpunkt) \\
         \end{tabular}
     \end{onlyenv}
@@ -265,7 +264,7 @@
     \frametitle{Kommandotolk (shell) och terminal}
 
     \ti{Termerna \emph{kommandotolk} och \emph{terminal} används ofta synonymt, men har olika betydelser:}
-    
+
     \halfblankline
     \begin{description}
         \di{Kommandotolk}{För kommunikation med operativsystemet, via kommandon}
@@ -274,7 +273,7 @@
     \end{description}
 
     \blankline
-    
+
     \ti{Exempel på shells:}
     \begin{itemize}
         \is{\code{bash} (Bourne-Again SHell)}
@@ -289,11 +288,11 @@
     Så här fungerar en kommandotolk:
     \begin{GobbleCode}{4}
         Upprepa i all oändlighet:
-            Läs ett kommando
-            Om kommandot är ett riktigt kommando:
-                utför det som ska göras
-            annars:
-                skriv ut felmeddelande
+        Läs ett kommando
+        Om kommandot är ett riktigt kommando:
+        utför det som ska göras
+        annars:
+        skriv ut felmeddelande
     \end{GobbleCode}
 
 \end{frame}
@@ -374,7 +373,7 @@
     \halfblankline
     \begin{onlyenv}<.->
         \begin{tabular}{lp{60mm}}
-            \code{scalac Calc.scala}  & Kompilerar \code{Calc.scala} med Scalakompilatorn                                         \\
+            \code{scalac Calc.scala}        & Kompilerar \code{Calc.scala} med Scalakompilatorn                                                                                             \\
             \code{cp -i report.tex old.tex} & Kopierar \code{report.tex} till \code{old.tex}. \code{-i} betyder att systemet frågar om \code{old.tex} ska skrivas över, om den redan finns. \\
         \end{tabular}
     \end{onlyenv}
@@ -442,7 +441,7 @@
         \begin{GobbleCode}{10}
             hacke-3{ma1337no-s}: ls -l
             -rw-r-----  1 ma1337no-s  students  4940 aug 21 11:14 example.txt
-             (skydd)       (ägare)     (grupp)
+            (skydd)       (ägare)     (grupp)
         \end{GobbleCode}
     \end{onlyenv}
 
@@ -453,7 +452,7 @@
     \frametitle{Filskydd 2/3}
     \begin{GobbleCode}{6}
         -rw-r-----  1 ma1337no-s  students  4940 aug 21 11:14 example.txt
-          u  g  o
+        u  g  o
     \end{GobbleCode}
 
     Tre kategorier av användare:
@@ -485,8 +484,8 @@
     \end{onlyenv}
 
     \ti{Filskydd kan anges symboliskt, till exempel \code{u=rw,o=r}}
-    
-    \halfblankline 
+
+    \halfblankline
     \ti{Eller numeriskt, enligt:}
 
     \begin{onlyenv}<+->
@@ -494,19 +493,19 @@
             x = 001, w = 010, r = 100, rx = 101, rw = 110, rwx = 111
         \end{GobbleCode}
     \end{onlyenv}
-    
-    
+
+
     \ti{Siffrorna tolkar man sedan som binära tal, vilket ger:}
-    
+
     \begin{onlyenv}<.->
         \begin{GobbleCode}{8}
             x = 1, w = 2, r = 4, rx = 5, rw = 6, rwx = 7
         \end{GobbleCode}
     \end{onlyenv}
-    
-    
+
+
     \ti{Fullständiga numeriska filskydd blir till exempel:}
-    
+
     \begin{onlyenv}<.->
         \begin{GobbleCode}{8}
             604 <=> u=rw,o=r    755 <=> u=rwx,g=rx,o=rx
@@ -532,9 +531,9 @@
 
     \blankline
     \begin{tabular}{p{2.2cm}p{8cm}}
-        \code{$\uparrow$} \code{$\downarrow$} & Bläddra bland tidigare kommandon.                 \\
+        \code{$\uparrow$} \code{$\downarrow$} & Bläddra bland tidigare kommandon.                  \\
         \code{!abc}                           & Gör om senaste kommando som inleds med \code{abc}. \\
-        \code{!!}                             & Gör om senaste kommando.                          \\
+        \code{!!}                             & Gör om senaste kommando.                           \\
     \end{tabular}
 \end{frame}
 
@@ -559,7 +558,7 @@
             Outline.tex
         \end{GobbleCode}
     \end{onlyenv}
-    
+
     \ti{Då kan vi till exempel skriva:}
     \begin{onlyenv}<.->
         \begin{GobbleCode}{8}
@@ -594,7 +593,7 @@
         \is{Används ofta för att konfigurera program.}
         \ii{Filnamn börjar med punkt och är dolda, s.k. \emph{punktfiler}.}
     \end{itemize}
-    
+
     \ti{\textbf{\code{bash} initieringsfil:}}
     \begin{itemize}
         \is{bash läser \code{.bash\_profile} (från hemkatalogen) när ett nytt terminalfönster öppnas.}

@@ -1,7 +1,7 @@
 
 
 
-            Eﬀektivitet i Scala: Sorteringsalgoritmer
+            Effektivitet i Scala: Sorteringsalgoritmer
                          Fiktiv Författare
                          12 september 2024
 
@@ -12,12 +12,12 @@ påhittade för övningsändamål.
 
 1 Introduktion
 Scala är ett populärt språk som kombinerar funktionell och objektoriente-
-rad programmering. I denna artikel utvärderar vi eﬀektiviteten hos olika
+rad programmering. I denna artikel utvärderar vi effektiviteten hos olika
 sorteringsalgoritmer när de används i Scala. Speciellt fokuserar vi på sorte-
 ringsalgoritmerna QuickSort och MergeSort.
 
 2 O-notation
-Innan vi börjar prata om algoritmers tidseﬀektivitet behöver vi förstå så
+Innan vi börjar prata om algoritmers tidseffektivitet behöver vi förstå så
 kallad O-notation. O-notation (ibland kallad “stora O-notation” eller “big
 O notation” på engelska) är ett sätt att beskriva hur effektiv en algoritm
 är när det gäller exekveringstid, beroende på mängden data som algoritmen
@@ -41,8 +41,8 @@ Här är några av de vanligaste O-notationerna och vad de representerar:
             på indata. En dubbling av indata leder till en dubbling av
             exekveringstiden.
    O(log n) Logaritmisk tid – Tiden ökar mycket långsamt när indata
-            växer. Vanligt i eﬀektiva sökalgoritmer.
- O(n log n) Linjär-logaritmisk tid – Vanligt för många eﬀektiva sorte-
+            växer. Vanligt i effektiva sökalgoritmer.
+ O(n log n) Linjär-logaritmisk tid – Vanligt för många effektiva sorte-
             ringsalgoritmer, som exempelvis MergeSort.
       O(n2) Kvadratisk tid – Tiden växer kvadratiskt med indata; of-
             ta sett i enklare sorteringsalgoritmer som Bubble Sort. En
@@ -65,7 +65,7 @@ Sortering är en grundläggande operation inom datavetenskap, och olika al-
 goritmer har olika prestanda beroende på data och sammanhang. Två av de
 vanligaste algoritmerna är QuickSort och MergeSort.
 
-  1Produkten blir egentligen n · (n − 1), men konstanta värden ignoreras i O-notation
+  1 Produkten blir egentligen n · (n − 1), men konstanta värden ignoreras i O-notation
 eftersom de inte spelar någon roll när n går mot ett stort värde.
 
                                 2
@@ -139,7 +139,7 @@ och 2.
 5 Slutsats
 Vi har undersökt två olika sorteringsalgoritmer i Scala och jämfört deras
 prestanda. Resultaten visar att valet av algoritm kan ha en betydande på-
-verkan på programmets eﬀektivitet. Genom att förstå dessa skillnader kan
+verkan på programmets effektivitet. Genom att förstå dessa skillnader kan
 utvecklare fatta mer informerade beslut när de designar och optimerar sina
 program.
 
