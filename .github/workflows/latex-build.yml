@@ -49,3 +49,46 @@ jobs:
           asset_path: ./lab-instructions/dodlabs_${{ env.TAG_NAME }}.pdf
           asset_name: dodlabs_${{ env.TAG_NAME }}.pdf
           asset_content_type: application/pdf
+
+
+
+
+
+      - name: Prepare stable 'latest' filename
+        run: |
+          cp "lab-instructions/dodlabs_${{env.TAG_NAME}}.pdf" \
+             "lab-instructions/dodlabs_latest.pdf"
+          echo "ASSET_LATEST=lab-instructions/dodlabs_latest.pdf" >> $GITHUB_ENV
+
+      - name: Delete old asset from subject 'latest' release (if exists)
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tag = `dodlabs_latest`;
+            try {
+              const rel = await github.rest.repos.getReleaseByTag({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag
+              });
+              for (const a of rel.data.assets ?? []) {
+                if (a.name === `slides_${process.env.SUBJECT}_latest.pdf`) {
+                  await github.rest.repos.deleteReleaseAsset({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    asset_id: a.id
+                  });
+                }
+              }
+            } catch (e) {
+              if (e.status !== 404) throw e; // 404 = ingen 'latest' release än
+            }
+
+      - name: Create/Update subject 'latest' release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: dodlabs_latest
+          name: "Lab instructions latest"
+          files: ${{ env.ASSET_LATEST }}
+          draft: false
+          prerelease: false

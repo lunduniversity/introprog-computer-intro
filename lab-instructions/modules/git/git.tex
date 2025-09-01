@@ -56,21 +56,21 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 
 	\item Utöver att konfigurera git att använda en viss editor och ditt korrekta namn och e-postadress, kan det vara bra att konfigurera en ytterligare grej:
 	\begin{Code}
-	git config --global pull.rebase false
+		git config --global pull.rebase false
 	\end{Code}
 	När man använder \code{git pull} (som du kommer få göra senare) så finns det två sätt att göra det på: \emph{merge} och \emph{rebase}. Det är två olika sätt att försöka sammanfoga ändringar från det centrala repositoriet med dina lokala ändringar. Det är en smaksak vilket man föredrar, båda har för- och nackdelar, men för nya git-användare är det rekkommenderat att inte använda \code{rebase}. Därför sätter vi \code{pull.rebase} till \code{false}. Detta är faktiskt standardinställningen, men i nyare versioner av git måste man ändå uttryckligen göra denna inställning.
 
 	% Tack Alexander Sandström som skriv ihop detta steg!
 	\item Nu börjar vi närma oss att kunna göra en lokal klon av vårt repo och börja arbeta med git, men vi behöver sätta upp en sak till: en SSH-nyckel.
-	
+
 	\halfblankline
 	Om du redan har satt upp en SSH-nyckel kan du hoppa över denna del.
 	\halfblankline
-	
+
 	\noindent I en alltmer osäker cyberrymd krävs det numera att man kopplar upp sig till GitHub via protokollet SSH (som vi använde för att koppla upp oss mot annan skoldator i slutet av labb~1). Med en SSH-nyckel så slipper man ange inloggningsuppgifter vid varje git-kommando. Det är också mycket säkrare eftersom du inte skickar dina inloggningsuppgifter via internet.
-	
+
 	Du ska generera ett så kallat nyckelpar (en privat och en publik nyckel) på din dator, och berätta för GitHub vilken din \emph{publika} nyckel är (\emph{ge \textbf{aldrig} ut din privata nyckel till \textbf{någon}}). Därefter sköts all kryptering och annan säkerhet automatiskt varje gång du snackar med GitHub via terminalen.
-	
+
 
 	\vspace*{3mm}
 
@@ -101,8 +101,8 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 
 	För att kunna klona vårt repositorium behöver vi en referens till det. Gå därför till webbsidan för ditt repositorium. Där hittar du en grön knapp med texten ''Code''. Om du klickar på denna får du upp en drop-downmeny som bland annat innehåller en URL, som du ska kopiera.
 	\\
-	
-	
+
+
 	\textbf{OBS!} Kontrollera att du tittar på SSH-varianten snarare än HTTS, URL:en ska vara på formatet:
 	\vspace{-.5em}
 	\begin{Code}
@@ -151,14 +151,14 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 	Observera att det antagligen också finns flera andra filer i katalogen som git har upptäckt. När du körde ditt scalaprogram så genererades t.ex. en fil som slutar på \code{.class} och några dolda kataloger vars namn börjar med en punkt, t.ex. \code{.metals}, \code{.scala-build} och \code{.vscode}. Genererade filer så som dessa vill man normalt inte ha med i sitt repository. Genom att skriva dessa filnamn i filen \code{.gitignore} så kommer Git att ignorera dem. Öppna filen \code{.gitignore} i valfri texteditor och lägg till namnen på de filer du vill ignorera, t.ex.:
 
 	\begin{Code}
-	*.class				# alla filer som slutar på .class
-	.metals/			# katalogen .metals/
-	.scala-build/		# katalogen .scala-build/
-	.vscode/			# katalogen .vscode/
-	*.tasty				# alla filer som slutar på .tasty
+		*.class				# alla filer som slutar på .class
+		.metals/			# katalogen .metals/
+		.scala-build/		# katalogen .scala-build/
+		.vscode/			# katalogen .vscode/
+		*.tasty				# alla filer som slutar på .tasty
 	\end{Code}
-	
-	
+
+
 	Spara filen när du är klar, och kolla statusen för projektet igen med \code{git status}. Nu borde de genererade filerna inte längre visas, och bara filen \code{HelloWorld.scala} ska visas som ''untracked''.
 
 	För att lagra vår Scala-fil i repositoriet så att git kan hålla reda på den måste vi utföra två steg: Först berättar vi vilka filer vi vill lagra genom att lägga till dem i s.k. \emph{staging area} (\code{git~add}); Därefter ger vi kommandot \code{git~commit} för att faktiskt lägga till de utvalda filerna. Ofta vill man spara alla filändringar man gjort, så det första steget kan verka onödigt, men ibland vill man ha mer kontroll över vilka filer som ska eller inte ska läggas till, innan man gör en commit.
@@ -168,15 +168,15 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 	\\
 
 	En extra detalj man kan notera är att \code{git add} inte egentligen lägger till \emph{filer} i staging area, utan snarare \emph{förändringar}. Efter status-kommandot ser vi att Git har förberett för att spara filen i repositoriet, men ännu inte gjort det. Om du nu ändrar något mer i filen och kör \code{git status} igen kommer så rapporterar Git att förändringar har lagts till i staging area samt att andra förändringar har gjorts i filen som ännu inte lagts till. Det finns alltså just nu olika innehåll i ditt workspace och i staging area.
-	
+
 	Gör \code{git add} igen för att också lägga till de nya ändringarna i staging area. Nu kan vi göra en commit!
 	\\
 
 	\code{[\ref{git-commit}]} Spara den nuvarande versionen av din fil i databasen med kommandot \code{git~commit}.
 	\\
-	
+
 	När du gör en commit måste du samtidigt förse git med ett commit-meddelade som beskriver syftet med ändringen. Git kommer då att öppna en editor (den du konfigurerade tidigare) där du kan skriva ditt meddelande. När du är klar så spara och stäng filen. Då slutförs committen och det lagras en ny permanent version av de filer och förändringar som du lagt i staging area.
-	
+
 	Ofta räcker det med en kort commit-kommentar, som berättar \emph{syftet} med committen, snarare än exakt vad som ändrats, och då kan man skriva den direkt på kommandoraden med optionen \code{-m}.
 
 	\begin{Code}
@@ -325,7 +325,7 @@ Här ges lösningar till de uppgifter som är markerade. Försök gärna lösa u
 
 	\item\label{git-clone} Byt ut URL:en mot din egen:
 	      \begin{Code}
-		      git clone https://github.com/fornamnefternamn/edaa60-lab2.git
+		      git clone https://github.com/fornamnefternamn/edab05-dod-lab2.git
 	      \end{Code}
 
 	\item\label{git-add} Lägg till fil till \emph{staging area}:

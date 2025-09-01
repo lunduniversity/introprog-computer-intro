@@ -1,2 +1,2 @@
 # introprog-computer-intro
-Course material for EDAA60 Computer Introduction, in Swedish "Datorer och datoranvändning".
+Course material for the *Computer Introduction* module in the introductory programming course, or in Swedish "Datorer och datoranvändning" (*dod*).
