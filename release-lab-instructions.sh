@@ -1,56 +1,119 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -Eeuo pipefail
 
-# This script creates a tag for the repository and pushes it to the remote
-# repository. The remote repository is configured to trigger a GitHub Actions
-# workflow when a new tag is pushed, which will create a release on GitHub
-# using the tag.
+# release-lab-instructions.sh
+# Skapar och pushar en annoterad tagg: lab_<version>
+# GitHub Actions-workflow som lyssnar på "lab_*" bygger PDF.
 
-# Usage: ./release-lab-instructions <version-number> ["Optional tag commit message"]
+REMOTE="origin"
 
-# Check for the correct number of input parameters
-if [ "$#" -lt 1 ]; then
-    echo "Error: Incorrect number of arguments."
-    echo "Usage: $0 <version-number> [\"tag commit message\"]"
-    echo "Example: $0 v1.0.1 \"Initial release\""
-    echo "If no commit message is specified, the default editor will be opened."
-    exit 1
+usage() {
+  cat <<'USAGE'
+Usage:
+  release-lab-instructions.sh -v <version> [-m "message"] [-r <remote>] [-y]
+
+Options:
+  -v  Versionssträng (t.ex. 2025-09-01 eller v1.2.3).  REQ
+  -m  Taggmeddelande (annoterad tag). Om utelämnas öppnas editor.
+  -r  Git remote (default: origin)
+  -y  Svara "ja" på alla frågor (överskriv tagg utan att fråga)
+  -h  Visa denna hjälp
+
+Exempel:
+  ./release-lab-instructions.sh -v v1.0.1
+  ./release-lab-instructions.sh -v 2025-09-01 -m "HT25 lab release"
+  ./release-lab-instructions.sh -v v2 -r origin -y
+USAGE
+}
+
+confirm() {
+  local prompt="${1:-Är du säker? (y/N) }"
+  read -r -p "$prompt" ans
+  [[ "$ans" == "y" || "$ans" == "Y" ]]
+}
+
+delete_tag_if_exists() {
+  local tag="$1"
+  if git rev-parse "$tag" >/dev/null 2>&1; then
+    echo "Taggen $tag finns redan lokalt."
+    if $ASSUME_YES || confirm "Vill du ersätta taggen $tag? (y/N) "; then
+      git tag -d "$tag" || true
+      if git ls-remote --tags "$REMOTE" | grep -q "refs/tags/$tag$"; then
+        git push "$REMOTE" --delete "$tag" || true
+      fi
+    else
+      echo "Avbryter."
+      exit 1
+    fi
+  else
+    # Om den inte finns lokalt, kolla endast remote
+    if git ls-remote --tags "$REMOTE" | grep -q "refs/tags/$tag$"; then
+      echo "Taggen $tag finns på remote."
+      if $ASSUME_YES || confirm "Vill du ersätta taggen $tag på remote? (y/N) "; then
+        git push "$REMOTE" --delete "$tag" || true
+      else
+        echo "Avbryter."
+        exit 1
+      fi
+    fi
+  fi
+}
+
+VERSION=""
+MESSAGE=""
+ASSUME_YES=false
+
+while getopts ":v:m:r:yh" opt; do
+  case "$opt" in
+    v) VERSION="$OPTARG" ;;
+    m) MESSAGE="$OPTARG" ;;
+    r) REMOTE="$OPTARG" ;;
+    y) ASSUME_YES=true ;;
+    h) usage; exit 0 ;;
+    \?) echo "Okänd flagga: -$OPTARG"; usage; exit 1 ;;
+    :) echo "Flagga -$OPTARG kräver ett värde."; usage; exit 1 ;;
+  esac
+done
+
+if [[ -z "$VERSION" ]]; then
+  echo "Fel: -v <version> krävs."
+  usage
+  exit 1
 fi
 
+TAG="lab_${VERSION}"
 
-# Define the tag and message
-TAG="lab_$1"
-MESSAGE="Lab instructions $1"
+# Hämta taggar
+git fetch --tags "$REMOTE" >/dev/null 2>&1 || true
 
-# Check if the tag already exists
-if git rev-parse "$TAG" >/dev/null 2>&1; then
-    echo "Error: Tag $TAG already exists."
+echo "Sammanfattning:"
+echo "  Version: $VERSION"
+echo "  Tagg:    $TAG"
+echo "  Remote:  $REMOTE"
+$ASSUME_YES || confirm "Skapa och pusha taggen nu? (y/N) " || { echo "Avbrutet."; exit 1; }
 
-    # Ask user if they want to replace the existing tag
-    read -p "Do you want to replace the existing tag? (y/n) " answer
-    case $answer in
-        [Yy]* )
-            # Delete the tag locally
-            git tag -d "$TAG"
-            # Delete the tag from the remote
-            git push origin --delete "$TAG"
-            ;;
-        * )
-            echo "Operation aborted."
-            exit 1
-            ;;
-    esac
+# Ta bort befintlig tagg (lokalt/remote) vid behov
+delete_tag_if_exists "$TAG"
+
+# Om inget -m: öppna editor för att skriva ett meddelande
+if [[ -z "$MESSAGE" ]]; then
+  tmpfile="$(mktemp)"
+  {
+    echo "Lab instructions $VERSION"
+    echo
+    echo "(Skriv ditt meddelande ovan. Ta inte bort sista raden.)"
+    echo "---"
+  } > "$tmpfile"
+  "${GIT_EDITOR:-${VISUAL:-vi}}" "$tmpfile"
+  MESSAGE="$(sed '/^---$/,$d' "$tmpfile" | sed -e '${/^$/d}')"
+  rm -f "$tmpfile"
+  [[ -z "$MESSAGE" ]] && MESSAGE="Lab instructions $VERSION"
 fi
 
-# Create the annotated tag
-if [ -z "$2" ]; then
-    # If no message is provided, open the editor to allow the user to enter a message
-    git tag -a "$TAG"
-else
-    # If a message is provided, use it directly
-    git tag -a "$TAG" -m "$2"
-fi
+# Skapa annoterad tagg
+git tag -a "$TAG" -m "$MESSAGE"
 
-# Push the tag to the remote repository
-git push origin "$TAG"
+# Pusha
+git push "$REMOTE" "$TAG"
 
-echo "Tag $TAG created and pushed successfully."
+echo "Klart! Taggen $TAG skapades och pushades till $REMOTE."
