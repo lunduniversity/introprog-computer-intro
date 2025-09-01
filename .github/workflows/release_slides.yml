@@ -50,3 +50,42 @@ jobs:
           tag_name: ${{ github.ref_name }}
           draft: false
           prerelease: false
+
+      - name: Prepare stable 'latest' filename
+        run: |
+          cp "lectures/${{ env.SUBJECT }}/slides_${{ env.SUBJECT }}_${{ env.VERSION }}.pdf" \
+             "lectures/${{ env.SUBJECT }}/slides_${{ env.SUBJECT }}_latest.pdf"
+          echo "ASSET_LATEST=lectures/${{ env.SUBJECT }}/slides_${{ env.SUBJECT }}_latest.pdf" >> $GITHUB_ENV
+
+      - name: Delete old asset from subject 'latest' release (if exists)
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tag = `slides_${process.env.SUBJECT}_latest`;
+            try {
+              const rel = await github.rest.repos.getReleaseByTag({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag
+              });
+              for (const a of rel.data.assets ?? []) {
+                if (a.name === `slides_${process.env.SUBJECT}_latest.pdf`) {
+                  await github.rest.repos.deleteReleaseAsset({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    asset_id: a.id
+                  });
+                }
+              }
+            } catch (e) {
+              if (e.status !== 404) throw e; // 404 = ingen 'latest' release än
+            }
+
+      - name: Create/Update subject 'latest' release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: slides_${{ env.SUBJECT }}_latest
+          name: "Slides (${{ env.SUBJECT }}) latest"
+          files: ${{ env.ASSET_LATEST }}
+          draft: false
+          prerelease: false
