@@ -47,38 +47,42 @@ Kom ihåg att laborationen är ett inlärningsmoment. Ta hjälp av materialet oc
 		\item Skriv avsiktligt fel och rätta felet. Prova specialtecknen för att radera enstaka tecken på kommandoraden och för att radera hela raden (ILL 3.3).
 		\item Skriv ut hjälptexten (''man-sidan'') för \code{date}-kommandot (ILL 1.8). Bläddra framåt och bakåt i texten.
 		\item Prova specialtecknen för att få tillbaka tidigare kommandon. Återkalla t.ex. kommandot för utskrift av datum och utför det på nytt. Prova både piltangenterna $\uparrow$ $\downarrow$ och \commandchar{control-r}. Du kan också prova kommandot \code{history} för att se vilka kommandon du har kört.
-		\item Använd kalenderprogrammet (\code{cal}) för att ta reda på vilken veckodag du är född.
+		\item Använd kalenderprogrammet (\code{cal}) för att ta reda på vilken veckodag du är född (eller prova valfritt annat kommando om din dator inte har cal, t.ex. \code{date}).
 		\item Intresserade kan prova \code{!} (s.k. \emph{history expansion}) för att repetera tidigare kommandon. Exempelvis:
 		\begin{Code}
 			ls -l      // lista filer, med mer info
 			!!         // repetera det senaste kommandot
 			man touch  // visa manualen för touch-kommandot
 			touch fil  // skapa en fil som heter 'fil'
-			!ls        // repetera det senaste kommandot som börjar med 'ls'
+			!ls        // repetera senaste kommandot som börjar med 'ls'
 		\end{Code}
 	\end{Deluppgifter}
+
+	\item Ladda ned labbfiler. Några laborationer har material du behöver för att utföra labben, inklusive denna. Materialet finns i en zip-fil på följande adress:\\
+	\url{https://fileadmin.cs.lth.se/pgk/dod-lab-material.zip}.\\
+	Använd t.ex. kommandot \code{curl} för att ladda ner zip-filen och \code{unzip} för att packa upp den. Anpassa och välj själv kataloger efter eget tycke i nedanstående exempel (notera att optionen \code{-O} nedan är stor bokstav O, inte en nolla). Du kan naturligtvis också använda en webbläsare för att ladda ned filerna, men prova gärna \code{curl} först:
+
+	\begin{Code}
+		mkdir courses    // skapa en kurskatalog om du inte redan har en
+		cd courses       // gå till katalogen
+		mkdir pgk        // skapa en pgk katalog
+		cd pgk           // gå till katalogen
+
+		// ladda ned och packa upp filerna
+		curl -O https://fileadmin.cs.lth.se/pgk/dod-lab-material.zip
+		unzip dod-lab-material.zip
+	\end{Code}
 
 	\item Kommandon för att hantera filer och kataloger (ILL 1.7, 2.2, 2.6--2.9).
 
 	\begin{Deluppgifter}
-		\item Skriv ut en innehållsförteckning över din hemkatalog. Skriv ut en förteckning där också filer vars namn börjar med punkt (s.k. \emph{punktfiler}) skrivs ut.
-		\item Gå till katalogen \code{/usr/local/cs/dod/me/metool/src/metool}. Skriv ut en innehållsförteckning över katalogen. Skriv ut en förteckning över de filer vars namn innehåller strängen \code{Statement}.
-		\item Prova hur filnamnskomplettering fungerar. Skriv \code{less R} och tryck på \commandchar{tab}. Datorn fyller i tecken i filnamnet så länge de är unika (nu står det \code{less Re} på kommando\-raden). Det finns mer än en fil vars namn börjar med \file{Re}. Tryck på \commandchar{tab} en gång till (ibland behövs det två extra tryckningar) så får du en lista över dessa filer. Skriv \code{a} och tryck på \commandchar{tab} igen; datorn fyller i till det unika filnamnet \file{ReadStatement.java}. Tryck på \commandchar{return} för att titta på filen.
-		\item Gå till din hemkatalog och skapa en katalog för de filer som används i denna laboration. Katalogen ska heta \file{lab1} och vara en underkatalog till en katalog \file{dod}, där du kan spara allt som rör kursen Datorer och datoranvändning. Du kan i fortsättningen skapa en ny katalog för varje datorlaboration som du gör. Använd följande kommandon:
-
-		\begin{Code}
-			cd          // gå till hemkatalogen om du inte redan är där
-			mkdir dod   // skapa katlogen dod i din hemkatalog
-			cd dod      // gå till katalogen dod
-			mkdir lab1  // skapa katalogen lab1
-			cd lab1     // gå till katalogen lab1
-		\end{Code}
-
-
-		\item Kopiera filen \file{/usr/local/cs/dod/lab1/example.txt} till katalogen \file{lab1}. Skriv ut filen på skärmen med en sida i taget.
+		\item Skriv ut en innehållsförteckning över din hemkatalog. Skriv också ut en förteckning där filer vars namn börjar med punkt (s.k. \emph{punktfiler}) skrivs ut också.
+		\item Gå till katalogen \code{dod-lab-material/unix/projects/beta/data} bland labbfilerna. Skriv ut en innehållsförteckning över katalogen. Skriv ut en förteckning över de filer vars namn innehåller strängen \code{report}.
+		\item Prova hur filnamnskomplettering fungerar. Skriv \code{less\ r} och tryck på \commandchar{tab}. Datorn fyller i tecken i filnamnet så länge de är unika (nu står det \code{less report} på kommando\-raden). Det finns mer än en fil vars namn börjar med \file{report}. Tryck på \commandchar{tab} en gång till (ibland behövs det två extra tryckningar) så får du en lista över dessa filer. Skriv \code{\_f} och tryck på \commandchar{tab} igen; datorn fyller i till det unika filnamnet \file{report\_final.txt}. Tryck på \commandchar{return} för att titta på filen.
+		\item Flytta dig runt i mappstrukturen och undersök vilka filer som finns.
 		\item Undersök hur mycket utrymme du har tillgängligt för att lagra filer.
-		\item Tag reda på hur stor filen \file{example.txt} är. Komprimera därefter filen och tag reda på storleken hos den komprimerade filen. Återställ sedan filen till sitt ursprungliga utseende.
-		\item \label{del:h} Skriv ut de rader i filen \file{example.txt} som innehåller ordet Unix. Kommandot för att leta i en fil heter \code{grep}.
+		\item Tag reda på hur stor filen \file{example.txt} i \file{dod-lab-material} är. Komprimera därefter filen och tag reda på storleken hos den komprimerade filen. Återställ sedan filen till sitt ursprungliga utseende.
+		\item \label{del:h} Skriv ut de rader i filen \file{example.txt} som innehåller ordet Unix. Kommandot för att leta i en fil heter \code{grep}. Se manualen med \code{man grep}.
 		\item \label{del:i} Samma som uppgift \ref{del:h}, men koppla om utskriften så att den hamnar i en fil med namnet \file{unix.txt}. Skriv ut denna fil på skärmen.
 		\item Räkna (med ett kommando) antalet rader i filen \file{unix.txt}. Du har nu räknat antalet rader som innehåller ordet Unix i filen \file{example.txt}.
 		\item \label{del:k} Tag bort filen \file{unix.txt}.
