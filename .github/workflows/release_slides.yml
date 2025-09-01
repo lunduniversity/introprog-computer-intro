@@ -33,7 +33,7 @@ jobs:
           work_in_root_file_dir: true
           root_file: "lectures/${{ env.SUBJECT }}/slides_handout.tex"
         env:
-          TEXINPUTS: ".:../latex-support//:./latex-support//:"
+          TEXINPUTS: ".:../../latex-support//:./latex-support//:"
 
       - name: Rename output PDF
         run: |
