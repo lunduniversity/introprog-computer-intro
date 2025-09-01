@@ -1,0 +1,52 @@
+name: Build and Release Slides
+
+on:
+  push:
+    tags:
+      - "slides_*_*" # ex: slides_intro_2025-09-01
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract subject and version
+        shell: bash
+        run: |
+          REF="${GITHUB_REF#refs/tags/}"              # slides_intro_2025-09-01
+          SUBJECT="${REF#slides_}"; SUBJECT="${SUBJECT%%_*}"          # intro
+          VERSION="${REF#slides_${SUBJECT}_}"                          # 2025-09-01
+          case "$SUBJECT" in intro|git|latex|unix|machine-code) ;; 
+            *) echo "Unsupported subject: $SUBJECT"; exit 1;;
+          esac
+          echo "SUBJECT=$SUBJECT" >> $GITHUB_ENV
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          latexmk_use_xelatex: true
+          work_in_root_file_dir: true
+          root_file: "lectures/${{ env.SUBJECT }}/slides_handout.tex"
+        env:
+          TEXINPUTS: ".:../latex-support//:./latex-support//:"
+
+      - name: Rename output PDF
+        run: |
+          SRC="lectures/${{ env.SUBJECT }}/slides_handout.pdf"
+          DST="lectures/${{ env.SUBJECT }}/slides_${{ env.SUBJECT }}_${{ env.VERSION }}.pdf"
+          mv "$SRC" "$DST"
+          echo "ASSET=$DST" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.ASSET }}
+          name: "Slides (${{ env.SUBJECT }}) ${{ env.VERSION }}"
+          tag_name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
