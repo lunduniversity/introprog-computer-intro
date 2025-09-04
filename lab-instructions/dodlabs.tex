@@ -183,9 +183,11 @@ Här samlas kort information och hjälp som kan vara användbar under laboration
 
 \subsection{Lab 1 --- Linux/Unix}
 \begin{itemize}
-	\item \texttt{Vad menas med att "gå till /usr/local/cs/dod/\dots"?}\\
-	      Det är en absolut sökväg som finns tillgänglig när du är inloggad på skolans datorer. Att ``gå~till'' en sökväg innebär att ändra sitt \texttt{working directory}. (ILL~1.7)
-	\item \texttt{Om jag använder min egen laptop, hur kommer jag åt \code{/usr/local/cs/dod/\dots}}?\\
+	\item \texttt{Vad menas med att ``gå till'' en katalog?}\\
+	      Att ``gå~till'' en sökväg innebär att ändra sitt \texttt{working directory}. (ILL~1.7)
+	\item \texttt{Varför börjar vissa sökvägar med ``/''?}\\
+	      Detta indikerar att sökvägen är \emph{absolut} och börjar från rotkatalogen. Ofta är det smidigare att använda \emph{relativa} sökvägar, vilket innebär att de börjar från den katalog du för tillfället befinner dig i.
+	\item \texttt{Om jag använder min egen laptop, hur kommer jag åt filer på skoldatorerna?}\\
 	      Du kan använda \code{ssh} för att logga in och arbeta på skoldatorerna (ILL~3.7), eller kopiera filer från skoldatorerna till din egen med \code{scp} eller \code{sftp} (ILL~4.2).
 \end{itemize}
 

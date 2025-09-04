@@ -76,8 +76,8 @@ Kom ihåg att laborationen är ett inlärningsmoment. Ta hjälp av materialet oc
 	\item Kommandon för att hantera filer och kataloger (ILL 1.7, 2.2, 2.6--2.9).
 
 	\begin{Deluppgifter}
-		\item Skriv ut en innehållsförteckning över din hemkatalog. Skriv också ut en förteckning där filer vars namn börjar med punkt (s.k. \emph{punktfiler}) skrivs ut också.
-		\item Gå till katalogen \code{dod-lab-material/unix/projects/beta/data} bland labbfilerna. Skriv ut en innehållsförteckning över katalogen. Skriv ut en förteckning över de filer vars namn innehåller strängen \code{report}.
+		\item Skriv ut en innehållsförteckning över din hemkatalog. Skriv också ut en förteckning där filer vars namn börjar med punkt (s.k. \emph{punktfiler}) också skrivs ut.
+		\item Gå till katalogen \code{dod-lab-material/unix/unix-lab-fs/projects/beta/data} bland labbfilerna. Skriv ut en innehållsförteckning över katalogen. Skriv ut en förteckning över de filer vars namn innehåller strängen \code{report}.
 		\item Prova hur filnamnskomplettering fungerar. Skriv \code{less\ r} och tryck på \commandchar{tab}. Datorn fyller i tecken i filnamnet så länge de är unika (nu står det \code{less report} på kommando\-raden). Det finns mer än en fil vars namn börjar med \file{report}. Tryck på \commandchar{tab} en gång till (ibland behövs det två extra tryckningar) så får du en lista över dessa filer. Skriv \code{\_f} och tryck på \commandchar{tab} igen; datorn fyller i till det unika filnamnet \file{report\_final.txt}. Tryck på \commandchar{return} för att titta på filen.
 		\item Flytta dig runt i mappstrukturen och undersök vilka filer som finns.
 		\item Undersök hur mycket utrymme du har tillgängligt för att lagra filer.
@@ -88,11 +88,12 @@ Kom ihåg att laborationen är ett inlärningsmoment. Ta hjälp av materialet oc
 		\item \label{del:k} Tag bort filen \file{unix.txt}.
 		\item Gör samma sak som i uppgift \ref{del:i}--\ref{del:k} utan att använda en temporär fil. Koppla i stället ihop kommandona med en pipe (|).
 	\end{Deluppgifter}
-	\item Editering av text. På LTHs Linuxdatorer finns flera editorer, till exempel \code{nano} (enkel, terminalbaserad), \code{gedit} (enkel, fönsterbaserad), \code{code} (enkel, fönsterbaserad) och \code{emacs} (avancerad). Du får naturligtvis använda vilken editor du vill normalt, men här ska du testa \code{gedit}. Gör gärna om uppgifterna nedan i någon annan editor senare, på egen hand. Vissa uppgifter kommer framstå som väldigt enkla, men prova gärna att göra dem t.ex. i \code{nano}.
+	\item Editering av text. På LTHs Linuxdatorer finns flera editorer, till exempel \code{nano} (enkel, terminalbaserad), \code{code} (VS Code) (enkel, fönsterbaserad) och \code{emacs} (avancerad). Du får naturligtvis använda vilken editor du vill normalt, men prova gärna med både \code{nano} och \code{code}.\\
+	\textbf{Tips}: I \code{nano} betyder~~\code{\^} (den lilla ``hatten'') Control-knappen (\code{CTRL}) på tangentbordet. Många funktioner har alternativa kortkommandon, t.ex. \code{M-R} för Replace, där \code{M} står för Meta-tangenten (ofta Alt-tangenten). Se \code{nano}'s hjälpskärm med \code{\^~G} (Control-G).
 
 	\begin{Deluppgifter}
-		\item Starta \code{gedit} och läs in filen \file{example.txt} genom att i terminalfönstret skriva:\\
-		\code{gedit example.txt \&}
+		\item Starta t.ex. VS Code och läs in filen \file{example.txt} genom att i terminalfönstret skriva:\\
+		\code{code example.txt}
 		\item Utnyttja musen och piltangenterna för att flytta textmarkören. Ändra textinnehållet genom att ta bort tecken och skriva in tecken. Spara det ändrade innehållet till filen.
 		\item Kontrollera att filen \file{example.txt} har ändrats.
 		\item Dela en rad i två rader. Sätt ihop raden igen.
