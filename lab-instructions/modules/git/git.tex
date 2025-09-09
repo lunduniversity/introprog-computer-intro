@@ -81,7 +81,8 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 		\item Skriv följande i terminalen:\\
 		      \code{ssh-keygen -t ed25519 -C \textquotedblleft valfri kommentar\textquotedblright}
 
-		\item SSH ber dig att döpa filen, default-namnet går bra att använda, tryck Enter.
+		\item SSH ber dig att döpa filen, default-namnet går bra att använda, tryck Enter.\\
+		      \emph{\textbf{Varning}: Om du väljer att döpa filen till något annat än default-namnet, så måste du inkludera sökvägen i namnet, för att den ska hamna på rätt plats, t.ex. \code{\textasciitilde/.ssh/min-nyckel}. Om du inte använder default-namnet måste du också konfigurera git att använda rätt nyckel. Se sidan med \emph{Tips} i början av dokumentet.}
 		\item Ingen passphrase behövs i detta läge, tryck Enter två gånger
 	\end{enumerate}
 
@@ -132,11 +133,10 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 		}
 	\end{lstlisting}
 
-	Prova att kompilera och testköra programmet för att verifiera att det fungerar (\emph{OBS! Nedan instruktioner kan vara fel, gör så som du lärt dig i pgk-kursen!}):
+	Prova att kompilera och testköra programmet för att verifiera att det fungerar (\emph{OBS! Nedan instruktioner kan vara fel, gör så som du lärt dig i prog-delen av kursen!}):
 
 	\begin{Code}
-		scalac HelloWorld.scala
-		scala HelloWorld
+		scala HelloWorld.scala
 	\end{Code}
 
 	Kontrollera innehållet i katalogen och statusen för projektet:

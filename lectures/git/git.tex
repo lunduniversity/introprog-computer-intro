@@ -2,7 +2,7 @@
 
 \begin{frame}
     \frametitle{Vad är versionshantering?}
-    
+
     \begin{itemize}
         \ii{Har du någonsin... }
         \begin{itemize}
@@ -11,7 +11,7 @@
             \ii{Skrivit över en fil av misstag?}
             \ii{Behövt hålla koll på olika versioner av samma dokument?}
         \end{itemize}
-        \ii{Versionshantering hjälper dig att lösa dessa problem!}
+        \ii{Versionshantering hjälper dig att hantera dessa problem!}
     \end{itemize}
 \end{frame}
 
@@ -34,12 +34,12 @@
         \ii{Möjlighet att återgå till äldre versioner av filer vid behov.}
         \ii{Möjliggör parallellt arbete och konflikthantering.}
     \end{itemize}
-    
+
 \end{frame}
 
 \begin{frame}
     \frametitle{Typer av versionshanteringssystem (1/2)}
-    
+
     \begin{block}{Centraliserade system}
         \begin{itemize}
             \ii{En central server lagrar alla filer och versioner. (\emph{repository})}
@@ -48,7 +48,7 @@
             \ii{Exempel: Subversion (SVN), Perforce}
         \end{itemize}
     \end{block}
-    
+
 \end{frame}
 
 \begin{frame}
@@ -94,7 +94,7 @@
 
     \blankline
     \ti{Testa: \code{git rev-list --max-parents=0 HEAD}}
-    
+
 \end{frame}
 
 \begin{frame}
@@ -113,7 +113,7 @@
             \ii{Använder Git internt för att hantera repositories, precis som lokala installationer av Git.}
         \end{itemize}
     \end{block}
-    
+
 \end{frame}
 
 \begin{frame}
@@ -127,13 +127,13 @@
         \di{git push}{Laddar upp dina lokala ändringar till ett fjärrrepository (t.ex. GitHub).}
         \di{git pull}{Hämtar och integrerar ändringar från ett fjärrrepository.}
     \end{description}
-    
+
 \end{frame}
 
 
 \begin{frame}
     \frametitle{Git-modellen}
-    
+
     \begin{itemize}
         \ii{\emph{Workspace}: En vanlig mapp på datorn där du jobbar med filer.}
         \ii{\emph{Staging Area}: En "kopia" av workspace där du förbereder ändringar inför nästa sparning.}
@@ -141,9 +141,9 @@
     \end{itemize}
 
     \begin{center}
-            \includegraphics[height=.5\textheight]{figs/model-add-commit.png}
+        \includegraphics[height=.5\textheight]{figs/model-add-commit.png}
     \end{center}
-    
+
 \end{frame}
 
 \begin{frame}
@@ -163,22 +163,22 @@
             \begin{tikzpicture}
                 % Draw the vertical line
                 \draw[thick] (0, 0) -- (0, 3);
-                
+
                 % Draw the commit nodes
                 \foreach \y in {0, 1, 2, 3} {
-                    \filldraw (0, \y) circle (3pt);
-                }
-                
+                        \filldraw (0, \y) circle (3pt);
+                    }
+
                 % Label the commits
                 \node[right, xshift=5pt] at (0, 3) {Commit 1};
                 \node[right, xshift=5pt] at (0, 2) {Commit 2};
                 \node[right, xshift=5pt] at (0, 1) {Commit 3};
                 \node[right, xshift=5pt] at (0, 0) {Commit 4};
             \end{tikzpicture}
-            
+
         \end{center}
     \end{minipage}
-    
+
 \end{frame}
 
 \begin{frame}
@@ -187,7 +187,7 @@
     \begin{minipage}{0.7\textwidth}
 
         \ti{Man kan skapa parallella utvecklingsgrenar, som sedan kan slås samman (\emph{merge}) med huvudgrenen igen.}
-        
+
         \begin{itemize}
             \ii{Varför vill man göra det?}
             \ii{Vilka problem kan uppstå?}
@@ -199,19 +199,19 @@
             % Rita huvudgrenen (main)
             \draw[thick] (0, 0) -- (0, 5);
             \foreach \y in {0, 1, 3, 4, 5} {
-                \filldraw (0, \y) circle (3pt);
-            }
+                    \filldraw (0, \y) circle (3pt);
+                }
             \node[above, yshift=2pt] at (0, 5) {\emph{main}};
-            
+
             % Rita parallellgrenen (branch)
             \draw[thick] (0, 4) -- (1, 3) -- (1, 2) -- (0, 1);
             \foreach \y in {2, 3} {
-                \filldraw (1, \y) circle (3pt);
-            }
+                    \filldraw (1, \y) circle (3pt);
+                }
             \node[above, yshift=2pt, xshift=15pt] at (1, 3) {\emph{branch}};
         \end{tikzpicture}
     \end{minipage}
-    
+
 \end{frame}
 
 \begin{frame}
@@ -224,7 +224,7 @@
         \ii{Skapa snabb fix för fel utan att stoppa ny utveckling.}
         \ii{Branches i Git är lätta att skapa och använda!}
     \end{itemize}
-    
+
 \end{frame}
 
 \begin{frame}
@@ -237,7 +237,7 @@
         \ii{Exempel: Flera redigerar samma rad, eller ändrar/byter namn på samma filer.}
         \ii{Konflikter måste lösas manuellt för att slutföra en \emph{merge}.}
     \end{itemize}
-    
+
 \end{frame}
 
 \begin{frame}[fragile]
@@ -246,7 +246,7 @@
     \begin{block}{\small Kod före merge}
         \begin{GobbleCode}[0pt]{10}
             def greet(): String = {
-                "Hello, world!"
+            "Hello, world!"
             }
         \end{GobbleCode}
     \end{block}
@@ -255,9 +255,9 @@
         \begin{GobbleCode}[0pt]{10}
             def greet(): String = {
             <<<<<<< HEAD
-                "Hello, world!"
+            "Hello, world!"
             =======
-                "Hi, everyone!"
+            "Hi, everyone!"
             >>>>>>> branch
             }
         \end{GobbleCode}
@@ -267,7 +267,7 @@
         \ii{Konflikten visas med \texttt{<<<<<<<}, \texttt{=======}, och \texttt{>>>>>>>}.}
         \ii{Utvecklaren måste välja vilken version som ska behållas eller kombinera dem manuellt.}
     \end{itemize}
-    
+
 \end{frame}
 
 
@@ -276,26 +276,26 @@
 
     \begin{GobbleCode}[2pt]{6}
         object Main {
-            def main(args: Array[String]): Unit = {
-                println("Starting calculation...")
-                println("Result: " + calculateSum(5, 10))
-            }
+        def main(args: Array[String]): Unit = {
+        println("Starting calculation...")
+        println("Result: " + calculateSum(5, 10))
+        }
 
-            def calculateSum(a: Int, b: Int): Int = {
+        def calculateSum(a: Int, b: Int): Int = {
         <<<<<<< HEAD
-                val sum = a + b
-                println("Sum calculated: " + sum)
-                sum
+        val sum = a + b
+        println("Sum calculated: " + sum)
+        sum
         =======
-                val sum = a + b
-                println("Calculating sum for: " + a + " and " + b)
-                println("Sum is: " + sum)
-                sum * 2 // Doubles the result
+        val sum = a + b
+        println("Calculating sum for: " + a + " and " + b)
+        println("Sum is: " + sum)
+        sum * 2 // Doubles the result
         >>>>>>> branch
-            }
+        }
         }
     \end{GobbleCode}
-    
+
 \end{frame}
 
 \begin{frame}
@@ -311,7 +311,7 @@
             \ii{Kallas ibland \emph{merge request}.}
         \end{itemize}
     \end{itemize}
-    
+
 \end{frame}
 
 \begin{frame}
@@ -323,23 +323,23 @@
         \ii{Möjligt att ha flera remotes för olika kopior av projektet.}
         \ii{Kolla med \texttt{git remote [-a, -v, -vv]}}
     \end{itemize}
-    
+
 \end{frame}
 
 \begin{frame}
     \frametitle{Påminnelse - Context}
 
     \begin{center}
-            \includegraphics[height=.5\textheight]{figs/model-rm-reset.png}
+        \includegraphics[height=.5\textheight]{figs/model-rm-reset.png}
     \end{center}
-    
+
 \end{frame}
 
 \begin{frame}
     \frametitle{Local vs remote: commit och push}
 
     \begin{center}
-            \includegraphics[width=.9\textwidth]{figs/local_remote_commit_push.png}
+        \includegraphics[width=.9\textwidth]{figs/local_remote_commit_push.png}
     \end{center}
 
 \end{frame}
@@ -348,7 +348,7 @@
     \frametitle{Local vs remote: fetch och merge}
 
     \begin{center}
-            \includegraphics[width=.9\textwidth]{figs/local_remote_fetch_merge.png}
+        \includegraphics[width=.9\textwidth]{figs/local_remote_fetch_merge.png}
     \end{center}
 
 \end{frame}
@@ -357,7 +357,7 @@
     \frametitle{Båda samtidigt!? -- push}
 
     \begin{center}
-            \includegraphics[width=\textwidth]{figs/local_remote_push_conflict.png}
+        \includegraphics[width=\textwidth]{figs/local_remote_push_conflict.png}
     \end{center}
 
 \end{frame}
@@ -366,7 +366,7 @@
     \frametitle{Båda samtidigt!? -- fetch}
 
     \begin{center}
-            \includegraphics[width=\textwidth]{figs/local_remote_fetch_conflict.png}
+        \includegraphics[width=\textwidth]{figs/local_remote_fetch_conflict.png}
     \end{center}
 
 \end{frame}
@@ -375,7 +375,7 @@
     \frametitle{Båda samtidigt!? -- merge efter fetch}
 
     \begin{center}
-            \includegraphics[width=\textwidth]{figs/local_remote_fetch_merge_conflict.png}
+        \includegraphics[width=\textwidth]{figs/local_remote_fetch_merge_conflict.png}
     \end{center}
 
 \end{frame}
@@ -525,9 +525,9 @@
         \ii{Se avsnitt 1.1, 1.2, 1.3, 1.6 samt 1.7 av youtube-serien ``Git and GitHub for Poets''.}
         \ii{Läs kapitel 1, 2 och 3.1--3.2 i Pro Git-boken (Chacon \& Straub).}
         \ii{Länkar till materialet finns på kurshemsidan:
-        
-        \halfblankline
-        \url{https://cs.lth.se/dod/datorlaborationer/}}
+
+            \halfblankline
+            \url{https://cs.lth.se/dod/datorlaborationer/}}
     \end{itemize}
 
 \end{frame}

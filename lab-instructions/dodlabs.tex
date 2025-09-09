@@ -178,6 +178,7 @@ Bland LTHs gemensamma regler finns följande föreskrifter:
 
 \newpage
 \section{Tips}
+\label{sec:tips}
 
 Här samlas kort information och hjälp som kan vara användbar under laborationerna. Vid problem och frågor under laborationerna, kolla gärna om din fråga finns besvarad här.
 
@@ -197,6 +198,31 @@ Här samlas kort information och hjälp som kan vara användbar under laboration
 	      Om du råkat öppna texteditorn \code{vim} (t.ex. genom att göra en git commit utan att ha ställt in en annan editor) kan du stänga den genom att trycka \code{:q} (kolon följt av \code{q}), sedan \code{Retur}. Om du redan provat annat kan du ha kommit in i något annat av Vim's editeringslägen. Tryck då först \code{Esc} för att gå tillbaka till det ``normala läget''.
 	\item \texttt{Hur arbetar man med texteditorn nano?} \\
 	      nano är en terminalbaserat texteditor. Den körs alltså direkt i terminalen utan att öppna några nya fönster, vilket kan vara fördelaktigt ibland. I editorn kan du flytta markören med piltangenterna och skriva text som förväntat. I botten av terminalen visas också operationer som kan utföras och vilken knappkombination som ska tryckas. Där används tecknet \texttt{\^{}} (den lilla ``hatten'' vid sidan om \commandchar{return}) för att betyda Ctrl-knappen. Använd t.ex. \commandchar{control-o} för att spara (Write Out), \commandchar{control-x} för att avsluta eller \commandchar{control-g} för mer hjälp.
+	\item \texttt{Hur ändrar jag min standardeditor för git?}\\
+	      Du kan ändra din standardeditor för git med kommandot:
+	      \begin{Code}
+		      git config --global core.editor nano
+	      \end{Code}
+	      där du kan byta ut \code{nano} mot valfri editor som är installerad på systemet, t.ex. \code{code --wait} (för Visual Studio Code). Notera att vissa editors, t.ex. \code{code}, kräver extra flaggor för att fungera bra med git.
+	\item \texttt{Hur konfigurerar jag separata SSH-nycklar för olika tjänster?}\\
+	      Ur säkerhetssynpunkt är det bra att använda olika SSH-nycklar för olika tjänster, t.ex. en nyckel för GitHub och en annan för GitLab. Detta kan göras genom att skapa flera nyckelpar med \code{ssh-keygen} (använd default-namn, och döp sedan om filerna) och sedan konfigurera SSH-klienten att använda rätt nyckel för varje tjänst genom att redigera filen \file{\textasciitilde/.ssh/config}. Om \file{config}-filen inte finns kan du själv skapa den. Nedan är ett exempel på hur en sådan konfigurationsfil kan se ut, med olika nycklar för GitHub, GitLab och LTHs studentdatorer:
+	      \begin{lstlisting}{}
+Host github.com
+    User git
+	HostName github.com
+	IdentityFile ~/.ssh/id_ed25519_github
+Host gitlab.com
+	User git
+	HostName gitlab.com
+	IdentityFile ~/.ssh/id_ed25519_gitlab
+Host student.login.lth.se
+    User xy1234zz-s
+	HostName student.login.lth.se
+	IdentityFile ~/.ssh/id_ed25519_student
+	      \end{lstlisting}
+	      Där \code{IdentityFile} anger sökvägen till den privata nyckeln som ska användas för respektive tjänst. Notera att filen \file{config} inte har någon filändelse och att den måste ha rätt behörigheter --- läs- och skrivbehörighet endast för användaren. Ändra t.ex. med \code{chmod 600 ~/.ssh/config}.
+
+	      \textbf{Notera} att du också behöver logga in på respektive tjänst och lägga till den publika nyckeln i deras system.
 \end{itemize}
 
 \subsection{Lab 3 --- \LaTeX}
