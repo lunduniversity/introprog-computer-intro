@@ -13,7 +13,7 @@
 	\item Gå till GitHub (\code{https://github.com}) och skapa dig ett eget gratiskonto. Försök välja ett kontonamn du känner att du kommer att vara bekväm med för en lång tid framöver. Det är mycket möjligt du kommer att ha kvar det under hela din yrkesverksamma tid. Prova till exempel \code{fornamnefternamn} utan svenska tecken och se om det är ledigt.
 	\item Läs igenom uppgifterna under rubriken Datorarbete.
 \end{Hemarbete}
-Länkar till det ovan refererade materialet finns på kurshemsidan under  ''Datorlaborationer'' om du inte har pappersversionerna av dem.
+Länkar till det ovan refererade materialet finns på kurshemsidan under  ''Versionshantering (dod)''.
 
 \subsection*{Kontrollfrågor}
 \begin{Kontrollfragor}
@@ -58,7 +58,7 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 	\begin{Code}
 		git config --global pull.rebase false
 	\end{Code}
-	När man använder \code{git pull} (som du kommer få göra senare) så finns det två sätt att göra det på: \emph{merge} och \emph{rebase}. Det är två olika sätt att försöka sammanfoga ändringar från det centrala repositoriet med dina lokala ändringar. Det är en smaksak vilket man föredrar, båda har för- och nackdelar, men för nya git-användare är det rekkommenderat att inte använda \code{rebase}. Därför sätter vi \code{pull.rebase} till \code{false}. Detta är faktiskt standardinställningen, men i nyare versioner av git måste man ändå uttryckligen göra denna inställning.
+	När man använder \code{git pull} (som du kommer få göra senare) så finns det två sätt att göra det på: \emph{merge} och \emph{rebase}. Det är två olika sätt att försöka sammanfoga ändringar från det centrala repositoriet med dina lokala ändringar. Det är en smaksak vilket man föredrar, båda har för- och nackdelar, men för nya git-användare är det rekommenderat att inte använda \code{rebase}. Därför sätter vi \code{pull.rebase} till \code{false}. Detta är faktiskt standardinställningen, men i nyare versioner av git måste man ändå uttryckligen göra denna inställning.
 
 	% Tack Alexander Sandström som skriv ihop detta steg!
 	\item Nu börjar vi närma oss att kunna göra en lokal klon av vårt repo och börja arbeta med git, men vi behöver sätta upp en sak till: en SSH-nyckel.
