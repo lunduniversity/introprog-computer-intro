@@ -86,7 +86,11 @@ while getopts ":v:s:m:yh" opt; do
   esac
 done
 
-[[ -z "$VERSION" ]] && echo "Fel: -v <version> krävs." && usage && exit 1
+if [[ -z "$VERSION" ]]; then
+  VERSION="$(date +%Y-%m-%d)"
+  echo "Notis: Ingen version angavs, använder dagens datum: $VERSION"
+fi
+
 [[ ${#SUBJECTS_RAW[@]} -eq 0 ]] && echo "Fel: minst en -s <subject> krävs." && usage && exit 1
 
 # Expandera subjects (komma-listor + flera -s)
