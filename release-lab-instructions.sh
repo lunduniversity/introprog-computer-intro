@@ -76,9 +76,8 @@ while getopts ":v:m:r:yh" opt; do
 done
 
 if [[ -z "$VERSION" ]]; then
-  echo "Fel: -v <version> krävs."
-  usage
-  exit 1
+  VERSION="$(date +%Y-%m-%d)"
+  echo "Ingen version angiven. Använder dagens datum som version: $VERSION"
 fi
 
 TAG="lab_${VERSION}"
