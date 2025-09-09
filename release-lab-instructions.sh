@@ -76,8 +76,9 @@ while getopts ":v:m:r:yh" opt; do
 done
 
 if [[ -z "$VERSION" ]]; then
-  VERSION="$(date +%Y-%m-%d)"
-  echo "Ingen version angiven. Använder dagens datum som version: $VERSION"
+  echo "Fel: -v <version> krävs."
+  usage
+  exit 1
 fi
 
 TAG="lab_${VERSION}"
@@ -103,7 +104,14 @@ if [[ -z "$MESSAGE" ]]; then
     echo "(Skriv ditt meddelande ovan. Ta inte bort sista raden.)"
     echo "---"
   } > "$tmpfile"
-  "${GIT_EDITOR:-${VISUAL:-vi}}" "$tmpfile"
+
+  editor_cmd="$(git config --get core.editor || true)"
+  if [[ -z "$editor_cmd" ]]; then
+    echo "core.editor är inte satt. Ex: git config --global core.editor 'nano -w'" >&2
+    exit 1
+  fi
+  sh -c "$editor_cmd \"\$1\"" _ "$tmpfile"
+
   MESSAGE="$(sed '/^---$/,$d' "$tmpfile" | sed -e '${/^$/d}')"
   rm -f "$tmpfile"
   [[ -z "$MESSAGE" ]] && MESSAGE="Lab instructions $VERSION"
