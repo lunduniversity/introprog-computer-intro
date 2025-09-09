@@ -1,10 +1,10 @@
 {
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "latex-workshop.latex.recipe.default": "latexmk (xelatex)",
   "latex-workshop.latex.search.rootFiles.exclude": [
     "**/latex.tex"
   ],
   "latex-workshop.latex.rootFile.useSubFile": false,
-  "editor.defaultFormatter": "James-Yu.latex-workshop",
+  "editor.defaultFormatter": null,
   "latex-workshop.formatting.latex": "latexindent"
 }

@@ -246,7 +246,7 @@
     \begin{block}{\small Kod före merge}
         \begin{GobbleCode}[0pt]{10}
             def greet(): String = {
-            "Hello, world!"
+                "Hello, world!"
             }
         \end{GobbleCode}
     \end{block}
@@ -255,9 +255,9 @@
         \begin{GobbleCode}[0pt]{10}
             def greet(): String = {
             <<<<<<< HEAD
-            "Hello, world!"
+                "Hello, world!"
             =======
-            "Hi, everyone!"
+                "Hi, everyone!"
             >>>>>>> branch
             }
         \end{GobbleCode}
@@ -276,23 +276,23 @@
 
     \begin{GobbleCode}[2pt]{6}
         object Main {
-        def main(args: Array[String]): Unit = {
-        println("Starting calculation...")
-        println("Result: " + calculateSum(5, 10))
-        }
+            def main(args: Array[String]): Unit = {
+                println("Starting calculation...")
+                println("Result: " + calculateSum(5, 10))
+            }
 
-        def calculateSum(a: Int, b: Int): Int = {
+            def calculateSum(a: Int, b: Int): Int = {
         <<<<<<< HEAD
-        val sum = a + b
-        println("Sum calculated: " + sum)
-        sum
+                val sum = a + b
+                println("Sum calculated: " + sum)
+                sum
         =======
-        val sum = a + b
-        println("Calculating sum for: " + a + " and " + b)
-        println("Sum is: " + sum)
-        sum * 2 // Doubles the result
+                val sum = a + b
+                println("Calculating sum for: " + a + " and " + b)
+                println("Sum is: " + sum)
+                sum * 2 // Doubles the result
         >>>>>>> branch
-        }
+            }
         }
     \end{GobbleCode}
 
@@ -527,7 +527,7 @@
         \ii{Länkar till materialet finns på kurshemsidan:
 
             \halfblankline
-            \url{https://cs.lth.se/dod/datorlaborationer/}}
+            \url{https://lunduniversity.github.io/pgk}}
     \end{itemize}
 
 \end{frame}
