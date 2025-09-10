@@ -369,7 +369,7 @@ Dagens datum: \today.
 
   \ti{Fotnoter är lätta att skriva:}
 
-  \begin{exlatex}
+  \begin{exlatexhide}
   Om man använder \LaTeX
   \footnote{uttalas
     ``lah-tekh''} så
@@ -378,7 +378,7 @@ Dagens datum: \today.
   % snyggt  
   professionellt
   utformade.
-  \end{exlatex}
+  \end{exlatexhide}
 
   \blankline
   \begin{itemize}
@@ -506,7 +506,7 @@ Några klasser som vi använder:
 
   \begin{exlatex}
 \begin{table}[t]
-  \begin{tabular}{lcr}
+  \begin{tabular}{|l|c|r|}
     Produkt & Typ    & Pris    \\
     \hline
     Skruvar & stora  & 0.18~kr \\
@@ -638,8 +638,9 @@ class Point(val x: Int,
 
   \blankline
   \begin{itemize}
-    \ii{I löpande text: \code{\$ \dots\ \$}}
-    \ii{På egen rad: \texttt{\textbackslash begin\{displaymath\} \dots\ \textbackslash end\{displaymath\}}}
+    \ii{I löpande text: \code{\$ \dots\ \$} eller \code{\textbackslash( \dots\ \textbackslash)} (mer robust i vissa sammanhang.)}
+    \ii{På egen rad: \texttt{\textbackslash begin\{displaymath\} \dots\ \textbackslash end\{displaymath\}}\\
+      eller \code{\textbackslash [ \dots\ \textbackslash ]} }
     \ii{Numrerad formel: \code{\textbackslash begin\{equation\} \dots\ \textbackslash end\{equation\}}}
     \ii{Etikett och referens: \code{\textbackslash label} och \code{\textbackslash ref}}
   \end{itemize}
@@ -652,13 +653,15 @@ class Point(val x: Int,
   \vspace{2em}
 
   \begin{exlatex}
-Formeln $x=3y-2$ står inne i texten. Däremot står
+Formeln \(x=3y-2\) står inne i texten. Däremot står
 \begin{displaymath}
-  x=3y-2
+  x_1 = 3y - 2
 \end{displaymath}
-för sig själv precis som
+för sig själv, precis som
+\[x_2 = -0.6e^{2-y} + \frac{9.3}{\pi}\]
+och detta är en numrerad ekvation:
 \begin{equation}
-  x=3y-2
+  x_3 = 2y^2 + 7y - 2a + 3
   \label{xochy}
 \end{equation}
 
@@ -680,11 +683,11 @@ vi att \ldots
   \vspace{1cm}
 
   \begin{exlatex}
-\begin{displaymath}
+\[
   x_{k+1} =
   x_{k} -
   \frac{f(x_{k})}{f'(x_{k})}
-\end{displaymath}
+\]
   \end{exlatex}
 \end{frame}
 
@@ -693,18 +696,18 @@ vi att \ldots
   \vspace{2em}
 
   \begin{exlatex}
-\begin{displaymath}
+\[
   e^x = 1+x+x^2/2!+x^3/3!+\cdots
-\end{displaymath}
+\]
   \end{exlatex}
 
   \vspace{1cm}
 
   \begin{exlatex}
-\begin{displaymath}
+\[
   x_{1,2}=\frac{p}{2}\pm
   \sqrt{\frac{p^2}{4}-q}
-\end{displaymath}
+\]
   \end{exlatex}
 
 \end{frame}
@@ -716,18 +719,18 @@ vi att \ldots
   \vspace{2em}
 
   \begin{exlatex}
-\begin{displaymath}
+\[
   \int_{-\infty}^{\infty}
   e^{-x^2} dx
-\end{displaymath}
+\]
   \end{exlatex}
 
   \vspace{1cm}
 
   \begin{exlatex}
-\begin{displaymath}
+\[
   \sum_{k=1}^n\frac{1}{a_k}
-\end{displaymath}
+\]
   \end{exlatex}
 
 \end{frame}
@@ -737,9 +740,9 @@ vi att \ldots
   \vspace{2em}
 
   \begin{exlatex}
-\begin{displaymath}
+\[
   \sin^2 x + \cos^2 x = 1
-\end{displaymath}
+\]
   \end{exlatex}
 \end{frame}
 
@@ -748,7 +751,7 @@ vi att \ldots
   \vspace{2em}
 
   \begin{exlatex}
-\begin{displaymath}
+\[
 A=\left(
 \begin{array}{cccc}
 a_{11} & a_{12} & \cdots & a_{1n} \\
@@ -757,7 +760,7 @@ a_{21} & a_{22} & \cdots & a_{2n} \\
 a_{n1} & a_{n2} & \cdots & a_{nn} \\
 \end{array}
 \right)
-\end{displaymath}
+\]
   \end{exlatex}
 \end{frame}
 
@@ -803,25 +806,6 @@ a_{n1} & a_{n2} & \cdots & a_{nn} \\
 \end{figure}
 Från text kan vi nu referera till figur~\ref{fig:exempelbild}.
     \end{exlatex}
-%   \begin{exsrc}
-% \begin{figure}
-%   \centering
-%   \includegraphics[height=40mm]
-%       {images/bild.pdf}
-%   \caption{Exempelbild}
-%   \label{fig:exempelbild}
-% \end{figure}
-% Från text kan vi nu referera till figur~\ref{fig:exempelbild}.
-%   \end{exsrc}
-%   \begin{exresult}
-% \begin{figure}
-%   \centering
-%   \includegraphics[height=30mm]{images/enkelmodell.pdf}
-%   \caption{Exempelbild}
-%   \label{fig:exempelbild2}
-% \end{figure}
-% Från text kan vi nu referera till figur~\ref{fig:exempelbild2}.
-%   \end{exresult}
 
 \end{frame}
 

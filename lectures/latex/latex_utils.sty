@@ -129,6 +129,47 @@
         \ts{{\tiny\textbf\texttt\sc RESULTAT:}}
 
         \vspace{1mm}
+        \uncover<+->{
+            {\footnotesize\input{ex/ex.\theexlatexctr}} % Kompilerad LaTeX-kod
+        }
+
+    \end{minipage}%
+}
+
+% Hack: \only ovan fungerar för footnote men inte för referenser
+% Detta är en kopia som istället använder \uncover, vilket fungerar för
+% referenser men inte för footnote
+\newenvironment{exlatexhide}{%
+    \only<1>{
+        \stepcounter{exlatexctr}% Stega upp räknaren
+    }
+    \VerbatimEnvironment
+    \begin{VerbatimOut}{ex/ex.\theexlatexctr}%
+        }{%
+    \end{VerbatimOut}
+    \noindent
+    \begin{minipage}[t]{.48\textwidth}%
+        \ti{{\tiny\textbf\texttt\sc KÄLLKOD:}}
+
+        \vspace{1mm}
+        \only<.->{
+            \lstinputlisting[style=latexex]{ex/ex.\theexlatexctr}% Rå LaTeX-kod
+        }
+    \end{minipage}%
+    \hfill
+    \only<.->{%
+        \vrule
+    }
+    \hfill
+    \begin{minipage}[t]{.48\textwidth}%
+        % Ändra fotnotssymboler till siffror i detta minipage
+        \makeatletter
+        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
+        \makeatother
+
+        \ts{{\tiny\textbf\texttt\sc RESULTAT:}}
+
+        \vspace{1mm}
         \only<+->{
             {\footnotesize\input{ex/ex.\theexlatexctr}} % Kompilerad LaTeX-kod
         }
