@@ -1,0 +1,6 @@
+# Ignore all files, except this .gitignore file.
+# The directory ex must exist for the build to work, but git doesn't
+# track empty directories. Now, it is not empty. (\(^_^)/)
+
+*.*
+!.gitignore
