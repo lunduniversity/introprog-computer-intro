@@ -1,6 +1,6 @@
 \ifdefined\ishandout
     \documentclass[handout]{beamer}
-    \else
+\else
     % \documentclass[handout]{beamer}
     \documentclass{beamer}
     % \setbeamercovered{transparent}
@@ -21,10 +21,6 @@
 \setbeamertemplate{enumerate item}[default]
 \setbeamertemplate{enumerate subitem}[default]
 
-% Beamer uses letters for footnotes by default. Change to numbers.
-% (Doesn't seem to work, though. I'll leave it for now.)
-\setbeamertemplate{footnote}{\insertfootnotemark}
-
 % Number captions
 \setbeamertemplate{caption}[numbered]
 
@@ -37,6 +33,7 @@
 % Swedish setup using polyglossia for better multilingual support
 \usepackage{polyglossia}
 \setmainlanguage{swedish}
+\usepackage[autostyle,autopunct]{csquotes} 
 
 \usepackage{url}
 \usepackage{datetime2}
@@ -71,7 +68,6 @@
 
 \frame[plain]{
     \maketitle
-    \vspace{-2\baselineskip}
 }
 
 \date{\the\year/\the\numexpr\year-1999}

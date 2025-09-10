@@ -1,4 +1,3 @@
-% !TEX root = slides.tex
 
 \title{\LaTeX}
 \section{\LaTeX}
@@ -352,13 +351,13 @@ I sällsynta fall kan man vilja skriva något \textbf{i fetstil}.
   \ti{Streck, mellanrum, och punkter:}
   
   \begin{exlatex}
-dod-kursen skrivs med bindestreck.
-Den pågår under vecka 1--4.
+``pgk-kursen'' skrivs med bindestreck.
+Dod-delen pågår under vecka 1--4.
 Tyvärr är den inte längre\ldots
 
-Ibland vill man göra en lång paus i en mening --- för att skapa spänning.
+Ibland vill man göra en lång paus i en mening---för att skapa spänning.
 
-\quad Telefon: 046--222~80~38. 
+\quad Telefon: 046--222~80~38.\\
 Dagens datum: \today.
   \end{exlatex}
 \end{frame}
@@ -375,30 +374,57 @@ Dagens datum: \today.
   \footnote{uttalas
     ``lah-tekh''} så
   blir det bra. Alla rapporter
-  blir automatiskt snyggt
+  blir automatiskt 
+  % snyggt  
+  professionellt
   utformade.
   \end{exlatex}
 
   \blankline
   \begin{itemize}
     \ii{Fotnoter numreras automatiskt: 1, 2, \ldots}
-    \ii{Här blir det dock fotnoten \emph{a} av olika anledningar.}
+    \ii{Men kan även modifieras till t.ex. bokstäver eller specialtecken: *, \dag, \ddag, \S, \P, \ldots}
   \end{itemize}
 
 \end{frame}
 
 \begin{frame}[fragile,t]
-  \frametitle{Citationstecken}
-  \vspace{3em}
+  \frametitle{Citationstecken (1/2)}
 
-  \ti{Det finns olika typer av citationstecken:}
+  \ti{Använd \code{csquotes} och \code{\textbackslash enquote} i löpande text.}
 
-  \begin{itemize}
-    \ii{\textasciigrave\textasciigrave text\textquotesingle\textquotesingle\ -- Typografiskt korrekta citationstecken (``text'')}
-    \ii{\textquotesingle\textquotesingle text\textquotesingle\textquotesingle\ -- Raka citationstecken för speciella fall (''text'')}
-  \end{itemize}
+\begin{exlatex}
+% Svenska citat:
+Hon sa \enquote{hej där} i löpande text.
+
+% Citat i citat:
+Kompisen repeterade: \enquote{Hon sa \enquote{hej där} i löpande text}.
+
+% Raka dubbla tecken (endast kod/ASCII):
+Rakt dubbelt citattecken i kod: \texttt{\textquotedbl}
+\end{exlatex}
 
 \end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Citationstecken (2/2)}
+
+  \ti{Använd \code{csquotes} och \code{\textbackslash enquote} i löpande text.}
+
+\begin{exlatex}
+% Apostrof:
+Typografisk apostrof: O\textquoteright{}Neill, rock\textquoteright n\textquoteright{}roll.
+ASCII-apostrof (visa tecknet): \textquotesingle
+
+% Svensk genitiv – ingen apostrof:
+Annas bok; EU:s beslut (inte EU\textquoteright s).
+
+% Engelska citat manuellt (om man inte använder csquotes):
+Engelska: ``hi there'' (skrivs med \texttt{``} och \texttt{''}).
+\end{exlatex}
+
+\end{frame}
+
 
 \begin{frame}[fragile,t]
   \frametitle{Listor}
@@ -825,6 +851,7 @@ Klasser: \scala{Random},
   \begin{itemize}
     \ii{För redigering, använd moderna verktyg som t.ex. \texttt{TeXstudio}, \texttt{TeXShop} (för Mac), eller \texttt{VS Code} med \texttt{LaTeX Workshop}-tillägget.}
     \ii{\textbf{Notera}, ni får lov att använda Overleaf om ni föredrar det!}
+    \ii{Lunds Universitet erbjuder nu t.o.m. gratis premiumkonto på Overleaf för studenter och anställda vid LU. Se mer här: \url{https://luservicedesk.service-now.com/support?id=kb_article_swe&sys_id=1be990302b6ba6900002fa97d891bf77}}
   \end{itemize}
 
 \end{frame}
