@@ -126,11 +126,8 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 	\item Vi ska nu börja utvecklingen av vårt scalaprogram. Skapa en fil i katalogen, kalla den t.ex. \code{HelloWorld.scala}, med följande innehåll:
 
 	\begin{lstlisting}[language=scala]
-		object HelloWorld {
-			def main(args: Array[String]): Unit = {
-				println("Hello, world!")
-			}
-		}
+		@main def main=
+ 		   println("Hello world!")
 	\end{lstlisting}
 
 	Prova att kompilera och testköra programmet för att verifiera att det fungerar (\emph{OBS! Nedan instruktioner kan vara fel, gör så som du lärt dig i prog-delen av kursen!}):
