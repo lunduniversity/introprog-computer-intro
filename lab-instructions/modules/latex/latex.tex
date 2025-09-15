@@ -1,3 +1,4 @@
+
 \section{Laboration \arabic{section} --- \LaTeX}
 
 \emph{Mål:} Du ska lära dig grunderna i {\LaTeX} och tillämpa dina kunskaper på ett exempel.
@@ -48,22 +49,32 @@
 \textbf{Notis}: I instruktionerna nedan föreslår vi att ni använder programmet Texmaker för att arbeta med \LaTeX, men ni får lov att använda vilken editor ni vill. Det går också bra att använda onlineverktyg, så som Overleaf.
 
 \begin{Datorarbete}
-	\item Skapa en ny katalog med namnet \file{dod/lab3} och gå till denna katalog.
-	\item Kopiera filen \file{/usr/local/cs/dod/lab3/rapportmall.tex} till din katalog. Ge den kopierade filen namnet \file{rapport.tex}. Filen innehåller en \LaTeX-mall för rapporter, liknande den mall som beskrivs i avsnitt 2.2 i \LaTeX-kompendiet och i föreläsningsbilderna.
-
-	\item I filen \file{/usr/local/cs/dod/lab3/rapporttext.txt} finns texten till rapporten som beskrivs i uppgift H\ref{hem:latexuppg}, utan några \LaTeX-kommandon och utan några figurer. Lägg in innehållet i denna fil i din \file{.tex}-fil, mellan \verb!\begin{document}! och \verb!\end{document}!.
-
-	\item Starta Texmaker med kommandot \verb/texmaker & / (eller \verb/texmaker rapport.tex &/).
-
-	\item Lägg in lämpliga \LaTeX-kommandon i filen så att rapporten får (åtminstone ungefär) det utseende som beskrivs i uppgift H\ref{hem:latexuppg}. Se till att styckeindelningen och rubrikerna blir korrekta i hela dokumentet innan du ger dig på resten, till exempel de matematiska formlerna.
+	\item I mappen med labbfiler som du laddade ned i labb 1 finns också en \file{latex}-katalog, som innehåller allt du behöver för att återskapa rapporten på nästa sida.
+	\item Filen \file{sort\_scala.tex} är en mall för \LaTeX-dokumentet, men utan innehåll.
+    \item I filen \file{oformaterad\_text.txt} finns den råa texten utan formattering.
+	\item Starta Texmaker med kommandot \verb/texmaker & / (eller \verb/texmaker sort_scala.tex &/). \emph{Du får lov att använda en annan editor om du vill. Åven Overleaf är tillåtet.}
+	\item Kopiera in den råa texten från \file{oformaterad\_text.txt} till \file{sort\_scala.tex}. Det ska ligga mellan \verb/\begin{document}/ och \verb/\end{document}/, som markerar dokumentets början och slut.
+	\item Återskapa den färdiga rapporten på nästa sida. Lägg in lämpliga \LaTeX-kommandon i filen så att rapporten får (åtminstone ungefär) samma utseende. Se till att styckeindelningen och rubrikerna blir korrekta i hela dokumentet innan du ger dig på resten, till exempel de matematiska formlerna.
 
 	Arbeta stegvis: ändra lite, klicka på pilen till vänster om Quick Build så körs pdfLaTeX, titta på resultatet, ändra lite till, osv.
 
-	Bilderna som ska inkluderas i dokumentet finns i filerna \file{nrbild.pdf} och \file{konvbild.pdf} i katalogen \file{/usr/local/cs/dod/lab3/}, programkoden finns i filen \file{NewtonRaphson.java} i samma katalog.
+	Bilderna som ska inkluderas i dokumentet finns i också bland de nedladdade labbfilerna, samt programkoden för kodlistningen i rapporten.
 
-	\item Prova gärna att skriva ut rapporten på skrivaren när du är nöjd med dokumentets utseende (ej obligatoriskt).
+    Notera att vissa detaljer i den råa texten (t.ex. sidnummer) genereras automatiskt av \LaTeX, så du ska inte manuellt ha med dessa i innehållet.
+
+    \smallskip
+
+    \noindent\textbf{Tips:}
+    \begin{itemize}
+        \item Kolla vilka paket som är inkluderade i mallen \file{sort\_scala.tex}.
+        \item Ta hjälp av \LaTeX-häftet och/eller online-resurser för att hitta rätt kommandon.
+        \item Använd etiketter (\verb/\label{etikett}/) och referenser (\verb/\ref{etikett}/) för att referera till figurer, tabeller och sektioner. \LaTeX\ numrerar automatiskt dessa åt dig. Skriv dem inte manuellt.
+        \item Den råa texten kan innehålla radbrytningar och bindestreck. Dessa ska inte ingå i källkoden, utan låt \LaTeX\ sköta radbrytningarna automatiskt där det är lämpligt.
+        \item Din lösning behöver inte vara \emph{exakt} likadan som den färdiga rapporten. Om du kör fast, fråga labbhandledaren om hjälp.
+        \item Det är ganska lätt att \enquote{fuska} på denna labb. V.g. gör inte det. Syftet är att du ska lära dig \LaTeX.
+    \end{itemize}
 
 	\item Om du har tid: prova sådana möjligheter i \LaTeX\ som du inte har behövt använda tidigare: listor av olika slag, innehållsförteckning, mera avancerade formler, osv.
 \end{Datorarbete}
 
-\includepdf[pages=-]{modules/latex/example/latexlosning}
+\includepdf[pages=-]{modules/latex/newex/sort_scala_losning}

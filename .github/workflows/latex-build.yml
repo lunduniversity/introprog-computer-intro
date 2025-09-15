@@ -17,7 +17,7 @@ jobs:
           latexmk_use_xelatex: true
           work_in_root_file_dir: true
           root_file: |
-            lab-instructions/modules/latex/example/latexlosning.tex
+            lab-instructions/modules/latex/newex/sort_scala_losning.tex
             lab-instructions/dodlabs.tex
         env:
           TEXINPUTS: ".:../latex-support//:./latex-support//:"
