@@ -1,16 +1,16 @@
 
 \section{Laboration \arabic{section} --- Maskinkod}
 
-\emph{Mål:} Att förstå hur en dator fungerar på en grundläggande nivå. Man hör ibland att datorer endast förstår och arbetar med ``ettor och nollor'', men vad betyder det egentligen? I denna laboration kommer vi arbeta med en förenklad datormodell där vi kan inspektera och manipulera minnet och processorn på en låg nivå och se just hur ettor och nollor används för att utföra beräkningar.
+\emph{Mål:} Att förstå hur en dator fungerar på en grundläggande nivå. Man hör ibland att datorer endast förstår och arbetar med \enquote{ettor och nollor}, men vad betyder det egentligen? I denna laboration kommer vi arbeta med en förenklad datormodell där vi kan inspektera och manipulera minnet och processorn på en låg nivå och se just hur ettor och nollor används för att utföra beräkningar.
 
 \subsection{Kort teori}
-Här går vi kortfattat igenom några centrala begrepp som du behöver inför laborationen. Gör också uppgifterna i avsnittet ``Obligatoriska förberedelser (hemarbete)'' \emph{innan} laborationen.
+Här går vi kortfattat igenom några centrala begrepp som du behöver inför laborationen. Gör också uppgifterna i avsnittet \enquote{Obligatoriska förberedelser (hemarbete)} \emph{innan} laborationen.
 
 \subsubsection{Processor (CPU, Central Processing Unit) och Register}
 CPU:n, eller \emph{processorn}, är hjärnan i en dator och utför alla dess beräkningar. Den läser och exekverar instruktioner från arbetsminnet, hanterar data via sina inbyggda register, och koordinerar övriga komponenter i systemet. \emph{Register} är små, snabba lagringsenheter inuti CPU:n som temporärt lagrar data för snabb tillgång under beräkningarna. De är begränsade i antal men erbjuder extremt snabb dataåtkomst -- upp till 100 gånger snabbare än arbetsminnet. Därför vill man vanligtvis använda registerna så mycket som möjligt, genom att ladda in data från arbetsminnet till registren en gång, använda dem genomgående i beräkningar, och först när beräkningarna är klara skriva tillbaka resultatet till arbetsminnet.
 
 \subsubsection{Arbetsminne (RAM, Random Access Memory)}
-Arbetsminnet i en dator fungerar som lagringsplatser som kan innehålla en viss mängd data. Man kan tänka på dem som ``lådor'' som kan fyllas med värden som CPU:n sedan kan läsa eller ändra. Varje låda har en unik adress så att CPU:n direkt kan hämta eller skriva data.
+Arbetsminnet i en dator fungerar som lagringsplatser som kan innehålla en viss mängd data. Man kan tänka på dem som \enquote{lådor} som kan fyllas med värden som CPU:n sedan kan läsa eller ändra. Varje låda har en unik adress så att CPU:n direkt kan hämta eller skriva data.
 Arbetsminnet används för att temporärt lagra både programkod och de data som programmen arbetar med.
 Det är långsammare än processorns register, men kan vara betydligt större. En modern dator har typiskt flera miljarder minnesplatser (mäts i GB, Giga Byte). 
 Till skillnad från permanenta lagringsenheter som hårddiskar och SSD-enheter, är arbetsminnet \emph{flyktigt}, vilket betyder att dess innehåll försvinner när datorn stängs av. Det är dock många storleksordningar snabbare än både hårddiskar och SSD-enheter\footnote{Läsning från RAM tar typiskt 10--100ns, från SSD 10--100$\mu$s och från hårddisk flera millisekunder.}.
@@ -41,7 +41,7 @@ I handledningen behöver vi ibland kunna referera till register och minnesplatse
     \item[\texttt{PC}] Programräknaren, som håller reda på vilken instruktion som ska köras härnäst.
 \end{description}
 
-Platserna i arbetsminnet har index 0--255 och benämns som \texttt{M0}, \texttt{M1}, \texttt{M2}, och så vidare. För att skilja mellan när ett värde används direkt eller som en adress för att referera till ett annat värde, använder vi en asterisk (eller ``stjärna'', \texttt{*}). Denna notation är inspirerad av programspråket C, där asterisk används för att hantera pekare. Som exempel: Om värdet 38 är lagrat i registret \texttt{R0}, så refererar \texttt{R0} till värdet 38. Å andra sidan, betyder \texttt{*R0} att värdet 38 används som en adress, och refererar till \texttt{M38}, alltså värdet som finns i arbetsminnet på plats 38. För mer komplexa adresseringar kan vi även använda parenteser, såsom i \texttt{*(R0+1)}, vilket då refererar till minnesplatsen \texttt{M39}.
+Platserna i arbetsminnet har index 0--255 och benämns som \texttt{M0}, \texttt{M1}, \texttt{M2}, och så vidare. För att skilja mellan när ett värde används direkt eller som en adress för att referera till ett annat värde, använder vi en asterisk (eller \enquote{stjärna}, \texttt{*}). Denna notation är inspirerad av programspråket C, där asterisk används för att hantera pekare. Som exempel: Om värdet 38 är lagrat i registret \texttt{R0}, så refererar \texttt{R0} till värdet 38. Å andra sidan, betyder \texttt{*R0} att värdet 38 används som en adress, och refererar till \texttt{M38}, alltså värdet som finns i arbetsminnet på plats 38. För mer komplexa adresseringar kan vi även använda parenteser, såsom i \texttt{*(R0+1)}, vilket då refererar till minnesplatsen \texttt{M39}.
 
 \newpage
 
@@ -61,7 +61,7 @@ Platserna i arbetsminnet har index 0--255 och benämns som \texttt{M0}, \texttt{
     \item Läs igenom användarmanualen för programmet som beskriver hur det fungerar. Manualen öppnas automatiskt när programmet startas, eller via menyn \texttt{Help}~$\rightarrow$~\texttt{Show Help}.
 \end{Hemarbete}
 
-\subsection*{Kontrollfrågor}
+\Förberedelser
 \begin{Kontrollfragor}
     \item Vad står förkortningen CPU för?
     \item Vad är huvudfunktionen hos en CPU?
@@ -231,7 +231,7 @@ Nedanstående uppgifter krävs inte för att bli godkänd på laborationen, utan
     Implementera ett program som medvetet leder till segmentation fault, t.ex. som demonstrerat av nedanstående pseudokod. Reflektera sedan över vad som händer och varför det kan så vara svårt att felsöka denna typ av fel.
 
     \halfblankline
-    \textbf{OBS!} Tänk på att spara ditt program \emph{innan} du kör det, gärna en kopia också, eftersom när du får det att ``fungera'' så kommer det att skriva över sig själv och till slut krascha. Spara alltså \emph{inte} programmet efter att det skrivit över sig själv!
+    \textbf{OBS!} Tänk på att spara ditt program \emph{innan} du kör det, gärna en kopia också, eftersom när du får det att \enquote{fungera} så kommer det att skriva över sig själv och till slut krascha. Spara alltså \emph{inte} programmet efter att det skrivit över sig själv!
 
     \hint[1]{Pseudokoden nedan använder en mix av hög- och lågnivåinstruktioner, för att både visa det logiska programflödet men samtidigt ge ledtrådar till kluriga lågnivådetaljer. Din kod kommer behöva använda fler rader och instruktioner, och du behöver tänka på hur minnesadresser och register används, så radnummer kommer inte stämmer.}
 

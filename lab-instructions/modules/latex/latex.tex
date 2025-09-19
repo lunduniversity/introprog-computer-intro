@@ -11,34 +11,21 @@
 	\item \label{hem:latexuppg} Med början två sidor fram finns ett exempel på en rapport som är producerad med \LaTeX. Studera rapporten och försök komma på vilka kommandon som behövs för att få texten att se ut som den gör. Markera i rapporten, eller i ett separat textdokument, vilka kommandon du behöver använda för att efterlikna rapporten.
 \end{Hemarbete}
 
-\subsection*{Kontrollfrågor}
+\Förberedelser
 \begin{Kontrollfragor}
-	\item Laborationsledaren kontrollerar att du gått igenom exempelrapporten och markerat vilka \LaTeX-kommandon du ska utnyttja för att formatera texten.
-	\halfblankline
-
-	% Förslag på faktiska kontrollfrågor. Eller räcker det med den ovan?
-	% \item På vilket sätt formaterar man text i {\LaTeX}. Hur markerar man t.ex. att ett ord ska vara fetstilt?
-	% \item Vad är {\LaTeX} och vad används det till?
 	\item Vad är skillnaden mellan {\LaTeX} och vanliga textredigerare, som MS Word?
 	\item Vilka fördelar finns med att använda {\LaTeX} för dokument?
 	\item Vad är ett {\LaTeX}-kommando och hur skrivs det i en dokumentfil?
+	\item Vad är skillnaden mellan ett kommando och en omgivning (environment)?
 	\item Hur skapar man rubriker och underrubriker i {\LaTeX}?
 	\item Hur får man fet eller kursiv text i {\LaTeX}?
 	\item Vad betyder tecket \$ i {\LaTeX}?
 	\item Hur skriver du tecknet \$ i {\LaTeX}, utan att det tolkas som ett kommando?
-	% \item Vad är skillnaden mellan kompileringsprocessen för {\LaTeX} och vanlig textredigering?
-	% \item {\LaTeX} är helt textbaserat. Vad är processen för att producera det slutgiltiga, formaterade dokumentet?
-	% \item Vad är en paketfil i {\LaTeX} och hur inkluderar man den i dokumentet?
-	% \item Vilka är de grundläggande elementen för att skapa en titelsida i {\LaTeX}?
-	% \item Hur skapar du en fetstil i {\LaTeX}?
-	% \item Vad är kommandot för att kursivera text i {\LaTeX}?
-	% \item Hur skapar du en punktlista i {\LaTeX}?
-	% \item Vilket kommando används för att justera texten till vänster i {\LaTeX}?
-	% \item Hur inkluderar du citat i en {\LaTeX}-dokumentfil?
-	% \item Vilket kommando använder du för att infoga en radbrytning i {\LaTeX}?
-	% \item Hur skapar du en numrerad lista i {\LaTeX}?
-	% \item Hur skapar du en rubrik med ett kapitelnummer i {\LaTeX}?
-	% \item Vilket kommando används för att skapa en tabell i {\LaTeX}?
+	\item {\LaTeX} är helt textbaserat. Vad är processen för att producera det slutgiltiga, formaterade dokumentet?
+	\item Vad är en paketfil i {\LaTeX} och hur inkluderar man den i dokumentet?
+	\item Det finns tre typer av listor i {\LaTeX}: punktlistor, numrerade listor och beskrivningslistor. Hur skapar du var och en av dessa?
+	\item Hur numreras figurer och tabeller i {\LaTeX}?
+	\item Hur refererar du till en figur eller tabell i texten?
 
 \end{Kontrollfragor}
 
@@ -46,21 +33,25 @@
 
 \subsection*{Datorarbete}
 
-\textbf{Notis}: I instruktionerna nedan föreslår vi att ni använder programmet Texmaker för att arbeta med \LaTeX, men ni får lov att använda vilken editor ni vill. Det går också bra att använda onlineverktyg, så som Overleaf.
+\textbf{Notis}: Du får avända valfri \LaTeX-editor, t.ex. VS Code, TexmakerI instruktionerna nedan föreslår vi att ni använder programmet Texmaker för att arbeta med \LaTeX, men ni får lov att använda vilken editor ni vill. Det går också bra att använda onlineverktyg, så som Overleaf.
 
 \begin{Datorarbete}
-	\item I mappen med labbfiler som du laddade ned i labb 1 finns också en \file{latex}-katalog, som innehåller allt du behöver för att återskapa rapporten på nästa sida.
-	\item Filen \file{sort\_scala.tex} är en mall för \LaTeX-dokumentet, men utan innehåll.
-    \item I filen \file{oformaterad\_text.txt} finns den råa texten utan formattering.
-	\item Starta Texmaker med kommandot \verb/texmaker & / (eller \verb/texmaker sort_scala.tex &/). \emph{Du får lov att använda en annan editor om du vill. Även Overleaf är tillåtet.}
-	\item Kopiera in den råa texten från \file{oformaterad\_text.txt} till \file{sort\_scala.tex}. Den ska ligga mellan \verb/\begin{document}/ och \verb/\end{document}/, som markerar dokumentets början och slut.
-	\item Återskapa den färdiga rapporten på nästa sida. Lägg in lämpliga \LaTeX-kommandon i filen så att rapporten får (åtminstone ungefär) samma utseende. Se till att styckeindelningen och rubrikerna blir korrekta i hela dokumentet innan du ger dig på resten, till exempel de matematiska formlerna.
-
-	Arbeta stegvis: ändra lite, klicka på pilen till vänster om Quick Build så körs pdfLaTeX, titta på resultatet, ändra lite till, osv.
-
-	Bilderna som ska inkluderas i dokumentet finns i också bland de nedladdade labbfilerna, samt programkoden för kodlistningen i rapporten.
-
-    Notera att vissa detaljer i den råa texten (t.ex. sidnummer) genereras automatiskt av \LaTeX, så du ska inte manuellt ha med dessa i innehållet.
+	\item I mappen med labbfiler som du laddade ned i labb 1 finns också en \file{latex}-katalog, som innehåller allt du behöver för att återskapa rapporten på nästa sida. Den finns här:
+	
+	\url{https://fileadmin.cs.lth.se/pgk/dod-lab-material.zip}
+	
+	\begin{itemize}
+		\item Filen \file{sort\_scala.tex} är en mall för \LaTeX-dokumentet, men utan innehåll.
+		\item I filen \file{oformaterad\_text.txt} finns den råa texten utan formattering.
+	\end{itemize}
+	\item Starta din föredragna \LaTeX-editor och öppna filen \file{sort\_scala.tex}, som är en mall för \LaTeX-dokumentet, med alla paket inkluderade (se kommentarerna i filen). Kopiera in den råa texten från \file{oformaterad\_text.txt} mellan \verb/\begin{document}/ och \verb/\end{document}/.
+	\item Återskapa den färdiga rapporten på nästa sida. Lägg in lämpliga \LaTeX-kommandon i filen så att rapporten får (åtminstone ungefär) samma utseende.
+	\begin{itemize}
+		\item Arbeta stegvis -- ändra lite, bygg/kompilera och titta på resultatet, ändra lite till, osv.
+		\item Notera att vissa saker i den råa texten kan leda till att kompileringen misslyckas, t.ex. specialtecken eller matematiska symboler som \(\cdot\) (multiplikation).
+		\item Bilderna som ska inkluderas i dokumentet finns också bland de nedladdade labbfilerna, samt programkoden för kodlistningen i rapporten.
+		\item Tänk på att vissa detaljer i den råa texten (t.ex. kapitel-, sid- och figurnummer) behöver tas bort, eftersom de genereras automatiskt av \LaTeX.
+	\end{itemize}
 
     \smallskip
 
@@ -71,10 +62,13 @@
         \item Använd etiketter (\verb/\label{etikett}/) och referenser (\verb/\ref{etikett}/) för att referera till figurer, tabeller och sektioner. \LaTeX\ numrerar automatiskt dessa åt dig. Skriv dem inte manuellt.
         \item Den råa texten kan innehålla radbrytningar och bindestreck. Dessa ska inte ingå i källkoden, utan låt \LaTeX\ sköta radbrytningarna automatiskt där det är lämpligt.
         \item Din lösning behöver inte vara \emph{exakt} likadan som den färdiga rapporten. Om du kör fast, fråga labbhandledaren om hjälp.
-        \item Det är ganska lätt att \enquote{fuska} på denna labb. V.g. gör inte det. Syftet är att du ska lära dig \LaTeX.
+        \item I appendix numrerar man kapitel med bokstäver (A, B, C, ...). Det görs med kommandot \verb/\appendix/. Rubriker som kommer efter det kommandot numreras med bokstäver.
+		\item Ibland kan det vara bra att kommentera ut delar av koden med \verb/%/ i början av raden, för att enklare kunna felsöka.
     \end{itemize}
 
 	\item Om du har tid: prova sådana möjligheter i \LaTeX\ som du inte har behövt använda tidigare: listor av olika slag, innehållsförteckning, mera avancerade formler, osv.
+	\item Kolla gärna på lösningen \emph{efter labben}, som finns på GitHub\footnote{Gå till dod-repot: \url{https://github.com/lunduniversity/introprog-computer-intro}\\
+	och titta på: \url{lab-instructions/modules/latex/newex/sort_scala_losning.tex}}, men försök att inte titta på den förrän du har gjort så mycket du kan på egen hand.
 \end{Datorarbete}
 
 \includepdf[pages=-]{modules/latex/newex/sort_scala_losning}

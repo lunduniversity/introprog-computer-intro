@@ -85,9 +85,9 @@ Scala är ett populärt språk som kombinerar funktionell och objektorienterad p
 
 \section{O-notation}
 
-Innan vi börjar prata om algoritmers tidseffektivitet behöver vi förstå så kallad \emph{O-notation}. O-notation (ibland kallad ``stora O-notation'' eller ``big O notation'' på engelska) är ett sätt att beskriva hur effektiv en algoritm är när det gäller exekveringstid, beroende på mängden data som algoritmen hanterar -- så kallad \emph{tidskomplexitet}. Den används ofta inom datavetenskap för att klassificera algoritmer baserat på deras prestanda, särskilt för stora inmatningsstorlekar.
+Innan vi börjar prata om algoritmers tidseffektivitet behöver vi förstå så kallad \emph{O-notation}. O-notation (ibland kallad \enquote{stora O-notation} eller \enquote{big O notation} på engelska) är ett sätt att beskriva hur effektiv en algoritm är när det gäller exekveringstid, beroende på mängden data som algoritmen hanterar -- så kallad \emph{tidskomplexitet}. Den används ofta inom datavetenskap för att klassificera algoritmer baserat på deras prestanda, särskilt för stora inmatningsstorlekar.
 
-O-notationen uttrycker hur algoritmens tid växer som en funktion av storleken på indata, vanligtvis betecknad som $n$. Till exempel, om en algoritm har en tidskomplexitet på $O(n)$, betyder det att tiden det tar att utföra algoritmen ökar linjärt med storleken på indata. O:et uttalas ofta som ``ordo'', alltså ``ordo n'' för $O(n)$ eller ``ordo n log n'' för $O(n \log n)$.
+O-notationen uttrycker hur algoritmens tid växer som en funktion av storleken på indata, vanligtvis betecknad som $n$. Till exempel, om en algoritm har en tidskomplexitet på $O(n)$, betyder det att tiden det tar att utföra algoritmen ökar linjärt med storleken på indata. O:et uttalas ofta som \enquote{ordo}, alltså \enquote{ordo n} för $O(n)$ eller \enquote{ordo n log n} för $O(n \log n)$.
 
 \subsection{Vanliga O-klasser}
 
@@ -151,7 +151,7 @@ I tabell~\ref{tab:sorteringsalgoritmer} nedan jämförs prestandan hos QuickSort
         MergeSort & 100000              & Omvänd      & 2500     & 10         \\
         \hline
     \end{tabular}
-    \caption{Jämförelse av QuickSort och MergeSort för olika indatatyper och -storlekar i Scala. Tid mäts i microsekunder och minnesanvänding i Megabyte. ``Omvänd'' betyder att datan är sorterad i omvänd ordning, vilket är värstafallet för QuickSort.}
+    \caption{Jämförelse av QuickSort och MergeSort för olika indatatyper och -storlekar i Scala. Tid mäts i microsekunder och minnesanvänding i Megabyte. \enquote{Omvänd} betyder att datan är sorterad i omvänd ordning, vilket är värstafallet för QuickSort.}
     \label{tab:sorteringsalgoritmer}
 \end{table}
 

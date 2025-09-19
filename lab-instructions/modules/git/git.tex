@@ -15,18 +15,19 @@
 \end{Hemarbete}
 Länkar till det ovan refererade materialet finns på kurshemsidan under  ''Versionshantering (dod)''.
 
-\subsection*{Kontrollfrågor}
+\Förberedelser
 \begin{Kontrollfragor}
-	\item Vad är ett versionshanteringssystem?
-	\item Vad är skillnaden mellan Git och GitHub?
-	\item Vad är ett repositorium (eng. \emph{repository}).
-	\item Vad innebär det att göra en klon av ett repositorium?
-	\item Vad innebär begreppet \emph{commit}?
-	\item Vad är skillnaden mellan commit och push i Git?
-	\item Vad är skillnaden mellan push och pull i Git?
-	\item Vad är en sammanfogningskonflikt (eng. \emph{merge conflict})?
-	\item Ge exempel på en situation då en sammanfogningskonflikt (eng. \emph{merge conflict}) kan uppstå.
+    \item Vad är ett versionshanteringssystem?
+    \item Vad är skillnaden mellan Git och GitHub?
+    \item Vad är ett repositorium (eng. \emph{repository})?
+    \item Vad innebär det att göra en klon av ett repositorium?
+    \item Vad innebär begreppet \emph{commit}?
+    \item Vad är skillnaden mellan commit och push i Git?
+    \item Vad är skillnaden mellan push och pull i Git?
+    \item Vad är en sammanfogningskonflikt (eng. \emph{merge conflict})?
+    \item Ge exempel på en situation då en sammanfogningskonflikt kan uppstå.
 \end{Kontrollfragor}
+
 
 \clearpage
 \subsection*{Datorarbete}
@@ -74,7 +75,7 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 
 	\vspace*{3mm}
 
-	\noindent De följande stegen är baserade på GitHubs egen guide ``Generating a new SSH key''\footnote{\url{https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key}}:
+	\noindent De följande stegen är baserade på GitHubs egen guide \enquote{Generating a new SSH key}\footnote{\url{https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key}}:
 
 	\begin{enumerate}
 		\item Öppna terminalen
@@ -94,7 +95,7 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 		id_ed25519.pub     # din publika nyckel
 	\end{Code}
 
-	Nu saknas endast att lägga till din publika nyckel i ditt GitHub-konto så att hemsidan kan autentisera dig. Följande guide beskriver de sista stegen under rubriken ``Adding a new SSH key to your account'': \url{https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account#adding-a-new-ssh-key-to-your-account}.
+	Nu saknas endast att lägga till din publika nyckel i ditt GitHub-konto så att hemsidan kan autentisera dig. Följande guide beskriver de sista stegen under rubriken \enquote{Adding a new SSH key to your account}: \url{https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account#adding-a-new-ssh-key-to-your-account}.
 
 	När alla stegen är gjorda på hemsidan ska det vara fritt fram att börja använda git och arbeta mot GitHub utan att behöva uppge användarnamn och lösenord. Var inte rädd att fråga din handledare om du fastnar vid något av stegen.
 
@@ -180,7 +181,7 @@ Under laborationen kommer vi att gå igenom ett scenario steg för steg där vi:
 		git commit -m "Förtydligade utskriften i programmet"
 	\end{Code}
 
-	Vid utskrift av projektets status bör det nu framgå att alla filer i katalogen är ``up-to-date'' med (det lokala) repositoriet.
+	Vid utskrift av projektets status bör det nu framgå att alla filer i katalogen är \enquote{up-to-date} med (det lokala) repositoriet.
 
 	Du kan nu fortsätta att arbeta med Scala-programmet i \code{HelloWorld.scala}. Ändra programmet med din favoriteditor så att något annat än ''Hello, world!'' skrivs ut, spara, kompilera och testkör.
 
@@ -310,7 +311,7 @@ Du har nu lärt dig tillräckligt mycket om Git för att kunna använda det för
 \newpage
 
 \subsection*{Git-kommandon}
-Här ges lösningar till de uppgifter som är markerade. Försök gärna lösa uppgifterna utan denna hjälp först. Ta gärna hjälp av en ``cheat sheet''.
+Här ges lösningar till de uppgifter som är markerade. Försök gärna lösa uppgifterna utan denna hjälp först. Ta gärna hjälp av en \enquote{cheat sheet}.
 
 \begin{enumerate}[label=C\arabic*]
 	\item\label{git-config} Byt ut \code{fornamnefternamn} och \code{mejladr@plats.se} nedan mot ditt GitHub användarnamn eller ditt namn (''Förnamn Efternamn''). Om du föredrar att använda en annan texteditor än \code{nano} byter du även ut \code{nano} mot namnet på den editor du vill använda, t.ex. \code{gedit}

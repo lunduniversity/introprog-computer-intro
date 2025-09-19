@@ -25,17 +25,28 @@
 
 %---------------------------------------------------------------
 
-% Define the command for difficulty rating
+% Gemensam hjälpmakro som bara ritar stjärnorna
+\newcommand{\stars}[1]{%
+  \ifnum#1>0 \ding{72}\else \ding{73}\fi
+  \ifnum#1>1 \ding{72}\else \ding{73}\fi
+  \ifnum#1>2 \ding{72}\else \ding{73}\fi
+  \ifnum#1>3 \ding{72}\else \ding{73}\fi
+  \ifnum#1>4 \ding{72}\else \ding{73}\fi
+}
+
+% Blockvariant (som tidigare)
 \newcommand{\difficulty}[2][]{%
-  \emph{Svårighet:} %
-  \ifnum#2>0 \ding{72}\else \ding{73}\fi
-  \ifnum#2>1 \ding{72}\else \ding{73}\fi
-  \ifnum#2>2 \ding{72}\else \ding{73}\fi
-  \ifnum#2>3 \ding{72}\else \ding{73}\fi
-  \ifnum#2>4 \ding{72}\else \ding{73}\fi
+  \emph{Svårighet:} \stars{#2}%
   \ifx\relax#1\relax \else \hspace{3mm}(\textit{#1})\fi
   \par\noindent
 }
+
+% Inline-variant för löpande text
+\newcommand{\diffinline}[2][]{%
+  \stars{#2}%
+  \ifx\relax#1\relax \else \,(\textit{#1})\fi
+}
+
 
 
 % Set section count to -1, so the first section (which is hidden) becomes 0,
@@ -47,7 +58,7 @@
 {\begin{Assignments}[H]}{\end{Assignments}}
 
 \newenvironment{Kontrollfragor}%
-{\begin{Assignments}[K]\tightlist}{\end{Assignments}}
+{\begin{Assignments}[F]\tightlist}{\end{Assignments}}
 
 \newenvironment{Datorarbete}%
 {\begin{Assignments}[D]}{\end{Assignments}}
@@ -60,6 +71,13 @@
 
 \newenvironment{Deluppgifter}%
 {\begin{enumerate}[a)]\firmlist}{\end{enumerate}}
+
+\newcommand{\Förberedelser}{
+\subsection*{Förberedelsefrågor}
+Dessa frågor hjälper dig att repetera viktiga begrepp 
+och bedöma om du har förberett dig tillräckligt inför laborationen. 
+Använd dem som stöd för dig själv---du behöver inte lämna in svaren.
+}
 
 % \newcommand{\file}[1]{{\slshape\fontfamily{ppl}\selectfont #1}}
 \newcommand{\file}[1]{\texttt{#1}}
@@ -117,38 +135,27 @@
 \maketitle
 \thispagestyle{titlepage}
 \vspace{-4cm}
-\section*{Datorlaborationer, Datorer och datoranvändning}
+\section*{Datorlaborationer, datorer och datoranvändning}
 
-Datorlaborationerna ger exempel på tillämpningar av det material som behandlas under kursen. Schema för laborationerna (tider och datorsalar) finns i kursprogrammet och på kurshemsidan. För laborationerna gäller följande:
+Datorlaborationerna ger exempel på tillämpningar av det material som behandlas under dod-delen av kursen. För laborationerna gäller följande:
 
 \begin{itemize}
-	\item Laborationerna är obligatoriska. Det betyder att du måste bli godkänd på alla uppgifterna under ordinarie laborationstid. Om du skulle vara sjuk vid något laborationstillfälle så måste du anmäla detta till kursansvarig (\url{mattias.nordahl@cs.lth.se}) före laborationen. Om du varit sjuk bör du göra uppgiften på egen hand och redovisa den under ditt nästa laborationstillfälle. Det kommer också att anordnas en uppsamlingslaboration efter kursens slut, för de studenter som missat någon laboration.
+    \item Laborationerna är obligatoriska. Det betyder att du måste bli godkänd på alla uppgifter under ordinarie laborationstid. Om du är sjuk vid något laborationstillfälle ska du anmäla detta till kursansvarig (\url{mattias.nordahl@cs.lth.se}) före laborationen. Gör sedan uppgiften på egen hand och redovisa den på en resurstid eller vid ditt nästa laborationstillfälle.
 
-	\item Uppgifterna i laborationerna ska lösas individuellt. Regler för samarbete finns på nästa sida.
+    \item Uppgifterna i laborationerna ska lösas individuellt. Regler för samarbete finns på nästa sida.
 
-	\item Varje laboration består av två delar: förberedelser (hemarbete) och datorarbete. Innan du kommer till laborationen ska du ha förberett dig genom att ha gjort uppgifterna som markerats som förberedelser, samt läst igenom vad som står under datorarbete. Du ska också ha gått igenom kontrollfrågorna.
+    \item Varje laboration består av två delar: förberedelser (hemarbete) och datorarbete. Innan du kommer till laborationen ska du ha gjort de uppgifter som är markerade som förberedelser, och gärna också ha skummat igenom vad som står under datorarbete. Du ska dessutom ha gått igenom förberedelsefrågorna i början av varje laboration.
+    
+    \item Förberedelsefrågorna kommer inte att kontrolleras av handledaren, utan är till för att du själv ska kunna bedöma om du har förberett dig tillräckligt.
 
-	\item Om du hittar någonting i uppgifterna eller andra anvisningar som är felaktigt eller oklart så är vi tacksamma om du meddelar dina synpunkter till \url{mattias.nordahl@cs.lth.se}.
+	\item Svaren till förberedelsefrågorna finns i laborationshandledningen eller i annat material som hänvisas till. Du kommer också att behöva reflektera själv utifrån materialet.
 
-	      %\item  Du måste för varje laboration se till att laborationsledaren noterar dig som godkänd på listan på sista sidan i detta häfte.
+    \item Under laborationerna får du ta hjälp av allt kursmaterial och andra resurser för att lösa uppgifterna. Ta också hjälp av handledaren om du fastnar eller behöver stöd.
 
-	\item I början av varje laboration kommer laborationsledaren att kontrollera att du har förberett dig. Kontrollen görs genom att du får svara på några frågor som valts bland kontrollfrågorna. Om du uppenbart inte har förberett dig så har laborationsledaren rätt att be dig att förbereda dig och komma tillbaka vid ett senare tillfälle.
+    \item Observera att laborationerna inte bara syftar till att testa dig, utan är ett \textbf{inlärningsmoment}! Diskutera gärna och ställ frågor till handledaren om allt du tycker är knepigt eller vill veta mer om.
 
-	\item \emph{Förtydligande av förberedelsekontrollen}: Kontrollen är inte menad att vara svår, utan syftar till att se att du har gjort en insats för att gå igenom det förberedande materialet, så att du kan få ut så mycket som möjligt av laborationen och laborationsledaren.
-
-	\item Observera att laborationerna inte syftar till att testa er, utan är ett inlärningsmoment! Under laborationerna får ni ta hjälp av allt kursmaterial eller andra resurser för att lösa uppgifterna. Ta också hjälp av laborationsledaren om ni fastnar eller behöver hjälp.
-
-	\item Svaren till kontrollfrågorna kommer att finnas i laborationshandledningen eller i annat material som delas ut eller hänvisas till. Du kommer också behöva tänka eller reflektera själv med utgångspunkt från materialet.
+    \item Om du hittar något i uppgifterna eller andra anvisningar som är felaktigt eller oklart uppskattar vi om du meddelar detta till \url{mattias.nordahl@cs.lth.se}.
 \end{itemize}
-
-% \subsection*{Datorlaborationerna och COVID-19}
-% Årets hösttermin blir en väldigt speciell hösttermin i skuggan av den pågående pandemin då vi måste tänka på att bedriva laborationerna på ett sådant sätt att risken för smittspridning minimeras. Din medverkan kommer att krävas för att allt ska fungera på ett bra sätt:
-% \begin{itemize}
-% \item Undvik trängsel! Tänk på att hålla avstånd till varandra så gott det går i samband med laborationen. Sprid ut er i datorsalarna så att ni har gott om utrymme mellann varandra.
-% \item Använd gärna den i salarna utplacerade handspriten för att desinficera händerna.
-% \item Alla datorer vi använder i kursen har lediga USB-uttag på framsidan av datorlådan. Om du helst föredrar att inte använda de tangentbord och datormöss som hör till datorerna kan du ta med ett eget standardtangentbord och mus med USB-anslutning och ansluta dem via dessa uttag. Ordinarie tangentbord/mus behöver inte kopplas ur.
-% \item Stanna hemma om du känner de minsta symptom som skulle kunna tyda på en virusinfektion. Vi kommer under hösten frikostigt arrangera uppsamlingstillfällen som du kan anmäla dig till för att ta igen de laborationer du missar när du stannar hemma så du behöver inte vara rädd för att missa något moment. Se kurshemsidan för information om när uppsamlingstillfällena går av stapeln och hur du gör för att anmäla dig till dem.
-% \end{itemize}
 
 
 
@@ -182,65 +189,81 @@ Bland LTHs gemensamma regler finns följande föreskrifter:
 \section{Tips}
 \label{sec:tips}
 
-Här samlas kort information och hjälp som kan vara användbar under laborationerna. Vid problem och frågor under laborationerna, kolla gärna om din fråga finns besvarad här.
+Här samlas kort information och hjälp som kan vara användbar under laborationerna. Vid problem och frågor under laborationerna, kolla gärna först om din fråga finns besvarad här.
 
 \subsection{Lab 1 --- Linux/Unix}
 \begin{itemize}
-	\item \texttt{Vad menas med att ``gå till'' en katalog?}\\
-	      Att ``gå~till'' en sökväg innebär att ändra sitt \texttt{working directory}. (ILL~1.7)
-	\item \texttt{Varför börjar vissa sökvägar med ``/''?}\\
-	      Detta indikerar att sökvägen är \emph{absolut} och börjar från rotkatalogen. Ofta är det smidigare att använda \emph{relativa} sökvägar, vilket innebär att de börjar från den katalog du för tillfället befinner dig i.
-	\item \texttt{Om jag använder min egen laptop, hur kommer jag åt filer på skoldatorerna?}\\
-	      Du kan använda \code{ssh} för att logga in och arbeta på skoldatorerna (ILL~3.7), eller kopiera filer från skoldatorerna till din egen med \code{scp} eller \code{sftp} (ILL~4.2).
+    \item \texttt{Vad menas med att \enquote{gå till} en katalog?}\\
+          Att \enquote{gå till} en sökväg innebär att ändra ditt \texttt{working directory}. (ILL~1.7)
+
+    \item \texttt{Varför börjar vissa sökvägar med \enquote*{/}?}\\
+          Detta indikerar att sökvägen är \emph{absolut} och börjar från rotkatalogen. Ofta är det smidigare att använda \emph{relativa} sökvägar, vilket innebär att de börjar från den katalog du för tillfället befinner dig i (ditt \emph{working directory}).
+
+    \item \texttt{Om jag använder min egen laptop, hur kommer jag åt filer på skoldatorerna?}\\
+          Du kan använda \code{ssh} för att logga in och arbeta på skoldatorerna (ILL~3.7), eller kopiera filer från skoldatorerna till din egen dator med \code{scp} eller \code{sftp} (ILL~4.2).
 \end{itemize}
 
 \subsection{Lab 2 --- Versionshantering med Git}
 \begin{itemize}
-	\item \texttt{Hur stänger jag vim!?}\\
-	      Om du råkat öppna texteditorn \code{vim} (t.ex. genom att göra en git commit utan att ha ställt in en annan editor) kan du stänga den genom att trycka \code{:q} (kolon följt av \code{q}), sedan \code{Retur}. Om du redan provat annat kan du ha kommit in i något annat av Vim's editeringslägen. Tryck då först \code{Esc} för att gå tillbaka till det ``normala läget''.
-	\item \texttt{Hur arbetar man med texteditorn nano?} \\
-	      nano är en terminalbaserat texteditor. Den körs alltså direkt i terminalen utan att öppna några nya fönster, vilket kan vara fördelaktigt ibland. I editorn kan du flytta markören med piltangenterna och skriva text som förväntat. I botten av terminalen visas också operationer som kan utföras och vilken knappkombination som ska tryckas. Där används tecknet \texttt{\^{}} (den lilla ``hatten'' vid sidan om \commandchar{return}) för att betyda Ctrl-knappen. Använd t.ex. \commandchar{control-o} för att spara (Write Out), \commandchar{control-x} för att avsluta eller \commandchar{control-g} för mer hjälp.
-	\item \texttt{Hur ändrar jag min standardeditor för git?}\\
-	      Du kan ändra din standardeditor för git med kommandot:
-	      \begin{Code}
-		      git config --global core.editor nano
-	      \end{Code}
-	      där du kan byta ut \code{nano} mot valfri editor som är installerad på systemet, t.ex. \code{code --wait} (för Visual Studio Code). Notera att vissa editors, t.ex. \code{code}, kräver extra flaggor för att fungera bra med git.
-	\item \texttt{Hur konfigurerar jag separata SSH-nycklar för olika tjänster?}\\
-	      Ur säkerhetssynpunkt är det bra att använda olika SSH-nycklar för olika tjänster, t.ex. en nyckel för GitHub och en annan för GitLab. Detta kan göras genom att skapa flera nyckelpar med \code{ssh-keygen} (använd default-namn, och döp sedan om filerna) och sedan konfigurera SSH-klienten att använda rätt nyckel för varje tjänst genom att redigera filen \file{\textasciitilde/.ssh/config}. Om \file{config}-filen inte finns kan du själv skapa den. Nedan är ett exempel på hur en sådan konfigurationsfil kan se ut, med olika nycklar för GitHub, GitLab och LTHs studentdatorer:
-	      \begin{lstlisting}{}
+    \item \texttt{Hur stänger jag vim!?}\\
+          Om du råkat öppna texteditorn \code{vim} (t.ex. genom att göra en git commit utan att ha ställt in en annan editor) kan du stänga den genom att skriva \code{:q} (kolon följt av \code{q}) och sedan trycka \code{Retur}. Om du redan provat annat kan du ha kommit in i något av Vims olika lägen. Tryck då först \code{Esc} för att återgå till det \enquote*{normala läget}.
+
+    \item \texttt{Hur arbetar jag med texteditorn nano?} \\
+          \code{nano} är en terminalbaserad texteditor. Den körs alltså direkt i terminalen utan att öppna nya fönster, vilket kan vara fördelaktigt ibland. I editorn kan du flytta markören med piltangenterna och skriva text som förväntat. Längst ned i terminalen visas också vanliga operationer och motsvarande knappkombinationer. Där används tecknet \texttt{\^{}} (den lilla \enquote*{hatten} vid sidan om \commandchar{return}) för att betyda Ctrl-knappen. Använd t.ex. \commandchar{control-o} för att spara (Write Out), \commandchar{control-x} för att avsluta eller \commandchar{control-g} för mer hjälp.
+
+    \item \texttt{Hur ändrar jag min standardeditor för git?}\\
+          Du kan ändra din standardeditor för git med kommandot:
+          \begin{Code}
+              git config --global core.editor nano
+          \end{Code}
+          Byt gärna ut \code{nano} mot en editor du föredrar och som är installerad på systemet, t.ex. \code{"code~--wait"} (för Visual Studio Code). Notera att vissa editors, t.ex. \code{code}, kräver extra flaggor för att fungera korrekt tillsammans med git.
+
+    \item \texttt{Hur konfigurerar jag separata SSH-nycklar för olika tjänster?}\\
+          Ur säkerhetssynpunkt är det bra att använda olika SSH-nycklar för olika tjänster, t.ex. en nyckel för GitHub och en annan för GitLab. Du kan skapa flera nyckelpar med \code{ssh-keygen} (acceptera standardnamn och döp sedan om filerna) och sedan konfigurera SSH-klienten att använda rätt nyckel för varje tjänst genom att redigera filen \file{\textasciitilde/.ssh/config}. Om \file{config}-filen inte finns kan du själv skapa den.
+
+          Exempel på konfiguration med olika nycklar för GitHub, GitLab och LTHs studentdatorer:
+          \begin{lstlisting}{}
 Host github.com
     User git
-	HostName github.com
-	IdentityFile ~/.ssh/id_ed25519_github
+    HostName github.com
+    IdentityFile ~/.ssh/id_ed25519_github
+
 Host gitlab.com
-	User git
-	HostName gitlab.com
-	IdentityFile ~/.ssh/id_ed25519_gitlab
+    User git
+    HostName gitlab.com
+    IdentityFile ~/.ssh/id_ed25519_gitlab
+
 Host student.login.lth.se
     User xy1234zz-s
-	HostName student.login.lth.se
-	IdentityFile ~/.ssh/id_ed25519_student
-	      \end{lstlisting}
-	      Där \code{IdentityFile} anger sökvägen till den privata nyckeln som ska användas för respektive tjänst. Notera att filen \file{config} inte har någon filändelse och att den måste ha rätt behörigheter --- läs- och skrivbehörighet endast för användaren. Ändra t.ex. med \code{chmod 600 ~/.ssh/config}.
+    HostName student.login.lth.se
+    IdentityFile ~/.ssh/id_ed25519_student
+          \end{lstlisting}
 
-	      \textbf{Notera} att du också behöver logga in på respektive tjänst och lägga till den publika nyckeln i deras system.
+          Här anger \code{IdentityFile} sökvägen till den privata nyckeln som ska användas för respektive tjänst. Notera att filen \file{config} inte har någon filändelse och att den måste ha rätt behörigheter --- läs- och skrivbehörighet endast för användaren. Ändra t.ex. med:
+		  \begin{lstlisting}{language=bash}
+chmod 600 ~/.ssh/config
+		  \end{lstlisting}
+
+          \textbf{Notera} också att du behöver logga in på respektive tjänst och lägga till den publika nyckeln i deras system.
 \end{itemize}
 
 \subsection{Lab 3 --- \LaTeX}
-
 \begin{itemize}
-	\item \texttt{Hur skriver jag specialtecken i \LaTeX{}?}\\
-	      Det finns flera tecken som har särskild betydelse i \LaTeX{}. För att faktiskt skriva dessa tecken i texten, utan att de ska tolkas som specialtecken, behöver man ``bryta~ut'' dem (eng. \emph{escape}). Det görs med \emph{escape}-tecknet \texttt{\textbackslash} (bakåt snedstreck eller eng. backslash). Exempel på specialtecken är \texttt{\textbackslash\%} för procenttecken och \texttt{\textbackslash\$} för dollartecken. \texttt{\textbackslash}-tecknet är i sig också ett specialtecken och kan skrivas med kommandot \texttt{\textbackslash{textbackslash}}, eller \texttt{\textbackslash{backslash}} inom matematikläget.
+    \item \texttt{Hur skriver jag specialtecken i \LaTeX{}?}\\
+          Vissa tecken har särskild betydelse i \LaTeX{}. För att faktiskt skriva dessa tecken i texten, utan att de ska tolkas som specialtecken, behöver du \enquote*{bryta ut} dem (eng. \emph{escape}). Det görs med \emph{escape}-tecknet \texttt{\textbackslash} (bakåt snedstreck, eng. backslash). 
 
+          Exempel på specialtecken är \texttt{\textbackslash\%} för procenttecken och \texttt{\textbackslash\$} för dollartecken. \texttt{\textbackslash}-tecknet i sig är också ett specialtecken och kan skrivas med kommandot \texttt{\textbackslash{textbackslash}}, eller \texttt{\textbackslash{backslash}} inom matematikläget.
 \end{itemize}
 
 \subsection{Lab 4 --- Maskinkod}
 \begin{itemize}
-	\item \emph{Inga frågor ännu.}
-	      % \item \texttt{TODO}\\
-	      %       TODO
+    \item \texttt{Vad betyder svårighetsgraden för uppgifterna?}\\
+          Svårighetsgraden är en uppskattning av hur svår varje uppgift är, på en skala från \diffinline{1} (enkel) till \diffinline{5} (mer komplicerad). Den påverkar inte om en uppgift är obligatorisk eller inte -- det framgår alltid av uppgiftsindelningen. 
+
+          Uppgifter under \emph{Datorarbete} är obligatoriska, medan uppgifter under \emph{Extrauppgifter} är frivilliga. Där kan svårighetsgraden vara ett stöd för dig när du väljer vilka uppgifter du vill försöka med.
 \end{itemize}
+
+
 
 \newpage
 \include{./modules/acknowledgements}
@@ -257,37 +280,37 @@ Host student.login.lth.se
 \newpage
 \include{./modules/machine-code/machine-code}
 
-\newpage
+% \newpage
 
-\subsection*{Datorer och datoranvändning, godkända laborationsuppgifter}
-\sectionmark{Godkända laborationsuppgifter}
+% \subsection*{Datorer och datoranvändning, godkända laborationsuppgifter}
+% \sectionmark{Godkända laborationsuppgifter}
 
-Efter du blivit godkänd på en laboration kan du be din handledare att signera nedan. Detta är inget som krävs, för handledaren kommer anteckna ditt godkännande och föra in i vårt betygsystem oavsett vilket. Däremot kan det fungera som en liten försäkring för din egen skull; Om det trots allt skulle ske ett misstag någonstans och ditt godkännande inte förs in i betygsystemet, så kan du visa att du blivit godkänd med nedanstående underskrift.
+% Efter du blivit godkänd på en laboration kan du be din handledare att signera nedan. Detta är inget som krävs, för handledaren kommer anteckna ditt godkännande och föra in i vårt betygsystem oavsett vilket. Däremot kan det fungera som en liten försäkring för din egen skull; Om det trots allt skulle ske ett misstag någonstans och ditt godkännande inte förs in i betygsystemet, så kan du visa att du blivit godkänd med nedanstående underskrift.
 
-\vspace{3mm}
+% \vspace{3mm}
 
-\noindent Värt att notera är att de flesta kurser du kommer läsa på LTH inte har något liknande analogt system för att visa att du blivit godkänd på en laboration, utan sköter det helt digitalt.
+% \noindent Värt att notera är att de flesta kurser du kommer läsa på LTH inte har något liknande analogt system för att visa att du blivit godkänd på en laboration, utan sköter det helt digitalt.
 
-\vspace{3mm}
+% \vspace{3mm}
 
-\noindent Skriv ditt namn och din namnteckning nedan:
+% \noindent Skriv ditt namn och din namnteckning nedan:
 
-\blankline
-\blankline
-\n Namn: \dotfill\\
+% \blankline
+% \blankline
+% \n Namn: \dotfill\\
 
-\blankline
-\n Namnteckning: \dotfill\\
+% \blankline
+% \n Namnteckning: \dotfill\\
 
-\blankline
-\begin{tabular}{lcc}
-	\toprule \addlinespace
-	{\sffamily\small Godkänd laboration	} & {\sffamily\small Datum} & {\sffamily\small Laborationsledarens namnteckning} \\ \addlinespace \midrule
-	1 Linux                                                                                                              \\ \addlinespace \midrule
-	2 \LaTeX                                                                                                             \\ \addlinespace \midrule
-	3 Git                                                                                                                \\ \addlinespace \midrule
-	4 Maskinkod                                                                                                          \\ \addlinespace
-	\bottomrule
-\end{tabular}
+% \blankline
+% \begin{tabular}{lcc}
+% 	\toprule \addlinespace
+% 	{\sffamily\small Godkänd laboration	} & {\sffamily\small Datum} & {\sffamily\small Laborationsledarens namnteckning} \\ \addlinespace \midrule
+% 	1 Linux                                                                                                              \\ \addlinespace \midrule
+% 	2 \LaTeX                                                                                                             \\ \addlinespace \midrule
+% 	3 Git                                                                                                                \\ \addlinespace \midrule
+% 	4 Maskinkod                                                                                                          \\ \addlinespace
+% 	\bottomrule
+% \end{tabular}
 
 \end{document}

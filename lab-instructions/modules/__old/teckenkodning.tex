@@ -120,16 +120,16 @@
 %tr "abc" "def"
 %\end{Code}
 %
-%\n Skriv in text från tangentbordet och se hur alla förekomster av ``a'', ``b'' eller ``c'' byts ut mot ``d'', ``e'' respektive ``f''. Avsluta inmatningen med CTRL-D.
+%\n Skriv in text från tangentbordet och se hur alla förekomster av \enquote{a}, \enquote{b} eller \enquote{c} byts ut mot \enquote{d}, \enquote{e} respektive \enquote{f}. Avsluta inmatningen med CTRL-D.
 %\halfblankline
 %
-%\n För att ange tecken som inte är direkt skrivbara, som radslutstecken och liknande, i argumenten kan man antingen skriva det som ett ``\textbackslash'' direkt följt av tre oktala siffror som anger tecknets teckenkod, eller -- för vissa vanliga specialtecken -- ange speciella escapesekvenser. Kommandot \code{tr \textquotedbl abc\textquotedbl \hspace{0mm}  \textquotedbl def\textquotedbl} kan alltså också skrivas som \code{tr \textquotedbl \textbackslash 141\textbackslash 142\textbackslash 143\textquotedbl \hspace{0mm} \textquotedbl \textbackslash 144\textbackslash 145\textbackslash 146\textquotedbl}. Se kommandots man-sida för att ta reda på vilka de speciella escapesekvenserna är (för radslut och liknande):
+%\n För att ange tecken som inte är direkt skrivbara, som radslutstecken och liknande, i argumenten kan man antingen skriva det som ett \enquote{\textbackslash} direkt följt av tre oktala siffror som anger tecknets teckenkod, eller -- för vissa vanliga specialtecken -- ange speciella escapesekvenser. Kommandot \code{tr \textquotedbl abc\textquotedbl \hspace{0mm}  \textquotedbl def\textquotedbl} kan alltså också skrivas som \code{tr \textquotedbl \textbackslash 141\textbackslash 142\textbackslash 143\textquotedbl \hspace{0mm} \textquotedbl \textbackslash 144\textbackslash 145\textbackslash 146\textquotedbl}. Se kommandots man-sida för att ta reda på vilka de speciella escapesekvenserna är (för radslut och liknande):
 %
 %\begin{Code}
 %man tr
 %\end{Code}
 %
-%\n För att läsa in texten från en fil i stället för från tangentbordet kan ni lägga till tecknet ``<'' följt av filnamnet sist på kommandoraden. Prova till exempel att byta ut alla ``e'' mot ``X'' i den första exempelfilen:
+%\n För att läsa in texten från en fil i stället för från tangentbordet kan ni lägga till tecknet \enquote{<} följt av filnamnet sist på kommandoraden. Prova till exempel att byta ut alla \enquote{e} mot \enquote{X} i den första exempelfilen:
 %
 %\begin{Code}
 %tr "e" "X" < text1.txt
