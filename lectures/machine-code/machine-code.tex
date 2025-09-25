@@ -8,7 +8,7 @@
 
         \halfblankline
 
-        \ti{Förberedelse inför laboration 4}
+        \ti{Förberedelse inför laboration 4!}
 
         \halfblankline
         \begin{itemize}
@@ -56,16 +56,47 @@
                         \node (al) [rectangle, draw, fill=green!20, below=of hl, text width=6em, text centered, minimum height=2em] {Assembly};
                         \node (mc) [rectangle, draw, fill=red!20, below=of al, text width=6em, text centered, minimum height=2em] {Maskinkod};
                         \node (hw) [rectangle, draw, fill=orange!20, below=of mc, text width=6em, text centered, minimum height=2em] {Hårdvara};
-
+                        
                         \draw[->] (hl) -- (al);
                         \draw[->] (al) -- (mc);
                         \draw[->] (mc) -- (hw);
-                    }
-                \end{tikzpicture}
+                        }
+                    \end{tikzpicture}
             \end{center}
         \end{column}
     \end{columns}
 \end{frame}
+
+
+\begin{frame}[fragile,t]
+    \frametitle{Exempel: ordpussel}
+    \vspace{1em}
+
+    Kul exempel där lågnivåtänk gör stor skillnad:
+
+    \url{https://www.youtube.com/watch?v=_-AfhLQfb6w}
+
+    \blankline
+
+    \begin{itemize}
+        \ii{Problem: hitta fem engelska fembokstavsord som tillsammans
+        använder 25 olika bokstäver (en bokstav blir över).}
+        \ii{Naiv lösning: prova alla kombinationer av ord
+        $\rightarrow$ \emph{orimligt många}, tog 30+ dagar.}
+        \ii{Snabbare lösningar från tittare:}
+        \begin{itemize}
+            \ii{Representera varje ord som ett 26-bitars tal (en bit per bokstav).}
+            \ii{Kolla överlapp med snabba bitoperationer (\texttt{\&}, \texttt{|}).}
+            \ii{Bygg en graf: sök efter kombinationer utan gemensamma bokstäver.}
+            \ii{Smart filtrering och pruning $\rightarrow$ lösning på millisekunder.}
+        \end{itemize}
+    \end{itemize}
+
+    \vspace{1em}
+    \ti{\emph{Slutsats:} Rätt datastruktur och lågnivåtänk kan
+    ge enorma hastighetsvinster.}
+\end{frame}
+
 
 
 \begin{frame}[fragile,t]
@@ -289,6 +320,10 @@
 
 \begin{frame}[fragile,t]
     \frametitle{Maskininstruktioner}
+    \begin{figure}
+        \centering
+        \includegraphics[height=2.2cm]{Mips32_addi_cr}
+    \end{figure}
 
     \ti{Komponenter av en instruktion}
     \begin{itemize}
@@ -300,7 +335,7 @@
     % \begin{envi}
     %     \begin{figure}
     %         \includegraphics{Mips32_addi}
-    %         \caption{By en:User:Booyabazooka - \url{http://en.wikipedia.org/wiki/Image:Mips32_addi.svg}, CC BY-SA 3.0, \url{https://commons.wikimedia.org/w/index.php?curid=1362890}}
+    %         % \caption{By en:User:Booyabazooka - \url{http://en.wikipedia.org/wiki/Image:Mips32_addi.svg}, CC BY-SA 3.0, \url{https://commons.wikimedia.org/w/index.php?curid=1362890}}
     %     \end{figure}
     % \end{envi}
 
@@ -342,7 +377,8 @@
     \blankline
     \ti{Relation till maskinkod}
     \begin{itemize}
-        \ii{Opcode för \texttt{ADD} + binär representation av register (\texttt{R1}, \texttt{R2})}
+        \ii{Varje OP Code har binära representationer.}
+        \ii{Register och andra operanders adresser representeras också binärt.}
         \ii{Exempel: \texttt{ADD R1, R2, R2} $\rightarrow$ \texttt{1001 0001 0010 0010}}
     \end{itemize}
 \end{frame}
