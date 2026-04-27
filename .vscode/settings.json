@@ -6,5 +6,8 @@
   ],
   "latex-workshop.latex.rootFile.useSubFile": false,
   "editor.defaultFormatter": null,
-  "latex-workshop.formatting.latex": "latexindent"
+  "latex-workshop.formatting.latex": "latexindent",
+  "files.watcherExclude": {
+    "**/target": true
+  }
 }
